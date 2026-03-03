@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import traceback
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from api.gemini_utils import call_gemini_new
