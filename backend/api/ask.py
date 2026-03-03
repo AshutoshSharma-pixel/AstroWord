@@ -10,7 +10,11 @@ from google.genai import types
 
 router = APIRouter()
 
-db = firestore.client()
+def get_db():
+    try:
+        return firestore.client()
+    except Exception:
+        return None
 
 class AskRequest(BaseModel):
     user_id: str
@@ -206,6 +210,7 @@ def build_chart_context(chart_data: dict, relevant_charts: list) -> str:
 
 @router.post("/ask")
 async def ask_astrologer(data: AskRequest):
+    db = get_db()
     try:
         user_ref = None
         plan = "free"

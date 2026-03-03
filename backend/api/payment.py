@@ -173,12 +173,14 @@ def verify_payment(request: VerifyPaymentRequest, db=Depends(get_db)):
 class CancelPlanRequest(BaseModel):
     user_id: str
 
-@router.post("/api/payment/cancel")
-async def cancel_plan(request: CancelPlanRequest):
+@router.post("/cancel")
+async def cancel_plan(request: CancelPlanRequest, db=Depends(get_db)):
     """
     Cancel an active subscription.
     """
     try:
+        if not db:
+            raise HTTPException(status_code=500, detail="Database not initialized")
         if not request.user_id:
             raise HTTPException(status_code=400, detail="Missing user_id")
 

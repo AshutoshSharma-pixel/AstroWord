@@ -43,13 +43,18 @@ if not firebase_admin._apps:
                 print("Firebase initialized successfully from serviceAccountKey.json")
             else:
                 print("Critical: Neither FIREBASE_SERVICE_ACCOUNT_JSON nor serviceAccountKey.json found/valid")
-    else:
-        if os.path.exists("serviceAccountKey.json"):
-            cred = credentials.Certificate("serviceAccountKey.json")
-            firebase_admin.initialize_app(cred)
-            print("Firebase initialized successfully from serviceAccountKey.json")
         else:
-            print("Warning: No Firebase credentials found (ENV or Local)")
+            if os.path.exists("serviceAccountKey.json"):
+                cred = credentials.Certificate("serviceAccountKey.json")
+                firebase_admin.initialize_app(cred)
+                print("Firebase initialized successfully from serviceAccountKey.json")
+            else:
+                try:
+                    # Final fallback: try application default credentials
+                    firebase_admin.initialize_app()
+                    print("Firebase initialized successfully using Application Default Credentials")
+                except Exception as e:
+                    print(f"Warning: No Firebase credentials found and ADC failed: {str(e)}")
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
