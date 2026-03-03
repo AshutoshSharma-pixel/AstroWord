@@ -95,25 +95,27 @@ async def health_check():
 @app.get("/api/fix-user")
 async def fix_kingashutosh():
     try:
+        from firebase_admin import auth as fb_auth
         from api.payment import get_db
         db = get_db()
-        users_ref = db.collection('users')
-        query = users_ref.where('email', '==', "kingashutosh12345@gmail.com").stream()
         
-        user_doc_ref = None
-        for doc in query:
-            user_doc_ref = doc.reference
-            break
-            
-        if not user_doc_ref:
-            return {"success": False, "error": "User document not found in Firestore"}
-            
+        # Look up UID by email via Firebase Auth (reliable)
+        target_email = "kingashutosh12345@gmail.com"
+        try:
+            fb_user = fb_auth.get_user_by_email(target_email)
+            uid = fb_user.uid
+        except Exception as e:
+            return {"success": False, "error": f"Firebase Auth lookup failed: {str(e)}"}
+        
+        # Update Firestore doc by UID
+        user_doc_ref = db.collection('users').document(uid)
         user_doc_ref.set({
             "plan": "starter",
             "questions_limit": 10,
-            "questions_today": 0
+            "questions_today": 0,
+            "email": target_email
         }, merge=True)
-        return {"success": True, "message": "User fixed via email query"}
+        return {"success": True, "message": f"User {uid} ({target_email}) set to starter plan with 10 questions/day"}
     except Exception as e:
         import traceback
         return {"success": False, "error": str(e), "trace": traceback.format_exc()}
