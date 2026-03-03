@@ -21,9 +21,9 @@ export default function AppLayout({
                 onNewReading={onNewReading}
                 activeChatId={activeChatId}
             />
-            <main className="flex-1 flex flex-col relative h-full">
+            <main className="flex-1 flex flex-col relative h-full mt-12 md:mt-0">
                 <TopBar />
-                <div className="flex-1 overflow-hidden pt-12 md:pt-0">
+                <div className="flex-1 overflow-hidden">
                     {children}
                 </div>
             </main>
