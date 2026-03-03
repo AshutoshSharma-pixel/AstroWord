@@ -2,11 +2,10 @@ import os
 import json
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+from api.gemini_utils import call_gemini_legacy
 import google.generativeai as genai
 
 router = APIRouter()
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-gemini_model = genai.GenerativeModel("gemini-2.5-flash")
 
 class KarakaRequest(BaseModel):
     chart_data: dict
@@ -185,7 +184,7 @@ Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Un
         
         prompt = KARAKA_PROMPTS[data.karaka_type] + f"\n\nCHART DATA:\n{chart_context}"
         
-        response = gemini_model.generate_content(
+        response = call_gemini_legacy(
             prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.4,

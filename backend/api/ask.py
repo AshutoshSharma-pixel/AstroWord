@@ -5,15 +5,10 @@ from pydantic import BaseModel
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime, timedelta
-from google import genai
+from api.gemini_utils import call_gemini_new
 from google.genai import types
-import os
 
 router = APIRouter()
-client = genai.Client(
-    api_key=os.environ.get("GEMINI_API_KEY"),
-    http_options={"api_version": "v1beta"}
-)
 
 # Initialize Firebase Admin
 if not firebase_admin._apps:
@@ -323,9 +318,8 @@ RECENT CONVERSATION HISTORY:
 USER QUESTION: {data.question}
 """
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
+        response = call_gemini_new(
+            prompt=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
                 response_mime_type="application/json"

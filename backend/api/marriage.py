@@ -3,11 +3,10 @@ import json
 import re
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+from api.gemini_utils import call_gemini_legacy
 import google.generativeai as genai
 
 router = APIRouter()
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-gemini_model = genai.GenerativeModel("gemini-2.5-flash")
 
 class KarakaRequest(BaseModel):
     user_id: str | None = None
@@ -97,7 +96,7 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
 }}
 """
 
-        response = gemini_model.generate_content(
+        response = call_gemini_legacy(
             prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.4,
@@ -269,7 +268,7 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
 }}
 """
 
-        response = gemini_model.generate_content(
+        response = call_gemini_legacy(
             prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.4,
@@ -363,8 +362,8 @@ Number each fact 1 to 5. Keep each fact under 15 words. Use **bold** for planet 
 Now write 5 facts for this specific chart:"""
 
     try:
-        # Execute both calls
-        windows_response = gemini_model.generate_content(
+        # Execute both calls using fallback utility
+        windows_response = call_gemini_legacy(
             windows_prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.1,
@@ -372,7 +371,7 @@ Now write 5 facts for this specific chart:"""
             )
         )
 
-        reading_response = gemini_model.generate_content(
+        reading_response = call_gemini_legacy(
             reading_prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.3,
