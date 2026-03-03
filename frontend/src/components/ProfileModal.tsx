@@ -8,6 +8,7 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
     const { user } = useAuth();
     const [displayName, setDisplayName] = useState(user?.displayName || '');
     const [saving, setSaving] = useState(false);
+    const [saved, setSaved] = useState(false);
     const [showPlanDetails, setShowPlanDetails] = useState(false);
     const [planData, setPlanData] = useState<any>(null);
     const [cancelling, setCancelling] = useState(false);
@@ -47,6 +48,10 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
         setSaving(true);
         try {
             await updateProfile(user!, { displayName });
+            // Reload Firebase user so rest of UI (Sidebar, avatar) reflects the new name
+            await user.reload();
+            setSaved(true);
+            setTimeout(() => setSaved(false), 2000);
         } catch (e) { } finally { setSaving(false); }
     };
 
@@ -112,7 +117,7 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
                                 />
                                 <button onClick={handleSave} disabled={saving}
                                     className="bg-gold/10 border border-gold/20 text-gold text-xs px-4 rounded-xl hover:bg-gold/20 transition-all disabled:opacity-50">
-                                    {saving ? '...' : 'Save'}
+                                    {saving ? '...' : saved ? '✓ Saved' : 'Save'}
                                 </button>
                             </div>
                         </div>
