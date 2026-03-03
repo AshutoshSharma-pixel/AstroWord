@@ -101,7 +101,7 @@ export default function LoginPage() {
                             animate={{ rotate: 360 }}
                             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                         >
-                            <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ opacity: 0.12 }}>
+                            <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ opacity: 0.12, width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
                                 <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="1" />
                                 <circle cx="350" cy="350" r="280" stroke="#c9a84c" strokeWidth="0.8" strokeDasharray="6 6" />
                                 <circle cx="350" cy="350" r="220" stroke="#c9a84c" strokeWidth="1" />
@@ -180,7 +180,7 @@ export default function LoginPage() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
             >
-                <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ opacity: 0.12 }}>
+                <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ opacity: 0.12, width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
                     <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="1" />
                     <circle cx="350" cy="350" r="280" stroke="#c9a84c" strokeWidth="0.8" strokeDasharray="6 6" />
                     <circle cx="350" cy="350" r="220" stroke="#c9a84c" strokeWidth="1" />
