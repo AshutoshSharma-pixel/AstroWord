@@ -342,7 +342,7 @@ export default function Sidebar({
 
                     {/* User Profile Pill */}
                     {user && (
-                        <div className="relative">
+                        <div className="relative z-50">
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
                                 className="w-full flex items-center gap-3 px-3 py-2 hover:bg-surface2 rounded-lg transition-colors border border-transparent hover:border-border"
@@ -356,17 +356,26 @@ export default function Sidebar({
                                 </div>
                             </button>
 
-                            {/* Dropdown Menu */}
+                            {/* Dropdown Menu — opens upward, above blog link */}
                             {isOpen && (
-                                <div className="absolute bottom-full left-0 mb-2 w-full bg-surface2 border border-border rounded-lg shadow-xl overflow-hidden py-1 z-50">
-                                    <button onClick={() => { setIsOpen(false); setEditDisplayName(user.displayName || ''); setShowProfile(true); }} className="w-full text-left px-4 py-2 text-sm text-text hover:bg-white/5 flex items-center gap-2">
+                                <div className="absolute bottom-full left-0 right-0 mb-2 bg-[#0D0F1A] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50">
+                                    <button
+                                        onClick={() => { setIsOpen(false); setEditDisplayName(user.displayName || ''); setShowProfile(true); }}
+                                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-sm text-text/80 hover:text-white"
+                                    >
                                         <User className="w-4 h-4 text-muted" /> Profile
                                     </button>
-                                    <button onClick={() => { setIsOpen(false); setEditDisplayName(user.displayName || ''); setShowSettings(true); }} className="w-full text-left px-4 py-2 text-sm text-text hover:bg-white/5 flex items-center gap-2">
+                                    <button
+                                        onClick={() => { setIsOpen(false); setEditDisplayName(user.displayName || ''); setShowSettings(true); }}
+                                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-sm text-text/80 hover:text-white"
+                                    >
                                         <Settings className="w-4 h-4 text-muted" /> Settings
                                     </button>
-                                    <div className="h-px bg-border my-1"></div>
-                                    <button onClick={handleSignOut} className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-red-400/10 flex items-center gap-2">
+                                    <div className="h-px bg-white/5" />
+                                    <button
+                                        onClick={handleSignOut}
+                                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-500/10 transition-colors text-sm text-red-400/70 hover:text-red-400"
+                                    >
                                         <LogOut className="w-4 h-4" /> Sign Out
                                     </button>
                                 </div>
@@ -375,137 +384,138 @@ export default function Sidebar({
                     )}
                 </div>
 
-                {/* Profile Modal */}
-                <ProfileModal
-                    isOpen={showProfile}
-                    onClose={() => setShowProfile(false)}
-                    onUpgradeClick={() => {
-                        setShowProfile(false);
-                        setShowUpgradeModal(true);
-                    }}
-                />
+            </div>{/* end sidebar div */}
 
-                {/* Settings Modal */}
-                {showSettings && user && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-bg/80 backdrop-blur-sm animate-in fade-in duration-200">
-                        <div className="bg-surface2 border border-border rounded-2xl w-full max-w-md shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200 p-6">
-                            <button onClick={() => setShowSettings(false)} className="absolute top-4 right-4 text-muted hover:text-white transition-colors">
-                                <XIcon className="w-5 h-5" />
-                            </button>
+            {/* ── Modals — siblings of sidebar div, not children ── */}
 
-                            <h2 className="text-2xl font-serif text-white mb-6">Settings</h2>
+            <ProfileModal
+                isOpen={showProfile}
+                onClose={() => setShowProfile(false)}
+                onUpgradeClick={() => {
+                    setShowProfile(false);
+                    setShowUpgradeModal(true);
+                }}
+            />
 
-                            <div className="space-y-6">
-                                {/* Account Settings */}
-                                <div>
-                                    <h3 className="text-sm font-mono text-gold uppercase tracking-widest mb-3">Account Settings</h3>
-                                    <div className="space-y-3">
-                                        <div>
-                                            <label className="text-xs text-muted mb-1 block">Display Name</label>
-                                            <div className="flex gap-2">
-                                                <input
-                                                    type="text"
-                                                    value={editDisplayName}
-                                                    onChange={(e) => setEditDisplayName(e.target.value)}
-                                                    className="flex-1 bg-surface border border-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-gold"
-                                                />
-                                                <button
-                                                    onClick={async () => {
-                                                        try {
-                                                            await updateProfile(user, { displayName: editDisplayName });
-                                                            alert("Display name updated!");
-                                                        } catch (e) {
-                                                            alert("Failed to update profile");
-                                                        }
-                                                    }}
-                                                    className="bg-gold/20 text-gold px-3 py-2 rounded-lg text-sm hover:bg-gold/30 transition-colors"
-                                                >
-                                                    Save
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className="text-xs text-muted mb-1 block">Email</label>
-                                            <div className="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-muted">
-                                                {user.email}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            {/* Settings Modal */}
+            {showSettings && user && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-bg/80 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-surface2 border border-border rounded-2xl w-full max-w-md shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200 p-6">
+                        <button onClick={() => setShowSettings(false)} className="absolute top-4 right-4 text-muted hover:text-white transition-colors">
+                            <XIcon className="w-5 h-5" />
+                        </button>
 
-                                <hr className="border-border" />
+                        <h2 className="text-2xl font-serif text-white mb-6">Settings</h2>
 
-                                {/* Preferences */}
-                                <div>
-                                    <h3 className="text-sm font-mono text-gold uppercase tracking-widest mb-3">Preferences</h3>
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <div className="text-sm text-white">Show chart tags after answers</div>
-                                                <div className="text-xs text-muted">Displays the astrological placements used</div>
-                                            </div>
+                        <div className="space-y-6">
+                            {/* Account Settings */}
+                            <div>
+                                <h3 className="text-sm font-mono text-gold uppercase tracking-widest mb-3">Account Settings</h3>
+                                <div className="space-y-3">
+                                    <div>
+                                        <label className="text-xs text-muted mb-1 block">Display Name</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                value={editDisplayName}
+                                                onChange={(e) => setEditDisplayName(e.target.value)}
+                                                className="flex-1 bg-surface border border-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-gold"
+                                            />
                                             <button
-                                                onClick={() => {
-                                                    const val = !showTags;
-                                                    setShowTags(val);
-                                                    localStorage.setItem('showChartTags', String(val));
+                                                onClick={async () => {
+                                                    try {
+                                                        await updateProfile(user!, { displayName: editDisplayName });
+                                                        alert("Display name updated!");
+                                                    } catch (e) {
+                                                        alert("Failed to update profile");
+                                                    }
                                                 }}
-                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full ${showTags ? 'bg-gold' : 'bg-surface'} border border-border transition-colors`}
+                                                className="bg-gold/20 text-gold px-3 py-2 rounded-lg text-sm hover:bg-gold/30 transition-colors"
                                             >
-                                                <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${showTags ? 'translate-x-1.5' : '-translate-x-1.5'}`} />
-                                            </button>
-                                        </div>
-
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <div className="text-sm text-white">Compact message view</div>
-                                                <div className="text-xs text-muted">Reduces padding in the chat flow</div>
-                                            </div>
-                                            <button
-                                                onClick={() => {
-                                                    const val = !compactView;
-                                                    setCompactView(val);
-                                                    localStorage.setItem('compactMessageView', String(val));
-                                                }}
-                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full ${compactView ? 'bg-gold' : 'bg-surface'} border border-border transition-colors`}
-                                            >
-                                                <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${compactView ? 'translate-x-1.5' : '-translate-x-1.5'}`} />
+                                                Save
                                             </button>
                                         </div>
                                     </div>
+                                    <div>
+                                        <label className="text-xs text-muted mb-1 block">Email</label>
+                                        <div className="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-muted">
+                                            {user!.email}
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
 
-                                <hr className="border-border" />
+                            <hr className="border-border" />
 
-                                {/* Danger Zone */}
-                                <div>
-                                    <h3 className="text-sm font-mono text-red-400 uppercase tracking-widest mb-3">Danger Zone</h3>
-                                    <button
-                                        onClick={async () => {
-                                            if (window.confirm("Are you sure? This will permanently delete your account and all readings.")) {
-                                                try {
-                                                    await deleteUser(user);
-                                                } catch (e: any) {
-                                                    alert("Failed to delete account. You may need to sign out and sign in again first. Error: " + e.message);
-                                                }
+                            {/* Preferences */}
+                            <div>
+                                <h3 className="text-sm font-mono text-gold uppercase tracking-widest mb-3">Preferences</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <div className="text-sm text-white">Show chart tags after answers</div>
+                                            <div className="text-xs text-muted">Displays the astrological placements used</div>
+                                        </div>
+                                        <button
+                                            onClick={() => {
+                                                const val = !showTags;
+                                                setShowTags(val);
+                                                localStorage.setItem('showChartTags', String(val));
+                                            }}
+                                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full ${showTags ? 'bg-gold' : 'bg-surface'} border border-border transition-colors`}
+                                        >
+                                            <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${showTags ? 'translate-x-1.5' : '-translate-x-1.5'}`} />
+                                        </button>
+                                    </div>
+
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <div className="text-sm text-white">Compact message view</div>
+                                            <div className="text-xs text-muted">Reduces padding in the chat flow</div>
+                                        </div>
+                                        <button
+                                            onClick={() => {
+                                                const val = !compactView;
+                                                setCompactView(val);
+                                                localStorage.setItem('compactMessageView', String(val));
+                                            }}
+                                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full ${compactView ? 'bg-gold' : 'bg-surface'} border border-border transition-colors`}
+                                        >
+                                            <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${compactView ? 'translate-x-1.5' : '-translate-x-1.5'}`} />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr className="border-border" />
+
+                            {/* Danger Zone */}
+                            <div>
+                                <h3 className="text-sm font-mono text-red-400 uppercase tracking-widest mb-3">Danger Zone</h3>
+                                <button
+                                    onClick={async () => {
+                                        if (window.confirm("Are you sure? This will permanently delete your account and all readings.")) {
+                                            try {
+                                                await deleteUser(user!);
+                                            } catch (e: any) {
+                                                alert("Failed to delete account. You may need to sign out and sign in again first. Error: " + e.message);
                                             }
-                                        }}
-                                        className="w-full bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500/20 px-4 py-2.5 rounded-xl transition-colors text-sm font-medium flex justify-center items-center gap-2"
-                                    >
-                                        <Trash2 className="w-4 h-4" /> Delete Account
-                                    </button>
-                                </div>
+                                        }
+                                    }}
+                                    className="w-full bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500/20 px-4 py-2.5 rounded-xl transition-colors text-sm font-medium flex justify-center items-center gap-2"
+                                >
+                                    <Trash2 className="w-4 h-4" /> Delete Account
+                                </button>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+            )}
 
-                <UpgradeModal
-                    isOpen={showUpgradeModal}
-                    onClose={() => setShowUpgradeModal(false)}
-                />
-            </div>
+            <UpgradeModal
+                isOpen={showUpgradeModal}
+                onClose={() => setShowUpgradeModal(false)}
+            />
         </>
     );
 }
-

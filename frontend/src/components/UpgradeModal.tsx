@@ -111,7 +111,7 @@ export default function UpgradeModal({ isOpen, onClose }: { isOpen: boolean; onC
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-bg/90 backdrop-blur-md animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-bg/90 backdrop-blur-md animate-in fade-in duration-200">
             {/* Close Button */}
             <button
                 onClick={onClose}

@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from api import chart, ask, payment, karaka, gana, user, marriage
+from api.email import router as email_router
 
 app = FastAPI(title="AstroWord API")
 
@@ -31,6 +32,7 @@ app.include_router(karaka.router, prefix="/api")
 app.include_router(gana.router, prefix="/api")
 app.include_router(user.router, prefix="/api")
 app.include_router(marriage.router, prefix="/api")
+app.include_router(email_router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):

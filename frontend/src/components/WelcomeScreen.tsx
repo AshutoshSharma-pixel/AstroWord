@@ -4,8 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Sparkles, Calendar, Clock, MapPin, User as UserIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { API_URL } from '@/utils/api';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: any) => void }) {
+    const { user } = useAuth();
     const [formData, setFormData] = useState({
         dob: '',
         tob: '',
@@ -76,6 +78,24 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
         return () => clearTimeout(timer);
     }, [formData.pob, showSuggestions]);
 
+    // Fire-and-forget welcome email — sent once per user via Firestore deduplication
+    const sendWelcomeEmail = async () => {
+        if (!user?.email || !user?.uid) return;
+        try {
+            await fetch(`${API_URL}/api/email/welcome`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: user.email,
+                    name: user.displayName || formData.name || '',
+                    user_id: user.uid
+                })
+            });
+        } catch (e) {
+            // Silent fail — email is non-critical
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
@@ -105,6 +125,9 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
 
             localStorage.setItem('astroword_chart', JSON.stringify(data.data));
             onComplete(data.data);
+
+            // Send welcome email after first chart setup (no-op if already sent)
+            sendWelcomeEmail();
         } catch (err: any) {
             setErrorText(err.message);
         } finally {
