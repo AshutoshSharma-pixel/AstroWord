@@ -10,7 +10,7 @@
   --color-text: var(--text);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
-  
+
   --font-serif: var(--font-cormorant);
   --font-sans: var(--font-outfit);
   --font-mono: var(--font-dm-mono);
@@ -20,12 +20,34 @@
   --bg: #080910;
   --surface: #0e1018;
   --surface2: #141620;
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(255, 255, 255, 0.07);
   --gold: #c9a84c;
   --amber: #f0a500;
   --text: #e8e4dc;
   --muted: #6b6760;
   --accent: #7c6fcd;
+
+  /* Responsive sizing */
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -35,6 +57,38 @@ body {
   min-height: 100vh;
   /* Cosmic radial gradient background */
   background-image: radial-gradient(circle at 100% 0%, rgba(124, 111, 205, 0.15) 0%, transparent 40%),
-                    radial-gradient(circle at 0% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 0% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 40%);
   background-attachment: fixed;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Overrides for Mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.3rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  p,
+  div,
+  li {
+    font-size: 0.95rem !important;
+  }
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

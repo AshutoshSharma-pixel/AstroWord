@@ -263,7 +263,7 @@ export default function ChatInterface({
         <div className="flex flex-col h-full bg-bg relative">
             <UpgradeModal isOpen={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
-            <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6 max-w-4xl mx-auto w-full">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
                 {initialMessages.map((msg: any, idx: number) => (
                     <div
                         key={msg.id || idx}
@@ -492,12 +492,12 @@ export default function ChatInterface({
                                                         ul: ({ node, ...props }) => <ul className="space-y-2 my-4 opacity-90 ml-2" {...props} />,
                                                         ol: ({ node, ...props }) => <ol className="space-y-1 mb-3 ml-2 list-decimal list-inside" {...props} />,
                                                         li: ({ node, ...props }) => (
-                                                            <li className="flex items-start gap-2">
-                                                                <span className="text-gold mr-3 mt-1.5 opacity-70">✦</span>
-                                                                <span className="flex-1 leading-relaxed text-text/90" {...props} />
+                                                            <li className="flex items-start gap-2 mb-2 last:mb-0">
+                                                                <span className="text-gold flex-shrink-0 mt-1.5 opacity-70 text-[10px]">✦</span>
+                                                                <span className="flex-1 leading-relaxed text-text/90 break-words" {...props} />
                                                             </li>
                                                         ),
-                                                        blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-gold/50 pl-4 py-1 italic bg-gold/5 text-white/90 rounded-r-lg my-6" {...props} />
+                                                        blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-gold/50 pl-4 py-2 italic bg-gold/5 text-white/90 rounded-r-lg my-6 break-words" {...props} />
                                                     }}
                                                 >
                                                     {msg.content}
@@ -573,27 +573,29 @@ export default function ChatInterface({
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="border-t border-border bg-bg/95 backdrop-blur z-10 w-full flex flex-col">
+            <div className="border-t border-border bg-bg/95 backdrop-blur z-20 w-full flex flex-col shrink-0">
                 {/* Tools Shortcut Bar */}
-                <div className="flex items-center gap-2 px-4 py-2 overflow-x-auto scrollbar-none border-b border-border/30 max-w-4xl mx-auto w-full">
-                    <span className="text-xs text-muted/50 font-mono whitespace-nowrap">Tools:</span>
-                    {[
-                        { label: '💑 Darakaraka', path: '/darakaraka' },
-                        { label: '☀️ Atmakaraka', path: '/atmakaraka' },
-                        { label: '💼 Amatyakaraka', path: '/amatyakaraka' },
-                        { label: '🔱 Gana', path: '/gana' },
-                        { label: '💝 Love/Arranged', path: '/marriage-type' },
-                        { label: '🔤 Spouse Initial', path: '/spouse-initial' },
-                        { label: '💍 Marriage Year', path: '/marriage-year' },
-                    ].map((tool) => (
-                        <button
-                            key={tool.path}
-                            onClick={() => router.push(tool.path)}
-                            className="whitespace-nowrap text-xs bg-surface border border-border hover:border-gold/30 hover:text-gold text-text/60 px-3 py-1.5 rounded-full transition-all flex-shrink-0"
-                        >
-                            {tool.label}
-                        </button>
-                    ))}
+                <div className="flex items-center gap-2 px-4 py-3 overflow-x-auto no-scrollbar border-b border-border/30 w-full">
+                    <div className="flex items-center gap-2 max-w-4xl mx-auto w-full px-0 sm:px-2 leading-none">
+                        <span className="text-[10px] text-muted/50 font-mono whitespace-nowrap uppercase tracking-tighter">Tools:</span>
+                        {[
+                            { label: '💑 Darakaraka', path: '/darakaraka' },
+                            { label: '☀️ Atmakaraka', path: '/atmakaraka' },
+                            { label: '💼 Amatyakaraka', path: '/amatyakaraka' },
+                            { label: '🔱 Gana', path: '/gana' },
+                            { label: '💝 Love/Arranged', path: '/marriage-type' },
+                            { label: '🔤 Spouse Initial', path: '/spouse-initial' },
+                            { label: '💍 Marriage Year', path: '/marriage-year' },
+                        ].map((tool) => (
+                            <button
+                                key={tool.path}
+                                onClick={() => router.push(tool.path)}
+                                className="whitespace-nowrap text-xs bg-surface border border-border hover:border-gold/30 hover:text-gold text-text/60 px-3 py-1.5 rounded-full transition-all flex-shrink-0"
+                            >
+                                {tool.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="p-4 max-w-4xl mx-auto w-full relative">
@@ -621,6 +623,6 @@ export default function ChatInterface({
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
