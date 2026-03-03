@@ -116,11 +116,11 @@ export default function AmatyakarakaPage() {
         fetchKaraka(data);
     };
 
-    if (authLoading) return <div className="min-h-screen bg-bg text-text" />;
+    if (authLoading) return <div className="min-h-[100dvh] bg-bg text-text" />;
 
     if (error) {
         return (
-            <div className="min-h-screen bg-bg flex items-center justify-center p-6">
+            <div className="min-h-[100dvh] bg-bg flex items-center justify-center p-6">
                 <div className="text-center space-y-4">
                     <p className="text-2xl">🌙</p>
                     <p className="text-white font-serif text-lg">The cosmos need a moment</p>
@@ -141,7 +141,7 @@ export default function AmatyakarakaPage() {
 
     if (!chartData && !isLoading) {
         return (
-            <div className="min-h-screen bg-bg text-text">
+            <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
             </div>
         );
@@ -149,7 +149,7 @@ export default function AmatyakarakaPage() {
 
     if (isLoading || !result) {
         return (
-            <div className="min-h-screen bg-bg text-text flex flex-col items-center justify-center p-6 relative overflow-hidden">
+            <div className="min-h-[100dvh] bg-bg text-text flex flex-col items-center justify-center p-6 relative overflow-hidden">
                 <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                     animate={{ rotate: 360 }}
@@ -204,7 +204,7 @@ export default function AmatyakarakaPage() {
     }
 
     return (
-        <div className="min-h-screen bg-bg text-text py-12">
+        <div className="min-h-[100dvh] bg-bg text-text py-12">
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />

@@ -73,7 +73,7 @@ const articles = [
 
 export default function BlogPage() {
     return (
-        <div className="min-h-screen bg-bg text-text py-16">
+        <div className="min-h-[100dvh] bg-bg text-text py-16">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
                 {/* Header */}

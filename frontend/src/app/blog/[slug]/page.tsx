@@ -529,7 +529,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
     if (!article) notFound();
 
     return (
-        <div className="min-h-screen bg-bg text-text py-12">
+        <div className="min-h-[100dvh] bg-bg text-text py-12">
             <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
                 {/* Breadcrumb */}

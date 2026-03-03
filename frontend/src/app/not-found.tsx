@@ -1,6 +1,6 @@
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-bg flex items-center justify-center p-6">
+        <div className="min-h-[100dvh] bg-bg flex items-center justify-center p-6">
             <div className="text-center space-y-4">
                 <div className="text-6xl">🌙</div>
                 <h1 className="text-gold font-serif text-3xl">Lost in the Cosmos</h1>
