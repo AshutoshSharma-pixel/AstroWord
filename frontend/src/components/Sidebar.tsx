@@ -162,14 +162,17 @@ export default function Sidebar({
 
     return (
         <>
-            {/* Hamburger button — mobile only */}
-            <button
-                className="md:hidden fixed top-4 left-4 z-50 bg-surface border border-border p-2 rounded-xl shadow-lg"
-                onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Toggle navigation"
-            >
-                <Menu className="w-5 h-5 text-white" />
-            </button>
+            {/* Mobile Top Bar — full-width fixed bar replacing floating hamburger */}
+            <div className="md:hidden fixed top-0 left-0 right-0 h-12 z-50 bg-bg/95 backdrop-blur-sm border-b border-border flex items-center px-4 gap-3">
+                <button
+                    className="p-1.5 rounded-lg hover:bg-surface transition-colors"
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label="Toggle navigation"
+                >
+                    <Menu className="w-5 h-5 text-white" />
+                </button>
+                <img src="/astroword-logo.svg" alt="AstroWord" className="h-7" />
+            </div>
 
             {/* Backdrop overlay — mobile only */}
             {mobileOpen && (
@@ -186,8 +189,8 @@ export default function Sidebar({
                 md:relative md:translate-x-0
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
-                {/* Logo */}
-                <div className="p-4 pl-5">
+                {/* Logo — hidden on mobile since the top bar shows it */}
+                <div className="p-4 pl-5 hidden md:block">
                     <img src="/astroword-logo.svg" alt="AstroWord" className="h-10" />
                 </div>
 

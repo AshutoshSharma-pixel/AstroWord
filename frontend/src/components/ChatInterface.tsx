@@ -263,13 +263,13 @@ export default function ChatInterface({
         <div className="flex flex-col h-full bg-bg relative overflow-hidden">
             <UpgradeModal isOpen={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
-            <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
+            <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
                 {initialMessages.map((msg: any, idx: number) => (
                     <div
                         key={msg.id || idx}
                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                        <div className={`max-w-[92%] sm:max-w-[80%] flex gap-3 sm:gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                        <div className={`max-w-[85%] sm:max-w-[80%] flex gap-3 sm:gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
 
                             {/* Avatar */}
                             <div className="flex-shrink-0 mt-1">
@@ -285,7 +285,7 @@ export default function ChatInterface({
                             </div>
 
                             {/* Message Content */}
-                            <div className={`flex flex-col gap-2 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                            <div className={`flex flex-col gap-2 min-w-0 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
 
                                 {msg.role === 'ai' && (
                                     <div className="flex items-center gap-2">
