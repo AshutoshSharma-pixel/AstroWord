@@ -136,7 +136,7 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
     };
 
     return (
-        <div className="flex-1 flex flex-col items-center justify-center p-6 h-full relative">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 h-full relative overflow-hidden">
 
             {/* Background Mandala Animation */}
             <motion.div
@@ -144,7 +144,7 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
             >
-                <svg width="700" height="700" viewBox="0 0 700 700" fill="none">
+                <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
                     {/* Rings */}
                     <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="0.8" opacity="0.2" />
                     <circle cx="350" cy="350" r="280" stroke="#c9a84c" strokeWidth="0.6" strokeDasharray="6 6" opacity="0.15" />
