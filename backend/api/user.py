@@ -15,6 +15,7 @@ async def get_user_plan(authorization: str = Header(None)):
         decoded = auth.verify_id_token(token)
         uid = decoded["uid"]
         
+        from firebase_admin import firestore
         db = firestore.client()
         user_ref = db.collection("users").document(uid)
         user_doc = user_ref.get()

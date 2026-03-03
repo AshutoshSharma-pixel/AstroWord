@@ -95,6 +95,7 @@ async def trigger_welcome_email(data: dict):
         return {"success": False, "error": "Missing email or user_id"}
 
     try:
+        from firebase_admin import firestore
         db = firestore.client()
         user_ref = db.collection("users").document(user_id)
         user_doc = user_ref.get()
