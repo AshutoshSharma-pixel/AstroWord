@@ -9,12 +9,39 @@ load_dotenv()
 if not firebase_admin._apps:
     service_account_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
     if service_account_json:
-        service_account_info = json.loads(service_account_json)
-        service_account_info["private_key"] = service_account_info["private_key"].replace("\\n", "\n")
-        cred = credentials.Certificate(service_account_info)
+        try:
+            # Detect and handle potential double-escaping or literal newlines
+            # First, parse the JSON
+            service_account_info = json.loads(service_account_json)
+            
+            # Ensure the private key is properly formatted with actual newlines
+            if "private_key" in service_account_info:
+                key = service_account_info["private_key"]
+                # Replace literal \n with actual newlines if present
+                key = key.replace("\\n", "\n")
+                # Remove any stray spaces surrounding the PEM headers/footers
+                key = key.strip()
+                service_account_info["private_key"] = key
+                
+            cred = credentials.Certificate(service_account_info)
+            firebase_admin.initialize_app(cred)
+            print("Firebase initialized successfully from environment JSON")
+        except Exception as e:
+            print(f"Error initializing Firebase from JSON: {str(e)}")
+            # Fallback to local file
+            if os.path.exists("serviceAccountKey.json"):
+                cred = credentials.Certificate("serviceAccountKey.json")
+                firebase_admin.initialize_app(cred)
+                print("Firebase initialized successfully from serviceAccountKey.json")
+            else:
+                print("Critical: Neither FIREBASE_SERVICE_ACCOUNT_JSON nor serviceAccountKey.json found/valid")
     else:
-        cred = credentials.Certificate("serviceAccountKey.json")
-    firebase_admin.initialize_app(cred)
+        if os.path.exists("serviceAccountKey.json"):
+            cred = credentials.Certificate("serviceAccountKey.json")
+            firebase_admin.initialize_app(cred)
+            print("Firebase initialized successfully from serviceAccountKey.json")
+        else:
+            print("Warning: No Firebase credentials found (ENV or Local)")
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
