@@ -2,8 +2,8 @@ import os
 import json
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_legacy
-import google.generativeai as genai
+from api.gemini_utils import call_gemini_new
+from google.genai import types
 
 router = APIRouter()
 
@@ -184,9 +184,9 @@ Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Un
         
         prompt = KARAKA_PROMPTS[data.karaka_type] + f"\n\nCHART DATA:\n{chart_context}"
         
-        response = call_gemini_legacy(
+        response = call_gemini_new(
             prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192
             )

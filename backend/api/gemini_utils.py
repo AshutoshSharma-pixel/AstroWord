@@ -1,6 +1,5 @@
 import os
 import logging
-import google.generativeai as legacy_genai
 from google import genai as new_genai
 
 logger = logging.getLogger(__name__)
@@ -13,22 +12,6 @@ for i in range(1, 11): # Support up to 10 keys
     if key:
         GEMINI_KEYS.append(key)
 
-def call_gemini_legacy(prompt, generation_config):
-    """Fallback-aware synchronous wrapper for the legacy generativeai SDK."""
-    last_error = None
-    for i, key in enumerate(GEMINI_KEYS):
-        try:
-            legacy_genai.configure(api_key=key)
-            model = legacy_genai.GenerativeModel("gemini-2.5-flash")
-            return model.generate_content(prompt, generation_config=generation_config)
-        except Exception as e:
-            last_error = e
-            error_msg = str(e)
-            if ("429" in error_msg or "Resource exhausted" in error_msg) and i < len(GEMINI_KEYS) - 1:
-                logger.warning(f"Gemini key {i+1} exhausted. Switching to key {i+2} (Legacy SDK).")
-                continue
-            raise e
-    raise last_error
 
 def call_gemini_new(prompt, config):
     """Fallback-aware synchronous wrapper for the new google-genai SDK."""

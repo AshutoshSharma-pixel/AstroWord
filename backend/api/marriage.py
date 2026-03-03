@@ -3,8 +3,8 @@ import json
 import re
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_legacy
-import google.generativeai as genai
+from api.gemini_utils import call_gemini_new
+from google.genai import types
 
 router = APIRouter()
 
@@ -363,17 +363,17 @@ Now write 5 facts for this specific chart:"""
 
     try:
         # Execute both calls using fallback utility
-        windows_response = call_gemini_legacy(
+        windows_response = call_gemini_new(
             windows_prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.1,
                 max_output_tokens=200
             )
         )
 
-        reading_response = call_gemini_legacy(
+        reading_response = call_gemini_new(
             reading_prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.3,
                 max_output_tokens=200
             )
