@@ -260,7 +260,7 @@ export default function ChatInterface({
     };
 
     return (
-        <div className="flex flex-col h-full bg-bg relative">
+        <div className="flex flex-col h-[100dvh] bg-bg relative overflow-hidden">
             <UpgradeModal isOpen={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
             <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
@@ -269,7 +269,7 @@ export default function ChatInterface({
                         key={msg.id || idx}
                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                        <div className={`max-w-[80%] flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                        <div className={`max-w-[92%] sm:max-w-[80%] flex gap-3 sm:gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
 
                             {/* Avatar */}
                             <div className="flex-shrink-0 mt-1">
@@ -479,7 +479,7 @@ export default function ChatInterface({
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="prose prose-invert max-w-none text-text prose-p:leading-loose prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide">
+                                            <div className="prose prose-invert max-w-none text-text prose-p:leading-relaxed prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide">
                                                 <ReactMarkdown
                                                     remarkPlugins={[remarkGfm]}
                                                     components={{
@@ -608,7 +608,7 @@ export default function ChatInterface({
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Ask about career, relationships, or the timing of events..."
-                            className="w-full bg-surface border border-border rounded-xl pl-11 pr-14 py-4 focus:ring-1 focus:ring-gold focus:border-gold outline-none transition-all placeholder:text-muted"
+                            className="w-full bg-surface border border-border rounded-xl pl-11 pr-14 py-3 sm:py-4 focus:ring-1 focus:ring-gold focus:border-gold outline-none transition-all placeholder:text-muted"
                         />
                         <button
                             type="submit"

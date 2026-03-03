@@ -15,7 +15,7 @@ export default function AppLayout({
     activeChatId?: string | null
 }) {
     return (
-        <div className="flex h-screen w-full overflow-hidden">
+        <div className="flex h-[100dvh] w-full overflow-hidden">
             <Sidebar
                 onChatSelect={onChatSelect}
                 onNewReading={onNewReading}
