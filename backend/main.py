@@ -10,6 +10,7 @@ if not firebase_admin._apps:
     service_account_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
     if service_account_json:
         service_account_info = json.loads(service_account_json)
+        service_account_info["private_key"] = service_account_info["private_key"].replace("\\n", "\n")
         cred = credentials.Certificate(service_account_info)
     else:
         cred = credentials.Certificate("serviceAccountKey.json")
