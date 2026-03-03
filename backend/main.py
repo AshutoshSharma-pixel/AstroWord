@@ -19,12 +19,18 @@ if not firebase_admin._apps:
             # Ensure the private key is properly formatted with actual newlines
             if "private_key" in service_account_info:
                 key = service_account_info["private_key"]
-                # Replace literal \n with actual newlines if present
-                key = key.replace("\\n", "\n")
-                # Remove any stray spaces surrounding the PEM headers/footers
+                # Aggressive replacement for all forms of literal newlines
+                # Handles \\n, \n (if literal), and accidental double backslashes
+                key = key.replace("\\\\n", "\n").replace("\\n", "\n")
+                
+                # Ensure it starts and ends with the correct PEM headers
                 key = key.strip()
+                if not key.startswith("-----BEGIN"):
+                    print(f"Warning: Private key does not start with expected header. Starts with: {key[:20]}")
+                
                 service_account_info["private_key"] = key
                 
+            print(f"Attempting to initialize Firebase with project: {service_account_info.get('project_id')}")
             cred = credentials.Certificate(service_account_info)
             firebase_admin.initialize_app(cred)
             print("Firebase initialized successfully from environment JSON")
