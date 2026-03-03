@@ -181,7 +181,7 @@ export default function Sidebar({
 
             {/* Sidebar */}
             <div className={`
-                fixed inset-y-0 left-0 z-40 w-[258px] h-screen bg-surface border-r border-border flex flex-col flex-shrink-0
+                fixed inset-y-0 left-0 z-40 w-[258px] h-[100dvh] bg-surface border-r border-border flex flex-col flex-shrink-0
                 transform transition-transform duration-300 ease-in-out
                 md:relative md:translate-x-0
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}

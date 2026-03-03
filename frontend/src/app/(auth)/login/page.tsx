@@ -84,7 +84,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex h-screen items-center justify-center bg-bg relative overflow-hidden">
+        <div className="flex h-[100dvh] items-center justify-center bg-bg relative overflow-hidden">
 
             {/* SPLASH SCREEN OVERLAY */}
             <AnimatePresence>
