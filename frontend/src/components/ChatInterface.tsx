@@ -294,7 +294,7 @@ export default function ChatInterface({
                                     </div>
                                 )}
 
-                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed ${msg.role === 'user'
+                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed overflow-hidden ${msg.role === 'user'
                                     ? 'bg-surface2 border border-border text-text/90'
                                     : 'bg-transparent text-text border-none p-0'
                                     }`}>
@@ -479,22 +479,22 @@ export default function ChatInterface({
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="prose prose-invert max-w-none text-text prose-p:leading-relaxed prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide">
+                                            <div className="prose prose-invert max-w-none w-full overflow-hidden text-text prose-p:leading-relaxed prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide break-words [overflow-wrap:anywhere]">
                                                 <ReactMarkdown
                                                     remarkPlugins={[remarkGfm]}
                                                     components={{
-                                                        h1: ({ node, ...props }) => <h1 className="text-gold font-serif text-xl font-medium mt-4 mb-2" {...props} />,
-                                                        h2: ({ node, ...props }) => <h2 className="text-gold font-serif text-2xl mt-6 mb-4 font-semibold tracking-wide" {...props} />,
-                                                        h3: ({ node, ...props }) => <h3 className="text-white font-serif text-xl mt-5 mb-3 font-medium tracking-wide" {...props} />,
+                                                        h1: ({ node, ...props }) => <h1 className="text-gold font-serif text-lg sm:text-xl font-medium mt-4 mb-2 break-words" {...props} />,
+                                                        h2: ({ node, ...props }) => <h2 className="text-gold font-serif text-xl sm:text-2xl mt-6 mb-4 font-semibold tracking-wide break-words" {...props} />,
+                                                        h3: ({ node, ...props }) => <h3 className="text-white font-serif text-lg sm:text-xl mt-5 mb-3 font-medium tracking-wide break-words" {...props} />,
                                                         strong: ({ node, ...props }) => <strong className="text-gold font-medium" {...props} />,
                                                         em: ({ node, ...props }) => <em className="text-text/80 italic" {...props} />,
-                                                        p: ({ node, ...props }) => <p className="mb-4 text-justify leading-relaxed" {...props} />,
+                                                        p: ({ node, ...props }) => <p className="mb-4 leading-relaxed break-words [overflow-wrap:anywhere]" {...props} />,
                                                         ul: ({ node, ...props }) => <ul className="space-y-2 my-4 opacity-90 ml-2" {...props} />,
                                                         ol: ({ node, ...props }) => <ol className="space-y-1 mb-3 ml-2 list-decimal list-inside" {...props} />,
                                                         li: ({ node, ...props }) => (
                                                             <li className="flex items-start gap-2 mb-2 last:mb-0">
                                                                 <span className="text-gold flex-shrink-0 mt-1.5 opacity-70 text-[10px]">✦</span>
-                                                                <span className="flex-1 leading-relaxed text-text/90 break-words" {...props} />
+                                                                <span className="flex-1 leading-relaxed text-text/90 break-words [overflow-wrap:anywhere]" {...props} />
                                                             </li>
                                                         ),
                                                         blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-gold/50 pl-4 py-2 italic bg-gold/5 text-white/90 rounded-r-lg my-6 break-words" {...props} />
