@@ -1,0 +1,53 @@
+# Root level .gitignore
+.DS_Store
+*.pem
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.*
+
+# Logs
+*.log
+logs/
+ask_output.log
+server.log
+test.log
+test_history.log
+
+# Firebase service account keys
+serviceAccountKey.json
+firebase-adminsdk*.json
+*.json.key
+
+# Test scripts (local dev only)
+backend/check_user.py
+backend/fix_real_user.py
+backend/update_user.py
+backend/test_*.py
+
+# Node
+node_modules/
+.next/
+out/
+build/
+.pnpm-debug.log*
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

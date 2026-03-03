@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pyswisseph
+geopy
+timezonefinder
+google-genai
+google-generativeai
+firebase-admin
+pydantic
+razorpay
+python-dotenv

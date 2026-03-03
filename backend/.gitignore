@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment files — NEVER commit these
+.env
+.env.local
+.env.*
+
+# Firebase service account
+serviceAccountKey.json
+firebase-adminsdk*.json
+
+# Logs
+*.log
+logs/
+ask_output.log
+server.log
+test.log
+test_history.log
+
+# Local test/utility scripts
+check_user.py
+fix_real_user.py
+update_user.py
+test_*.py

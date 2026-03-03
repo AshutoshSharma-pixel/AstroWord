@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface2);
+  --color-border: var(--border);
+  --color-gold: var(--gold);
+  --color-amber: var(--amber);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-dm-mono);
+}
+
+:root {
+  --bg: #080910;
+  --surface: #0e1018;
+  --surface2: #141620;
+  --border: rgba(255,255,255,0.07);
+  --gold: #c9a84c;
+  --amber: #f0a500;
+  --text: #e8e4dc;
+  --muted: #6b6760;
+  --accent: #7c6fcd;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-outfit), sans-serif;
+  min-height: 100vh;
+  /* Cosmic radial gradient background */
+  background-image: radial-gradient(circle at 100% 0%, rgba(124, 111, 205, 0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 0% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
+}

@@ -1,0 +1,26 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="300" cy="300" r="290" stroke="#c9a84c" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="10 10"/>
+  <circle cx="300" cy="300" r="250" stroke="#c9a84c" strokeOpacity="0.3" strokeWidth="1"/>
+  <circle cx="300" cy="300" r="200" stroke="#c9a84c" strokeOpacity="0.5" strokeWidth="2"/>
+  <circle cx="300" cy="300" r="100" stroke="#c9a84c" strokeOpacity="0.4" strokeWidth="1" strokeDasharray="5 5"/>
+  <circle cx="300" cy="300" r="50" fill="#c9a84c" fillOpacity="0.1" stroke="#c9a84c" strokeWidth="2"/>
+  
+  <rect x="150" y="150" width="300" height="300" transform="rotate(45 300 300)" stroke="#c9a84c" strokeOpacity="0.4" strokeWidth="2"/>
+  <rect x="150" y="150" width="300" height="300" stroke="#c9a84c" strokeOpacity="0.4" strokeWidth="2"/>
+  
+  <path d="M300 100 L350 200 L450 200 L370 260 L400 360 L300 300 L200 360 L230 260 L150 200 L250 200 Z" stroke="#c9a84c" strokeOpacity="0.5" strokeWidth="2" fill="none"/>
+  
+  {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+    <line 
+      key={angle}
+      x1="300" 
+      y1="100" 
+      x2="300" 
+      y2="50" 
+      transform={`rotate(${angle} 300 300)`} 
+      stroke="#c9a84c" 
+      strokeOpacity="0.6" 
+      strokeWidth="2"
+    />
+  ))}
+</svg>
