@@ -4,7 +4,6 @@ pyswisseph
 geopy
 timezonefinder
 google-genai
-google-genai
 firebase-admin
 pydantic
 razorpay
