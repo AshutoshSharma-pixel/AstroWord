@@ -9,3 +9,4 @@ firebase-admin
 pydantic
 razorpay
 python-dotenv
+resend

@@ -8,6 +8,8 @@ load_dotenv()
 
 if not firebase_admin._apps:
     service_account_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
+    initialized = False
+
     if service_account_json:
         try:
             # Strip any potential wrapping quotes added by ENV managers
@@ -19,42 +21,37 @@ if not firebase_admin._apps:
             # Ensure the private key is properly formatted with actual newlines
             if "private_key" in service_account_info:
                 key = service_account_info["private_key"]
-                # Aggressive replacement for all forms of literal newlines
-                # Handles \\n, \n (if literal), and accidental double backslashes
                 key = key.replace("\\\\n", "\n").replace("\\n", "\n")
-                
-                # Ensure it starts and ends with the correct PEM headers
                 key = key.strip()
-                if not key.startswith("-----BEGIN"):
-                    print(f"Warning: Private key does not start with expected header. Starts with: {key[:20]}")
-                
                 service_account_info["private_key"] = key
                 
             print(f"Attempting to initialize Firebase with project: {service_account_info.get('project_id')}")
             cred = credentials.Certificate(service_account_info)
             firebase_admin.initialize_app(cred)
             print("Firebase initialized successfully from environment JSON")
+            initialized = True
         except Exception as e:
             print(f"Error initializing Firebase from JSON: {str(e)}")
-            # Fallback to local file
-            if os.path.exists("serviceAccountKey.json"):
+
+    if not initialized:
+        # Fallback 1: local file
+        if os.path.exists("serviceAccountKey.json"):
+            try:
                 cred = credentials.Certificate("serviceAccountKey.json")
                 firebase_admin.initialize_app(cred)
                 print("Firebase initialized successfully from serviceAccountKey.json")
-            else:
-                print("Critical: Neither FIREBASE_SERVICE_ACCOUNT_JSON nor serviceAccountKey.json found/valid")
-        else:
-            if os.path.exists("serviceAccountKey.json"):
-                cred = credentials.Certificate("serviceAccountKey.json")
-                firebase_admin.initialize_app(cred)
-                print("Firebase initialized successfully from serviceAccountKey.json")
-            else:
-                try:
-                    # Final fallback: try application default credentials
-                    firebase_admin.initialize_app()
-                    print("Firebase initialized successfully using Application Default Credentials")
-                except Exception as e:
-                    print(f"Warning: No Firebase credentials found and ADC failed: {str(e)}")
+                initialized = True
+            except Exception as e:
+                print(f"Error initializing from serviceAccountKey.json: {str(e)}")
+        
+    if not initialized:
+        # Fallback 2: final fallback: try application default credentials
+        try:
+            firebase_admin.initialize_app()
+            print("Firebase initialized successfully using Application Default Credentials")
+            initialized = True
+        except Exception as e:
+            print(f"Warning: No Firebase credentials found and ADC failed: {str(e)}")
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
