@@ -647,7 +647,14 @@ async def generate_chart(data: ChartRequest):
             desc += "Mahadasha: Could not determine\n"
         
         if current_antardasha:
-            desc += f"Antardasha: {current_antardasha['lord']} ({current_antardasha['start']} to {current_antardasha['end']})\n"
+            desc += f"Current Antardasha: {current_antardasha['lord']} ({current_antardasha['start']} to {current_antardasha['end']})\n"
+        
+        # Include full Antardasha table for the current Mahadasha
+        if current_maha and chart_data.get("antardashas"):
+            desc += f"\nAll Antardashas within {current_maha['lord']} Mahadasha:\n"
+            for ad in chart_data["antardashas"]:
+                marker = " << CURRENT" if current_antardasha and ad['lord'] == current_antardasha['lord'] and ad['start'] == current_antardasha['start'] else ""
+                desc += f"  {current_maha['lord']}-{ad['lord']}: {ad['start']} to {ad['end']}{marker}\n"
         
         desc += f"\nToday's Date: {datetime.now().strftime('%Y-%m-%d')}\n"
         
