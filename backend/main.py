@@ -10,8 +10,10 @@ if not firebase_admin._apps:
     service_account_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
     if service_account_json:
         try:
+            # Strip any potential wrapping quotes added by ENV managers
+            service_account_json = service_account_json.strip().strip("'\"")
+            
             # Detect and handle potential double-escaping or literal newlines
-            # First, parse the JSON
             service_account_info = json.loads(service_account_json)
             
             # Ensure the private key is properly formatted with actual newlines
