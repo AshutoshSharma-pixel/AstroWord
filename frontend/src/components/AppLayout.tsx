@@ -23,7 +23,7 @@ export default function AppLayout({
             />
             <main className="flex-1 flex flex-col relative h-full">
                 <TopBar />
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1 overflow-hidden">
                     {children}
                 </div>
             </main>

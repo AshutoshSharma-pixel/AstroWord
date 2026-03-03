@@ -260,7 +260,7 @@ export default function ChatInterface({
     };
 
     return (
-        <div className="flex flex-col h-[100dvh] bg-bg relative overflow-hidden">
+        <div className="flex flex-col h-full bg-bg relative overflow-hidden">
             <UpgradeModal isOpen={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
             <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
