@@ -10,25 +10,7 @@ from google.genai import types
 
 router = APIRouter()
 
-# Initialize Firebase Admin
-if not firebase_admin._apps:
-    cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-    if cred_path and os.path.exists(cred_path):
-        try:
-            cred = credentials.Certificate(cred_path)
-            firebase_admin.initialize_app(cred)
-        except ValueError:
-            # Fallback if the path points to an OAuth profile instead of a Service Account
-            cred = credentials.ApplicationDefault()
-            firebase_admin.initialize_app(cred, {"projectId": "astroword-4002a"})
-    else:
-        pass  # Firebase disabled — Firestore tracking unavailable
-
-db = None
-try:
-    db = firestore.client()
-except Exception:
-    pass
+db = firestore.client()
 
 class AskRequest(BaseModel):
     user_id: str

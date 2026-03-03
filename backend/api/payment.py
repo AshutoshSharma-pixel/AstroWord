@@ -24,15 +24,6 @@ else:
     razorpay_client = None
 
 def get_db():
-    if not firebase_admin._apps:
-        cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-        if cred_path and os.path.exists(cred_path):
-            try:
-                cred = credentials.Certificate(cred_path)
-                firebase_admin.initialize_app(cred)
-            except ValueError:
-                cred = credentials.ApplicationDefault()
-                firebase_admin.initialize_app(cred, {"projectId": "astroword-4002a"})
     try:
         return firestore.client()
     except Exception:
