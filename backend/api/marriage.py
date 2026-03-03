@@ -96,9 +96,9 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
 }}
 """
 
-        response = call_gemini_legacy(
+        response = call_gemini_new(
             prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192,
                 response_mime_type="application/json"
@@ -268,9 +268,9 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
 }}
 """
 
-        response = call_gemini_legacy(
+        response = call_gemini_new(
             prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192,
                 response_mime_type="application/json"

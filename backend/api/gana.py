@@ -2,8 +2,8 @@ import os
 import json
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_legacy
-import google.generativeai as genai
+from api.gemini_utils import call_gemini_new
+from google.genai import types
 
 router = APIRouter()
 
@@ -56,9 +56,9 @@ At the very end of your response, on a new line, provide the keywords like this:
 KEYWORDS: word 1, word 2, word 3
 """
         
-        response = call_gemini_legacy(
+        response = call_gemini_new(
             prompt,
-            generation_config=genai.types.GenerationConfig(
+            config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192
             )
