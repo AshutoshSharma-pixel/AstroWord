@@ -16,6 +16,8 @@ for i in range(1, 11): # Support up to 10 keys
 def call_gemini_new(prompt, config):
     """Fallback-aware synchronous wrapper for the new google-genai SDK."""
     last_error = None
+    # Retry on rate limits AND on invalid/expired keys so all 4 keys are tried
+    RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
     for i, key in enumerate(GEMINI_KEYS):
         try:
             client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
@@ -27,8 +29,10 @@ def call_gemini_new(prompt, config):
         except Exception as e:
             last_error = e
             error_msg = str(e)
-            if ("429" in error_msg or "Resource exhausted" in error_msg) and i < len(GEMINI_KEYS) - 1:
-                logger.warning(f"Gemini key {i+1} exhausted. Switching to key {i+2} (New SDK).")
+            is_retriable = any(err in error_msg for err in RETRIABLE_ERRORS)
+            has_next_key = i < len(GEMINI_KEYS) - 1
+            if is_retriable and has_next_key:
+                logger.warning(f"Gemini key {i+1} failed ({error_msg[:80]}). Trying key {i+2}...")
                 continue
             raise e
     raise last_error
