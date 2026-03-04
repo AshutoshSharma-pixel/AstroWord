@@ -274,6 +274,7 @@ export default function Sidebar({
                                     onClick={() => {
                                         if (editingChatId !== chat.id) {
                                             onChatSelect?.(chat.id, chat.messages || [], chat.chart_data);
+                                            setMobileOpen(false); // Close mobile sidebar when chat selected
                                         }
                                     }}
                                 >
