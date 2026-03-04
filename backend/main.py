@@ -56,7 +56,7 @@ from fastapi.responses import JSONResponse
 from api import chart, ask, payment, karaka, gana, user, marriage
 from api.email import router as email_router
 
-app = FastAPI(title="AstroWord API")
+app = FastAPI(title="AstroWord API", version="1.1.0")  # v1.1.0 – streaming support
 
 app.add_middleware(
     CORSMiddleware,
