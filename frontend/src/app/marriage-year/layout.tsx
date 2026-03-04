@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Marriage Year Predictor — Vedic Dasha Timing | AstroWord',
-    description: 'Predict your most likely marriage years using Vimshottari Dasha, Jupiter transits, and 7th house activation based on your Vedic birth chart. Get specific year-by-year windows.',
+    description: 'Predict your most likely marriage year using Vimshottari Dasha and antardasha timing. Free AI Vedic astrology tool.',
     keywords: 'marriage year predictor, when will I get married astrology, marriage timing vedic astrology, dasha marriage, jupiter transit marriage, 7th house marriage',
     alternates: { canonical: 'https://astroword.in/marriage-year' },
     openGraph: {

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Amatyakaraka Calculator — Find Your Career Planet | AstroWord',
-    description: 'Calculate your Amatyakaraka — the planet with the second highest degree in your birth chart. It reveals your career path, professional strengths, and the nature of your vocation in Jaimini astrology.',
+    title: 'Amatyakaraka Calculator — Career & Profession Planet | AstroWord',
+    description: 'Calculate your Amatyakaraka planet for career and professional life insights using Jaimini Vedic astrology.',
     keywords: 'amatyakaraka calculator, career planet vedic astrology, jaimini amatyakaraka, profession astrology, career path birth chart',
     alternates: { canonical: 'https://astroword.in/amatyakaraka' },
     openGraph: {

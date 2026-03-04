@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Love or Arranged Marriage Predictor — Vedic Astrology | AstroWord',
-    description: "Find out if your birth chart indicates a love marriage, arranged marriage, or a combination. AI analyzes Rahu, Venus, 5th lord, 7th lord connections from your Vedic chart.",
+    title: 'Love or Arranged Marriage Predictor — AI Vedic Analysis | AstroWord',
+    description: 'Find out if your birth chart indicates love marriage or arranged marriage using AI-powered Vedic astrology analysis.',
     keywords: 'love marriage or arranged marriage, marriage type predictor, vedic astrology marriage, rahu 7th house love marriage, venus marriage astrology',
     alternates: { canonical: 'https://astroword.in/marriage-type' },
     openGraph: {

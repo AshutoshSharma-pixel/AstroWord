@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Spouse Name Initial Predictor — Nakshatra Syllables | AstroWord',
-    description: 'Predict the first letter of your future spouse name using 7th lord nakshatra, Darakaraka nakshatra, and Venus nakshatra. Three Vedic methods for the most accurate result.',
+    title: 'Spouse Name Initial Predictor — Vedic Astrology | AstroWord',
+    description: 'Discover the likely first letter of your future spouse\'s name using 7th lord, Darakaraka, and Venus karaka methods.',
     keywords: 'spouse name initial predictor, future spouse name astrology, nakshatra name letter, 7th lord nakshatra, darakaraka nakshatra name',
     alternates: { canonical: 'https://astroword.in/spouse-initial' },
     openGraph: {

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Atmakaraka Calculator — Find Your Soul Planet | AstroWord',
-    description: "Calculate your Atmakaraka — the planet with the highest degree in your birth chart. Discover your soul's deepest desire, life purpose, and karmic lessons using Jaimini astrology.",
+    title: 'Atmakaraka Calculator — Your Soul Significator | AstroWord',
+    description: 'Find your Atmakaraka — the planet that represents your soul\'s deepest desire in Vedic astrology. Free Jaimini Atmakaraka calculator.',
     keywords: 'atmakaraka calculator, soul planet vedic astrology, jaimini atmakaraka, soul significator, karma astrology, life purpose astrology',
     alternates: { canonical: 'https://astroword.in/atmakaraka' },
     openGraph: {

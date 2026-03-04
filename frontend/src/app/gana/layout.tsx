@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Gana Calculator — Nakshatra Compatibility for Kundli Milan | AstroWord',
-    description: 'Check your Gana (Deva, Manushya, or Rakshasa) based on Moon nakshatra and calculate compatibility with your partner. Gana matching is worth 6 out of 36 points in Ashtakoot Kundli Milan.',
+    title: 'Gana Compatibility Calculator — Vedic Match Making | AstroWord',
+    description: 'Check Deva, Manushya, or Rakshasa Gana compatibility for marriage matching using your Moon nakshatra.',
     keywords: 'gana calculator, kundli milan, nakshatra compatibility, ashtakoot matching, deva manushya rakshasa gana, marriage compatibility astrology',
     alternates: { canonical: 'https://astroword.in/gana' },
     openGraph: {
