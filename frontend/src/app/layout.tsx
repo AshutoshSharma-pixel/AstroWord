@@ -22,17 +22,29 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AstroWord — India's First Precision Vedic AI",
+  metadataBase: new URL('https://astroword.in'),
+  title: {
+    default: "AstroWord — India's First Precision Vedic AI",
+    template: "%s | AstroWord",
+  },
   description:
-    "Get accurate Vedic astrology readings powered by AI. Ask about career, marriage, future and more based on your D1, D9, D10 birth chart.",
+    "Get accurate Vedic astrology readings powered by AI. Ask about career, marriage, future and more based on your D1, D9, D10, D7 birth chart. Free 5 questions daily.",
   keywords:
-    "vedic astrology, kundli, birth chart, AI astrology, jyotish, marriage prediction, career astrology",
+    "vedic astrology, kundli, birth chart, AI astrology, jyotish, marriage prediction, career astrology, darakaraka, atmakaraka, dasha timing, free astrology",
+  authors: [{ name: "AstroWord", url: "https://astroword.in" }],
+  creator: "AstroWord",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  },
+  alternates: { canonical: "https://astroword.in" },
   openGraph: {
     title: "AstroWord — India's First Precision Vedic AI",
     description: "Ask anything about your life. Your birth chart has the answers.",
     url: "https://astroword.in",
     siteName: "AstroWord",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AstroWord — Precision Vedic AI" }],
     locale: "en_IN",
     type: "website",
   },
@@ -40,6 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AstroWord — India's First Precision Vedic AI",
     description: "Ask anything about your life. Your birth chart has the answers.",
+    site: "@astroword_in",
   },
 };
 
@@ -47,6 +60,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
+
 
 export default function RootLayout({
   children,
