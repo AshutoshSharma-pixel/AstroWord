@@ -181,20 +181,20 @@ export default function UpgradeModal({ isOpen, onClose }: { isOpen: boolean; onC
                         <p className="text-muted text-xs mb-4 font-mono uppercase tracking-wider">7 Day Pass</p>
 
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm line-through text-muted">₹149</span>
+                            <span className="text-sm line-through text-muted">₹199</span>
                             <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-0.5 rounded-full border border-green-500/30">
-                                54% OFF
+                                55% OFF
                             </span>
                         </div>
                         <div className="flex items-baseline gap-1 mb-6">
-                            <span className="text-4xl font-semibold text-white">₹69</span>
+                            <span className="text-4xl font-semibold text-white">₹89</span>
                             <span className="text-muted text-sm">/ 7 days</span>
                         </div>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm text-text/80">
                             <li className="flex items-start gap-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />
-                                <span>10 questions per day</span>
+                                <span>12 questions per day</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />
@@ -207,6 +207,10 @@ export default function UpgradeModal({ isOpen, onClose }: { isOpen: boolean; onC
                             <li className="flex items-start gap-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />
                                 <span>Career & profession chart <span className="text-gold font-mono text-xs">D10</span></span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />
+                                <span>Children chart <span className="text-gold font-mono text-xs">D7</span></span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />

@@ -50,7 +50,7 @@ def create_order(request: CreateOrderRequest, db=Depends(get_db)):
         
     # Determine pricing based on plan - Strictly Server Logic
     if request.plan_type == 'starter':
-        amount = 6900    # ₹69
+        amount = 8900    # ₹89
     elif request.plan_type == 'pro':
         amount = 19900   # ₹199
     elif request.plan_type == 'annual':
@@ -129,9 +129,9 @@ def verify_payment(request: VerifyPaymentRequest, db=Depends(get_db)):
         amount_paid = rzp_order.get("amount")
         now = datetime.now(timezone.utc)
         
-        if amount_paid == 6900:
+        if amount_paid == 8900:
             derived_plan = "starter"
-            questions_limit = 10
+            questions_limit = 12
             expiry_time = now + timedelta(days=7)
         elif amount_paid == 19900:
             derived_plan = "pro"
