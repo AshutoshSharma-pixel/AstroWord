@@ -2,6 +2,7 @@ import os
 import json
 import re
 import traceback
+from datetime import datetime
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from api.gemini_utils import call_gemini_new
@@ -14,7 +15,19 @@ class KarakaRequest(BaseModel):
     chart_data: dict
     karaka_type: str | None = None
 
-# Nakshatra syllables (aksharas) — sounds associated with each nakshatra
+# ── Shared astrology constants ──────────────────────────────────────────────
+SIGN_LORDS = {
+    "Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury",
+    "Cancer": "Moon", "Leo": "Sun", "Virgo": "Mercury",
+    "Libra": "Venus", "Scorpio": "Mars", "Sagittarius": "Jupiter",
+    "Capricorn": "Saturn", "Aquarius": "Saturn", "Pisces": "Jupiter"
+}
+ZODIAC_SIGNS = [
+    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+]
+
+# Nakshatra syllables (aksharas)
 NAKSHATRA_SYLLABLES = {
     "Ashwini": ["Chu", "Che", "Cho", "La"],
     "Bharani": ["Li", "Lu", "Le", "Lo"],
@@ -45,13 +58,52 @@ NAKSHATRA_SYLLABLES = {
     "Revati": ["De", "Do", "Cha", "Chi"]
 }
 
+# ── Shared helpers ───────────────────────────────────────────────────────────
+
+def resolve_seventh_lord(asc_sign: str) -> tuple[str, str]:
+    """Return (seventh_house_sign, seventh_lord) for the given ascendant sign."""
+    if asc_sign in ZODIAC_SIGNS:
+        asc_idx = ZODIAC_SIGNS.index(asc_sign)
+        seventh_sign = ZODIAC_SIGNS[(asc_idx + 6) % 12]
+        return seventh_sign, SIGN_LORDS.get(seventh_sign, "Venus")
+    return "Unknown", "Venus"
+
+
+def resolve_planet_house(planet_name: str, asc_sign: str, planets: dict) -> int | None:
+    """Return house number (1-12) of a planet relative to ascendant, or None."""
+    p_sign = planets.get(planet_name, {}).get("d1", {}).get("sign", "")
+    if p_sign in ZODIAC_SIGNS and asc_sign in ZODIAC_SIGNS:
+        asc_idx = ZODIAC_SIGNS.index(asc_sign)
+        p_idx = ZODIAC_SIGNS.index(p_sign)
+        return ((p_idx - asc_idx) % 12) + 1
+    return None
+
+
+def fmt_house(n: int | None) -> str:
+    """Format house number with ordinal suffix, e.g. 7 → '7th'."""
+    if n is None:
+        return "unknown"
+    suffixes = {1: "st", 2: "nd", 3: "rd"}
+    return f"{n}{suffixes.get(n if n <= 3 else 0, 'th')}"
+
+
+# ── /marriage-type ───────────────────────────────────────────────────────────
+
 @router.post("/marriage-type")
 async def marriage_type(data: KarakaRequest):
     try:
         planets = data.chart_data.get("planets", {})
         ascendant = data.chart_data.get("ascendant", {})
         description = data.chart_data.get("description_text", "")
-        
+
+        # Fix 4 — guard against missing/empty chart description
+        if not description or len(description.strip()) < 100:
+            raise HTTPException(
+                status_code=400,
+                detail="description_text is missing or too short (< 100 chars). "
+                       "Pass the full chart object returned by /api/chart."
+            )
+
         prompt = f"""
 You are a precision Vedic astrology expert specializing in marriage analysis.
 
@@ -106,26 +158,24 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
             )
         )
         response_text = response.text.strip()
-        
-        # Clean JSON wrappers if Model hallucinates them
+
         for prefix in ["```json", "```"]:
             if response_text.startswith(prefix):
                 response_text = response_text[len(prefix):]
         if response_text.endswith("```"):
             response_text = response_text[:-3]
         response_text = response_text.strip()
-        
+
         try:
             result = json.loads(response_text)
         except json.JSONDecodeError:
-            # Fallback regex salvage attempt
             salvaged_text = response_text
             reading_text = "Analysis unavailable due to complex planetary alignments."
             if salvaged_text.strip().startswith('{') and '"reading":' in salvaged_text:
                 match = re.search(r'"reading"\s*:\s*"(.*?)"\s*,\s*"key_indicators"', salvaged_text, re.DOTALL)
                 if match:
                     reading_text = match.group(1).replace('\\n', '\n').replace('\\"', '"')
-            
+
             result = {
                 "result": "Analysis unavailable",
                 "percentage": {"love": 50, "arranged": 50},
@@ -134,13 +184,17 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
                 "timing": "Check current dasha period",
                 "keywords": []
             }
-        
+
         return {"success": True, **result}
 
+    except HTTPException:
+        raise
     except Exception as e:
-        import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ── /spouse-initial ──────────────────────────────────────────────────────────
 
 @router.post("/spouse-initial")
 async def spouse_initial(data: KarakaRequest):
@@ -149,16 +203,7 @@ async def spouse_initial(data: KarakaRequest):
         ascendant = data.chart_data.get("ascendant", {})
         asc_sign = ascendant.get("sign", "")
         description = data.chart_data.get("description_text", "")
-        
-        SIGN_LORDS = {
-            "Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury",
-            "Cancer": "Moon", "Leo": "Sun", "Virgo": "Mercury",
-            "Libra": "Venus", "Scorpio": "Mars", "Sagittarius": "Jupiter",
-            "Capricorn": "Saturn", "Aquarius": "Saturn", "Pisces": "Jupiter"
-        }
-        ZODIAC_SIGNS = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo",
-                        "Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"]
-        
+
         def get_syllable_info(planet_name):
             p = planets.get(planet_name, {}).get("d1", {})
             nak = p.get("nakshatra", "")
@@ -174,20 +219,14 @@ async def spouse_initial(data: KarakaRequest):
                 "primary_syllable": primary,
                 "primary_letter": primary[0].upper() if primary else "A"
             }
-        
-        # Method 1 — 7th Lord
-        if asc_sign in ZODIAC_SIGNS:
-            asc_index = ZODIAC_SIGNS.index(asc_sign)
-            seventh_sign = ZODIAC_SIGNS[(asc_index + 6) % 12]
-            seventh_lord = SIGN_LORDS.get(seventh_sign, "Venus")
-        else:
-            seventh_lord = "Venus"
-            seventh_sign = "Unknown"
-            
+
+        # Fix 5 — use shared resolve_seventh_lord helper
+        seventh_sign, seventh_lord = resolve_seventh_lord(asc_sign)
+
         method1 = get_syllable_info(seventh_lord)
         method1["method"] = "7th Lord Method (Parashari)"
         method1["seventh_house_sign"] = seventh_sign
-        
+
         # Method 2 — Darakaraka
         eligible = {k: v for k, v in planets.items() if k not in ["Rahu", "Ketu", "Uranus", "Neptune", "Pluto"]}
         if len(eligible) > 0:
@@ -198,28 +237,21 @@ async def spouse_initial(data: KarakaRequest):
             )
             dk_planet = sorted_planets[-1][0]
         else:
-            dk_planet = "Venus" # Fallback
-            
+            dk_planet = "Venus"
+
         method2 = get_syllable_info(dk_planet)
         method2["method"] = "Darakaraka Method (Jaimini)"
-        
+
         # Method 3 — Venus
         method3 = get_syllable_info("Venus")
         method3["method"] = "Venus Karaka Method"
-        
-        # Collect all unique initials across all 3 methods
+
         all_initials = list(set([
             method1["primary_letter"],
             method2["primary_letter"],
             method3["primary_letter"]
         ]))
-        
-        all_syllables_combined = list(set(
-            method1["syllables"] + 
-            method2["syllables"] + 
-            method3["syllables"]
-        ))
-        
+
         prompt = f"""
 You are a Vedic astrology expert. Analyze spouse name initials using three methods.
 
@@ -283,7 +315,7 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
                 response_text = response_text[len(prefix):]
         if response_text.endswith("```"):
             response_text = response_text[:-3]
-        
+
         try:
             result = json.loads(response_text.strip())
         except json.JSONDecodeError:
@@ -293,7 +325,7 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
                 match = re.search(r'"reading"\s*:\s*"(.*?)"\s*,\s*"sample_names"', salvaged_text, re.DOTALL)
                 if match:
                     reading_text = match.group(1).replace('\\n', '\n').replace('\\"', '"')
-                    
+
             result = {
                 "most_likely_initials": all_initials,
                 "primary_initial": method1["primary_letter"],
@@ -306,12 +338,15 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
                 "sample_names": [],
                 "keywords": []
             }
-        
+
         return {"success": True, **result}
 
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ── /marriage-year ───────────────────────────────────────────────────────────
 
 @router.post("/marriage-year")
 async def marriage_year_predictor(data: KarakaRequest):
@@ -319,72 +354,102 @@ async def marriage_year_predictor(data: KarakaRequest):
     ascendant = data.chart_data.get("ascendant", {})
     current_mahadasha = data.chart_data.get("current_mahadasha", {})
     current_antardasha = data.chart_data.get("current_antardasha", {})
-    from datetime import datetime
+    all_antardashas = data.chart_data.get("antardashas", []) or data.chart_data.get("all_antardashas", [])
     current_year = datetime.now().year
+    asc_sign = ascendant.get("sign", "Unknown")
 
-    chart_summary = f"""
-Ascendant: {ascendant.get('sign', 'Unknown')}
+    # Fix 1 — resolve actual 7th lord and its house placement
+    seventh_sign, seventh_lord = resolve_seventh_lord(asc_sign)
+    seventh_lord_data = planets.get(seventh_lord, {}).get("d1", {})
+    seventh_lord_sign = seventh_lord_data.get("sign", "Unknown")
+    seventh_lord_house = resolve_planet_house(seventh_lord, asc_sign, planets)
+    seventh_lord_nak = seventh_lord_data.get("nakshatra", "Unknown")
+
+    # Fix 3 — resolve Venus, Jupiter, Rahu house numbers
+    venus_house = resolve_planet_house("Venus", asc_sign, planets)
+    jupiter_house = resolve_planet_house("Jupiter", asc_sign, planets)
+    rahu_house = resolve_planet_house("Rahu", asc_sign, planets)
+
+    venus_d = planets.get("Venus", {}).get("d1", {})
+    jupiter_d = planets.get("Jupiter", {}).get("d1", {})
+    rahu_d = planets.get("Rahu", {}).get("d1", {})
+
+    # Format upcoming antardashas from the chart data
+    upcoming_ad_text = ""
+    if all_antardashas:
+        upcoming_lines = []
+        for ad in all_antardashas[:8]:  # next 8 antardashas
+            lord = ad.get("lord", ad.get("planet", "?"))
+            start = ad.get("start", "")
+            end = ad.get("end", "")
+            upcoming_lines.append(f"  {lord}: {start} – {end}")
+        if upcoming_lines:
+            upcoming_ad_text = "Upcoming Antardashas:\n" + "\n".join(upcoming_lines)
+    if not upcoming_ad_text:
+        current_ad_lord = current_antardasha.get("lord", "Unknown") if current_antardasha else "Unknown"
+        upcoming_ad_text = f"Current Antardasha: {current_ad_lord}"
+
+    # Fix 2 — single merged Gemini call with ---READING--- delimiter
+    merged_prompt = f"""You are a precision Vedic astrology expert. Predict marriage timing.
+
+FULL CHART CONTEXT:
+Ascendant: {asc_sign}
 Current Year: {current_year}
-Mahadasha: {current_mahadasha.get('lord', 'Unknown')} ends {current_mahadasha.get('end', 'Unknown')}
-Antardasha: {current_antardasha.get('lord', 'Unknown') if current_antardasha else 'Unknown'}
-Venus: {planets.get('Venus', {}).get('d1', {}).get('sign', 'Unknown')} {planets.get('Venus', {}).get('d1', {}).get('nakshatra', 'Unknown')}
-Jupiter: {planets.get('Jupiter', {}).get('d1', {}).get('sign', 'Unknown')}
-Moon: {planets.get('Moon', {}).get('d1', {}).get('sign', 'Unknown')} {planets.get('Moon', {}).get('d1', {}).get('nakshatra', 'Unknown')}
-7th lord: based on {ascendant.get('sign', 'Unknown')} ascendant
+
+7th House Sign: {seventh_sign}
+7th Lord: {seventh_lord} — placed in {seventh_lord_sign} ({seventh_lord_nak}), {fmt_house(seventh_lord_house)} house from ascendant
+
+Venus: {venus_d.get('sign', 'Unknown')} {venus_d.get('nakshatra', '')}, {fmt_house(venus_house)} house
+Jupiter: {jupiter_d.get('sign', 'Unknown')}, {fmt_house(jupiter_house)} house
+Rahu: {rahu_d.get('sign', 'Unknown')}, {fmt_house(rahu_house)} house
+Moon: {planets.get('Moon', {}).get('d1', {}).get('sign', 'Unknown')} {planets.get('Moon', {}).get('d1', {}).get('nakshatra', '')}
+
+Mahadasha: {current_mahadasha.get('lord', 'Unknown')} Mahadasha (ends {current_mahadasha.get('end', 'Unknown')})
+{upcoming_ad_text}
+
+TASK: Produce two sections separated by exactly this delimiter on its own line: ---READING---
+
+SECTION 1 — before ---READING---:
+Output exactly 3 marriage year windows, one per line, in this exact pipe format:
+YEAR|DASHA_PERIOD|STRENGTH|REASON|BEST_MONTHS
+
+Rules:
+- YEAR must be between {current_year} and {current_year + 7}
+- DASHA_PERIOD: use actual Mahadasha-Antardasha lord names from the chart above
+- STRENGTH: one of Strong / Moderate / Possible
+- REASON: cite specific planets and house activations from THIS chart (not generic)
+- BEST_MONTHS: 2-3 month window e.g. Apr-Jun
+
+SECTION 2 — after ---READING---:
+Write exactly 5 numbered facts about marriage timing for THIS specific chart.
+Each fact must be under 20 words. Use **bold** for planet names and house numbers.
+Facts must reference the actual windows from Section 1 and the chart above.
+Do NOT repeat generic astrology. Be chart-specific.
 """
-
-    # CALL 1 — Get windows as simple pipe-separated list
-    windows_prompt = f"""
-Vedic astrology. Marriage timing for this chart:
-{chart_summary}
-
-List exactly 3 marriage year windows from {current_year} to {current_year+7}.
-Format each window on its own line exactly like this:
-YEAR|DASHA|STRENGTH|REASON|MONTHS
-
-Example:
-2027|Venus-Mercury|Strong|Venus dasha + Jupiter transit|Apr-Oct
-2028|Venus-Ketu|Moderate|Secondary activation|Jan-Jun
-2029|Sun-Venus|Possible|Venus antardasha active|Mar-Aug
-
-Output only 3 lines in that format. Nothing else. No explanations.
-"""
-
-    # CALL 2 — Get reading as plain markdown
-    reading_prompt = f"""Write 5 facts about marriage timing for this Vedic chart. Ascendant: {ascendant.get('sign', 'Unknown')}. Venus in {planets.get('Venus', {}).get('d1', {}).get('sign', 'Unknown')}. Current dasha: {current_mahadasha.get('lord', 'Unknown')} until {current_mahadasha.get('end', 'Unknown')}.
-
-Number each fact 1 to 5. Keep each fact under 15 words. Use **bold** for planet names. Example format:
-1. **Venus** rules the 7th house for this ascendant.
-2. Current dasha period strongly activates marriage.
-3. Best window is 2027 based on transits.
-4. **Jupiter** aspecting 7th house confirms timing.
-5. Marriage most likely between 2027 and 2028.
-
-Now write 5 facts for this specific chart:"""
 
     try:
-        # Execute both calls using fallback utility
-        windows_response = call_gemini_new(
-            windows_prompt,
+        response = call_gemini_new(
+            merged_prompt,
             config=types.GenerateContentConfig(
-                temperature=0.1,
-                max_output_tokens=500
-            )
-        )
-
-        reading_response = call_gemini_new(
-            reading_prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.3,
+                temperature=0.2,
                 max_output_tokens=1000
             )
         )
+
+        raw = response.text.strip()
+
+        # Split on the delimiter
+        if "---READING---" in raw:
+            windows_raw, reading_raw = raw.split("---READING---", 1)
+        else:
+            # Fallback: try to split on blank line
+            windows_raw, reading_raw = raw, ""
 
         # Parse pipe-separated windows
         windows = []
         most_likely_year = str(current_year + 1)
 
-        for line in windows_response.text.strip().split('\n'):
+        for line in windows_raw.strip().split('\n'):
             line = line.strip()
             if '|' in line:
                 parts = line.split('|')
@@ -400,26 +465,32 @@ Now write 5 facts for this specific chart:"""
         if windows:
             most_likely_year = windows[0]["year"]
         else:
-            print(f"WARNING: No windows parsed. Raw response: {windows_response.text}")
+            print(f"WARNING: No windows parsed. Raw:\n{windows_raw}")
 
-        reading = reading_response.text.strip()
+        reading = reading_raw.strip()
         if not reading:
-            reading = f"## Marriage Timing\n\nYour **{current_mahadasha.get('lord', 'Venus')} Mahadasha** is currently active and holds significant promise for relationships."
+            reading = (
+                f"## Marriage Timing\n\n"
+                f"Your **{seventh_lord}** (7th lord) is placed in the **{fmt_house(seventh_lord_house)} house**, "
+                f"and your **{current_mahadasha.get('lord', 'current')} Mahadasha** holds significant promise for relationships."
+            )
 
         return {
             "success": True,
             "most_likely_year": most_likely_year,
             "most_likely_period": f"during {most_likely_year}",
             "windows": windows if windows else [
-                {"year": str(current_year+1), "dasha_period": f"{current_mahadasha.get('lord','Venus')} Mahadasha", "strength": "Strong", "reason": "Current dasha favors marriage", "months": "Apr-Sep"},
-                {"year": str(current_year+2), "dasha_period": "Next Antardasha", "strength": "Moderate", "reason": "Secondary window", "months": "Jan-Jun"},
-                {"year": str(current_year+3), "dasha_period": "Following period", "strength": "Possible", "reason": "Tertiary window", "months": "Mar-Oct"}
+                {"year": str(current_year + 1), "dasha_period": f"{current_mahadasha.get('lord', 'Venus')} Mahadasha",
+                 "strength": "Strong", "reason": f"{seventh_lord} (7th lord) in {seventh_lord_sign}", "months": "Apr-Sep"},
+                {"year": str(current_year + 2), "dasha_period": "Next Antardasha",
+                 "strength": "Moderate", "reason": "Secondary window", "months": "Jan-Jun"},
+                {"year": str(current_year + 3), "dasha_period": "Following period",
+                 "strength": "Possible", "reason": "Tertiary window", "months": "Mar-Oct"}
             ],
             "reading": reading,
             "delay_factors": "",
-            "keywords": ["marriage", "timing", "dasha", "Venus"]
+            "keywords": ["marriage", "timing", seventh_lord, "dasha"]
         }
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
