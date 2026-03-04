@@ -102,16 +102,15 @@ export default function ChatInterface({
     // Auto-send pending question from calculator pages (suggested questions)
     useEffect(() => {
         const pending = sessionStorage.getItem('pending_question');
-        if (pending && initialMessages.length === 1 && !isTyping) {
+        if (pending && !isTyping) {
             sessionStorage.removeItem('pending_question');
             setInput(pending);
-            // Submit after a short delay to let the UI settle
             setTimeout(() => {
                 const form = document.getElementById('chat-form') as HTMLFormElement;
                 if (form) form.requestSubmit();
-            }, 300);
+            }, 600);
         }
-    }, [initialMessages]);
+    }, []);
 
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();

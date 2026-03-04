@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppLayout from '@/components/AppLayout';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ChatInterface from '@/components/ChatInterface';
@@ -24,6 +24,20 @@ export default function Home() {
     setActiveChatId(null);
     setChatMessages([]);
   };
+
+  // Restore chart from localStorage when returning from a tool page with a pending question
+  useEffect(() => {
+    const saved = localStorage.getItem('astroword_chart');
+    const pending = sessionStorage.getItem('pending_question');
+    if (saved && pending && !chartData) {
+      try {
+        const parsed = JSON.parse(saved);
+        setChartData(parsed);
+        setActiveChatId(`chat_${Date.now()}`);
+        setChatMessages([]);
+      } catch (e) { }
+    }
+  }, []);
 
   return (
     <AppLayout
