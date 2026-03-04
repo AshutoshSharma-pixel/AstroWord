@@ -1,11 +1,12 @@
 import os
 import json
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime, timedelta
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_new, call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -341,7 +342,6 @@ USER QUESTION: {data.question}
                 "data": parsed_response
             }
         except Exception:
-            # Fallback if Gemini didn't return perfect JSON
             return {
                  "success": True,
                  "data": {
@@ -365,3 +365,98 @@ USER QUESTION: {data.question}
                 "tags": ["System Error"]
             }
         }
+
+
+@router.post("/ask/stream")
+async def ask_stream(data: AskRequest):
+    """Streaming version of /api/ask using Server-Sent Events."""
+    db = get_db()
+    user_ref = None
+    plan = "free"
+
+    # Auth / limit check — same as /ask
+    if db and data.user_id and data.user_id != "demo-user":
+        try:
+            user_ref = db.collection("users").document(data.user_id)
+            user_doc = user_ref.get()
+            if user_doc.exists:
+                user_data = user_doc.to_dict()
+                today_str = datetime.now().strftime("%Y-%m-%d")
+                last_reset = user_data.get("last_reset_date", "")
+                if last_reset != today_str:
+                    user_ref.update({"questions_today": 0, "last_reset_date": today_str})
+                    questions_today = 0
+                else:
+                    questions_today = user_data.get("questions_today", 0)
+                plan = user_data.get("plan", "FREE").lower()
+                questions_limit = user_data.get("questions_limit", 5)
+                if questions_today >= questions_limit:
+                    now = datetime.now()
+                    midnight = datetime.combine(now.date() + timedelta(days=1), datetime.min.time())
+                    hrs = int((midnight - now).total_seconds() // 3600)
+                    mins = int(((midnight - now).total_seconds() % 3600) // 60)
+                    reset_time = f"{hrs} hours and {mins} minutes" if hrs > 0 else f"{mins} minutes"
+                    async def _limit_gen():
+                        yield f"data: {json.dumps({'limit_reached': True, 'reset_time': reset_time})}\n\n"
+                        yield "data: [DONE]\n\n"
+                    return StreamingResponse(_limit_gen(), media_type="text/event-stream")
+        except Exception:
+            pass
+
+    # Build prompt (plain markdown — no JSON output request)
+    relevant_charts = get_relevant_charts(data.question, plan)
+    chart_description = build_chart_context(data.chart_data, relevant_charts)
+    charts_used = ", ".join(relevant_charts)
+    history_text = "None"
+    if data.chat_history:
+        formatted = []
+        for msg in data.chat_history:
+            role = "User" if msg.get("role") == "user" else "AstroWord"
+            formatted.append(f"{role}: {msg.get('content')}")
+        history_text = "\n\n".join(formatted[-10:])
+    fallback_instruction = ""
+    if data.chart_data.get("isFallback"):
+        fallback_instruction = "\nIMPORTANT: Chart data is missing. Rely on conversation history.\n"
+
+    STREAM_RULES = SYSTEM_PROMPT.split("Return ONLY this exact JSON")[0].strip()
+    prompt = f"""{fallback_instruction}{STREAM_RULES}
+
+Charts analyzed: {charts_used}
+
+CHART DATA:
+{chart_description}
+
+RECENT CONVERSATION HISTORY:
+{history_text}
+
+USER QUESTION: {data.question}
+
+Write your full analysis in plain markdown following the structure above. Do NOT wrap in JSON."""
+
+    _user_ref = user_ref  # capture for closure
+
+    def generate():
+        try:
+            stream = call_gemini_stream(
+                prompt=prompt,
+                config=types.GenerateContentConfig(temperature=0.3)
+            )
+            for chunk in stream:
+                if chunk.text:
+                    yield f"data: {json.dumps({'chunk': chunk.text})}\n\n"
+            # Increment question count after full stream
+            if _user_ref:
+                try:
+                    _user_ref.update({"questions_today": firestore.Increment(1)})
+                except Exception:
+                    pass
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+        finally:
+            yield "data: [DONE]\n\n"
+
+    return StreamingResponse(
+        generate(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+    )
