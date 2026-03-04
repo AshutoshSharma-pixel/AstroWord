@@ -279,7 +279,9 @@ export default function ChatInterface({
                                     </div>
                                 ) : (
                                     <div className="w-8 h-8 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center text-accent text-sm font-medium">
-                                        AS
+                                        {user?.displayName
+                                            ? user.displayName.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()
+                                            : user?.email?.substring(0, 2).toUpperCase() || 'U'}
                                     </div>
                                 )}
                             </div>
