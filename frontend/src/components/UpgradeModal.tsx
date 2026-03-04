@@ -77,9 +77,10 @@ export default function UpgradeModal({ isOpen, onClose }: { isOpen: boolean; onC
 
                         const verifyData = await verifyRes.json();
                         if (verifyData.success) {
-                            alert('Cosmic Upgrade Successful! Your new plan is active.');
-                            window.location.reload(); // Refresh to ensure Sidebar picks up new limits
                             onClose();
+                            setTimeout(() => {
+                                alert('✨ Cosmic Upgrade Successful! Your new plan is now active.');
+                            }, 300);
                         } else {
                             alert('Payment verification failed.');
                         }
