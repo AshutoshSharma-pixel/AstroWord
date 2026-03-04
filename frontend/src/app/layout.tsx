@@ -73,18 +73,26 @@ export default function RootLayout({
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is Darakaraka in Vedic astrology?",
+        "name": "How accurate is Vedic AI astrology?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Darakaraka is the planet with the lowest degree in your birth chart (among 7 planets). It is the spouse significator in Jaimini astrology and reveals the nature, appearance, and characteristics of your future partner."
+          "text": "Vedic AI astrology is highly accurate as it processes ancient Jyotish rules, planetary degrees, Dasha periods, and divisional charts (like D9 Navamsa) instantly without human error, providing precise mathematical calculations for predictions."
         }
       },
       {
         "@type": "Question",
-        "name": "How can AI predict marriage timing in astrology?",
+        "name": "What is Navamsa chart D9?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "AI analyzes your Vimshottari Dasha periods, Jupiter transits, 7th house activation, and Venus placements to identify the most auspicious years for marriage based on traditional Vedic astrology rules."
+          "text": "The Navamsa chart (D9) is the most important divisional chart in Vedic astrology. It acts as the microscopic view of your 9th house, revealing your true inner self, second half of life, and is vital for marriage and spouse predictions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Darakaraka in Vedic astrology?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Darakaraka is the planet with the lowest degree in your birth chart. In Jaimini astrology, it serves as the primary spouse significator, revealing the exact nature, appearance, and characteristics of your future partner."
         }
       },
       {
@@ -92,15 +100,7 @@ export default function RootLayout({
         "name": "What is Atmakaraka in Vedic astrology?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Atmakaraka is the planet with the highest degree in your birth chart. It is the soul significator in Jaimini astrology and reveals your soul's deepest desire, life purpose, and the karmic lessons you must complete in this lifetime."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is Gana in Vedic astrology compatibility?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Gana is one of the 8 factors in Kundli Milan (Ashtakoot matching). Every person belongs to one of three Ganas — Deva, Manushya or Rakshasa — based on their Moon nakshatra. Gana matching is worth 6 out of 36 points in compatibility scoring."
+          "text": "Atmakaraka is the planet with the highest degree in your birth chart. It acts as the soul significator in Jaimini astrology and points to your soul's deepest desires, primary life purpose, and karmic lessons."
         }
       },
       {
@@ -108,7 +108,7 @@ export default function RootLayout({
         "name": "Is AstroWord free to use?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. AstroWord offers 5 free questions per day with D1 and D9 chart analysis. All calculator tools (Darakaraka, Atmakaraka, Gana, Marriage Year, etc.) are always free. Paid plans start at ₹69 for 7 days with more daily questions."
+          "text": "Yes. AstroWord offers 5 free questions per day with deep D1 and D9 chart analysis. All premium calculators (Darakaraka, Atmakaraka, Marriage Year Predictor) are completely free. Paid plans are available for extensive daily readings starting at ₹89."
         }
       }
     ]
