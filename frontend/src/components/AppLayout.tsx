@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 
@@ -14,6 +15,15 @@ export default function AppLayout({
     onNewReading?: () => void,
     activeChatId?: string | null
 }) {
+    useEffect(() => {
+        // Wake up Railway container immediately
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/health`).catch(() => { });
+        // Keep alive every 4 minutes
+        const interval = setInterval(() => {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/health`).catch(() => { });
+        }, 4 * 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
     return (
         <div className="flex h-[100dvh] w-full overflow-hidden">
             <Sidebar

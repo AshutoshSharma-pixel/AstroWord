@@ -19,7 +19,8 @@ type Message = {
 
 import { useAuth } from '@/components/AuthProvider';
 import { db } from '@/utils/firebase/config';
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp, increment } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import React from 'react';
 
 export default function ChatInterface({
     chartData,
@@ -30,7 +31,7 @@ export default function ChatInterface({
     chartData: any,
     activeChatId: string | null,
     initialMessages: any[],
-    setChatMessages: (msgs: any[]) => void
+    setChatMessages: React.Dispatch<React.SetStateAction<any[]>>
 }) {
     const { user } = useAuth();
     const router = useRouter();
@@ -118,141 +119,107 @@ export default function ChatInterface({
 
         const userMsg = input.trim();
         const newMsg: Message = { id: Date.now().toString(), role: 'user', content: userMsg };
-        setChatMessages([...initialMessages, newMsg]);
+        const aiMsgId = (Date.now() + 1).toString();
+        const aiPlaceholder: Message = { id: aiMsgId, role: 'ai', content: '', tags: [] };
+
         setInput('');
         setIsTyping(true);
+        setChatMessages([...initialMessages, newMsg, aiPlaceholder]);
 
-        // Get ID token for authorization
         const idToken = user ? await user.getIdToken() : '';
 
         try {
-            // First, Verify User Question Limits manually
-            if (user) {
-                const userDocRef = doc(db, 'users', user.uid);
-                const userDocSnap = await getDoc(userDocRef);
-                if (userDocSnap.exists()) {
-                    const data = userDocSnap.data();
-                    const qToday = data.questions_today || 0;
-                    const qLimit = data.questions_limit || 5;
-                    const plan = data.plan || 'FREE';
-
-                    // If not lifetime cosmos plan and today's questions equal limits
-                    // Let the backend handle the limit validation to compute the exact reset time
-                }
-            }
-
-            // Get AI analysis
-            const res = await fetch(`${API_URL}/api/ask`, {
+            const res = await fetch(`${API_URL}/api/ask/stream`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${idToken}`
                 },
                 body: JSON.stringify({
-                    user_id: user?.uid || "demo-user",
+                    user_id: user?.uid || 'demo-user',
                     question: userMsg,
                     chart_data: chartData,
                     chat_history: initialMessages
                 })
             });
 
-            const data = await res.json();
+            const reader = res.body?.getReader();
+            const decoder = new TextDecoder();
+            let fullText = '';
+            let limitReached = false;
 
-            if (!res.ok || !data.success) {
-                if (data.limit_reached) {
-                    const resetTimeStr = data.reset_time || "midnight";
-                    const newMessagesLimit = [
-                        ...initialMessages,
-                        newMsg,
-                        {
-                            id: Date.now().toString(),
-                            role: 'ai',
-                            content: `LIMIT_REACHED:${resetTimeStr}`,
-                            tags: []
-                        } as Message
-                    ];
-                    setChatMessages(newMessagesLimit);
-                    setIsTyping(false);
+            while (reader) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const lines = decoder.decode(value, { stream: true }).split('\n');
+                for (const line of lines) {
+                    if (!line.startsWith('data: ')) continue;
+                    const raw = line.slice(6).trim();
+                    if (raw === '[DONE]') break;
+                    try {
+                        const parsed = JSON.parse(raw);
 
-                    // Update local chat history so it shows up in sidebar
-                    if (user && activeChatId) {
-                        const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
-                        setDoc(chatRef, {
-                            title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                            messages: newMessagesLimit.map(m => ({
-                                role: m.role,
-                                content: m.content,
-                                timestamp: Date.now()
-                            })),
-                            updated_at: serverTimestamp()
-                        }, { merge: true }).catch(e => console.error("Failed to update chat in Firestore", e));
-                    }
-                    return;
+                        if (parsed.limit_reached) {
+                            limitReached = true;
+                            const resetTimeStr = parsed.reset_time || 'midnight';
+                            const limitMsgs = [
+                                ...initialMessages,
+                                newMsg,
+                                { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
+                            ];
+                            setChatMessages(limitMsgs);
+                            if (user && activeChatId) {
+                                const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                                setDoc(chatRef, {
+                                    title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                                    messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                                    updated_at: serverTimestamp()
+                                }, { merge: true }).catch(() => { });
+                            }
+                            return;
+                        }
+
+                        if (parsed.error) throw new Error(parsed.error);
+
+                        if (parsed.chunk) {
+                            fullText += parsed.chunk;
+                            setIsTyping(false); // hide dots once first chunk arrives
+                            setChatMessages(prev => {
+                                const updated = [...prev];
+                                updated[updated.length - 1] = { ...updated[updated.length - 1], content: fullText };
+                                return updated;
+                            });
+                        }
+                    } catch { /* skip malformed SSE lines */ }
                 }
-                throw new Error(data.detail || 'Failed to analyze chart');
             }
 
-            const parsed = data.data || data;
-            const answerText = parsed.answer || parsed.data?.answer || 'The cosmos are silent. Try asking again.';
-            const tags = parsed.tags || parsed.data?.tags || [];
-
-            const newMessages = [
-                ...initialMessages,
-                newMsg,
-                {
-                    id: Date.now().toString(),
-                    role: 'ai',
-                    content: answerText,
-                    tags: tags
-                } as Message
-            ];
-
-            setChatMessages(newMessages);
-
-            // Increment Daily Quota regardless of chat save
-            if (user) {
-                const userDocRef = doc(db, 'users', user.uid);
-                updateDoc(userDocRef, {
-                    questions_today: increment(1)
-                }).catch(e => console.error("Failed to increment limits in Firestore", e));
-            }
-
-            // Save to Firestore
-            if (user && activeChatId) {
-                const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
-                const updateData: any = {
-                    title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                    messages: newMessages.map(m => ({
-                        role: m.role,
-                        content: m.content,
-                        timestamp: Date.now()
-                    })),
-                    updated_at: serverTimestamp(),
-                    chart_data: chartData
-                };
-
-                if (initialMessages.length === 1) {
-                    updateData.created_at = serverTimestamp();
+            if (!limitReached) {
+                // Save complete conversation to Firestore
+                const finalMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: fullText, tags: [] } as Message];
+                if (user && activeChatId) {
+                    const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                    const updateData: any = {
+                        title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                        messages: finalMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                        updated_at: serverTimestamp(),
+                        chart_data: chartData
+                    };
+                    if (initialMessages.length === 1) updateData.created_at = serverTimestamp();
+                    setDoc(chatRef, updateData, { merge: true }).catch(e => console.error('Failed to save chat', e));
                 }
-
-                setDoc(chatRef, updateData, { merge: true }).catch(e => console.error("Failed to update chat in Firestore", e));
             }
-
-
 
         } catch (err: any) {
-            console.error("Chat Error:", err);
-            setChatMessages([
-                ...initialMessages,
-                newMsg,
-                {
-                    id: Date.now().toString(),
-                    role: 'ai',
-                    content: err.message || 'I encountered an error interpreting your cosmic alignment. Please try again later.',
-                    confidence: 'LOW',
-                    tags: ['Error']
-                }
-            ]);
+            console.error('Chat Error:', err);
+            setChatMessages(prev => {
+                const updated = [...prev];
+                updated[updated.length - 1] = {
+                    ...updated[updated.length - 1],
+                    content: err.message || 'I encountered an error. Please try again.'
+                };
+                return updated;
+            });
         } finally {
             setIsTyping(false);
         }
