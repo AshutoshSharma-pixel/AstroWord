@@ -279,7 +279,7 @@ export default function ChatInterface({
 
                             {/* Avatar */}
                             <div className="flex-shrink-0 mt-1">
-                                {msg.role === 'ai' ? (
+                                {msg.role === 'ai' || msg.role === 'model' ? (
                                     <div className="w-8 h-8 rounded bg-surface2 border border-gold/30 flex items-center justify-center text-gold">
                                         ☉
                                     </div>
@@ -295,18 +295,18 @@ export default function ChatInterface({
                             {/* Message Content */}
                             <div className={`flex flex-col gap-2 max-w-full w-full ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
 
-                                {msg.role === 'ai' && (
+                                {msg.role === 'ai' || msg.role === 'model' ? (
                                     <div className="flex items-center gap-2">
                                         <span className="text-xs font-mono text-gold tracking-widest uppercase">AstroWord</span>
 
                                     </div>
-                                )}
+                                ) : null}
 
-                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed overflow-hidden max-w-full ${msg.role === 'user'
+                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed overflow-hidden max-w-full break-words [overflow-wrap:break-word] ${msg.role === 'user'
                                     ? 'bg-surface2 border border-border text-text/90'
                                     : 'bg-transparent text-text border-none p-0'
                                     }`}>
-                                    {msg.role === 'ai' ? (
+                                    {msg.role === 'ai' || msg.role === 'model' ? (
                                         typeof msg.content === 'string' && msg.content.startsWith('LIMIT_REACHED:') ? (
                                             <div className="bg-surface2 border border-gold/20 rounded-2xl p-6 space-y-5 my-2">
                                                 {/* Header */}
@@ -517,7 +517,7 @@ export default function ChatInterface({
                                     )}
                                 </div>
 
-                                {msg.role === 'ai' && msg.tags && msg.tags.length > 0 && (
+                                {(msg.role === 'ai' || msg.role === 'model') && msg.tags && msg.tags.length > 0 && (
                                     <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-border">
                                         {msg.tags.map((tag: string, i: number) => (
                                             <span

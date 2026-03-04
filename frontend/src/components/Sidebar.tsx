@@ -194,14 +194,17 @@ export default function Sidebar({
                     <img src="/astroword-logo.svg" alt="AstroWord" className="h-10" />
                 </div>
 
-                {/* New Reading Button */}
+                {/* New Chat Button */}
                 <div className="px-3 mb-4 mt-2">
                     <button
-                        onClick={onNewReading}
-                        className="w-full flex items-center justify-between px-3 py-2 bg-surface2 hover:bg-white/5 border border-border rounded-lg text-sm text-text transition-colors group"
+                        onClick={() => {
+                            if (onNewReading) onNewReading();
+                            setMobileOpen(false); // Make sure to close the mobile drawer so they see the new chat
+                        }}
+                        className="w-full flex items-center justify-between px-3 py-2.5 bg-gold/5 hover:bg-gold/10 border border-gold/40 rounded-lg text-sm transition-all group shadow-[0_0_10px_rgba(201,168,76,0.05)]"
                     >
-                        <span className="font-medium group-hover:text-gold transition-colors">New Reading</span>
-                        <PlusCircle className="w-4 h-4 text-muted group-hover:text-gold transition-colors" />
+                        <span className="font-medium text-gold">New Chat</span>
+                        <Edit2 className="w-4 h-4 text-gold" />
                     </button>
 
                     {/* Explore Tools Button */}
