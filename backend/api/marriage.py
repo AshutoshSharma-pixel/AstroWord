@@ -368,7 +368,7 @@ Now write 5 facts for this specific chart:"""
             windows_prompt,
             config=types.GenerateContentConfig(
                 temperature=0.1,
-                max_output_tokens=200
+                max_output_tokens=500
             )
         )
 
@@ -376,7 +376,7 @@ Now write 5 facts for this specific chart:"""
             reading_prompt,
             config=types.GenerateContentConfig(
                 temperature=0.3,
-                max_output_tokens=200
+                max_output_tokens=1000
             )
         )
 
@@ -399,6 +399,8 @@ Now write 5 facts for this specific chart:"""
 
         if windows:
             most_likely_year = windows[0]["year"]
+        else:
+            print(f"WARNING: No windows parsed. Raw response: {windows_response.text}")
 
         reading = reading_response.text.strip()
         if not reading:
