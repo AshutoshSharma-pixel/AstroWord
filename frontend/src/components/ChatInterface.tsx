@@ -127,81 +127,119 @@ export default function ChatInterface({
         setChatMessages([...initialMessages, newMsg, aiPlaceholder]);
 
         const idToken = user ? await user.getIdToken() : '';
+        const fetchBody = JSON.stringify({
+            user_id: user?.uid || 'demo-user',
+            question: userMsg,
+            chart_data: chartData,
+            chat_history: initialMessages
+        });
+        const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` };
 
         try {
-            const res = await fetch(`${API_URL}/api/ask/stream`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${idToken}`
-                },
-                body: JSON.stringify({
-                    user_id: user?.uid || 'demo-user',
-                    question: userMsg,
-                    chart_data: chartData,
-                    chat_history: initialMessages
-                })
-            });
+            // --- Try streaming endpoint first ---
+            const streamRes = await fetch(`${API_URL}/api/ask/stream`, { method: 'POST', headers, body: fetchBody });
 
-            const reader = res.body?.getReader();
-            const decoder = new TextDecoder();
-            let fullText = '';
-            let limitReached = false;
+            if (streamRes.ok) {
+                // ✅ Streaming path
+                const reader = streamRes.body?.getReader();
+                const decoder = new TextDecoder();
+                let fullText = '';
+                let limitReached = false;
 
-            while (reader) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                const lines = decoder.decode(value, { stream: true }).split('\n');
-                for (const line of lines) {
-                    if (!line.startsWith('data: ')) continue;
-                    const raw = line.slice(6).trim();
-                    if (raw === '[DONE]') break;
-                    try {
-                        const parsed = JSON.parse(raw);
-
-                        if (parsed.limit_reached) {
-                            limitReached = true;
-                            const resetTimeStr = parsed.reset_time || 'midnight';
-                            const limitMsgs = [
-                                ...initialMessages,
-                                newMsg,
-                                { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
-                            ];
-                            setChatMessages(limitMsgs);
-                            if (user && activeChatId) {
-                                const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
-                                setDoc(chatRef, {
-                                    title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                                    messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
-                                    updated_at: serverTimestamp()
-                                }, { merge: true }).catch(() => { });
+                while (reader) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const lines = decoder.decode(value, { stream: true }).split('\n');
+                    for (const line of lines) {
+                        if (!line.startsWith('data: ')) continue;
+                        const raw = line.slice(6).trim();
+                        if (raw === '[DONE]') break;
+                        try {
+                            const parsed = JSON.parse(raw);
+                            if (parsed.limit_reached) {
+                                limitReached = true;
+                                const resetTimeStr = parsed.reset_time || 'midnight';
+                                const limitMsgs = [
+                                    ...initialMessages, newMsg,
+                                    { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
+                                ];
+                                setChatMessages(limitMsgs);
+                                if (user && activeChatId) {
+                                    const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                                    setDoc(chatRef, {
+                                        title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                                        messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                                        updated_at: serverTimestamp()
+                                    }, { merge: true }).catch(() => { });
+                                }
+                                return;
                             }
-                            return;
-                        }
-
-                        if (parsed.error) throw new Error(parsed.error);
-
-                        if (parsed.chunk) {
-                            fullText += parsed.chunk;
-                            setIsTyping(false); // hide dots once first chunk arrives
-                            setChatMessages(prev => {
-                                const updated = [...prev];
-                                updated[updated.length - 1] = { ...updated[updated.length - 1], content: fullText };
-                                return updated;
-                            });
-                        }
-                    } catch { /* skip malformed SSE lines */ }
+                            if (parsed.error) throw new Error(parsed.error);
+                            if (parsed.chunk) {
+                                fullText += parsed.chunk;
+                                setIsTyping(false);
+                                setChatMessages(prev => {
+                                    const updated = [...prev];
+                                    updated[updated.length - 1] = { ...updated[updated.length - 1], content: fullText };
+                                    return updated;
+                                });
+                            }
+                        } catch { /* skip malformed SSE lines */ }
+                    }
                 }
-            }
 
-            if (!limitReached) {
-                // Save complete conversation to Firestore
-                const finalMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: fullText, tags: [] } as Message];
+                if (!limitReached) {
+                    const finalMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: fullText, tags: [] } as Message];
+                    if (user && activeChatId) {
+                        const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                        const updateData: any = {
+                            title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                            messages: finalMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                            updated_at: serverTimestamp(),
+                            chart_data: chartData
+                        };
+                        if (initialMessages.length === 1) updateData.created_at = serverTimestamp();
+                        setDoc(chatRef, updateData, { merge: true }).catch(e => console.error('Failed to save chat', e));
+                    }
+                }
+
+            } else {
+                // ⚠️ Fallback: streaming not available — use standard JSON endpoint
+                const res = await fetch(`${API_URL}/api/ask`, { method: 'POST', headers, body: fetchBody });
+                const data = await res.json();
+
+                if (!res.ok || !data.success) {
+                    if (data.limit_reached) {
+                        const resetTimeStr = data.reset_time || 'midnight';
+                        const limitMsgs = [
+                            ...initialMessages, newMsg,
+                            { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
+                        ];
+                        setChatMessages(limitMsgs);
+                        if (user && activeChatId) {
+                            const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                            setDoc(chatRef, {
+                                title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                                messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                                updated_at: serverTimestamp()
+                            }, { merge: true }).catch(() => { });
+                        }
+                        return;
+                    }
+                    throw new Error(data.detail || 'Failed to get AI response');
+                }
+
+                const parsed = data.data || data;
+                const answerText = parsed.answer || 'The cosmos are silent. Try asking again.';
+                const tags = parsed.tags || [];
+                const newMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: answerText, tags } as Message];
+                setChatMessages(newMessages);
+
                 if (user && activeChatId) {
                     const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
                     const updateData: any = {
                         title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                        messages: finalMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                        messages: newMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
                         updated_at: serverTimestamp(),
                         chart_data: chartData
                     };
@@ -224,6 +262,8 @@ export default function ChatInterface({
             setIsTyping(false);
         }
     };
+
+
 
     return (
         <div className="flex flex-col h-full bg-bg relative overflow-hidden">
