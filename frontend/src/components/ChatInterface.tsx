@@ -293,7 +293,7 @@ export default function ChatInterface({
                             </div>
 
                             {/* Message Content */}
-                            <div className={`flex flex-col gap-2 min-w-0 w-full ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                            <div className={`flex flex-col gap-2 max-w-full w-full ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
 
                                 {msg.role === 'ai' && (
                                     <div className="flex items-center gap-2">
@@ -302,7 +302,7 @@ export default function ChatInterface({
                                     </div>
                                 )}
 
-                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed overflow-hidden ${msg.role === 'user'
+                                <div className={`p-4 rounded-2xl text-[15px] leading-relaxed overflow-hidden max-w-full ${msg.role === 'user'
                                     ? 'bg-surface2 border border-border text-text/90'
                                     : 'bg-transparent text-text border-none p-0'
                                     }`}>
@@ -487,7 +487,7 @@ export default function ChatInterface({
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="prose prose-invert max-w-none w-full overflow-hidden text-text prose-p:leading-relaxed prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide break-words [overflow-wrap:anywhere]">
+                                            <div className="prose prose-invert max-w-none w-full overflow-hidden text-text prose-p:leading-relaxed prose-a:text-gold hover:prose-a:text-amber prose-strong:text-white font-serif tracking-wide break-words [overflow-wrap:break-word]">
                                                 <ReactMarkdown
                                                     remarkPlugins={[remarkGfm]}
                                                     components={{
@@ -496,13 +496,13 @@ export default function ChatInterface({
                                                         h3: ({ node, ...props }) => <h3 className="text-white font-serif text-lg sm:text-xl mt-5 mb-3 font-medium tracking-wide break-words" {...props} />,
                                                         strong: ({ node, ...props }) => <strong className="text-gold font-medium" {...props} />,
                                                         em: ({ node, ...props }) => <em className="text-text/80 italic" {...props} />,
-                                                        p: ({ node, ...props }) => <p className="mb-4 leading-relaxed break-words [overflow-wrap:anywhere]" {...props} />,
+                                                        p: ({ node, ...props }) => <p className="mb-4 leading-relaxed break-words [overflow-wrap:break-word]" {...props} />,
                                                         ul: ({ node, ...props }) => <ul className="space-y-2 my-4 opacity-90 ml-2" {...props} />,
                                                         ol: ({ node, ...props }) => <ol className="space-y-1 mb-3 ml-2 list-decimal list-inside" {...props} />,
                                                         li: ({ node, ...props }) => (
                                                             <li className="flex items-start gap-2 mb-2 last:mb-0">
                                                                 <span className="text-gold flex-shrink-0 mt-1.5 opacity-70 text-[10px]">✦</span>
-                                                                <span className="flex-1 leading-relaxed text-text/90 break-words [overflow-wrap:anywhere]" {...props} />
+                                                                <span className="flex-1 leading-relaxed text-text/90 break-words [overflow-wrap:break-word]" {...props} />
                                                             </li>
                                                         ),
                                                         blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-gold/50 pl-4 py-2 italic bg-gold/5 text-white/90 rounded-r-lg my-6 break-words" {...props} />
@@ -583,9 +583,9 @@ export default function ChatInterface({
 
             <div className="border-t border-border bg-bg/95 backdrop-blur z-20 w-full flex flex-col shrink-0">
                 {/* Tools Shortcut Bar */}
-                <div className="flex items-center gap-2 px-4 py-3 overflow-x-auto no-scrollbar border-b border-border/30 w-full">
-                    <div className="flex items-center gap-2 max-w-4xl mx-auto w-full px-0 sm:px-2 leading-none">
-                        <span className="text-[10px] text-muted/50 font-mono whitespace-nowrap uppercase tracking-tighter">Tools:</span>
+                <div className="px-4 py-3 border-b border-border/30 w-full">
+                    <div className="flex flex-wrap items-center gap-2 max-w-4xl mx-auto w-full px-0 sm:px-2 leading-none">
+                        <span className="text-[10px] text-muted/50 font-mono uppercase tracking-tighter w-full sm:w-auto mb-1 sm:mb-0">Tools:</span>
                         {[
                             { label: '💑 Darakaraka', path: '/darakaraka' },
                             { label: '☀️ Atmakaraka', path: '/atmakaraka' },
