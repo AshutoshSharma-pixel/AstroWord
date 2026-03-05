@@ -1,0 +1,43 @@
+INFO:     Will watch for changes in these directories: ['/Users/ashutoshsharma/Desktop/Astroword/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [47557] using StatReload
+INFO:     Started server process [47611]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47611]
+INFO:     Started server process [48111]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'api/user.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48111]
+INFO:     Started server process [48212]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+Initializing Firebase with Project ID: astroword-4002a
+✅ Firebase initialized from FIREBASE_SERVICE_ACCOUNT_JSON
+INFO:     127.0.0.1:51707 - "GET /api/user/plan HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51932 - "OPTIONS /api/user/plan HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'api/ask.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48212]
+INFO:     Started server process [54924]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+Initializing Firebase with Project ID: astroword-4002a
+✅ Firebase initialized from FIREBASE_SERVICE_ACCOUNT_JSON
+INFO:     127.0.0.1:53558 - "POST /api/ask/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53890 - "POST /api/ask/stream HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [54924]
+INFO:     Stopping reloader process [47557]

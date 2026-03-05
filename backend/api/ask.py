@@ -6,8 +6,9 @@ from pydantic import BaseModel
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime, timedelta
-from api.gemini_utils import call_gemini_new, call_gemini_stream
+from api.gemini_utils import call_gemini_new, call_gemini_stream, GEMINI_KEYS
 from google.genai import types
+from google import genai as new_genai
 
 router = APIRouter()
 
@@ -312,6 +313,7 @@ USER QUESTION: {data.question}
             prompt=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
+                model="gemini-2.0-flash",
                 response_mime_type="application/json"
             )
         )
@@ -435,35 +437,58 @@ Write your full analysis in plain markdown following the structure above. Do NOT
 
     _user_ref = user_ref  # capture for closure
 
-    def generate():
-        try:
-            stream = call_gemini_stream(
-                prompt=prompt,
-                config=types.GenerateContentConfig(temperature=0.3)
-            )
-            for chunk in stream:
-                try:
-                    text_chunk = chunk.text
-                    if text_chunk:
-                        # Clean JSON string formatting issues if any exist
-                        clean_chunk = json.dumps({'chunk': text_chunk})
-                        yield f"data: {clean_chunk}\n\n"
-                except Exception as attribute_err:
-                    print(f"Skipping malformed chunk: {attribute_err}")
-                    pass
-            # Increment question count after full stream
-            if _user_ref:
-                try:
-                    _user_ref.update({"questions_today": firestore.Increment(1)})
-                except Exception:
-                    pass
-        except Exception as e:
-            import traceback
-            traceback.print_exc()
-            error_payload = json.dumps({"error": str(e)})
-            yield f"data: {error_payload}\n\n"
-        finally:
-            yield "data: [DONE]\n\n"
+    def generate(
+        _prompt=prompt,
+        _user_ref=user_ref,
+        _keys=GEMINI_KEYS
+    ):
+        print("GENERATE_CALLED")
+        print(f"DEBUG generate() called, prompt length={len(_prompt)}, keys={len(_keys)}")
+        RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
+        last_error = None
+        
+        for i, key in enumerate(_keys):
+            try:
+                client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
+                response_stream = client.models.generate_content_stream(
+                    model="gemini-2.0-flash",
+                    contents=_prompt,
+                    config=types.GenerateContentConfig(temperature=0.3)
+                )
+                for chunk in response_stream:
+                    try:
+                        text_chunk = chunk.text
+                        if text_chunk:
+                            clean_chunk = json.dumps({'chunk': text_chunk})
+                            yield f"data: {clean_chunk}\n\n"
+                    except Exception:
+                        pass
+                
+                if _user_ref:
+                    try:
+                        _user_ref.update({"questions_today": firestore.Increment(1)})
+                    except Exception:
+                        pass
+                yield "data: [DONE]\n\n"
+                return
+                
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                print(f"DEBUG KEY {i+1} ERROR: {type(e).__name__}: {str(e)}")
+                last_error = e
+                error_msg = str(e)
+                is_retriable = any(err in error_msg for err in RETRIABLE_ERRORS)
+                has_next_key = i < len(_keys) - 1
+                if is_retriable and has_next_key:
+                    continue
+                yield f"data: {json.dumps({'error': str(e)})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+        
+        if last_error:
+            yield f"data: {json.dumps({'error': str(last_error)})}\n\n"
+        yield "data: [DONE]\n\n"
 
     return StreamingResponse(
         generate(),

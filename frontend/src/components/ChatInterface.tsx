@@ -135,6 +135,11 @@ export default function ChatInterface({
         });
         const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` };
 
+        console.log("DEBUG: Sending request to /api/ask/stream");
+        console.log("DEBUG: user_id:", user?.uid);
+        console.log("DEBUG: chartData exists:", !!chartData);
+        console.log("DEBUG: fetchBody:", fetchBody);
+
         try {
             // --- Try streaming endpoint first ---
             const streamRes = await fetch(`${API_URL}/api/ask/stream`, { method: 'POST', headers, body: fetchBody });
@@ -161,14 +166,16 @@ export default function ChatInterface({
                     buffer = lines.pop() || '';
 
                     for (const line of lines) {
-                        if (!line.startsWith('data: ')) continue;
-                        const raw = line.slice(6).trim();
+                        const trimmedLine = line.trim();
+                        if (!trimmedLine || !trimmedLine.startsWith('data:')) continue;
+
+                        const raw = trimmedLine.replace(/^data:\s*/, '').trim();
                         if (raw === '[DONE]') {
                             console.log("Received [DONE] signal.");
                             break;
                         }
 
-                        console.log("stream chunk:", raw); // <-- Temporary trace for debugging
+                        console.log("stream chunk raw:", raw); // <-- Enhanced trace
 
                         try {
                             const parsed = JSON.parse(raw);
