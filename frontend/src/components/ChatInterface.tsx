@@ -145,11 +145,18 @@ export default function ChatInterface({
                 const decoder = new TextDecoder();
                 let fullText = '';
                 let limitReached = false;
+                let buffer = '';
 
                 while (reader) {
                     const { done, value } = await reader.read();
                     if (done) break;
-                    const lines = decoder.decode(value, { stream: true }).split('\n');
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+
+                    // Keep the last incomplete line in the buffer
+                    buffer = lines.pop() || '';
+
                     for (const line of lines) {
                         if (!line.startsWith('data: ')) continue;
                         const raw = line.slice(6).trim();
@@ -184,7 +191,9 @@ export default function ChatInterface({
                                     return updated;
                                 });
                             }
-                        } catch { /* skip malformed SSE lines */ }
+                        } catch (err) {
+                            console.error("Parse error on chunk:", raw, err);
+                        }
                     }
                 }
 

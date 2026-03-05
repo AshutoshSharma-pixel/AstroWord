@@ -442,8 +442,15 @@ Write your full analysis in plain markdown following the structure above. Do NOT
                 config=types.GenerateContentConfig(temperature=0.3)
             )
             for chunk in stream:
-                if chunk.text:
-                    yield f"data: {json.dumps({'chunk': chunk.text})}\n\n"
+                try:
+                    text_chunk = chunk.text
+                    if text_chunk:
+                        # Clean JSON string formatting issues if any exist
+                        clean_chunk = json.dumps({'chunk': text_chunk})
+                        yield f"data: {clean_chunk}\n\n"
+                except Exception as attribute_err:
+                    print(f"Skipping malformed chunk: {attribute_err}")
+                    pass
             # Increment question count after full stream
             if _user_ref:
                 try:
@@ -451,7 +458,10 @@ Write your full analysis in plain markdown following the structure above. Do NOT
                 except Exception:
                     pass
         except Exception as e:
-            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            import traceback
+            traceback.print_exc()
+            error_payload = json.dumps({"error": str(e)})
+            yield f"data: {error_payload}\n\n"
         finally:
             yield "data: [DONE]\n\n"
 
@@ -460,3 +470,4 @@ Write your full analysis in plain markdown following the structure above. Do NOT
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
     )
+
