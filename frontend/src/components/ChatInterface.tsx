@@ -135,7 +135,7 @@ export default function ChatInterface({
         });
         const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` };
 
-        console.log("DEBUG: Sending request to /api/ask/stream");
+        console.log("DEBUG: Sending request to /api/ask/");
         console.log("DEBUG: user_id:", user?.uid);
         console.log("DEBUG: chartData exists:", !!chartData);
         console.log("DEBUG: fetchBody:", fetchBody);
