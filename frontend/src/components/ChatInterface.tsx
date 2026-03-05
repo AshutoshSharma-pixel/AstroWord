@@ -149,7 +149,10 @@ export default function ChatInterface({
 
                 while (reader) {
                     const { done, value } = await reader.read();
-                    if (done) break;
+                    if (done) {
+                        console.log("Stream reader done.");
+                        break;
+                    }
 
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n');
@@ -160,7 +163,13 @@ export default function ChatInterface({
                     for (const line of lines) {
                         if (!line.startsWith('data: ')) continue;
                         const raw = line.slice(6).trim();
-                        if (raw === '[DONE]') break;
+                        if (raw === '[DONE]') {
+                            console.log("Received [DONE] signal.");
+                            break;
+                        }
+
+                        console.log("stream chunk:", raw); // <-- Temporary trace for debugging
+
                         try {
                             const parsed = JSON.parse(raw);
                             if (parsed.limit_reached) {
@@ -181,7 +190,10 @@ export default function ChatInterface({
                                 }
                                 return;
                             }
-                            if (parsed.error) throw new Error(parsed.error);
+                            if (parsed.error) {
+                                console.error("Backend sent error block in stream:", parsed.error);
+                                throw new Error(parsed.error);
+                            }
                             if (parsed.chunk) {
                                 fullText += parsed.chunk;
                                 setIsTyping(false);
