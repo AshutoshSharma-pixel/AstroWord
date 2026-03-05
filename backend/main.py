@@ -68,7 +68,7 @@ app.add_middleware(
         "https://astroword.vercel.app",
     ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -77,7 +77,7 @@ app.include_router(ask.router, prefix="/api")
 app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
 app.include_router(karaka.router, prefix="/api")
 app.include_router(gana.router, prefix="/api")
-app.include_router(user.router, prefix="/api")
+app.include_router(user.router, prefix="/api/user")
 app.include_router(marriage.router, prefix="/api")
 app.include_router(email_router)
 

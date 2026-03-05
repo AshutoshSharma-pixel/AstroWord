@@ -3,6 +3,7 @@ import { updateProfile } from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/utils/firebase/config';
 import { useAuth } from '@/components/AuthProvider';
+import { safeApiFetch } from '@/utils/safeApi';
 
 export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
     const { user } = useAuth();
@@ -21,10 +22,13 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
                 const token = await user.getIdToken();
                 // We use relative path or localhost per previous setup
                 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-                const res = await fetch(`${apiUrl}/api/user/plan`, {
+
+                const data = await safeApiFetch(`${apiUrl}/api/user/plan`, {
                     headers: { Authorization: `Bearer ${token}` }
+                }, {
+                    success: true, plan: 'free', questions_today: 0, questions_limit: 5
                 });
-                const data = await res.json();
+
                 if (data.success) setPlanData(data);
             } catch (e) { }
         };
