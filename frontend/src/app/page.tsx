@@ -26,7 +26,28 @@ export default function Home() {
   };
 
   // Restore chart from localStorage when returning from a tool page with a pending question
+  // or loaded from a pending chat click
   useEffect(() => {
+    // 1. First check if we have a pending chat selected from the Sidebar on another page
+    const pendingChatRaw = sessionStorage.getItem('pending_chat');
+    if (pendingChatRaw) {
+      try {
+        const pendingChat = JSON.parse(pendingChatRaw);
+        setActiveChatId(pendingChat.id);
+        setChatMessages(pendingChat.messages || []);
+        if (pendingChat.chartData) {
+          setChartData(pendingChat.chartData);
+          localStorage.setItem('astroword_chart', JSON.stringify(pendingChat.chartData));
+        }
+        sessionStorage.removeItem('pending_chat');
+        return; // Skip checking pending question
+      } catch (e) {
+        console.error("Failed to parse pending chat", e);
+        sessionStorage.removeItem('pending_chat');
+      }
+    }
+
+    // 2. Otherwise check for a pending question from calculators
     const saved = localStorage.getItem('astroword_chart');
     const pending = sessionStorage.getItem('pending_question');
     if (saved && pending && !chartData) {
@@ -37,7 +58,7 @@ export default function Home() {
         setChatMessages([]);
       } catch (e) { }
     }
-  }, []);
+  }, [chartData]);
 
   return (
     <AppLayout

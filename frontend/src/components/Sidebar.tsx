@@ -276,7 +276,19 @@ export default function Sidebar({
                                         }`}
                                     onClick={() => {
                                         if (editingChatId !== chat.id) {
-                                            onChatSelect?.(chat.id, chat.messages || [], chat.chart_data);
+                                            if (onChatSelect) {
+                                                onChatSelect(chat.id, chat.messages || [], chat.chart_data);
+                                            } else {
+                                                // If we are not on the chat page, set a pending chat and navigate home
+                                                if (typeof window !== 'undefined') {
+                                                    sessionStorage.setItem('pending_chat', JSON.stringify({
+                                                        id: chat.id,
+                                                        messages: chat.messages || [],
+                                                        chartData: chat.chart_data
+                                                    }));
+                                                    window.location.href = '/';
+                                                }
+                                            }
                                             setMobileOpen(false); // Close mobile sidebar when chat selected
                                         }
                                     }}
