@@ -81,6 +81,27 @@ export default function ChatInterface({
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showUpgrade, setShowUpgrade] = useState(false);
+    const [loadingText, setLoadingText] = useState("Casting your chart...");
+
+    useEffect(() => {
+        if (!isTyping) return;
+        const messages = [
+            "Casting your chart...",
+            "Consulting the planets...",
+            "Reading your Dasha timeline...",
+            "Analyzing planetary positions...",
+            "Checking your Navamsa...",
+            "The cosmos are speaking...",
+            "Calculating your Antardasha...",
+            "Almost ready...",
+        ];
+        let i = 0;
+        const interval = setInterval(() => {
+            i = (i + 1) % messages.length;
+            setLoadingText(messages[i]);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [isTyping]);
 
     useEffect(() => {
         const handleOpenUpgrade = () => setShowUpgrade(true);
@@ -135,7 +156,7 @@ export default function ChatInterface({
         });
         const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` };
 
-        console.log("DEBUG: Sending request to /api/ask/");
+        console.log("DEBUG: Sending request to /api/ask");
         console.log("DEBUG: user_id:", user?.uid);
         console.log("DEBUG: chartData exists:", !!chartData);
         console.log("DEBUG: fetchBody:", fetchBody);
@@ -510,10 +531,16 @@ export default function ChatInterface({
                             <div className="w-8 h-8 rounded bg-surface2 border border-gold/30 flex items-center justify-center text-gold flex-shrink-0">
                                 ☉
                             </div>
-                            <div className="flex items-center gap-1.5 h-8">
-                                <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-gold" />
-                                <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.2 }} className="w-1.5 h-1.5 rounded-full bg-gold" />
-                                <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.4 }} className="w-1.5 h-1.5 rounded-full bg-gold" />
+                            <div className="flex flex-col gap-1 justify-center">
+                                <span className="text-xs font-mono text-gold tracking-widest uppercase">AstroWord</span>
+                                <div className="flex items-center gap-2">
+                                    <motion.div
+                                        animate={{ opacity: [0.4, 1, 0.4] }}
+                                        transition={{ repeat: Infinity, duration: 1.5 }}
+                                        className="w-1.5 h-1.5 rounded-full bg-gold"
+                                    />
+                                    <span className="text-sm text-muted font-serif italic">{loadingText}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
