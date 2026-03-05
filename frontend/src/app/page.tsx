@@ -35,10 +35,13 @@ export default function Home() {
         const pendingChat = JSON.parse(pendingChatRaw);
         setActiveChatId(pendingChat.id);
         setChatMessages(pendingChat.messages || []);
+
+        const loadedChart = pendingChat.chartData || { isFallback: true, ascendant: { sign: 'Unknown' } };
+        setChartData(loadedChart);
         if (pendingChat.chartData) {
-          setChartData(pendingChat.chartData);
           localStorage.setItem('astroword_chart', JSON.stringify(pendingChat.chartData));
         }
+
         sessionStorage.removeItem('pending_chat');
         return; // Skip checking pending question
       } catch (e) {
