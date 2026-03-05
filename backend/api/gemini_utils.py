@@ -39,17 +39,26 @@ def call_gemini_new(prompt, config):
 
 
 def call_gemini_stream(prompt, config):
-    """Fallback-aware streaming wrapper — returns a chunk iterator."""
-    last_error = None
+    """Fallback-aware streaming wrapper — yields chunks directly to keep the client alive."""
     RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
+    
+    # We must yield directly from inside the function to keep the client instance alive,
+    # otherwise returning the un-evaluated generator causes the client to be garbage collected.
+    last_error = None
     for i, key in enumerate(GEMINI_KEYS):
+        client = None
         try:
             client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
-            return client.models.generate_content_stream(
+            response_stream = client.models.generate_content_stream(
                 model="gemini-2.5-flash",
                 contents=prompt,
                 config=config
             )
+            # Yield chunks directly to maintain client scope
+            for chunk in response_stream:
+                yield chunk
+            return # Successfully finished streaming with this key
+            
         except Exception as e:
             last_error = e
             error_msg = str(e)
@@ -57,6 +66,8 @@ def call_gemini_stream(prompt, config):
             has_next_key = i < len(GEMINI_KEYS) - 1
             if is_retriable and has_next_key:
                 logger.warning(f"Gemini key {i+1} failed ({error_msg[:80]}). Trying stream key {i+2}...")
-                continue
-            raise e
-    raise last_error
+                continue # Try the next key
+            raise e # If not retriable or no keys left, raise immediately
+            
+    if last_error:
+        raise last_error
