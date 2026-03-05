@@ -287,11 +287,7 @@ Contributions are welcome! Please:
 
 ---
 
-## 📄 License
 
-This project is licensed under the MIT License.
-
----
 
 <div align="center">
   <p>Built with ✨ and Jyotish principles</p>
