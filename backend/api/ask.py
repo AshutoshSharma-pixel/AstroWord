@@ -450,7 +450,7 @@ Write your full analysis in plain markdown following the structure above. Do NOT
             try:
                 client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
                 response_stream = client.models.generate_content_stream(
-                    model="gemini-2.0-flash-001",
+                    model="gemini-2.5-flash-preview-04-17",
                     contents=_prompt,
                     config=types.GenerateContentConfig(temperature=0.3)
                 )
