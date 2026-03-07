@@ -313,7 +313,6 @@ USER QUESTION: {data.question}
             prompt=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
-                model="gemini-2.0-flash",
                 response_mime_type="application/json"
             )
         )
