@@ -191,10 +191,22 @@ export default function ChatInterface({
                 throw new Error(data.detail || 'Failed to get AI response');
             }
 
-            const parsed = data.data || data;
+            let parsed = data.data || data;
+
+            // Sometimes the AI returns stringified JSON inside the response text itself
+            if (typeof parsed === 'string') {
+                try { parsed = JSON.parse(parsed); } catch (e) { }
+            }
+            if (typeof parsed.answer === 'string' && parsed.answer.trim().startsWith('{')) {
+                try {
+                    const innerParsed = JSON.parse(parsed.answer);
+                    if (innerParsed.answer) parsed = innerParsed;
+                } catch (e) { }
+            }
+
             console.log("parsed response:", parsed);
             console.log("answer text:", parsed.answer);
-            const answerText = parsed.answer || 'The cosmos are silent. Try asking again.';
+            const answerText = parsed.answer || (typeof parsed === 'string' ? parsed : 'The cosmos are silent. Try asking again.');
             const tags = parsed.tags || [];
             const newMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: answerText, tags } as Message];
             setChatMessages(newMessages);
