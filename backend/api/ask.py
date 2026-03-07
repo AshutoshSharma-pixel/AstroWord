@@ -432,9 +432,7 @@ RECENT CONVERSATION HISTORY:
 
 USER QUESTION: {data.question}
 
-Write your full analysis in plain text/markdown following the structure above. 
-CRITICAL INSTRUCTION: DO NOT RETURN JSON. DO NOT WRAP YOUR RESPONSE IN A JSON BLOCK. 
-DO NOT INCLUDE "answer", "confidence", OR "tags" FIELDS. JUST WRITE THE PLAIN MARKDOWN ANALYSIS DIRECTLY."""
+Write your full analysis in plain markdown following the structure above. Do NOT wrap in JSON."""
 
     _user_ref = user_ref  # capture for closure
 
