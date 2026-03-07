@@ -195,13 +195,27 @@ export default function ChatInterface({
 
             // Sometimes the AI returns stringified JSON inside the response text itself
             if (typeof parsed === 'string') {
-                try { parsed = JSON.parse(parsed); } catch (e) { }
+                try {
+                    parsed = JSON.parse(parsed);
+                } catch (e) {
+                    // Try to aggressively extract the "answer": "..." content if JSON.parse fails
+                    const answerMatch = parsed.match(/"answer"\s*:\s*"([\s\S]*?)"\s*(?:,\s*"confidence"|\})/);
+                    if (answerMatch && answerMatch[1]) {
+                        parsed = { answer: answerMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') };
+                    }
+                }
             }
             if (typeof parsed.answer === 'string' && parsed.answer.trim().startsWith('{')) {
                 try {
                     const innerParsed = JSON.parse(parsed.answer);
                     if (innerParsed.answer) parsed = innerParsed;
-                } catch (e) { }
+                } catch (e) {
+                    // Try to aggressively extract if inner parse fails
+                    const answerMatch = parsed.answer.match(/"answer"\s*:\s*"([\s\S]*?)"\s*(?:,\s*"confidence"|\})/);
+                    if (answerMatch && answerMatch[1]) {
+                        parsed.answer = answerMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
+                    }
+                }
             }
 
             console.log("parsed response:", parsed);
