@@ -22,7 +22,7 @@ def call_gemini_new(prompt, config):
         try:
             client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
             return client.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-2.0-flash-001",
                 contents=prompt,
                 config=config
             )
@@ -50,7 +50,7 @@ def call_gemini_stream(prompt, config):
         try:
             client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
             response_stream = client.models.generate_content_stream(
-                model="gemini-2.0-flash",
+                model="gemini-2.0-flash-001",
                 contents=prompt,
                 config=config
             )
