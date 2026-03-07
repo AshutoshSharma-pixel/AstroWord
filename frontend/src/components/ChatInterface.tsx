@@ -192,6 +192,8 @@ export default function ChatInterface({
             }
 
             const parsed = data.data || data;
+            console.log("parsed response:", parsed);
+            console.log("answer text:", parsed.answer);
             const answerText = parsed.answer || 'The cosmos are silent. Try asking again.';
             const tags = parsed.tags || [];
             const newMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: answerText, tags } as Message];
