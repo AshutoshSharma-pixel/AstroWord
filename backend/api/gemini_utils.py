@@ -20,9 +20,9 @@ def call_gemini_new(prompt, config):
     RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
     for i, key in enumerate(GEMINI_KEYS):
         try:
-            client = new_genai.Client(api_key=key, http_options={"api_version": "v1alpha"})
+            client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
             return client.models.generate_content(
-                model="gemini-2.5-flash-preview-05-20",
+                model="gemini-2.5-flash",
                 contents=prompt,
                 config=config
             )
@@ -48,9 +48,9 @@ def call_gemini_stream(prompt, config):
     for i, key in enumerate(GEMINI_KEYS):
         client = None
         try:
-            client = new_genai.Client(api_key=key, http_options={"api_version": "v1alpha"})
+            client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
             response_stream = client.models.generate_content_stream(
-                model="gemini-2.5-flash-preview-05-20",
+                model="gemini-2.5-flash",
                 contents=prompt,
                 config=config
             )

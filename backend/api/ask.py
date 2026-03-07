@@ -448,9 +448,9 @@ Write your full analysis in plain markdown following the structure above. Do NOT
         
         for i, key in enumerate(_keys):
             try:
-                client = new_genai.Client(api_key=key, http_options={"api_version": "v1alpha"})
+                client = new_genai.Client(api_key=key, http_options={"api_version": "v1beta"})
                 response_stream = client.models.generate_content_stream(
-                    model="gemini-2.5-flash-preview-05-20",
+                    model="gemini-2.5-flash",
                     contents=_prompt,
                     config=types.GenerateContentConfig(temperature=0.3)
                 )
