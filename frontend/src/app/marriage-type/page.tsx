@@ -38,11 +38,6 @@ export default function MarriageTypePage() {
     // Initial load: check auth and local storage
     useEffect(() => {
         if (!authLoading) {
-            if (!user) {
-                router.push('/login');
-                return;
-            }
-
             const savedChart = localStorage.getItem('astroword_chart');
             if (savedChart) {
                 try {
