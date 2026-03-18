@@ -138,6 +138,10 @@ export default function AtmakarakaPage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                    <h1 className="text-gold font-serif text-3xl">Atmakaraka Calculator — Discover Your Soul's Purpose</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to find your Atmakaraka planet — the soul significator in Jaimini astrology — and receive a personalized AI reading about your karmic path.</p>
+                </div>
             </div>
         );
     }

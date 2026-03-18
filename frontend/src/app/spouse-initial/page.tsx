@@ -129,6 +129,10 @@ export default function SpouseInitialPage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                    <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Find the First Letter of Your Spouse's Name</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to discover the name initial of your future spouse using ancient nakshatra akshara (syllable) mapping from your Darakaraka and 7th lord.</p>
+                </div>
             </div>
         );
     }
