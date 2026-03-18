@@ -14,6 +14,22 @@ const AuthContext = createContext<AuthContextType>({ user: null, loading: true }
 
 export const useAuth = () => useContext(AuthContext);
 
+// Pages that must be publicly accessible (no login required)
+const PUBLIC_ROUTES = [
+    '/darakaraka',
+    '/atmakaraka',
+    '/amatyakaraka',
+    '/gana',
+    '/marriage-type',
+    '/marriage-year',
+    '/spouse-initial',
+    '/login',
+    '/blog',
+];
+
+const isPublicRoute = (path: string) =>
+    PUBLIC_ROUTES.some((route) => path === route || path.startsWith(route + '/'));
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
@@ -25,10 +41,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(currentUser);
             setLoading(false);
 
-            // Simple client-side route protection
-            if (!currentUser && pathname !== '/login') {
+            if (!currentUser && !isPublicRoute(pathname)) {
+                // Protect private routes — redirect unauthenticated users to login
                 router.push('/login');
             } else if (currentUser && pathname === '/login') {
+                // Already logged in — send away from login page
                 router.push('/');
             }
         });
