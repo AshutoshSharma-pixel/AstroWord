@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
   },
-  alternates: { canonical: "https://astroword.in" },
+  alternates: { canonical: "./" },
   openGraph: {
     title: "AstroWord — India's First Precision Vedic AI",
     description: "Ask anything about your life. Your birth chart has the answers.",

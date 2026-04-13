@@ -1,26 +1,16 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Love or Arranged Marriage Predictor — AI Vedic Analysis | AstroWord',
-    description: 'Find out if your birth chart indicates love marriage or arranged marriage using AI-powered Vedic astrology analysis.',
-    keywords: 'love marriage or arranged marriage, marriage type predictor, vedic astrology marriage, rahu 7th house love marriage, venus marriage astrology',
-    alternates: { canonical: 'https://astroword.in/marriage-type' },
-    openGraph: {
-        title: 'Love or Arranged Marriage Predictor | AstroWord',
-        description: "Your birth chart reveals whether you're destined for love marriage, arranged marriage, or both.",
-        url: 'https://astroword.in/marriage-type',
-        siteName: 'AstroWord',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
-        locale: 'en_IN',
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Love or Arranged Marriage Predictor | AstroWord',
-        description: "Your birth chart reveals whether you're destined for love or arranged marriage.",
-    },
+  title: "Love or Arranged Marriage Predictor — AI Vedic Analysis | AstroWord",
+  description: "Will you have a love marriage or an arranged marriage? Get an AI-powered prediction based on your 5th house, 7th house, and D9 Navamsa chart.",
+  keywords: "love or arranged marriage, marriage astrology, 7th house lord, d9 chart analysis, marriage prediction ai",
+  alternates: { canonical: "https://astroword.in/marriage-type" },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    return children;
+export default function MarriageTypeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }

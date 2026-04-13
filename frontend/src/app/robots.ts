@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: ['/api/', '/(auth)/', '/dashboard', '/blog'],
+            disallow: ['/api/', '/(auth)/', '/dashboard'],
         },
         sitemap: 'https://astroword.in/sitemap.xml',
     };
