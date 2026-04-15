@@ -16,6 +16,7 @@ export const useAuth = () => useContext(AuthContext);
 
 // Pages that must be publicly accessible (no login required)
 const PUBLIC_ROUTES = [
+    '/',
     '/darakaraka',
     '/atmakaraka',
     '/amatyakaraka',
@@ -41,6 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(currentUser);
             setLoading(false);
 
+            // Don't redirect while auth state is still loading
             if (!currentUser && !isPublicRoute(pathname)) {
                 // Protect private routes — redirect unauthenticated users to login
                 router.push('/login');

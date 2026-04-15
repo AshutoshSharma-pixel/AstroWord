@@ -2,17 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const host = request.headers.get('host');
-
-  // Redirection: www.astroword.in -> astroword.in
-  if (host && host.startsWith('www.')) {
-    const newHost = host.replace('www.', '');
-    return NextResponse.redirect(
-      `https://${newHost}${url.pathname}${url.search}`,
-      301
-    );
-  }
+  // Let Vercel handle domain redirects (www vs non-www)
+  // Do NOT add www redirect here — Vercel domain settings already handle it
+  // Adding a conflicting redirect causes ERR_TOO_MANY_REDIRECTS
 
   return NextResponse.next();
 }
