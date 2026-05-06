@@ -30,7 +30,7 @@ export default function MarriageTypePage() {
     const { user, loading: authLoading } = useAuth();
 
     const [chartData, setChartData] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [taglineIndex, setTaglineIndex] = useState(0);
     const [error, setError] = useState<string | null>(null);
@@ -101,8 +101,6 @@ export default function MarriageTypePage() {
         setChartData(data);
         fetchMarriageType(data);
     };
-
-    if (authLoading) return <div className="min-h-[100dvh] bg-bg text-text" />;
 
     if (error) {
         return (

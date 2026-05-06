@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/api/', '/(auth)/', '/dashboard'],
         },
-        sitemap: 'https://astroword.in/sitemap.xml',
+        sitemap: 'https://www.astroword.in/sitemap.xml',
     };
 }

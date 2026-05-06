@@ -2,14 +2,14 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Vedic Astrology Blog — Learn Jyotish, Dasha, Nakshatra & More | AstroWord',
+    title: 'Vedic Astrology Blog — Learn Jyotish, Dasha, Nakshatra & More',
     description: 'Learn Vedic astrology concepts explained simply. Articles on Darakaraka, Atmakaraka, Dasha timing, marriage prediction, career astrology and more.',
     keywords: 'vedic astrology blog, learn jyotish, dasha explained, nakshatra meaning, karaka planets, atmakaraka, darakaraka',
-    alternates: { canonical: 'https://astroword.in/blog' },
+    alternates: { canonical: 'https://www.astroword.in/blog' },
     openGraph: {
         title: 'Vedic Astrology Blog — AstroWord',
         description: 'Learn Vedic astrology concepts explained simply. Articles on Darakaraka, Atmakaraka, Dasha timing and more.',
-        url: 'https://astroword.in/blog',
+        url: 'https://www.astroword.in/blog',
         siteName: 'AstroWord',
     }
 };

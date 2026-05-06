@@ -507,13 +507,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     const article = articles[slug];
     if (!article) return { title: 'Article Not Found' };
     return {
-        title: `${article.title} | AstroWord`,
+        title: article.title,
         description: article.description,
-        alternates: { canonical: `https://astroword.in/blog/${slug}` },
+        alternates: { canonical: `https://www.astroword.in/blog/${slug}` },
         openGraph: {
             title: article.title,
             description: article.description,
-            url: `https://astroword.in/blog/${slug}`,
+            url: `https://www.astroword.in/blog/${slug}`,
             siteName: 'AstroWord',
         }
     };

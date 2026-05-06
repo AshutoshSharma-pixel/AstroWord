@@ -22,7 +22,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://astroword.in'),
+  metadataBase: new URL('https://www.astroword.in'),
   title: {
     default: "AstroWord — India's First Precision Vedic AI",
     template: "%s | AstroWord",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "Get accurate Vedic astrology readings powered by AI. Ask about career, marriage, future and more based on your D1, D9, D10, D7 birth chart. Free 5 questions daily.",
   keywords:
     "vedic astrology, kundli, birth chart, AI astrology, jyotish, marriage prediction, career astrology, darakaraka, atmakaraka, dasha timing, free astrology",
-  authors: [{ name: "AstroWord", url: "https://astroword.in" }],
+  authors: [{ name: "AstroWord", url: "https://www.astroword.in" }],
   creator: "AstroWord",
   robots: {
     index: true,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AstroWord — India's First Precision Vedic AI",
     description: "Ask anything about your life. Your birth chart has the answers.",
-    url: "https://astroword.in",
+    url: "https://www.astroword.in",
     siteName: "AstroWord",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AstroWord — Precision Vedic AI" }],
     locale: "en_IN",
