@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
   },
-  alternates: { canonical: "./" },
+  alternates: { canonical: "https://www.astroword.in" },
   openGraph: {
     title: "AstroWord — India's First Precision Vedic AI",
     description: "Ask anything about your life. Your birth chart has the answers.",
-    url: "https://www.astroword.in",
+    url: "https://www.astroword.in/",
     siteName: "AstroWord",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AstroWord — Precision Vedic AI" }],
     locale: "en_IN",
