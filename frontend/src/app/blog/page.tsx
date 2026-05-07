@@ -69,6 +69,69 @@ const articles = [
         date: 'Mar 6, 2026',
         emoji: '🌙'
     },
+    {
+        slug: 'what-is-amatyakaraka',
+        title: 'What is Amatyakaraka? Your Career Planet in Jaimini Astrology',
+        description: 'Amatyakaraka is the second most important planet in your chart. Discover what it reveals about your ideal career, professional strengths, and path to success.',
+        category: 'Jaimini Astrology',
+        readTime: '6 min read',
+        date: 'May 1, 2026',
+        emoji: '💼'
+    },
+    {
+        slug: 'gana-matching-marriage',
+        title: 'Gana Matching for Marriage — Deva, Manushya and Rakshasa Explained',
+        description: 'One of the 8 Ashtakoot factors, Gana matching reveals deep compatibility based on your Moon nakshatra. Learn what your Gana says about you and your partner.',
+        category: 'Compatibility',
+        readTime: '5 min read',
+        date: 'May 2, 2026',
+        emoji: '🔱'
+    },
+    {
+        slug: 'spouse-name-initial-nakshatra',
+        title: 'How to Find Your Spouse\'s Name Initial Using Nakshatra Akshara',
+        description: 'Ancient Vedic astrology maps each nakshatra to specific syllables. Learn how your Darakaraka nakshatra can reveal the first letter of your future spouse\'s name.',
+        category: 'Marriage Astrology',
+        readTime: '5 min read',
+        date: 'May 3, 2026',
+        emoji: '🔤'
+    },
+    {
+        slug: 'what-is-jaimini-astrology',
+        title: 'What is Jaimini Astrology? The Ancient System Behind Chara Karakas',
+        description: 'Jaimini astrology is a 2000-year-old system that uses Chara Karakas — changing significators — to reveal soul purpose, career, and marriage destiny with remarkable precision.',
+        category: 'Vedic Basics',
+        readTime: '7 min read',
+        date: 'May 4, 2026',
+        emoji: '📿'
+    },
+    {
+        slug: 'mars-7th-house-marriage',
+        title: 'Mars in the 7th House — Mangal Dosha, Marriage Delay and What It Really Means',
+        description: 'Mars in the 7th house is one of the most misunderstood placements in Vedic astrology. Learn what Mangal Dosha actually means and when it affects marriage timing.',
+        category: 'Marriage Astrology',
+        readTime: '6 min read',
+        date: 'May 5, 2026',
+        emoji: '🔴'
+    },
+    {
+        slug: 'venus-in-vedic-astrology',
+        title: 'Venus in Vedic Astrology — Love, Marriage and the Karaka of Desire',
+        description: 'Venus (Shukra) is the natural karaka of marriage in Vedic astrology. Learn how Venus sign, house, and dasha influence your love life, marriage timing, and relationship quality.',
+        category: 'Planets',
+        readTime: '6 min read',
+        date: 'May 6, 2026',
+        emoji: '✨'
+    },
+    {
+        slug: 'rahu-in-7th-house',
+        title: 'Rahu in the 7th House — Unconventional Love, Foreign Spouse and Marriage Karma',
+        description: 'Rahu in the 7th house is one of the strongest indicators of a love marriage or inter-caste relationship. Learn what this placement means for your marriage destiny.',
+        category: 'Marriage Astrology',
+        readTime: '5 min read',
+        date: 'May 7, 2026',
+        emoji: '🌑'
+    },
 ];
 
 export default function BlogPage() {

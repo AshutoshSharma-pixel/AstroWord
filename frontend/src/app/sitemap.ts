@@ -96,5 +96,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.7,
         },
+        {
+            url: `${base}/blog/what-is-amatyakaraka`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/gana-matching-marriage`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/spouse-name-initial-nakshatra`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/what-is-jaimini-astrology`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/mars-7th-house-marriage`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/venus-in-vedic-astrology`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/rahu-in-7th-house`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
     ];
 }

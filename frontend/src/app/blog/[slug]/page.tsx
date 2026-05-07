@@ -498,6 +498,347 @@ const articles: Record<string, {
             </>
         ),
     },
+
+    'what-is-amatyakaraka': {
+        title: 'What is Amatyakaraka? Your Career Planet in Jaimini Astrology',
+        description: 'Amatyakaraka is the second most important planet in your chart after Atmakaraka. Discover what it reveals about your ideal career and path to professional success.',
+        category: 'Jaimini Astrology',
+        date: 'May 1, 2026',
+        readTime: '6 min read',
+        relatedCalculator: { label: 'Find My Amatyakaraka', href: '/amatyakaraka', emoji: '💼' },
+        content: (
+            <>
+                <h2>What is Amatyakaraka?</h2>
+                <p>Amatyakaraka is one of the seven Chara Karakas (changing significators) in Jaimini astrology — an ancient system of Vedic astrology codified by the sage Jaimini over 2000 years ago. The word comes from Sanskrit: Amatya means minister or advisor, and Karaka means significator. Together, Amatyakaraka literally means the significator of your professional path — the planet that acts as the minister to your soul.</p>
+                <p>In Jaimini astrology, the Amatyakaraka is the planet with the second highest degree within its sign among all seven planets (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn). Rahu and Ketu are excluded from Chara Karaka calculation in most classical texts.</p>
+                <h2>Amatyakaraka vs Atmakaraka</h2>
+                <p>The Atmakaraka (highest degree planet) represents your soul — your deepest purpose and karmic mission. The Amatyakaraka is the planet that helps you fulfil that mission in the material world. If Atmakaraka is the king, Amatyakaraka is the prime minister — the one who actually executes the work.</p>
+                <p>This is why Amatyakaraka is the primary indicator of career, profession, and professional success in Jaimini astrology. It is more specific for career than even the 10th house lord in many cases.</p>
+                <h2>How to Calculate Amatyakaraka</h2>
+                <p>To find your Amatyakaraka manually, take all seven planets and note their degree within their sign (ignoring which sign they are in — only the degree from 0° to 29°59&apos; matters). Arrange them in order from highest to lowest degree. The planet with the highest degree is your Atmakaraka. The planet with the second highest degree is your Amatyakaraka.</p>
+                <p>For example, if your planetary degrees are: Sun 27°, Moon 14°, Mars 3°, Mercury 22°, Jupiter 18°, Venus 9°, Saturn 25° — then Sun (27°) is Atmakaraka and Saturn (25°) is Amatyakaraka.</p>
+                <p>AstroWord calculates this automatically from your exact birth data and then generates a personalised AI reading about your professional destiny.</p>
+                <h2>Amatyakaraka by Planet — What Each Planet Means for Career</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        ['Sun as Amatyakaraka', 'Career in government, administration, politics, or leadership. You thrive in positions of authority. Ideal careers include IAS, IPS, corporate leadership, medicine (especially surgery), and law. Your career demands that you be seen and respected.'],
+                        ['Moon as Amatyakaraka', 'Career connected to the public, care, nourishment, or emotions. Ideal careers include healthcare, psychology, hospitality, real estate, food industry, teaching, and social work. You work best in careers where you directly serve or nurture others.'],
+                        ['Mars as Amatyakaraka', 'Career in engineering, sports, military, police, real estate, or surgery. You need a career with action, competition, and physical or technical challenge. You are a natural builder and problem solver under pressure.'],
+                        ['Mercury as Amatyakaraka', 'Career in communication, business, analysis, writing, or technology. Ideal careers include journalism, IT, finance, accounting, consulting, and marketing. You thrive where your intellect and communication skills are valued.'],
+                        ['Jupiter as Amatyakaraka', 'Career in teaching, law, finance, consulting, or spiritual work. You are a natural mentor and advisor. Ideal careers include professor, judge, financial advisor, priest, or any role where wisdom is shared. Your career grows through knowledge and ethics.'],
+                        ['Venus as Amatyakaraka', 'Career in arts, entertainment, fashion, beauty, luxury, or diplomacy. You thrive in careers that involve creativity, aesthetics, and human connection. Ideal careers include design, film, music, jewellery, events, or luxury retail.'],
+                        ['Saturn as Amatyakaraka', 'Career in service, structure, discipline, or long-term projects. Ideal careers include engineering, law, architecture, agriculture, mining, or social justice work. Your career demands patience — success often comes after the age of 35 but is deeply stable once established.'],
+                        ['Rahu as Amatyakaraka', 'Used in some Jaimini traditions: career in unconventional fields, foreign connections, technology, media, or research. You may work in fields that did not exist a generation ago. Your career has an element of the unexpected or the innovative.'],
+                    ].map(([title, desc]) => (
+                        <div key={title} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-2">✦ {title}</p>
+                            <p className="text-muted text-sm leading-relaxed">{desc}</p>
+                        </div>
+                    ))}
+                </div>
+                <h2>Amatyakaraka in the D10 Chart</h2>
+                <p>For deeper career analysis, astrologers look at where the Amatyakaraka planet is placed in the Dashamamsha (D10) chart — the divisional chart specifically for career and professional life. The D10 reveals the actual environment of your work, your relationship with authority, and the specific timing of career milestones.</p>
+                <p>When the Amatyakaraka is strong in both the D1 (birth chart) and D10, professional success comes more naturally and earlier in life. A challenged Amatyakaraka may indicate career changes, delays, or working in a field different from one&apos;s natural talents.</p>
+                <h2>Using Amatyakaraka with Dasha Timing</h2>
+                <p>The Amatyakaraka Mahadasha and Antardasha periods are often the most professionally significant years of a person&apos;s life. During the Amatyakaraka&apos;s period, career opportunities open, promotions happen, businesses are launched, and professional recognition arrives.</p>
+                <p>Similarly, when a planet transits over your natal Amatyakaraka or when the Amatyakaraka transits a key house, career events are triggered.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Is Amatyakaraka more important than the 10th house for career?</strong><br />In Jaimini astrology, yes — the Amatyakaraka often overrides the 10th house lord in indicating the nature of profession. However, the best career readings combine both systems.</p>
+                <p><strong>Q: Can my Amatyakaraka change over time?</strong><br />No. The Amatyakaraka is calculated from your birth chart and remains fixed throughout your life.</p>
+                <p><strong>Q: What if my Atmakaraka and Amatyakaraka are the same planet?</strong><br />This cannot happen — they are by definition different planets (the highest and second highest degree planets respectively).</p>
+                <p><strong>Q: Does Amatyakaraka work the same for men and women?</strong><br />Yes, the calculation and interpretation are the same regardless of gender.</p>
+                <p><strong>Q: My Amatyakaraka is debilitated — does that mean career failure?</strong><br />Not necessarily. A debilitated Amatyakaraka may indicate career challenges or working in unconventional ways, but cancellation of debilitation (Neecha Bhanga) can turn this into exceptional strength. Always read the full chart in context.</p>
+                <p>Ready to find your Amatyakaraka? Use AstroWord&apos;s free <Link href="/amatyakaraka">Amatyakaraka Calculator</Link> and get an AI-powered reading about your career destiny.</p>
+            </>
+        ),
+    },
+
+    'gana-matching-marriage': {
+        title: 'Gana Matching for Marriage — Deva, Manushya and Rakshasa Explained',
+        description: 'One of the 8 Ashtakoot factors, Gana matching reveals deep compatibility based on your Moon nakshatra. Learn what your Gana says about you and your partner.',
+        category: 'Compatibility',
+        date: 'May 2, 2026',
+        readTime: '5 min read',
+        relatedCalculator: { label: 'Find My Gana', href: '/gana', emoji: '🔱' },
+        content: (
+            <>
+                <h2>What is Gana in Vedic Astrology?</h2>
+                <p>In Vedic astrology, every person belongs to one of three Ganas — cosmic personality archetypes — based on their Moon&apos;s nakshatra at the time of birth. The word Gana means group or type in Sanskrit. The three Ganas are Deva (divine), Manushya (human), and Rakshasa (fierce or demonic).</p>
+                <p>Gana is one of the eight factors in Ashtakoot matching — the traditional compatibility system used for arranged marriages across India. Out of 36 total points in Ashtakoot, Gana carries 6 points, making it one of the highest-weighted compatibility factors.</p>
+                <h2>The Three Ganas — Personality and Nature</h2>
+                <p><strong>Deva Gana (Divine Nature)</strong><br />People born with their Moon in a Deva nakshatra have a naturally sattvic, gentle, and harmonious temperament. They are idealistic, spiritual, and cooperative. They value peace, honesty, and ethical behaviour above personal gain. They are forgiving, emotionally stable, and work well with others.</p>
+                <p>Deva nakshatras: Ashwini, Mrigashira, Punarvasu, Pushya, Hasta, Swati, Anuradha, Shravan, Revati</p>
+                <p><strong>Manushya Gana (Human Nature)</strong><br />People born in Manushya nakshatras have a balanced, practical, and goal-oriented nature. They experience the full range of human emotions — ambition, affection, frustration, joy. They can be both generous and self-interested depending on circumstances. They are the most relatable and adaptable of the three Ganas.</p>
+                <p>Manushya nakshatras: Bharani, Rohini, Ardra, Purva Phalguni, Uttara Phalguni, Purva Ashadha, Uttara Ashadha, Purva Bhadrapada, Uttara Bhadrapada</p>
+                <p><strong>Rakshasa Gana (Fierce Nature)</strong><br />People born in Rakshasa nakshatras have an intense, independent, and powerful temperament. They are not &quot;demonic&quot; in a negative sense — they are simply more self-directed, unconventional, and willing to break norms when necessary. They are often highly ambitious, creative, and deeply loyal to those they choose to trust. They do not conform easily.</p>
+                <p>Rakshasa nakshatras: Krittika, Ashlesha, Magha, Chitra, Vishakha, Jyeshtha, Mula, Dhanistha, Shatabhisha</p>
+                <h2>Gana Compatibility in Marriage</h2>
+                <ul>
+                    <li><strong>Deva + Deva:</strong> Excellent. Deep harmony, shared values, peaceful household.</li>
+                    <li><strong>Manushya + Manushya:</strong> Excellent. Practical compatibility, mutual understanding of ambitions and emotions.</li>
+                    <li><strong>Rakshasa + Rakshasa:</strong> Excellent. Intense bond, mutual respect for independence and strength.</li>
+                    <li><strong>Deva + Manushya:</strong> Good. Some differences but complementary. Deva&apos;s idealism is balanced by Manushya&apos;s practicality.</li>
+                    <li><strong>Manushya + Rakshasa:</strong> Moderate. Workable with effort. The Rakshasa partner&apos;s intensity can overwhelm the Manushya partner.</li>
+                    <li><strong>Deva + Rakshasa:</strong> Traditionally considered the most challenging. The Deva partner&apos;s need for harmony can clash with the Rakshasa partner&apos;s intensity and independence.</li>
+                </ul>
+                <h2>Does a Deva-Rakshasa Match Always Fail?</h2>
+                <p>No. Gana matching is one factor among eight in Ashtakoot, and one factor among dozens in a full compatibility analysis. Many happy marriages exist between Deva and Rakshasa Gana individuals — especially when other compatibility factors like Rashi (1 point), Nadi (8 points), and Bhakoot (7 points) are strong.</p>
+                <p>Additionally, if both partners have strong mutual Venus connections, Jupiter influencing the 7th house, or other benefic yogas, the Gana mismatch can be significantly reduced in impact. Modern astrologers generally do not reject a match based on Gana alone.</p>
+                <h2>Nakshatra to Gana Table</h2>
+                <div className="overflow-x-auto my-4">
+                    <table className="w-full text-sm border-collapse">
+                        <tbody>
+                            {[
+                                ['Ashwini', 'Deva'], ['Bharani', 'Manushya'], ['Krittika', 'Rakshasa'], ['Rohini', 'Manushya'], ['Mrigashira', 'Deva'], ['Ardra', 'Manushya'], ['Punarvasu', 'Deva'], ['Pushya', 'Deva'], ['Ashlesha', 'Rakshasa'], ['Magha', 'Rakshasa'], ['Purva Phalguni', 'Manushya'], ['Uttara Phalguni', 'Manushya'], ['Hasta', 'Deva'], ['Chitra', 'Rakshasa'], ['Swati', 'Deva'], ['Vishakha', 'Rakshasa'], ['Anuradha', 'Deva'], ['Jyeshtha', 'Rakshasa'], ['Mula', 'Rakshasa'], ['Purva Ashadha', 'Manushya'], ['Uttara Ashadha', 'Manushya'], ['Shravan', 'Deva'], ['Dhanistha', 'Rakshasa'], ['Shatabhisha', 'Rakshasa'], ['Purva Bhadrapada', 'Manushya'], ['Uttara Bhadrapada', 'Manushya'], ['Revati', 'Deva'],
+                            ].map(([nakshatra, gana]) => (
+                                <tr key={nakshatra} className="border-b border-border"><td className="py-2 text-text/90">{nakshatra}</td><td className="py-2 text-gold">{gana}</td></tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: How do I find my Gana?</strong><br />Your Gana is determined by your Moon&apos;s nakshatra at birth. You need your exact birth time, date, and place to calculate it accurately.</p>
+                <p><strong>Q: Can Gana mismatch be remedied?</strong><br />Some astrologers suggest remedies like specific pujas or wearing certain gemstones. However, the more practical view is that awareness of the difference in temperaments helps couples navigate their relationship consciously.</p>
+                <p><strong>Q: Is Gana matching used in love marriages?</strong><br />Traditionally it was used for arranged marriages, but many couples in love marriages also check Gana out of curiosity or family pressure.</p>
+                <p><strong>Q: My Gana is Rakshasa — should I be worried?</strong><br />Absolutely not. Rakshasa Gana individuals include many highly successful, spiritual, and deeply loving people. The name is misleading — it simply indicates a more independent and intense nature.</p>
+                <p><strong>Q: Does Gana matching apply to same-sex couples?</strong><br />Gana matching is based on Moon nakshatra and applies regardless of gender or orientation.</p>
+                <p>Want to find your Gana instantly? Use AstroWord&apos;s free <Link href="/gana">Gana Calculator</Link> to discover your cosmic nature and compatibility.</p>
+            </>
+        ),
+    },
+
+    'spouse-name-initial-nakshatra': {
+        title: 'How to Find Your Spouse\'s Name Initial Using Nakshatra Akshara',
+        description: 'Ancient Vedic astrology maps each nakshatra to specific syllables. Learn how your Darakaraka nakshatra can reveal the first letter of your future spouse\'s name.',
+        category: 'Marriage Astrology',
+        date: 'May 3, 2026',
+        readTime: '5 min read',
+        relatedCalculator: { label: 'Predict My Spouse Initial', href: '/spouse-initial', emoji: '🔤' },
+        content: (
+            <>
+                <h2>The Ancient Art of Name Prediction in Vedic Astrology</h2>
+                <p>One of the most fascinating and little-known applications of Vedic astrology is the prediction of a future spouse&apos;s name initial using the Nakshatra Akshara system. Each of the 27 nakshatras is associated with four specific syllables (called Aksharas or Bijakshara) that correspond to the sound vibrations of that nakshatra. A child named using the syllable of their birth nakshatra is believed to be in harmony with their cosmic energy.</p>
+                <p>This same principle, applied in reverse, allows astrologers to predict the starting syllable of a future spouse&apos;s name by identifying which nakshatra is occupied by the spouse significator in the birth chart.</p>
+                <h2>How the Nakshatra Akshara System Works</h2>
+                <p>Each nakshatra has four padas (quarters), and each pada has a specific syllable associated with it. For example, Ashwini nakshatra&apos;s four syllables are Chu, Che, Cho, La. A person born with the Moon in Ashwini Pada 1 would ideally be named with a word starting with &quot;Chu&quot; — which in practice becomes names like Chunky, or names starting with Ch in Hindi like Chandan.</p>
+                <p>There are 27 nakshatras × 4 padas = 108 syllables total, which is why 108 is considered sacred in Hindu tradition.</p>
+                <h2>The Three Methods AstroWord Uses</h2>
+                <p><strong>Method 1: Darakaraka Nakshatra</strong><br />The Darakaraka is the planet with the lowest degree in the birth chart — the primary spouse significator in Jaimini astrology. The nakshatra occupied by the Darakaraka planet, and specifically the pada it falls in, gives the most direct indication of the spouse&apos;s name syllable.</p>
+                <p><strong>Method 2: 7th Lord Nakshatra</strong><br />The lord of the 7th house (the house of marriage in Parashari astrology) also carries information about the spouse. Its nakshatra pada gives a secondary name syllable indication.</p>
+                <p><strong>Method 3: Venus Nakshatra</strong><br />Venus is the natural karaka (universal significator) of marriage and love. Its nakshatra provides a third data point for the spouse&apos;s name initial.</p>
+                <p>When two or three of these methods point to the same syllable or similar sounds, the indication becomes much stronger.</p>
+                <h2>Nakshatra to Syllable Reference Table</h2>
+                <div className="overflow-x-auto my-4">
+                    <table className="w-full text-sm border-collapse">
+                        <tbody>
+                            {[
+                                ['Ashwini', 'Chu', 'Che', 'Cho', 'La'], ['Bharani', 'Li', 'Lu', 'Le', 'Lo'], ['Krittika', 'A', 'I', 'U', 'E'], ['Rohini', 'O', 'Va', 'Vi', 'Vu'], ['Mrigashira', 'Ve', 'Vo', 'Ka', 'Ki'], ['Ardra', 'Ku', 'Gha', 'Na', 'Chha'], ['Punarvasu', 'Ke', 'Ko', 'Ha', 'Hi'], ['Pushya', 'Hu', 'He', 'Ho', 'Da'], ['Ashlesha', 'Di', 'Du', 'De', 'Do'], ['Magha', 'Ma', 'Mi', 'Mu', 'Me'], ['Purva Phalguni', 'Mo', 'Ta', 'Ti', 'Tu'], ['Uttara Phalguni', 'Te', 'To', 'Pa', 'Pi'], ['Hasta', 'Pu', 'Sha', 'Na', 'Tha'], ['Chitra', 'Pe', 'Po', 'Ra', 'Ri'], ['Swati', 'Ru', 'Re', 'Ro', 'Ta'], ['Vishakha', 'Ti', 'Tu', 'Te', 'To'], ['Anuradha', 'Na', 'Ni', 'Nu', 'Ne'], ['Jyeshtha', 'No', 'Ya', 'Yi', 'Yu'], ['Mula', 'Ye', 'Yo', 'Bha', 'Bhi'], ['Purva Ashadha', 'Bhu', 'Dha', 'Bha', 'Dha'], ['Uttara Ashadha', 'Be', 'Bo', 'Ja', 'Ji'], ['Shravan', 'Ju', 'Je', 'Jo', 'Gha'], ['Dhanistha', 'Ga', 'Gi', 'Gu', 'Ge'], ['Shatabhisha', 'Go', 'Sa', 'Si', 'Su'], ['Purva Bhadrapada', 'Se', 'So', 'Da', 'Di'], ['Uttara Bhadrapada', 'Du', 'Tha', 'Jha', 'Na'], ['Revati', 'De', 'Do', 'Cha', 'Chi'],
+                            ].map(([nakshatra, p1, p2, p3, p4]) => (
+                                <tr key={nakshatra} className="border-b border-border"><td className="py-2 text-text/90">{nakshatra}</td><td className="py-2 text-gold">{p1}</td><td className="py-2 text-gold">{p2}</td><td className="py-2 text-gold">{p3}</td><td className="py-2 text-gold">{p4}</td></tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <h2>How Accurate Is This Method?</h2>
+                <p>Name prediction using Nakshatra Aksharas is one of the more approximate techniques in Vedic astrology. It works best when all three methods (Darakaraka, 7th lord, Venus) agree on the same syllable. When they point to different syllables, the Darakaraka nakshatra is typically given highest weightage.</p>
+                <p>In practice, many people find that their spouse&apos;s name starts with a sound that is phonetically similar to the predicted syllable — especially when transliterated across languages. For example, a &quot;Va&quot; syllable might correspond to names starting with W, V, or B in different regional languages.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Is this method 100% accurate?</strong><br />No astrology technique is 100% accurate. This method provides a probabilistic indication rather than a certain prediction. Consider it one fascinating data point among many in your chart analysis.</p>
+                <p><strong>Q: What if my spouse has a different cultural name system?</strong><br />The syllable mapping was created in the context of Sanskrit and Indian languages. For names from other linguistic traditions, look for phonetic similarities rather than exact letter matches.</p>
+                <p><strong>Q: Can I use this for choosing my child&apos;s name?</strong><br />Yes — this is actually the primary traditional use of the Nakshatra Akshara system. Finding your child&apos;s birth nakshatra and naming them with the corresponding syllable is a traditional Vedic practice called Namakarana.</p>
+                <p><strong>Q: What if my Darakaraka and 7th lord are in the same nakshatra?</strong><br />This is actually a very strong indication — both spouse significators pointing to the same nakshatra and syllable gives a much higher confidence in the prediction.</p>
+                <p><strong>Q: Does the system work if I am already married?</strong><br />You can verify it by checking if your spouse&apos;s name starts with the predicted syllable. Many people are surprised to find the match.</p>
+                <p>Curious about your spouse&apos;s name initial? Use AstroWord&apos;s free <Link href="/spouse-initial">Spouse Name Initial Predictor</Link> to discover the letters the stars are pointing to.</p>
+            </>
+        ),
+    },
+
+    'what-is-jaimini-astrology': {
+        title: 'What is Jaimini Astrology? The Ancient System Behind Chara Karakas',
+        description: 'Jaimini astrology is a 2000-year-old system that uses Chara Karakas — changing significators — to reveal soul purpose, career, and marriage destiny with remarkable precision.',
+        category: 'Vedic Basics',
+        date: 'May 4, 2026',
+        readTime: '7 min read',
+        relatedCalculator: { label: 'Explore Jaimini Calculators', href: '/atmakaraka', emoji: '📿' },
+        content: (
+            <>
+                <h2>What is Jaimini Astrology?</h2>
+                <p>Jaimini astrology is one of the oldest and most sophisticated systems of Vedic astrology, codified by the ancient sage Maharishi Jaimini in his text Jaimini Sutras, believed to have been written between 400 BCE and 200 CE. Unlike the more widely known Parashari system (attributed to Sage Parashara), Jaimini astrology has its own unique set of tools, including Chara Karakas, Chara Dashas, Argala, and Pada Lagna.</p>
+                <p>While Parashari astrology focuses on fixed natural karakas (Sun always signifies father, Venus always signifies wife), Jaimini astrology uses Chara Karakas — changing significators based on planetary degrees — that are unique to each individual&apos;s birth chart. This makes Jaimini astrology highly personalised and, in many ways, more precise for specific life predictions.</p>
+                <h2>The Core Concept: Chara Karakas</h2>
+                <p>Chara means movable or changing in Sanskrit. Chara Karakas are the seven (or eight, in some traditions) planets that take on specific significations based on their degree in your birth chart.</p>
+                <ul>
+                    <li><strong>Atmakaraka (AK):</strong> The planet with the highest degree. Signifies the soul — your deepest purpose, karmic mission, and primary life theme.</li>
+                    <li><strong>Amatyakaraka (AmK):</strong> The planet with the second highest degree. Signifies the career and professional destiny — the minister to your soul&apos;s mission.</li>
+                    <li><strong>Bhratrikaraka (BK):</strong> Third highest degree. Signifies siblings, courage, and co-born.</li>
+                    <li><strong>Matrikaraka (MK):</strong> Fourth highest degree. Signifies the mother, mind, and emotional foundations.</li>
+                    <li><strong>Pitrikaraka (PK):</strong> Fifth highest degree. Signifies the father, authority figures, and guru.</li>
+                    <li><strong>Gnatikaraka (GK):</strong> Sixth highest degree. Signifies competitors, diseases, legal troubles, and obstacles.</li>
+                    <li><strong>Darakaraka (DK):</strong> The planet with the lowest degree. Signifies the spouse — the most important planet for marriage prediction in Jaimini astrology.</li>
+                </ul>
+                <h2>How Jaimini Differs from Parashari Astrology</h2>
+                <p>Both systems use the same birth chart (D1) and the same planets, but their analytical tools differ significantly.</p>
+                <p>In Parashari astrology, Venus always signifies the wife/husband, Saturn always signifies longevity, and Sun always signifies the father — regardless of which chart you are reading. These are called Sthira (fixed) karakas.</p>
+                <p>In Jaimini astrology, whoever your Darakaraka planet is — whether it is the Sun, Moon, Mars, or any other planet — that planet becomes the primary indicator of your spouse. If your Darakaraka is Saturn, then Saturn (not Venus) reveals the most about your future partner.</p>
+                <p>This is a fundamental difference that makes Jaimini readings feel more personalised and targeted to your specific chart.</p>
+                <h2>Jaimini Dasha System</h2>
+                <p>Jaimini astrology also has its own Dasha (planetary period) systems, the most popular of which are Chara Dasha and Navamsha Dasha. Unlike Vimsottari Dasha (the Parashari system based on the Moon&apos;s nakshatra), Jaimini Dashas are based on the signs and their relationships with planets.</p>
+                <p>In Chara Dasha, each sign (not planet) rules for a period of time, and the effects of that Dasha are interpreted based on which planets are placed in or aspect that sign. This creates a completely different timing framework from Vimsottari Dasha and often reveals life events that the Parashari Dasha misses.</p>
+                <h2>The Karakamsha Chart</h2>
+                <p>One of the most powerful tools in Jaimini astrology is the Karakamsha — the sign occupied by the Atmakaraka in the Navamsha (D9) chart. This sign becomes the Karakamsha Lagna — a powerful second ascendant that reveals spiritual path, ultimate life achievement, and karmic destiny.</p>
+                <p>Planets placed in or aspecting the Karakamsha Lagna reveal what the soul truly seeks in this lifetime — beyond ambition, beyond relationships, at the deepest karmic level.</p>
+                <h2>Why AstroWord Uses Jaimini Astrology</h2>
+                <p>AstroWord&apos;s calculator tools (Atmakaraka, Amatyakaraka, Darakaraka, Gana, Marriage Year, Marriage Type, and Spouse Initial) are all rooted in Jaimini astrology principles. We chose this system because it produces remarkably specific, personalised results — especially for questions about career and marriage, which are the questions Indians care about most deeply.</p>
+                <p>The AI readings on AstroWord combine classical Jaimini principles with modern language and contextual intelligence to deliver readings that feel both ancient and immediately practical.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Is Jaimini astrology better than Parashari?</strong><br />Neither system is objectively better. They are complementary. The best astrologers use both. Jaimini tends to excel at career and marriage specifics; Parashari excels at overall life timing and psychological depth.</p>
+                <p><strong>Q: Do I need to know my exact birth time for Jaimini astrology?</strong><br />Yes. The Chara Karakas are calculated using exact planetary degrees, which require an accurate birth time. Even a 30-minute error can change which planet is your Atmakaraka or Darakaraka.</p>
+                <p><strong>Q: Can I learn Jaimini astrology on my own?</strong><br />Yes, but it has a steep learning curve. The Jaimini Sutras are written in cryptic sutra form and have multiple competing interpretations. Good starting points include works by K.N. Rao, Sanjay Rath, and P.V.R. Narasimha Rao.</p>
+                <p><strong>Q: Does Jaimini astrology work for non-Indians?</strong><br />Yes. The Jaimini system is a mathematical and astronomical framework that works for any birth time and place regardless of the person&apos;s cultural background.</p>
+                <p><strong>Q: Where can I get a Jaimini reading?</strong><br />AstroWord provides free AI-powered Jaimini readings for your Atmakaraka, Amatyakaraka, Darakaraka, and more — based on your exact birth details.</p>
+                <p>Explore AstroWord&apos;s Jaimini calculators: <Link href="/atmakaraka">Atmakaraka</Link> · <Link href="/amatyakaraka">Amatyakaraka</Link> · <Link href="/darakaraka">Darakaraka</Link></p>
+            </>
+        ),
+    },
+
+    'mars-7th-house-marriage': {
+        title: 'Mars in the 7th House — Mangal Dosha, Marriage Delay and What It Really Means',
+        description: 'Mars in the 7th house is one of the most misunderstood placements in Vedic astrology. Learn what Mangal Dosha actually means and when it affects marriage timing.',
+        category: 'Marriage Astrology',
+        date: 'May 5, 2026',
+        readTime: '6 min read',
+        relatedCalculator: { label: 'Predict My Marriage Year', href: '/marriage-year', emoji: '🔴' },
+        content: (
+            <>
+                <h2>What is Mangal Dosha?</h2>
+                <p>Mangal Dosha (also called Kuja Dosha or Manglik Dosha) is one of the most talked-about and most misunderstood concepts in Vedic astrology. It refers to the placement of Mars (Mangal) in certain houses of the birth chart that are believed to create challenges in marriage.</p>
+                <p>According to classical texts, Mangal Dosha is present when Mars is placed in the 1st, 2nd, 4th, 7th, 8th, or 12th house from the Lagna (ascendant), Moon, or Venus. Different astrological traditions count different combinations, which is why the percentage of people classified as &quot;Manglik&quot; varies widely — from 30% to over 50% of the population depending on which rules are applied.</p>
+                <h2>Mars in the 7th House Specifically</h2>
+                <p>The 7th house is the house of marriage, partnerships, and spouse in Vedic astrology. Mars is a fiery, aggressive, and independent planet. When placed in the 7th house, Mars brings intensity, passion, and assertion into the domain of marriage — which can manifest in multiple ways depending on the overall chart.</p>
+                <p>The classical concern is that an unmodified Mars in the 7th house can bring conflict, ego clashes, separation, or in extreme classical interpretations, widowhood. These interpretations come from an era when marriage meant a specific social institution with very specific power dynamics. Modern astrologers interpret these themes more contextually.</p>
+                <h2>What Mars in the 7th House Actually Indicates</h2>
+                <ul>
+                    <li><strong>A passionate, intense marriage:</strong> The person wants a partner who is strong, ambitious, and not submissive. A passive partner will bore them quickly.</li>
+                    <li><strong>High expectations from marriage:</strong> Mars demands that the partnership be dynamic, growth-oriented, and stimulating. A stagnant marriage feels suffocating.</li>
+                    <li><strong>Risk of ego conflict:</strong> Both partners need to be willing to assert themselves without dominating. Conflict arises when one partner is significantly more passive than the other.</li>
+                    <li><strong>Attraction to strong, independent partners:</strong> Mars in the 7th often finds people who are driven, confident, and sometimes from different backgrounds (especially when Rahu aspects Mars).</li>
+                    <li><strong>Potential for a late but durable marriage:</strong> In some charts, Mars in the 7th delays marriage because the person is not willing to settle — but when they do marry, the bond is strong and passionate.</li>
+                </ul>
+                <h2>When Does Mangal Dosha Actually Matter?</h2>
+                <p>Classical Mangal Dosha has limited real-world impact in most cases because of a concept called Dosha Cancellation (Dosha Parihara). Mangal Dosha is cancelled in many situations:</p>
+                <ul>
+                    <li>When Mars is in its own sign (Aries, Scorpio) or exaltation sign (Capricorn) in the 7th house</li>
+                    <li>When Jupiter aspects Mars or the 7th house</li>
+                    <li>When the person marries another Manglik — the doshas cancel each other</li>
+                    <li>When Mars is the 7th lord itself (creating a self-aspecting situation)</li>
+                    <li>In certain Lagnas like Aries and Scorpio where Mars rules beneficially</li>
+                    <li>After the age of 28, some traditions consider the Dosha significantly reduced</li>
+                </ul>
+                <p>Additionally, if a person&apos;s Darakaraka (Jaimini) is Mars, this is actually a very strong placement for marriage — indicating a spouse who is energetic, ambitious, and decisive.</p>
+                <h2>The Modern Reality</h2>
+                <p>In modern astrology practice, blanket Mangal Dosha concerns cause unnecessary anxiety for millions of people. The placement of Mars in the 7th house is one factor in a chart that has hundreds of factors. A trained astrologer always looks at the complete picture — the strength of Venus, the condition of the 7th lord, the Navamsha (D9) chart, the Darakaraka, and the Dasha timing — before making any marriage prediction.</p>
+                <p>Families that reject marriage proposals purely on the basis of Mangal Dosha — without looking at the full chart of both individuals — are applying a drastically oversimplified rule that classical texts themselves never intended to be used in isolation.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Am I Manglik if Mars is in my 7th house?</strong><br />By the strictest definition (Mars in 1st, 2nd, 4th, 7th, 8th, or 12th from Lagna), yes. But this includes such a large percentage of the population that the designation loses practical meaning without further analysis.</p>
+                <p><strong>Q: Can a Manglik marry a non-Manglik?</strong><br />Yes. Many happy marriages exist between Manglik and non-Manglik individuals. The key is whether the non-Manglik&apos;s chart is strong enough to handle a Mars-dominant partner. A full compatibility analysis is more informative than the Manglik/non-Manglik binary.</p>
+                <p><strong>Q: Is Mars in the 7th house always bad for marriage?</strong><br />No. In charts where Mars is well-placed (own sign, exalted, or aspected by Jupiter), Mars in the 7th can give a passionate and loyal marriage. It is not inherently bad.</p>
+                <p><strong>Q: What remedies exist for Mangal Dosha?</strong><br />Common traditional remedies include Mangal puja, fasting on Tuesdays, donating red lentils, wearing red coral (after consulting an astrologer), and performing the Kumbh Vivah ritual. Whether these are effective is a matter of personal belief.</p>
+                <p><strong>Q: Will my marriage be delayed because of Mars in the 7th?</strong><br />Not necessarily from Mars alone. Marriage timing is best assessed through Dasha analysis, Jupiter transits, and the overall condition of the 7th house and its lord.</p>
+                <p>Want to know when you will get married? Try AstroWord&apos;s <Link href="/marriage-year">Marriage Year Predictor</Link> for a personalised Vedic timing analysis.</p>
+            </>
+        ),
+    },
+
+    'venus-in-vedic-astrology': {
+        title: 'Venus in Vedic Astrology — Love, Marriage and the Karaka of Desire',
+        description: 'Venus (Shukra) is the natural karaka of marriage in Vedic astrology. Learn how Venus sign, house, and dasha influence your love life, marriage timing, and relationship quality.',
+        category: 'Planets',
+        date: 'May 6, 2026',
+        readTime: '6 min read',
+        relatedCalculator: { label: 'Check My Marriage Type', href: '/marriage-type', emoji: '✨' },
+        content: (
+            <>
+                <h2>Venus in Vedic Astrology — Shukra, the Planet of Desire</h2>
+                <p>In Vedic astrology, Venus is known as Shukra — the planet of love, beauty, desire, luxury, and artistic expression. As the Naisargika Karaka (natural significator) of marriage, Venus is the most important planet to examine in any birth chart when studying relationships, attraction, and romantic destiny.</p>
+                <p>Unlike in Western astrology where Venus rules both Taurus and Libra, in Vedic astrology Venus rules Taurus (Vrishabha) and Libra (Tula) and is exalted in Pisces (Meena) — the sign of unconditional love and spiritual union. Venus is debilitated in Virgo (Kanya), the sign of analysis and criticism, which can make love feel conditional or intellectual.</p>
+                <h2>What Venus Represents in Your Chart</h2>
+                <p>In a man&apos;s chart, Venus represents the wife or female partner — her nature, appearance, and quality of the relationship. In a woman&apos;s chart, Venus represents her own approach to love, beauty, and femininity — while the 7th house lord and Darakaraka (in Jaimini astrology) better describe the husband.</p>
+                <p>Beyond marriage, Venus in a birth chart governs creativity and artistic talent, material comforts and luxury, sensory pleasures and beauty, social grace and diplomacy, and financial abundance (especially from creative or artistic work).</p>
+                <h2>Venus in Each House — Marriage and Love Themes</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        ['Venus in 1st House', 'Attractive, charming, and naturally magnetic personality. Marriage comes relatively easily — the person draws love towards them. Strong artistic sensibility. Can be vain or overly focused on appearance.'],
+                        ['Venus in 2nd House', 'Love connected to family, tradition, and financial stability. May marry within the family community or someone from a wealthy background. Beautiful voice and love of fine food.'],
+                        ['Venus in 4th House', 'Deep emotional need for domestic harmony. Love of home, mother, and comfort. Marriage often brings a home or real estate. Partner likely to be homely, nurturing, and family-oriented.'],
+                        ['Venus in 5th House', 'Romantic, creative, and drawn to love affairs. This is one of the best placements for love marriage. Strong creative talents. May have children early or place great importance on children.'],
+                        ['Venus in 7th House', 'Classic placement for marriage — Venus in its own domain. Attractive spouse, harmonious partnership, and natural diplomacy in relationships. Marriage is a central life theme. Can sometimes create over-dependence on partnership for happiness.'],
+                        ['Venus in 8th House', 'Intense, transformative relationships. Love mixed with mystery, secrets, and deep psychological bonds. May inherit through marriage. Sexuality is important in partnerships. Relationships have a karmic quality.'],
+                        ['Venus in 9th House', 'Love of foreign cultures, philosophy, and spiritual connections. May marry someone from a different region, culture, or religion. Partnership has a teaching quality — the spouse is often a guide or philosophical companion.'],
+                        ['Venus in 10th House', 'Career connected to beauty, arts, entertainment, or luxury. May marry someone from the professional sphere. Public image tied to relationships. Success through creative or relationship-based careers.'],
+                        ['Venus in 11th House', 'Love connected to friendship networks and social groups. May meet spouse through friends or professional networks. Multiple love interests before settling. Marriage brings financial gains.'],
+                        ['Venus in 12th House', 'Love with a spiritual, sacrificial, or foreign element. May marry someone from a foreign country or meet in an isolated setting. Deep, private romantic life. Can indicate love affairs that are hidden or unconventional. Spiritual approach to relationships.'],
+                    ].map(([title, desc]) => (
+                        <div key={title} className="bg-surface border border-border rounded-xl p-4"><p className="text-gold text-sm font-medium mb-2">✦ {title}</p><p className="text-muted text-sm leading-relaxed">{desc}</p></div>
+                    ))}
+                </div>
+                <h2>Venus Mahadasha and Marriage Timing</h2>
+                <p>Venus Mahadasha is 20 years long and is typically the most romantically and materially abundant period in a person&apos;s life. When Venus Mahadasha runs during the appropriate age for marriage, it almost always brings significant romantic developments — love affairs, engagements, or marriages.</p>
+                <p>Even if Venus Mahadasha does not coincide with typical marriage age, Venus Antardasha within another planet&apos;s Mahadasha often triggers marriage events, especially when combined with Jupiter transiting the 7th house.</p>
+                <h2>Exalted and Debilitated Venus</h2>
+                <p><strong>Exalted Venus (Pisces):</strong> The most elevated expression of Venus energy — unconditional love, spiritual devotion, artistic excellence, and deep compassion. These individuals give love freely and attract partners who are sensitive and spiritually inclined.</p>
+                <p><strong>Debilitated Venus (Virgo):</strong> Venus in Virgo can make love feel analytical, critical, or conditional. The person may be overly focused on perfection in relationships or find it difficult to express affection freely. However, if debilitation is cancelled (Neecha Bhanga), this placement often produces exceptional analytical creativity and can indicate very successful people in fields requiring both art and precision.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Does Venus rule love marriage specifically?</strong><br />Venus indicates the capacity for love and attraction, but love marriage is better indicated by Rahu&apos;s involvement with Venus or the 5th and 7th house lords. Venus alone does not distinguish between love and arranged marriage.</p>
+                <p><strong>Q: My Venus is weak — will I have a bad marriage?</strong><br />A weak Venus (debilitated, combust, or poorly aspected) can create challenges in relationships, but it does not guarantee a bad marriage. The Darakaraka, 7th house, and Navamsha D9 chart also need to be examined.</p>
+                <p><strong>Q: Which sign is best for Venus in a marriage chart?</strong><br />Pisces (exaltation), Taurus and Libra (own signs) are strongest. But even a &quot;weak&quot; Venus with a strong Darakaraka and 7th house can give a good marriage.</p>
+                <p><strong>Q: Can Venus be too strong?</strong><br />Yes. An extremely strong Venus with afflictions from Rahu or Mars can lead to excessive desire, multiple relationships, or materialism. Balance is key.</p>
+                <p><strong>Q: How does Venus retrograde affect marriage?</strong><br />Venus retrograde in the birth chart often indicates reviewing and rethinking relationships — a tendency to reconnect with past partners or approach love in a non-conventional way. Marriage may be delayed or unconventional in some aspect.</p>
+                <p>Explore how Venus and your birth chart predict your marriage destiny — try AstroWord&apos;s <Link href="/marriage-type">Love or Arranged Marriage Predictor</Link> for free.</p>
+            </>
+        ),
+    },
+
+    'rahu-in-7th-house': {
+        title: 'Rahu in the 7th House — Unconventional Love, Foreign Spouse and Marriage Karma',
+        description: 'Rahu in the 7th house is one of the strongest indicators of a love marriage or inter-caste relationship. Learn what this placement means for your marriage destiny.',
+        category: 'Marriage Astrology',
+        date: 'May 7, 2026',
+        readTime: '5 min read',
+        relatedCalculator: { label: 'Predict My Marriage Year', href: '/marriage-year', emoji: '🌑' },
+        content: (
+            <>
+                <h2>Rahu in the 7th House — The Shadow Planet of Desire in the House of Marriage</h2>
+                <p>Rahu, the North Node of the Moon, is the planet of obsession, illusion, foreignness, and unconventional desire in Vedic astrology. When placed in the 7th house — the house of marriage, partnerships, and spouse — Rahu brings its signature energy of intense longing, breaking of norms, and karma to the domain of relationships.</p>
+                <p>This is one of the most talked-about placements in Vedic astrology, and for good reason. Rahu in the 7th house is a powerful indicator of non-traditional marriage circumstances and a deeply karmic bond with the spouse.</p>
+                <h2>What Rahu in the 7th House Actually Means</h2>
+                <ul>
+                    <li><strong>Strong indicator of love marriage:</strong> Rahu disrupts traditional, family-arranged marriage patterns. People with Rahu in the 7th often meet their spouse in unconventional ways — through the internet, at work, through friends of friends, or in foreign settings — rather than through the traditional process.</li>
+                    <li><strong>Attraction to foreigners or people from different backgrounds:</strong> Rahu represents the foreign, the unfamiliar, and the &quot;other.&quot; Its placement in the 7th house often draws the person to a spouse from a different state, religion, caste, culture, or country.</li>
+                    <li><strong>Intense, almost obsessive attraction:</strong> Rahu in the 7th can create a powerful, magnetic pull towards specific people — a feeling of destiny or fate around the relationship. This can be wonderful but also difficult if the relationship becomes obsessive or if the initial intensity fades.</li>
+                    <li><strong>Non-linear marriage journey:</strong> The path to marriage is rarely straightforward with Rahu in the 7th. There may be broken engagements, relationship complications, long-distance periods, or family opposition before marriage finally happens.</li>
+                    <li><strong>Karmic relationship with spouse:</strong> Rahu in the 7th strongly suggests a karmic bond with the spouse — a feeling that you have known each other before, or that this relationship is meant to teach you something profound about yourself.</li>
+                </ul>
+                <h2>Rahu in 7th House and Marriage Timing</h2>
+                <p>Rahu in the 7th house often delays marriage relative to social expectations — not because marriage won&apos;t happen, but because Rahu&apos;s energy creates a complex path to the altar. The person may be in long relationships that don&apos;t lead to marriage, or may have very specific requirements for a partner that take time to find.</p>
+                <p>Marriage often occurs during Rahu Mahadasha or Antardasha, or when Jupiter transits the 7th house and provides the stabilising energy needed to convert Rahu&apos;s intense attraction into a committed union.</p>
+                <h2>Ketu in the 1st House — The Other Side</h2>
+                <p>When Rahu is in the 7th, Ketu (the South Node) is automatically in the 1st house (the Lagna). This axis means the person has a deep, past-life connection to the themes of self-identity, solitude, and independence (Ketu in 1st) — and is karmically being pulled towards the lessons of relationship, partnership, and &quot;the other&quot; (Rahu in 7th) in this lifetime.</p>
+                <p>This creates people who simultaneously crave deep partnership and also need space and independence. Finding a partner who understands this paradox is part of the marriage karma for this placement.</p>
+                <h2>Rahu in 7th House with Other Planets</h2>
+                <p><strong>Rahu + Venus in 7th:</strong> Intensely powerful for attraction. Love marriage is almost certain. The relationship has a glamorous, passionate, and sometimes larger-than-life quality. Can also indicate more than one significant relationship.</p>
+                <p><strong>Rahu + Jupiter in 7th:</strong> Jupiter&apos;s expansive, wise energy moderates Rahu&apos;s impulsiveness. Marriage may be with someone educated, philosophical, or from a different religious background. Generally more stable than Rahu alone in the 7th.</p>
+                <p><strong>Rahu + Saturn in 7th:</strong> The most karmic and complex combination. Marriage may be significantly delayed, with a partner who is older, from a very different background, or who carries responsibilities. When it works, it is deeply committed and lasting.</p>
+                <p><strong>Rahu + Mars in 7th:</strong> Double intensity. Strong physical attraction and passion, but also risk of conflict and power struggles in marriage. Works best when both partners are similarly strong and independent.</p>
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>Q: Does Rahu in 7th always mean love marriage?</strong><br />Not always, but it is one of the strongest indicators. Even in arranged marriages with Rahu in the 7th, there is usually something unconventional — the spouse is from a different background, city, or the match comes through unusual circumstances.</p>
+                <p><strong>Q: Will Rahu in 7th cause divorce?</strong><br />Not inherently. Rahu creates complexity and non-linearity in marriage, but many people with this placement have long, meaningful marriages. The key is choosing a partner who can handle the intensity and unconventionality that Rahu brings.</p>
+                <p><strong>Q: Is Rahu Dosha real?</strong><br />There is no classical Vedic text that formally defines a &quot;Rahu Dosha&quot; for marriage in the way Mangal Dosha is defined. The effects of Rahu in the 7th are better understood as a karmic pattern rather than a flaw.</p>
+                <p><strong>Q: Will I marry a foreigner with Rahu in 7th?</strong><br />It is more likely than average, especially if Rahu is also connected to the 9th house or aspected by foreign-indicating planets. But &quot;foreign&quot; in Vedic astrology can simply mean someone very different from your own background — not necessarily a different nationality.</p>
+                <p><strong>Q: When will I get married with Rahu in 7th?</strong><br />This requires a full Dasha analysis. Common marriage-triggering periods include Rahu Mahadasha, Venus Antardasha within Rahu Mahadasha, and Jupiter transiting the 7th house or natal Rahu.</p>
+                <p>Find out when your marriage is most likely — try AstroWord&apos;s <Link href="/marriage-year">Marriage Year Predictor</Link> for a personalised Dasha and transit analysis.</p>
+            </>
+        ),
+    },
 };
 
 type Params = Promise<{ slug: string }>;
