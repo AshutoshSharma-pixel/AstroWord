@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Amatyakaraka Calculator — Free AI Career Reading | AstroWord",
+  title: "Amatyakaraka Calculator — Free AI Career Reading",
   description: "Discover your Amatyakaraka planet and get a free AI reading about your ideal career, professional strengths, and success path. Authentic Jaimini Vedic astrology.",
   keywords: "amatyakaraka calculator, career astrology, vedic career prediction, professional life jyotish",
   alternates: { canonical: "https://www.astroword.in/amatyakaraka" },

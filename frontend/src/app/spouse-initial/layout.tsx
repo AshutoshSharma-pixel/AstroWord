@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spouse Name Initial Predictor — Free Nakshatra Reading | AstroWord",
+  title: "Spouse Name Initial Predictor — Free Nakshatra Reading",
   description: "Predict the first letter of your future spouse's name using ancient Vedic nakshatra akshara mapping. Free AI analysis based on your Darakaraka and 7th lord.",
   keywords: "spouse name initial, future spouse name, nakshatra akshara, jaimini astrology name prediction, marriage astrology",
   alternates: { canonical: "https://www.astroword.in/spouse-initial" },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gana Calculator — Free Vedic Soul Type Reading | AstroWord",
+  title: "Gana Calculator — Free Vedic Soul Type Reading",
   description: "Find your Gana (Deva, Manushya or Rakshasa) from your Moon nakshatra. Free AI reading about your nature, temperament, and marriage compatibility.",
   keywords: "gana calculator, deva gana, manushya gana, rakshasa gana, kundli matching, guna milan",
   alternates: { canonical: "https://www.astroword.in/gana" },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "When Will I Get Married? Free AI Vedic Prediction | AstroWord",
+  title: "When Will I Get Married? Free AI Vedic Prediction",
   description: "Get a free AI-powered Vedic astrology prediction for your marriage year. Based on Vimsottari Dasha, Jupiter transits, and 7th house activation in your birth chart.",
   keywords: "marriage year predictor, when will i get married, dasha timing, marriage prediction calculator, vedic dasha analysis",
   alternates: { canonical: "https://www.astroword.in/marriage-year" },

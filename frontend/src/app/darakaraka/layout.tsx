@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Darakaraka Calculator — Free AI Spouse Reading | AstroWord",
+  title: "Darakaraka Calculator — Free AI Spouse Reading",
   description: "Find your Darakaraka planet and get a free AI-powered reading about your future spouse's personality, appearance, and career. Based on authentic Jaimini astrology.",
   keywords: "darakaraka calculator, future spouse prediction, vedic astrology spouse, jaimini astrology, marriage prediction",
   alternates: { canonical: "https://www.astroword.in/darakaraka" },
