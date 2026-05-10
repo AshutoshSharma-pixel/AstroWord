@@ -81,12 +81,12 @@ export default function Sidebar({
                         await setDoc(doc(db, 'users', user.uid), {
                             questions_today: 0,
                             last_reset_date: new Date().toISOString().split('T')[0],
-                            plan: 'FREE',
+                            plan: 'free',
                             questions_limit: 5
                         });
                         setQuestionsToday(0);
                         setQuestionsLimit(5);
-                        setUserPlan('FREE');
+                        setUserPlan('free');
                     } catch (e) {
                         console.error("Failed to init user doc", e);
                     }
@@ -229,7 +229,7 @@ export default function Sidebar({
                             <span className="text-xs font-mono text-gold bg-gold/10 px-2 py-0.5 rounded uppercase font-medium">{userPlan}</span>
                         </div>
                         <div className="space-y-1.5">
-                            {Math.max(0, questionsLimit - questionsToday) === 0 && !['annual', 'cosmos'].includes(userPlan.toLowerCase()) ? (
+                            {Math.max(0, questionsLimit - questionsToday) === 0 && !['annual'].includes(userPlan.toLowerCase()) ? (
                                 <div className="flex items-center gap-1 mt-1 text-xs text-red-400 font-mono">
                                     <Clock className="w-3 h-3" />
                                     <span>Resets at midnight</span>
@@ -237,10 +237,10 @@ export default function Sidebar({
                             ) : (
                                 <div className="flex justify-between text-xs text-text/70 mb-1">
                                     <span>Questions left today</span>
-                                    <span>{['annual', 'cosmos'].includes(userPlan.toLowerCase()) ? '∞' : `${Math.max(0, questionsLimit - questionsToday)}/${questionsLimit}`}</span>
+                                    <span>{['annual'].includes(userPlan.toLowerCase()) ? '∞' : `${Math.max(0, questionsLimit - questionsToday)}/${questionsLimit}`}</span>
                                 </div>
                             )}
-                            {(!['annual', 'cosmos'].includes(userPlan.toLowerCase())) && (
+                            {(!['annual'].includes(userPlan.toLowerCase())) && (
                                 <div className="flex gap-1 h-1">
                                     {Array.from({ length: questionsLimit }).map((_, idx) => {
                                         const dot = idx + 1;
@@ -256,6 +256,17 @@ export default function Sidebar({
                                 </div>
                             )}
                         </div>
+                        {(userPlan?.toLowerCase() === 'free' ||
+                            userPlan?.toLowerCase() === 'starter') && (
+                            <button
+                                onClick={() => setShowUpgradeModal(true)}
+                                className="w-full mt-3 bg-gradient-to-r from-gold/20 to-amber/10 hover:from-gold/30 hover:to-amber/20 border border-gold/30 hover:border-gold/50 text-gold text-xs font-medium py-2 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5"
+                            >
+                                <span>✦</span>
+                                <span>Upgrade Plan</span>
+                                <span className="text-gold/50">→</span>
+                            </button>
+                        )}
                     </div>
                 </div>
 

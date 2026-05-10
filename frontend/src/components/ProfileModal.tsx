@@ -61,7 +61,7 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
 
     const handleCancel = async () => {
         if (!user) return;
-        if (!confirm(`Cancel your ${plan} plan? Access continues until ${planExpiry}.`)) return;
+        if (!confirm(`Cancel your ${plan} plan? ${planExpiry ? `Access continues until ${planExpiry}.` : `Your plan will be cancelled immediately.`}`)) return;
         setCancelling(true);
         try {
             const token = await user.getIdToken();
@@ -176,12 +176,12 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
                             <span className={`text-sm font-bold px-3 py-1.5 rounded-full border font-mono ${planColor}`}>
                                 {planData?.plan_cancelled ? 'CANCELLED' : plan.toUpperCase()}
                             </span>
-                            {plan !== 'free' && planExpiry && (
+                            {plan?.toLowerCase() !== 'free' && planExpiry && (
                                 <span className="text-xs text-white/30 font-mono">
                                     {planData?.plan_cancelled ? 'Access ends ' : 'Renews '}{planExpiry}
                                 </span>
                             )}
-                            {plan === 'free' && (
+                            {plan?.toLowerCase() === 'free' && (
                                 <span className="text-xs text-white/30 font-mono">Free forever</span>
                             )}
                         </div>
@@ -191,7 +191,7 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
                             <div className="bg-white/3 border border-white/5 rounded-xl p-3">
                                 <p className="text-xs text-white/30 font-mono mb-1">Questions/day</p>
                                 <p className="text-white text-sm font-medium">
-                                    {plan === 'free' ? '5' : plan === 'starter' ? '10' : '∞'}
+                                    {questionsLimit}
                                 </p>
                             </div>
                             <div className="bg-white/3 border border-white/5 rounded-xl p-3">
@@ -237,7 +237,7 @@ export default function ProfileModal({ isOpen, onClose, onUpgradeClick }: any) {
                                     ✦ {plan === 'free' ? 'Upgrade Plan' : planData?.plan_cancelled ? 'Resubscribe' : 'Upgrade to Pro'}
                                 </button>
                             )}
-                            {plan !== 'free' && !planData?.plan_cancelled && (
+                            {plan?.toLowerCase() !== 'free' && !planData?.plan_cancelled && (
                                 <button onClick={handleCancel} disabled={cancelling}
                                     className="w-full border border-red-500/15 text-red-400/50 hover:text-red-400 hover:border-red-500/30 py-2 rounded-xl text-xs transition-all disabled:opacity-50">
                                     {cancelling ? 'Cancelling...' : `Cancel ${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan`}
