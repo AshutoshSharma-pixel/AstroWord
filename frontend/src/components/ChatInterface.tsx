@@ -60,17 +60,19 @@ export default function ChatInterface({
 
     // Save initial chart session to Firestore so it appears in the sidebar history immediately
     useEffect(() => {
-        if (user && activeChatId && initialMessages.length === 1 && initialMessages[0].role === 'ai') {
+        if (user && activeChatId && initialMessages.length <= 1 && (initialMessages.length === 0 || initialMessages[0].role === 'ai')) {
             const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
             setDoc(chatRef, {
                 title: 'New Astrology Reading',
-                messages: [
-                    {
-                        role: initialMessages[0].role,
-                        content: initialMessages[0].content,
-                        timestamp: Date.now()
-                    }
-                ],
+                messages: initialMessages.length > 0
+                    ? [
+                        {
+                            role: initialMessages[0].role,
+                            content: initialMessages[0].content,
+                            timestamp: Date.now()
+                        }
+                    ]
+                    : [],
                 updated_at: serverTimestamp(),
                 created_at: serverTimestamp(),
                 chart_data: chartData

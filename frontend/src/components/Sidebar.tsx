@@ -61,59 +61,58 @@ export default function Sidebar({
         if (!user) return;
 
         // Listen to User Document for Limits
-        const unsub = onSnapshot(doc(db, 'users', user.uid), async (docSnap) => {
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                const today = new Date().toDateString();
-                const lastReset = data.last_reset ? new Date(data.last_reset).toDateString() : '';
+        const unsub = onSnapshot(
+            doc(db, 'users', user.uid),
+            async (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
 
-                let qToday = data.questions_today || 0;
-                let qLimit = data.questions_limit || 5;
-                let uPlan = data.plan || 'FREE';
-                let pExpiry = data.expiry_time ? new Date(data.expiry_time).toLocaleDateString() : '';
+                    let qToday = data.questions_today || 0;
+                    let qLimit = data.questions_limit || 5;
+                    let uPlan = data.plan || 'FREE';
+                    let pExpiry = data.expiry_time ? new Date(data.expiry_time).toLocaleDateString() : '';
 
-                if (lastReset !== today) {
-                    qToday = 0;
+                    setQuestionsToday(qToday);
+                    setQuestionsLimit(qLimit);
+                    setUserPlan(uPlan);
+                    setPlanExpiry(pExpiry);
+                } else {
                     try {
-                        await updateDoc(doc(db, 'users', user.uid), {
+                        await setDoc(doc(db, 'users', user.uid), {
                             questions_today: 0,
-                            last_reset: new Date().toISOString()
+                            last_reset_date: new Date().toISOString().split('T')[0],
+                            plan: 'FREE',
+                            questions_limit: 5
                         });
+                        setQuestionsToday(0);
+                        setQuestionsLimit(5);
+                        setUserPlan('FREE');
                     } catch (e) {
-                        console.error("Failed to reset daily count", e);
+                        console.error("Failed to init user doc", e);
                     }
                 }
-                setQuestionsToday(qToday);
-                setQuestionsLimit(qLimit);
-                setUserPlan(uPlan);
-                setPlanExpiry(pExpiry);
-            } else {
-                try {
-                    await setDoc(doc(db, 'users', user.uid), {
-                        questions_today: 0,
-                        last_reset: new Date().toISOString(),
-                        plan: 'FREE',
-                        questions_limit: 5
-                    });
-                    setQuestionsToday(0);
-                    setQuestionsLimit(5);
-                    setUserPlan('FREE');
-                } catch (e) {
-                    console.error("Failed to init user doc", e);
-                }
+            },
+            (error) => {
+                console.error('[Sidebar] user doc onSnapshot error:', error.code, error.message);
             }
-        });
+        );
 
         // Listen to Recent Chats
         const chatsRef = collection(db, 'users', user.uid, 'chats');
         const q = query(chatsRef, orderBy('updated_at', 'desc'), limit(15));
-        const unsubChats = onSnapshot(q, (snapshot) => {
-            const chats = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setRecentChats(chats);
-        });
+        const unsubChats = onSnapshot(
+            q,
+            (snapshot) => {
+                const chats = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setRecentChats(chats);
+            },
+            (error) => {
+                console.error('[Sidebar] chats onSnapshot error:', error.code, error.message);
+            }
+        );
 
         return () => {
             unsub();
