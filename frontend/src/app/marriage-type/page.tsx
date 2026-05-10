@@ -127,10 +127,77 @@ export default function MarriageTypePage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
-                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
-                    <h1 className="text-gold font-serif text-3xl">Love or Arranged Marriage Calculator — Vedic Astrology Prediction</h1>
-                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to find out whether your chart indicates a love marriage or arranged marriage, based on your 5th house, 7th house, Venus, and Rahu placements.</p>
-                </div>
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+  <div className="space-y-4">
+    <h1 className="text-gold font-serif text-3xl">Love or Arranged Marriage? What Your Birth Chart Reveals</h1>
+    <p className="text-muted text-sm leading-relaxed">
+      Enter your birth details above to find out whether your chart indicates 
+      a love marriage or arranged marriage. AI analysis based on your 5th house, 
+      7th house, Venus, Rahu, and D9 Navamsa placements.
+    </p>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">Love Marriage Indicators in Vedic Astrology</h2>
+    <p className="text-muted text-sm leading-relaxed">
+      Vedic astrology identifies love marriage through connections between the 
+      5th house (romance), 7th house (marriage), and specific planets — 
+      especially Venus, Rahu, and Moon.
+    </p>
+    <div className="space-y-2">
+      {[
+        'Rahu in the 7th house or conjunct Venus — strongest love marriage indicator',
+        '5th lord and 7th lord connected by conjunction or mutual aspect',
+        'Venus in 1st, 5th, 7th, or 11th house with benefic influence',
+        'Moon in 5th house or aspecting the 5th lord',
+        'Mars and Venus conjunction — passionate love before marriage',
+        'Rahu aspecting or conjunct the 5th or 7th lord',
+      ].map((item) => (
+        <div key={item} className="flex items-start gap-2">
+          <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+          <p className="text-muted text-sm">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">Arranged Marriage Indicators in Vedic Astrology</h2>
+    <div className="space-y-2">
+      {[
+        'Jupiter strongly placed in or aspecting the 7th house',
+        'Saturn in the 7th house — traditional, duty-based marriage',
+        '7th lord in 2nd or 4th house — marriage within family or community',
+        'Strong benefic influence on 7th house with no Rahu connection',
+        'Venus in traditional signs like Taurus, Cancer, or Capricorn',
+        'Moon in Kendra with no malefic connection to 5th house',
+      ].map((item) => (
+        <div key={item} className="flex items-start gap-2">
+          <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+          <p className="text-muted text-sm">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">Love or Arranged Marriage — FAQ</h2>
+    <div className="space-y-3">
+      {[
+        { q: 'Can astrology predict love marriage or arranged marriage with certainty?', a: 'Astrology identifies strong tendencies and planetary yogas that make one type more likely. AstroWord analyses your 5th house, 7th house, Venus, Rahu, and D9 chart together to give you a probability-based reading.' },
+        { q: 'What is the strongest indicator of love marriage in astrology?', a: "Rahu's connection to Venus or the 7th house is the strongest single indicator of a love marriage or unconventional relationship in Vedic astrology." },
+        { q: 'Can someone have both love and arranged marriage indicators?', a: 'Yes — many charts show mixed signals, which often means a love relationship that eventually gets family approval, or an arranged marriage with a strong romantic connection.' },
+        { q: 'Does D9 Navamsa chart show love or arranged marriage?', a: 'Yes. The D9 Navamsa confirms the D1 reading. If Venus is strong and well-placed in both D1 and D9, love marriage is strongly indicated. Rahu in the 7th of D9 is also a strong love marriage signal.' },
+        { q: 'What if my chart shows arranged marriage but I want a love marriage?', a: 'Astrology shows tendencies, not fixed outcomes. Free will plays a major role. Many people with arranged marriage indicators still find love — and vice versa. The chart shows the path of least resistance, not the only path.' },
+      ].map((item) => (
+        <div key={item.q} className="bg-surface2 border border-border rounded-xl p-4 space-y-2">
+          <p className="text-white text-sm font-medium">{item.q}</p>
+          <p className="text-muted text-xs leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
             </div>
         );
     }

@@ -136,10 +136,79 @@ export default function MarriageYearPage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
-                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
-                    <h1 className="text-gold font-serif text-3xl">Marriage Year Predictor — When Will You Get Married?</h1>
-                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to get your most auspicious marriage windows predicted by Vedic Dasha analysis, Jupiter transits, and 7th house activation.</p>
-                </div>
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+  <div className="space-y-4">
+    <h1 className="text-gold font-serif text-3xl">Marriage Year Predictor — When Will You Get Married?</h1>
+    <p className="text-muted text-sm leading-relaxed">
+      Enter your birth details above to get an AI-powered Vedic astrology prediction 
+      for your most likely marriage year. Based on Vimsottari Dasha analysis, 
+      Jupiter transits, and 7th house activation in your exact birth chart.
+    </p>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">How Vedic Astrology Predicts Marriage Year</h2>
+    <p className="text-muted text-sm leading-relaxed">
+      Marriage timing in Vedic astrology is calculated through three overlapping systems: 
+      Vimsottari Dasha (planetary periods), Jupiter and Saturn transits, and activation 
+      of the 7th house and its lord. When all three align, marriage is most likely to occur.
+    </p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {[
+        { title: 'Venus or 7th Lord Dasha', desc: 'The planetary period of Venus or your 7th house lord is the strongest trigger for marriage events.' },
+        { title: 'Jupiter Transit', desc: 'Jupiter transiting your 7th house, natal Venus, or Darakaraka activates marriage possibilities.' },
+        { title: 'Dasha + Transit Overlap', desc: 'When your marriage Dasha and a Jupiter transit coincide, the marriage window is strongest.' },
+        { title: 'Darakaraka Period', desc: 'The Mahadasha or Antardasha of your Darakaraka planet — your spouse significator — often triggers marriage.' },
+      ].map((item) => (
+        <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-1">
+          <p className="text-white text-sm font-medium">✦ {item.title}</p>
+          <p className="text-muted text-xs leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">Why Is My Marriage Getting Delayed?</h2>
+    <p className="text-muted text-sm leading-relaxed">
+      Marriage delay in Vedic astrology is caused by specific planetary conditions 
+      that can be identified in your birth chart.
+    </p>
+    <div className="space-y-2">
+      {[
+        'Saturn aspecting or placed in the 7th house — causes delay but ensures stability',
+        'Venus combust or debilitated in the birth chart',
+        '7th lord placed in 6th, 8th, or 12th house',
+        'Ongoing Saturn Sade Sati (7.5 year transit over Moon)',
+        'Rahu or Ketu in the 7th house creating unconventional marriage circumstances',
+        'Mangal Dosha with no cancellation in the chart',
+      ].map((item) => (
+        <div key={item} className="flex items-start gap-2">
+          <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+          <p className="text-muted text-sm">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-gold font-serif text-2xl">Marriage Prediction by Date of Birth — FAQ</h2>
+    <div className="space-y-3">
+      {[
+        { q: 'Can astrology predict my exact marriage year?', a: 'Vedic astrology can identify the most likely 1-2 year windows for marriage based on your Dasha periods and transits. AstroWord shows you all active marriage windows ranked by strength.' },
+        { q: 'What is the most reliable method for marriage timing?', a: 'The most reliable method combines Vimsottari Dasha (especially Venus, 7th lord, and Darakaraka dashas) with Jupiter transit over the 7th house or natal Venus.' },
+        { q: 'Does Saturn always delay marriage?', a: 'Saturn in or aspecting the 7th house can delay marriage, but it also brings stability and commitment. Many people with Saturn influence marry later but have lasting marriages.' },
+        { q: 'What if I am already past the predicted marriage window?', a: 'Planetary windows repeat and new ones open. AstroWord analyses your upcoming windows based on current planetary positions, not just historical patterns.' },
+        { q: 'Do I need my exact birth time for marriage prediction?', a: 'Yes — birth time determines your ascendant, 7th house lord, and Dasha start date. Even a 30-minute error can shift your Dasha periods significantly.' },
+      ].map((item) => (
+        <div key={item.q} className="bg-surface2 border border-border rounded-xl p-4 space-y-2">
+          <p className="text-white text-sm font-medium">{item.q}</p>
+          <p className="text-muted text-xs leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
             </div>
         );
     }
