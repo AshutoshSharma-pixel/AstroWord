@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
   },
-  alternates: { canonical: "https://www.astroword.in" },
+  alternates: { canonical: "https://www.astroword.in/" },
   openGraph: {
     title: "Free AI Vedic Astrologer — Ask Your Birth Chart Anything",
     description: "India's first AI Vedic astrologer. Ask anything about career, marriage, timing, and relationships — based on your exact birth chart. Free 5 questions daily.",

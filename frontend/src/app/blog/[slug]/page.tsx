@@ -856,7 +856,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
             description: article.description,
             url: `https://www.astroword.in/blog/${slug}`,
             siteName: 'AstroWord',
-        }
+            images: [{ url: 'https://www.astroword.in/og-image.png', width: 1200, height: 630, alt: article.title }],
+            locale: 'en_IN',
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: article.title,
+            description: article.description,
+            images: ['https://www.astroword.in/og-image.png'],
+            site: '@astroword_in',
+        },
     };
 }
 
