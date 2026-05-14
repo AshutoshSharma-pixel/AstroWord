@@ -24,7 +24,7 @@ if not firebase_admin._apps:
                 
             print(f"Initializing Firebase with Project ID: {service_account_info.get('project_id')}")
             cred = credentials.Certificate(service_account_info)
-            firebase_admin.initialize_app(cred, {'storageBucket': 'astroword-4002a.appspot.com'})
+            firebase_admin.initialize_app(cred, {'storageBucket': 'astroword-4002a.firebasestorage.app'})
             print("✅ Firebase initialized from FIREBASE_SERVICE_ACCOUNT_JSON")
             firebase_ready = True
         except Exception as e:
@@ -34,7 +34,7 @@ if not firebase_admin._apps:
     if not firebase_ready and os.path.exists("serviceAccountKey.json"):
         try:
             cred = credentials.Certificate("serviceAccountKey.json")
-            firebase_admin.initialize_app(cred, {'storageBucket': 'astroword-4002a.appspot.com'})
+            firebase_admin.initialize_app(cred, {'storageBucket': 'astroword-4002a.firebasestorage.app'})
             print("✅ Firebase initialized from serviceAccountKey.json")
             firebase_ready = True
         except Exception as e:
@@ -43,7 +43,7 @@ if not firebase_admin._apps:
     # Path 3: Application Default Credentials (ADC)
     if not firebase_ready:
         try:
-            firebase_admin.initialize_app(options={'storageBucket': 'astroword-4002a.appspot.com'})
+            firebase_admin.initialize_app(options={'storageBucket': 'astroword-4002a.firebasestorage.app'})
             print("✅ Firebase initialized from Application Default Credentials")
             firebase_ready = True
         except Exception as e:
