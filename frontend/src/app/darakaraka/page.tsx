@@ -92,6 +92,7 @@ export default function DarakarakaPage() {
                 } else {
                     setResult(data);
                 }
+                localStorage.setItem('astroword_chart', JSON.stringify(chart));
             } else {
                 setError('Could not load your Darakaraka. Please try again.');
             }
@@ -255,6 +256,34 @@ export default function DarakarakaPage() {
                     chartData={chartData} 
                     calculatorType="darakaraka"
                 />
+
+                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
+                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
+                  <p className="text-muted text-sm leading-relaxed">
+                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'Tell me more about my Darakaraka and what it means for my marriage');
+                        window.location.href = '/';
+                      }}
+                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
+                    >
+                      ✦ Ask the AI — Free
+                    </button>
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'When will I get married based on my chart?');
+                        window.location.href = '/';
+                      }}
+                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
+                    >
+                      When will I marry?
+                    </button>
+                  </div>
+                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
+                </div>
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">
