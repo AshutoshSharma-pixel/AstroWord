@@ -252,11 +252,6 @@ export default function DarakarakaPage() {
                     </ReactMarkdown>
                 </div>
 
-                <MarriageReportPreview 
-                    chartData={chartData} 
-                    calculatorType="darakaraka"
-                />
-
                 <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
                   <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
                   <p className="text-muted text-sm leading-relaxed">
@@ -284,6 +279,11 @@ export default function DarakarakaPage() {
                   </div>
                   <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
                 </div>
+
+                <MarriageReportPreview 
+                    chartData={chartData} 
+                    calculatorType="darakaraka"
+                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">

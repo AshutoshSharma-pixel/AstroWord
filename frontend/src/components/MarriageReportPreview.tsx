@@ -24,7 +24,7 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
         
         const timer = setTimeout(() => {
             setIsModalOpen(true);
-        }, 3000);
+        }, 9000);
 
         return () => {
             if (document.body.contains(script)) {
