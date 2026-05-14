@@ -62,7 +62,9 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
                         body: JSON.stringify({
                             chart_data: chartData,
                             payment_id: response.razorpay_payment_id,
-                            user_id: user.uid
+                            user_id: user?.uid || 'anonymous',
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature
                         })
                     });
                     
