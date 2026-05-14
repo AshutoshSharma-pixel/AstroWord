@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Lock, Check, Download, Loader2 } from 'lucide-react';
+import { Lock, Check, Download, Loader2, X } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
 
 interface MarriageReportPreviewProps {
@@ -14,6 +14,7 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
     const [generating, setGenerating] = useState(false);
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -21,10 +22,15 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
         script.async = true;
         document.body.appendChild(script);
         
+        const timer = setTimeout(() => {
+            setIsModalOpen(true);
+        }, 3000);
+
         return () => {
             if (document.body.contains(script)) {
                 document.body.removeChild(script);
             }
+            clearTimeout(timer);
         };
     }, []);
 
@@ -64,6 +70,7 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
                     
                     if (data.success) {
                         setDownloadUrl(data.download_url);
+                        setIsModalOpen(false); // Close modal on success
                     } else {
                         setError("Something went wrong. Please contact support.");
                     }
@@ -79,100 +86,180 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
         rzp.open();
     };
 
-    return (
-        <div className="bg-surface rounded-xl border border-border overflow-hidden my-8">
-            {/* TOP SECTION */}
-            <div className="p-6 border-b border-border text-center">
-                <div className="text-gold text-2xl mb-2">✦</div>
-                <h2 className="text-xl font-serif text-white mb-1">Your Full Marriage Report is Ready</h2>
-                <p className="text-muted text-sm mb-3">Spouse profile · Marriage timing · 2026 forecast · Remedies</p>
-                <span className="bg-surface2 text-gold text-xs px-2 py-0.5 rounded-full uppercase tracking-wider text-[10px]">Preview</span>
+    const blurredPreviewContent = (
+        <div className="space-y-4 text-left">
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">YOUR FUTURE SPOUSE</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-full"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-4/5"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-3/4"></div>
+                </div>
             </div>
-
-            {/* MIDDLE SECTION (Blurred Content or Success State) */}
-            <div className="relative p-6">
-                {downloadUrl ? (
-                    // Success State
-                    <div className="text-center py-8">
-                        <div className="bg-green-500/10 text-green-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Check className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-white text-lg font-serif mb-2">Your Marriage Report is Ready!</h3>
-                        <p className="text-muted text-sm mb-6">You can now download your comprehensive PDF report.</p>
-                        <a 
-                            href={downloadUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-gold text-black px-6 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors"
-                        >
-                            <Download className="w-4 h-4" />
-                            Download PDF Report
-                        </a>
-                    </div>
-                ) : (
-                    // Blurred Preview
-                    <>
-                        <div className="space-y-6 blur-[4px] select-none opacity-40">
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">YOUR FUTURE SPOUSE</h4>
-                                <p className="text-white text-sm leading-relaxed">The placement of your Darakaraka indicates a partner with a strong, independent nature. They are likely to be involved in a profession related to leadership, technology, or creative arts. Their appearance will be striking with a warm and magnetic personality that complements yours perfectly, bringing balance to your life.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">WHEN WILL YOU MARRY</h4>
-                                <p className="text-white text-sm leading-relaxed">Based on your current Dasha periods and the transit of Jupiter, the most promising window for marriage appears to be between late 2026 and mid 2027. This period activates your 7th house lord strongly, indicating a time of union.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">LOVE OR ARRANGED</h4>
-                                <p className="text-white text-sm leading-relaxed">Analysis of your 5th and 7th lords suggests a strong inclination towards a love marriage, or a love-cum-arranged setup where you meet through mutual friends but proceed with family blessings.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">SPOUSE NAME INITIAL</h4>
-                                <p className="text-white text-sm leading-relaxed">The syllables indicated by your 7th lord and Darakaraka point towards names starting with letters like R, S, M, or A, aligning with the sacred sounds of your chart.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">2026-2027 FORECAST</h4>
-                                <p className="text-white text-sm leading-relaxed">Transit of Jupiter through your 7th house during this period brings expansion and blessings to your relationship sector, making it an ideal time for commitment and long-term planning.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-gold text-xs font-medium mb-1 tracking-wider">REMEDIES & GUIDANCE</h4>
-                                <p className="text-white text-sm leading-relaxed">To strengthen your 7th house energy, consider chanting the Venus mantra on Fridays and donating white items to those in need. This will help remove obstacles in timing and attract the right energy.</p>
-                            </div>
-                        </div>
-
-                        {/* OVERLAY */}
-                        <div className="absolute inset-0 bg-surface/70 flex flex-col items-center justify-center p-6 text-center">
-                            {generating ? (
-                                <div className="flex flex-col items-center gap-3">
-                                    <Loader2 className="w-8 h-8 text-gold animate-spin" />
-                                    <p className="text-white font-medium">Generating your report...</p>
-                                    <p className="text-muted text-sm">This may take up to a minute. Please don't close this window.</p>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="bg-surface2 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-border">
-                                        <Lock className="w-5 h-5 text-gold" />
-                                    </div>
-                                    <h3 className="text-white text-lg font-serif mb-1">Unlock Your Complete Marriage Report</h3>
-                                    <p className="text-muted text-sm mb-6 max-w-md">Deeply personalised · Based on your exact birth chart · Instant PDF</p>
-                                    
-                                    <button 
-                                        onClick={handlePayment}
-                                        className="bg-gold text-black px-8 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors mb-3 shadow-lg shadow-gold/10"
-                                    >
-                                        Get Full Report — ₹199
-                                    </button>
-                                    
-                                    <p className="text-muted text-xs">One-time payment · Instant download · No subscription</p>
-                                    
-                                    {error && (
-                                        <p className="text-red-500 text-xs mt-4">{error}</p>
-                                    )}
-                                </>
-                            )}
-                        </div>
-                    </>
-                )}
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">WHEN WILL YOU MARRY</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-full"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-4/5"></div>
+                </div>
+            </div>
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">LOVE OR ARRANGED</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-full"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-3/4"></div>
+                </div>
+            </div>
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">SPOUSE NAME INITIAL</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-1/2"></div>
+                </div>
+            </div>
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">2026-2027 FORECAST</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-full"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-4/5"></div>
+                </div>
+            </div>
+            <div>
+                <h4 className="text-gold text-xs font-mono tracking-widest uppercase mb-2 mt-4">REMEDIES & GUIDANCE</h4>
+                <div className="blur-[4px] select-none opacity-60">
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-full"></div>
+                    <div className="h-3 rounded-full bg-white/15 mb-2 w-3/4"></div>
+                </div>
             </div>
         </div>
+    );
+
+    return (
+        <>
+            <div className="bg-surface rounded-xl border border-border overflow-hidden my-8">
+                {/* TOP SECTION */}
+                <div className="p-6 border-b border-border text-center">
+                    <div className="text-gold text-2xl mb-2">✦</div>
+                    <h2 className="text-xl font-serif text-white mb-1">Your Full Marriage Report is Ready</h2>
+                    <p className="text-muted text-sm mb-3">Spouse profile · Marriage timing · 2026 forecast · Remedies</p>
+                    <span className="bg-surface2 text-gold text-xs px-2 py-0.5 rounded-full uppercase tracking-wider text-[10px]">Preview</span>
+                </div>
+
+                {/* MIDDLE SECTION (Blurred Content or Success State) */}
+                <div className="relative p-6">
+                    {downloadUrl ? (
+                        // Success State
+                        <div className="text-center py-8">
+                            <div className="bg-green-500/10 text-green-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Check className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-white text-lg font-serif mb-2">Your Marriage Report is Ready!</h3>
+                            <p className="text-muted text-sm mb-6">You can now download your comprehensive PDF report.</p>
+                            <a 
+                                href={downloadUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 bg-gold text-black px-6 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors"
+                            >
+                                <Download className="w-4 h-4" />
+                                Download PDF Report
+                            </a>
+                        </div>
+                    ) : (
+                        // Blurred Preview
+                        <>
+                            {blurredPreviewContent}
+
+                            {/* OVERLAY */}
+                            <div className="absolute inset-0 bg-surface/70 flex flex-col items-center justify-center p-6 text-center">
+                                {generating ? (
+                                    <div className="flex flex-col items-center gap-3">
+                                        <Loader2 className="w-8 h-8 text-gold animate-spin" />
+                                        <p className="text-white font-medium">Generating your report...</p>
+                                        <p className="text-muted text-sm">This may take up to a minute. Please don't close this window.</p>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="bg-surface2 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-border">
+                                            <Lock className="w-5 h-5 text-gold" />
+                                        </div>
+                                        <h3 className="text-white text-lg font-serif mb-1">Unlock Your Complete Marriage Report</h3>
+                                        <p className="text-muted text-sm mb-6 max-w-md">Deeply personalised · Based on your exact birth chart · Instant PDF</p>
+                                        
+                                        <button 
+                                            onClick={handlePayment}
+                                            className="bg-gold text-black px-8 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors mb-3 shadow-lg shadow-gold/10"
+                                        >
+                                            Get Full Report — ₹199
+                                        </button>
+                                        
+                                        <p className="text-muted text-xs">One-time payment · Instant download · No subscription</p>
+                                        
+                                        {error && (
+                                            <p className="text-red-500 text-xs mt-4">{error}</p>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+
+            {/* Persistent Trigger Button */}
+            {!downloadUrl && (
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="w-full mt-4 border border-gold/40 text-gold text-sm py-2 rounded-xl hover:bg-gold/10 transition-all"
+                >
+                    ✦ View Your Marriage Report Preview
+                </button>
+            )}
+
+            {/* Auto-Popup Modal */}
+            {isModalOpen && !downloadUrl && (
+                <div 
+                    className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div 
+                        className="bg-surface2 border border-gold/30 rounded-2xl p-6 max-w-md w-full relative max-h-[85vh] overflow-y-auto"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button 
+                            className="absolute top-4 right-4 text-muted hover:text-white"
+                            onClick={() => setIsModalOpen(false)}
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+                        
+                        <div className="text-center mb-6">
+                            <div className="text-gold text-2xl mb-2">✦</div>
+                            <h2 className="text-xl font-serif text-white mb-1">Your Marriage Report</h2>
+                            <p className="text-muted text-sm">Spouse profile · Marriage timing · 2026 forecast</p>
+                        </div>
+                        
+                        {/* Preview Content */}
+                        <div className="mb-6">
+                            {blurredPreviewContent}
+                        </div>
+                        
+                        {/* CTA Button */}
+                        <div className="text-center">
+                            <button 
+                                onClick={handlePayment}
+                                className="bg-gold text-black px-6 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors mb-2 w-full"
+                            >
+                                Get Full Report — ₹199
+                            </button>
+                            <p className="text-muted text-xs">One-time payment · Instant download</p>
+                            
+                            {error && (
+                                <p className="text-red-500 text-xs mt-3">{error}</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
