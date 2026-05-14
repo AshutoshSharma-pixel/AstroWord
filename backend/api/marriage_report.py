@@ -263,10 +263,11 @@ Be specific, personal, and detailed. Minimum 1200 words total.
 
         # Fallback if parsing failed completely
         if not sections_html:
+            formatted_text = response_text.replace("\n\n", "</p><p>").replace("\n", "<br>")
             sections_html = f"""
             <div class="section">
               <div class="section-title">Your Report</div>
-              <div class="section-content"><p>{response_text.replace("\n\n", "</p><p>").replace("\n", "<br>")}</p></div>
+              <div class="section-content"><p>{formatted_text}</p></div>
             </div>
             """
 
