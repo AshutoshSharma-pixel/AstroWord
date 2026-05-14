@@ -328,10 +328,11 @@ Be specific, personal, and detailed. Minimum 1200 words total.
         signed_url = blob.generate_signed_url(expiration=timedelta(days=7))
 
         # 7. Update Firestore
-        order_ref.update({
+        report_order_ref.update({
             "report_generated": True,
             "report_url": signed_url,
-            "report_generated_at": firestore.SERVER_TIMESTAMP
+            "report_generated_at": firestore.SERVER_TIMESTAMP,
+            "status": "completed"
         })
 
         return {
