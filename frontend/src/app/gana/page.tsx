@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
+import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
@@ -82,6 +83,7 @@ export default function GanaPage() {
             const data = await res.json();
             if (res.ok && data.success) {
                 setResult(data);
+                localStorage.setItem('astroword_chart', JSON.stringify(chart));
             } else {
                 setError('Could not load your Gana. Please try again.');
             }
@@ -229,6 +231,39 @@ export default function GanaPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
+
+                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
+                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
+                  <p className="text-muted text-sm leading-relaxed">
+                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'Tell me more about my Gana and compatibility');
+                        window.location.href = '/';
+                      }}
+                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
+                    >
+                      ✦ Ask the AI — Free
+                    </button>
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'What Gana should my spouse be for best compatibility?');
+                        window.location.href = '/';
+                      }}
+                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
+                    >
+                      Who is compatible with me?
+                    </button>
+                  </div>
+                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
+                </div>
+
+                <MarriageReportPreview
+                  chartData={chartData}
+                  calculatorType="gana"
+                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">

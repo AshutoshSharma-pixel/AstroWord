@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
+import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
@@ -91,6 +92,7 @@ export default function MarriageYearPage() {
                     }
                 }
                 setResult(data);
+                localStorage.setItem('astroword_chart', JSON.stringify(chart));
             } else {
                 setError('Could not load your marriage year prediction. Please try again.');
             }
@@ -302,6 +304,39 @@ export default function MarriageYearPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
+
+                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
+                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
+                  <p className="text-muted text-sm leading-relaxed">
+                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'Tell me more about my marriage timing and Dasha');
+                        window.location.href = '/';
+                      }}
+                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
+                    >
+                      ✦ Ask the AI — Free
+                    </button>
+                    <button
+                      onClick={() => {
+                        sessionStorage.setItem('pending_question', 'Is 2026 or 2027 a strong marriage year for me?');
+                        window.location.href = '/';
+                      }}
+                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
+                    >
+                      Will I marry in 2026?
+                    </button>
+                  </div>
+                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
+                </div>
+
+                <MarriageReportPreview
+                  chartData={chartData}
+                  calculatorType="marriage-year"
+                />
 
                 <div className="text-center text-xs text-muted/50 px-4 font-serif italic">
                     Astrology shows the possibility of a romantic involvement. Free will and your choices always play the ultimate role.
