@@ -9,3 +9,5 @@ pydantic
 razorpay
 python-dotenv
 resend # v1.0
+weasyprint
+

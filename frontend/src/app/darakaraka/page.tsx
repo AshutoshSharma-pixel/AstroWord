@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
+import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
@@ -249,6 +250,11 @@ export default function DarakarakaPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
+
+                <MarriageReportPreview 
+                    chartData={chartData} 
+                    calculatorType="darakaraka"
+                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">
