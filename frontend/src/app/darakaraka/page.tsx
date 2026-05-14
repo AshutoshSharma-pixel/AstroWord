@@ -118,13 +118,13 @@ export default function DarakarakaPage() {
                     
                     if (event === 'data') {
                         const parsedData = JSON.parse(data);
-                        setResult(prev => ({
+                        setResult((prev: any) => ({
                             ...prev,
                             ...parsedData.karaka,
                             all_karakas: parsedData.all_karakas
                         }));
                     } else if (event === 'text') {
-                        setResult(prev => ({
+                        setResult((prev: any) => ({
                             ...prev,
                             reading: (prev?.reading || '') + data
                         }));
