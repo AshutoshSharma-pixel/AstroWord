@@ -88,7 +88,7 @@ def get_db():
     except Exception:
         return None
 
-@router.post("/api/marriage-report/generate")
+@router.post("/marriage-report/generate")
 async def generate_marriage_report(request: GenerateReportRequest, db=Depends(get_db)):
     if not db:
         raise HTTPException(status_code=500, detail="Database not initialized")
