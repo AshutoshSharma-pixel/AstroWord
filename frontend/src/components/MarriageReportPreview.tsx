@@ -56,7 +56,7 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
                 setGenerating(true);
                 setError(null);
                 try {
-                    const res = await fetch('/api/marriage-report/generate', {
+                    const res = await fetch('https://astroword-backend-422394834926.asia-south1.run.app/api/marriage-report/generate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
