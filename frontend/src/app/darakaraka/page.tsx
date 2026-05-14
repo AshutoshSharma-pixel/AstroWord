@@ -69,7 +69,7 @@ export default function DarakarakaPage() {
         setError(null);
         try {
             const idToken = user ? await user.getIdToken() : '';
-            const res = await fetch(`${API_URL}/api/karaka`, {
+            const res = await fetch(`${API_URL}/api/karaka/stream`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,21 +81,59 @@ export default function DarakarakaPage() {
                     karaka_type: 'darakaraka'
                 })
             });
-            const data = await res.json();
-            if (res.ok && data.success) {
-                if (data.karaka) {
-                    setResult({
-                        ...data.karaka,
-                        reading: data.reading,
-                        keywords: data.keywords
-                    });
-                } else {
-                    setResult(data);
-                }
-                localStorage.setItem('astroword_chart', JSON.stringify(chart));
-            } else {
+
+            if (!res.ok) {
                 setError('Could not load your Darakaraka. Please try again.');
+                return;
             }
+
+            const reader = res.body?.getReader();
+            if (!reader) {
+                setError('Could not load stream. Please try again.');
+                return;
+            }
+
+            const decoder = new TextDecoder();
+            let buffer = '';
+
+            setResult(null); // Clear previous result
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                buffer += decoder.decode(value, { stream: true });
+                
+                const parts = buffer.split('\n\n');
+                buffer = parts.pop() || ''; // Keep the last incomplete part in the buffer
+                
+                for (const part of parts) {
+                    if (!part.trim()) continue;
+                    const lines = part.split('\n');
+                    let event = '';
+                    let data = '';
+                    for (const line of lines) {
+                        if (line.startsWith('event: ')) event = line.substring(7).trim();
+                        if (line.startsWith('data: ')) data = line.substring(6).trim();
+                    }
+                    
+                    if (event === 'data') {
+                        const parsedData = JSON.parse(data);
+                        setResult(prev => ({
+                            ...prev,
+                            ...parsedData.karaka,
+                            all_karakas: parsedData.all_karakas
+                        }));
+                    } else if (event === 'text') {
+                        setResult(prev => ({
+                            ...prev,
+                            reading: (prev?.reading || '') + data
+                        }));
+                    } else if (event === 'error') {
+                        setError(`Error: ${data}`);
+                    }
+                }
+            }
+            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {
