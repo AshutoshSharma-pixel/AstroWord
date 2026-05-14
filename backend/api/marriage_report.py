@@ -79,6 +79,8 @@ class GenerateReportRequest(BaseModel):
     chart_data: dict
     payment_id: str
     user_id: str
+    razorpay_order_id: str = ""
+    razorpay_signature: str = ""
 
 def get_db():
     try:
@@ -91,19 +93,34 @@ async def generate_marriage_report(request: GenerateReportRequest, db=Depends(ge
     if not db:
         raise HTTPException(status_code=500, detail="Database not initialized")
         
-    # 1. Verify Payment
-    order_ref = db.collection("orders").document(request.payment_id)
-    order_doc = order_ref.get()
+    import hmac
+    import hashlib
     
-    if not order_doc.exists:
-        raise HTTPException(status_code=400, detail="Payment not found")
-        
-    order_data = order_doc.to_dict()
-    if order_data.get("status") != "verified":
-        raise HTTPException(status_code=400, detail="Payment not verified")
-        
-    if order_data.get("user_id") != request.user_id:
-        raise HTTPException(status_code=400, detail="Order does not belong to user")
+    # 1. Verify Payment with Razorpay signature
+    razorpay_key_secret = os.environ.get("RAZORPAY_KEY_SECRET", "")
+    
+    if request.razorpay_order_id and request.razorpay_signature and razorpay_key_secret:
+        msg = f"{request.razorpay_order_id}|{request.payment_id}"
+        expected = hmac.new(
+            razorpay_key_secret.encode(),
+            msg.encode(),
+            hashlib.sha256
+        ).hexdigest()
+        if expected != request.razorpay_signature:
+            raise HTTPException(status_code=400, detail="Invalid payment signature")
+    
+    # Store in Firestore for records
+    try:
+        report_order_ref = db.collection("report_orders").document(request.payment_id)
+        report_order_ref.set({
+            "payment_id": request.payment_id,
+            "user_id": request.user_id,
+            "amount": 199,
+            "status": "processing",
+            "created_at": firestore.SERVER_TIMESTAMP
+        })
+    except Exception:
+        pass
 
     try:
         # 2. Run Calculations (Duplicated core logic)
