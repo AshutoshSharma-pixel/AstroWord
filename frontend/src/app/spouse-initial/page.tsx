@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
 import ShareCard from '@/components/ShareCard';
+import FloatingTools from '@/components/FloatingTools';
 
 const TAGLINES = [
     "Calculating your Darakaraka nakshatra...",
@@ -243,6 +244,7 @@ export default function SpouseInitialPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
+            <FloatingTools currentTool="spouse-initial" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-6">
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
