@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const SECTIONS = [
   { icon: '👤', title: 'Your Future Spouse', desc: 'Appearance, personality, profession and nature of your destined partner based on Darakaraka and 7th house analysis.' },
@@ -58,22 +59,43 @@ export default function MarriageReportPage() {
       </nav>
 
       {/* HERO */}
-      <section className="text-center px-6 py-20 max-w-3xl mx-auto">
-        <div className="text-gold text-3xl mb-6">✦</div>
-        <h1 className="text-4xl md:text-5xl font-serif text-white mb-6 leading-tight">
-          Your Complete Vedic<br />Marriage Report
-        </h1>
-        <p className="text-muted text-lg mb-4 max-w-xl mx-auto leading-relaxed">
-          AI analyses your birth chart using authentic Vedic methods — Jaimini Karakas, Dasha timing, nakshatra mapping — and writes a deeply personalised 1200+ word marriage report.
-        </p>
-        <p className="text-muted text-sm mb-10">Instant PDF · One-time ₹199 · No subscription</p>
-        <button
-          onClick={handleGetReport}
-          className="bg-gold text-black px-10 py-4 rounded-xl font-medium text-lg hover:bg-gold/90 transition-colors shadow-lg shadow-gold/10 mb-4"
-        >
-          Get My Marriage Report — ₹199
-        </button>
-        <p className="text-muted text-xs">Enter your birth details → Pay → Download PDF in 60 seconds</p>
+      <section className="px-6 py-16 max-w-5xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          
+          {/* Left — image */}
+          <div className="w-full md:w-2/5 flex-shrink-0">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-gold/10 border border-gold/20">
+              <Image
+                src="/Marriage_Report_Image_.png"
+                alt="AstroWord Vedic Marriage Report"
+                width={600}
+                height={700}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Right — text */}
+          <div className="w-full md:w-3/5 text-center md:text-left">
+            <div className="text-gold text-2xl mb-4">✦</div>
+            <h1 className="text-4xl md:text-5xl font-serif text-white mb-6 leading-tight">
+              Your Complete Vedic<br />Marriage Report
+            </h1>
+            <p className="text-muted text-lg mb-4 leading-relaxed">
+              AI analyses your birth chart using authentic Vedic methods — Jaimini Karakas, Dasha timing, nakshatra mapping — and writes a deeply personalised 1200+ word marriage report.
+            </p>
+            <p className="text-muted text-sm mb-8">Instant PDF · One-time ₹199 · No subscription</p>
+            <button
+              onClick={handleGetReport}
+              className="bg-gold text-black px-10 py-4 rounded-xl font-medium text-lg hover:bg-gold/90 transition-colors shadow-lg shadow-gold/10 mb-4 w-full md:w-auto"
+            >
+              Get My Marriage Report — ₹199
+            </button>
+            <p className="text-muted text-xs mt-3">Enter your birth details → Pay → Download PDF in 60 seconds</p>
+          </div>
+
+        </div>
       </section>
 
       {/* WHAT'S INSIDE */}

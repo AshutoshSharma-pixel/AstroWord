@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Complete AI Vedic marriage report. Spouse profile, marriage timing, love or arranged prediction, 2026-2027 forecast. Instant PDF ₹199.",
     url: "https://www.astroword.in/marriage-report",
     siteName: "AstroWord",
-    images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Vedic Marriage Report" }],
+    images: [{ url: "https://www.astroword.in/Marriage_Report_Image_.png", width: 1200, height: 630, alt: "AstroWord Vedic Marriage Report" }],
     locale: "en_IN",
     type: "website",
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vedic Marriage Report — AI-Powered Kundli Marriage Prediction",
     description: "Complete AI Vedic marriage report. Spouse profile, marriage timing, 2026-2027 forecast. Instant PDF ₹199.",
-    images: ["https://www.astroword.in/og-image.png"],
+    images: ["https://www.astroword.in/Marriage_Report_Image_.png"],
     site: "@astroword_in",
   },
 };
