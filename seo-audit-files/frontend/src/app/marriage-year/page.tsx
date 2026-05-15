@@ -5,13 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
-import ShareCard from '@/components/ShareCard';
-import TopToolsStrip from '@/components/TopToolsStrip';
 
 const TAGLINES = [
     "Analyzing your 7th house and its lord...",
@@ -83,34 +79,21 @@ export default function MarriageYearPage() {
                     chart_data: chart
                 })
             });
-
-            if (!res.ok) {
-                setError('Could not load your marriage year prediction. Please try again.');
-                setIsLoading(false);
-                return;
-            }
-
-            let resultData: any = { reading: '## Marriage Timing Analysis\n\n' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (done) => {
-                    // done contains windows, most_likely_year, keywords
-                    resultData = { ...resultData, ...done };
-                    setResult({ ...resultData });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (data.reading) {
+                    // Extract numbered list and prepend header
+                    const numbered = data.reading.match(/1\.[\s\S]+/);
+                    if (numbered) {
+                        data.reading = '## Marriage Timing Analysis\n\n' + numbered[0];
+                    } else {
+                        data.reading = '## Marriage Timing Analysis\n\n' + data.reading;
+                    }
                 }
-            );
-
-            localStorage.setItem('astroword_chart', JSON.stringify(chart));
+                setResult(data);
+            } else {
+                setError('Could not load your marriage year prediction. Please try again.');
+            }
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {
@@ -153,79 +136,10 @@ export default function MarriageYearPage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
-                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
-  <div className="space-y-4">
-    <h1 className="text-gold font-serif text-3xl">Marriage Year Predictor — When Will You Get Married?</h1>
-    <p className="text-muted text-sm leading-relaxed">
-      Enter your birth details above to get an AI-powered Vedic astrology prediction 
-      for your most likely marriage year. Based on Vimsottari Dasha analysis, 
-      Jupiter transits, and 7th house activation in your exact birth chart.
-    </p>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">How Vedic Astrology Predicts Marriage Year</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      Marriage timing in Vedic astrology is calculated through three overlapping systems: 
-      Vimsottari Dasha (planetary periods), Jupiter and Saturn transits, and activation 
-      of the 7th house and its lord. When all three align, marriage is most likely to occur.
-    </p>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {[
-        { title: 'Venus or 7th Lord Dasha', desc: 'The planetary period of Venus or your 7th house lord is the strongest trigger for marriage events.' },
-        { title: 'Jupiter Transit', desc: 'Jupiter transiting your 7th house, natal Venus, or Darakaraka activates marriage possibilities.' },
-        { title: 'Dasha + Transit Overlap', desc: 'When your marriage Dasha and a Jupiter transit coincide, the marriage window is strongest.' },
-        { title: 'Darakaraka Period', desc: 'The Mahadasha or Antardasha of your Darakaraka planet — your spouse significator — often triggers marriage.' },
-      ].map((item) => (
-        <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-1">
-          <p className="text-white text-sm font-medium">✦ {item.title}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Why Is My Marriage Getting Delayed?</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      Marriage delay in Vedic astrology is caused by specific planetary conditions 
-      that can be identified in your birth chart.
-    </p>
-    <div className="space-y-2">
-      {[
-        'Saturn aspecting or placed in the 7th house — causes delay but ensures stability',
-        'Venus combust or debilitated in the birth chart',
-        '7th lord placed in 6th, 8th, or 12th house',
-        'Ongoing Saturn Sade Sati (7.5 year transit over Moon)',
-        'Rahu or Ketu in the 7th house creating unconventional marriage circumstances',
-        'Mangal Dosha with no cancellation in the chart',
-      ].map((item) => (
-        <div key={item} className="flex items-start gap-2">
-          <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
-          <p className="text-muted text-sm">{item}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Marriage Prediction by Date of Birth — FAQ</h2>
-    <div className="space-y-3">
-      {[
-        { q: 'Can astrology predict my exact marriage year?', a: 'Vedic astrology can identify the most likely 1-2 year windows for marriage based on your Dasha periods and transits. AstroWord shows you all active marriage windows ranked by strength.' },
-        { q: 'What is the most reliable method for marriage timing?', a: 'The most reliable method combines Vimsottari Dasha (especially Venus, 7th lord, and Darakaraka dashas) with Jupiter transit over the 7th house or natal Venus.' },
-        { q: 'Does Saturn always delay marriage?', a: 'Saturn in or aspecting the 7th house can delay marriage, but it also brings stability and commitment. Many people with Saturn influence marry later but have lasting marriages.' },
-        { q: 'What if I am already past the predicted marriage window?', a: 'Planetary windows repeat and new ones open. AstroWord analyses your upcoming windows based on current planetary positions, not just historical patterns.' },
-        { q: 'Do I need my exact birth time for marriage prediction?', a: 'Yes — birth time determines your ascendant, 7th house lord, and Dasha start date. Even a 30-minute error can shift your Dasha periods significantly.' },
-      ].map((item) => (
-        <div key={item.q} className="bg-surface2 border border-border rounded-xl p-4 space-y-2">
-          <p className="text-white text-sm font-medium">{item.q}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.a}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                    <h1 className="text-gold font-serif text-3xl">Marriage Year Predictor — When Will You Get Married?</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to get your most auspicious marriage windows predicted by Vedic Dasha analysis, Jupiter transits, and 7th house activation.</p>
+                </div>
             </div>
         );
     }
@@ -259,7 +173,6 @@ export default function MarriageYearPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <TopToolsStrip currentTool="marriage-year" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 text-center space-y-3">
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
@@ -272,13 +185,6 @@ export default function MarriageYearPage() {
                         Most auspicious year for marriage or any romantic relationship
                     </p>
                 </div>
-
-                <ShareCard
-                  question="When will I get married?"
-                  answer={`${result.most_likely_year}`}
-                  subtext="My most auspicious marriage year based on Dasha & transits"
-                  keywords={['Marriage Timing', 'Dasha', 'Jupiter Transit', 'Vedic Astrology']}
-                />
 
                 <div className="space-y-3">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono">All Marriage Windows</p>
@@ -302,16 +208,7 @@ export default function MarriageYearPage() {
                                     }`}>
                                     {window.strength}
                                 </div>
-                                <div className="text-muted text-xs mt-1">
-                                    <ReactMarkdown
-                                        components={{
-                                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
-                                            p: ({ children }) => <span className="inline">{children}</span>
-                                        }}
-                                    >
-                                        {window.reason}
-                                    </ReactMarkdown>
-                                </div>
+                                <p className="text-muted text-xs mt-1">{window.reason}</p>
                             </div>
                         </div>
                     ))}
@@ -336,50 +233,6 @@ export default function MarriageYearPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
-
-                <div className="text-center py-4">
-                    <a
-                        href="/blog/when-will-i-get-married"
-                        className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors"
-                    >
-                        <span>📖</span>
-                        <span>Read: When Will I Get Married? Astrology Guide</span>
-                        <span>→</span>
-                    </a>
-                </div>
-
-                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
-                  <p className="text-muted text-sm leading-relaxed">
-                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Tell me more about my marriage timing and Dasha');
-                        window.location.href = '/';
-                      }}
-                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
-                    >
-                      ✦ Ask the AI — Free
-                    </button>
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Is 2026 or 2027 a strong marriage year for me?');
-                        window.location.href = '/';
-                      }}
-                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
-                    >
-                      Will I marry in 2026?
-                    </button>
-                  </div>
-                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
-                </div>
-
-                <MarriageReportPreview
-                  chartData={chartData}
-                  calculatorType="marriage-year"
-                />
 
                 <div className="text-center text-xs text-muted/50 px-4 font-serif italic">
                     Astrology shows the possibility of a romantic involvement. Free will and your choices always play the ultimate role.

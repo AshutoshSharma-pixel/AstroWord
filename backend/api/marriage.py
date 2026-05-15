@@ -4,8 +4,9 @@ import re
 import traceback
 from datetime import datetime
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_new, call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -135,58 +136,97 @@ ARRANGED MARRIAGE INDICATORS (check each):
 Provide a highly detailed, expansive reading.
 Do not give generic answers. Be specific — cite actual planets and houses from THIS chart.
 
-Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quotes as \\" within the reading string so the JSON parses correctly!
-{{
-    "result": "Love Marriage" OR "Arranged Marriage" OR "Love-Cum-Arranged Marriage",
-    "percentage": {{
-        "love": 70,
-        "arranged": 30
-    }},
-    "reading": "detailed markdown reading explaining why with \\n for newlines",
-    "key_indicators": ["list of specific chart factors that determined this"],
-    "timing": "when marriage is likely based on dasha",
-    "keywords": ["3-4 descriptive keywords"]
-}}
+Provide the response in pure Markdown. Do not use JSON.
+At the very end of your response, provide the following structured data after the delimiter `---DATA---`:
+RESULT: Love Marriage (or Arranged Marriage or Love-Cum-Arranged Marriage)
+LOVE_PERCENTAGE: 70
+ARRANGED_PERCENTAGE: 30
+KEY_INDICATORS: factor 1, factor 2, factor 3
+TIMING: when marriage is likely
+KEYWORDS: word 1, word 2, word 3
 """
 
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                response_mime_type="application/json",
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
-        )
-        response_text = response.text.strip()
-
-        for prefix in ["```json", "```"]:
-            if response_text.startswith(prefix):
-                response_text = response_text[len(prefix):]
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
-        response_text = response_text.strip()
-
-        try:
-            result = json.loads(response_text)
-        except json.JSONDecodeError:
-            salvaged_text = response_text
-            reading_text = "Analysis unavailable due to complex planetary alignments."
-            if salvaged_text.strip().startswith('{') and '"reading":' in salvaged_text:
-                match = re.search(r'"reading"\s*:\s*"(.*?)"\s*,\s*"key_indicators"', salvaged_text, re.DOTALL)
-                if match:
-                    reading_text = match.group(1).replace('\\n', '\n').replace('\\"', '"')
-
-            result = {
-                "result": "Analysis unavailable",
-                "percentage": {"love": 50, "arranged": 50},
-                "reading": reading_text,
-                "key_indicators": [],
-                "timing": "Check current dasha period",
-                "keywords": []
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
             }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            # Default values for parsing
+            result_val = "Love Marriage"
+            love_pct = 50
+            arr_pct = 50
+            key_indicators = []
+            timing = "Check current dasha period"
+            keywords = ["marriage", "type"]
+            
+            # Stream from Gemini
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=8192,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    # Check if we are in the data section to avoid streaming it
+                    if "---DATA---" not in full_text:
+                        yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+                    else:
+                        # If delimiter just appeared, yield only the part before it
+                        if "---DATA---" in text_chunk:
+                            parts = full_text.split("---DATA---", 1)
+                            # We might have already streamed some of this if it was in previous chunks,
+                            # but usually the delimiter appears in a single chunk or we can just send the delta.
+                            # For simplicity, we just stop streaming once ---DATA--- is detected in full_text.
+                            pass
 
-        return {"success": True, **result}
+            # Parse structured data at the end
+            if "---DATA---" in full_text:
+                parts = full_text.rsplit("---DATA---", 1)
+                data_part = parts[1].strip()
+                
+                for line in data_part.split('\n'):
+                    line = line.strip()
+                    if line.startswith("RESULT:"):
+                        result_val = line[len("RESULT:"):].strip()
+                    elif line.startswith("LOVE_PERCENTAGE:"):
+                        try:
+                            love_pct = int(re.search(r'\d+', line).group())
+                        except: pass
+                    elif line.startswith("ARRANGED_PERCENTAGE:"):
+                        try:
+                            arr_pct = int(re.search(r'\d+', line).group())
+                        except: pass
+                    elif line.startswith("KEY_INDICATORS:"):
+                        key_indicators = [k.strip() for k in line[len("KEY_INDICATORS:"):].split(",") if k.strip()]
+                    elif line.startswith("TIMING:"):
+                        timing = line[len("TIMING:"):].strip()
+                    elif line.startswith("KEYWORDS:"):
+                        keywords = [k.strip() for k in line[len("KEYWORDS:"):].split(",") if k.strip()]
+            
+            # Yield done with parsed data
+            done_data = {
+                "type": "done",
+                "result": result_val,
+                "percentage": {"love": love_pct, "arranged": arr_pct},
+                "key_indicators": key_indicators,
+                "timing": timing,
+                "keywords": keywords[:6]
+            }
+            yield f"data: {json.dumps(done_data)}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+        )
 
     except HTTPException:
         raise
@@ -287,61 +327,72 @@ Give 6-8 Indian names and 3-4 international names starting with the most likely 
 
 Keep it engaging and mystical. Use **bold** for letters and syllables.
 
-Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quotes as \\" within the reading string so the JSON parses correctly!
-{{
-    "most_likely_initials": {json.dumps(all_initials)},
-    "primary_initial": "{method1['primary_letter']}",
-    "methods": {{
-        "seventh_lord": {json.dumps(method1)},
-        "darakaraka": {json.dumps(method2)},
-        "venus": {json.dumps(method3)}
-    }},
-    "reading": "full markdown reading with \\n for newlines",
-    "sample_names": ["name1", "name2", "name3", "name4", "name5", "name6"],
-    "keywords": ["3-4 keywords"]
-}}
+Provide the response in pure Markdown. Do not use JSON.
+At the very end of your response, provide the following structured data after the delimiter `---DATA---`:
+SAMPLE_NAMES: name1, name2, name3, name4, name5, name6
+KEYWORDS: word 1, word 2, word 3
 """
 
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                response_mime_type="application/json",
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
-        )
-        response_text = response.text.strip()
-        for prefix in ["```json", "```"]:
-            if response_text.startswith(prefix):
-                response_text = response_text[len(prefix):]
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
-
-        try:
-            result = json.loads(response_text.strip())
-        except json.JSONDecodeError:
-            salvaged_text = response_text
-            reading_text = "Analysis unavailable due to complex planetary alignments."
-            if salvaged_text.strip().startswith('{') and '"reading":' in salvaged_text:
-                match = re.search(r'"reading"\s*:\s*"(.*?)"\s*,\s*"sample_names"', salvaged_text, re.DOTALL)
-                if match:
-                    reading_text = match.group(1).replace('\\n', '\n').replace('\\"', '"')
-
-            result = {
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
                 "most_likely_initials": all_initials,
-                "primary_initial": method1["primary_letter"],
+                "primary_initial": method1['primary_letter'],
                 "methods": {
                     "seventh_lord": method1,
                     "darakaraka": method2,
                     "venus": method3
-                },
-                "reading": reading_text,
-                "sample_names": [],
-                "keywords": []
+                }
             }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            sample_names = []
+            keywords = ["spouse", "initials"]
+            
+            # Stream from Gemini
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=8192,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    # Hide the data section from the stream
+                    if "---DATA---" not in full_text:
+                        yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
 
-        return {"success": True, **result}
+            # Parse structured data at the end
+            if "---DATA---" in full_text:
+                parts = full_text.rsplit("---DATA---", 1)
+                data_part = parts[1].strip()
+                
+                for line in data_part.split('\n'):
+                    line = line.strip()
+                    if line.startswith("SAMPLE_NAMES:"):
+                        sample_names = [n.strip() for n in line[len("SAMPLE_NAMES:"):].split(",") if n.strip()]
+                    elif line.startswith("KEYWORDS:"):
+                        keywords = [k.strip() for k in line[len("KEYWORDS:"):].split(",") if k.strip()]
+            
+            # Yield done
+            done_data = {
+                "type": "done",
+                "sample_names": sample_names,
+                "keywords": keywords[:6]
+            }
+            yield f"data: {json.dumps(done_data)}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+        )
 
     except Exception as e:
         traceback.print_exc()
@@ -430,70 +481,88 @@ Do NOT repeat generic astrology. Be chart-specific.
 """
 
     try:
-        response = call_gemini_new(
-            merged_prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.2,
-                max_output_tokens=1000,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
+            }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            full_text = ""
+            reading_started = False
+            
+            # Stream from Gemini
+            for chunk in call_gemini_stream(
+                merged_prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.2,
+                    max_output_tokens=1000,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    
+                    if reading_started:
+                        yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+                    elif "---READING---" in full_text:
+                        reading_started = True
+                        parts = full_text.split("---READING---", 1)
+                        # Yield the part after delimiter if it has content
+                        if len(parts) > 1 and parts[1]:
+                            yield f"data: {json.dumps({'type': 'chunk', 'text': parts[1]})}\n\n"
+
+            # Parse windows and finalize
+            if "---READING---" in full_text:
+                windows_raw, reading_raw = full_text.split("---READING---", 1)
+            else:
+                windows_raw, reading_raw = full_text, ""
+                
+            windows = []
+            most_likely_year = str(current_year + 1)
+            
+            for line in windows_raw.strip().split('\n'):
+                line = line.strip()
+                if '|' in line:
+                    parts = line.split('|')
+                    if len(parts) >= 5:
+                        windows.append({
+                            "year": parts[0].strip(),
+                            "dasha_period": parts[1].strip(),
+                            "strength": parts[2].strip(),
+                            "reason": parts[3].strip(),
+                            "months": parts[4].strip()
+                        })
+            
+            if windows:
+                most_likely_year = windows[0]["year"]
+                
+            # Yield done
+            done_data = {
+                "type": "done",
+                "most_likely_year": most_likely_year,
+                "most_likely_period": f"during {most_likely_year}",
+                "windows": windows if windows else [
+                    {"year": str(current_year + 1), "dasha_period": f"{current_mahadasha.get('lord', 'Venus')} Mahadasha",
+                     "strength": "Strong", "reason": f"{seventh_lord} (7th lord) in {seventh_lord_sign}", "months": "Apr-Sep"},
+                    {"year": str(current_year + 2), "dasha_period": "Next Antardasha",
+                     "strength": "Moderate", "reason": "Secondary window", "months": "Jan-Jun"},
+                    {"year": str(current_year + 3), "dasha_period": "Following period",
+                     "strength": "Possible", "reason": "Tertiary window", "months": "Mar-Oct"}
+                ],
+                "delay_factors": "",
+                "keywords": ["marriage", "timing", seventh_lord, "dasha"]
+            }
+            yield f"data: {json.dumps(done_data)}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
         )
 
-        raw = response.text.strip()
-
-        # Split on the delimiter
-        if "---READING---" in raw:
-            windows_raw, reading_raw = raw.split("---READING---", 1)
-        else:
-            # Fallback: try to split on blank line
-            windows_raw, reading_raw = raw, ""
-
-        # Parse pipe-separated windows
-        windows = []
-        most_likely_year = str(current_year + 1)
-
-        for line in windows_raw.strip().split('\n'):
-            line = line.strip()
-            if '|' in line:
-                parts = line.split('|')
-                if len(parts) >= 5:
-                    windows.append({
-                        "year": parts[0].strip(),
-                        "dasha_period": parts[1].strip(),
-                        "strength": parts[2].strip(),
-                        "reason": parts[3].strip(),
-                        "months": parts[4].strip()
-                    })
-
-        if windows:
-            most_likely_year = windows[0]["year"]
-        else:
-            print(f"WARNING: No windows parsed. Raw:\n{windows_raw}")
-
-        reading = reading_raw.strip()
-        if not reading:
-            reading = (
-                f"## Marriage Timing\n\n"
-                f"Your **{seventh_lord}** (7th lord) is placed in the **{fmt_house(seventh_lord_house)} house**, "
-                f"and your **{current_mahadasha.get('lord', 'current')} Mahadasha** holds significant promise for relationships."
-            )
-
-        return {
-            "success": True,
-            "most_likely_year": most_likely_year,
-            "most_likely_period": f"during {most_likely_year}",
-            "windows": windows if windows else [
-                {"year": str(current_year + 1), "dasha_period": f"{current_mahadasha.get('lord', 'Venus')} Mahadasha",
-                 "strength": "Strong", "reason": f"{seventh_lord} (7th lord) in {seventh_lord_sign}", "months": "Apr-Sep"},
-                {"year": str(current_year + 2), "dasha_period": "Next Antardasha",
-                 "strength": "Moderate", "reason": "Secondary window", "months": "Jan-Jun"},
-                {"year": str(current_year + 3), "dasha_period": "Following period",
-                 "strength": "Possible", "reason": "Tertiary window", "months": "Mar-Oct"}
-            ],
-            "reading": reading,
-            "delay_factors": "",
-            "keywords": ["marriage", "timing", seventh_lord, "dasha"]
-        }
-
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))

@@ -5,13 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
-import ShareCard from '@/components/ShareCard';
-import TopToolsStrip from '@/components/TopToolsStrip';
 
 const TAGLINES = [
     "Calculating your Darakaraka nakshatra...",
@@ -83,34 +79,15 @@ export default function SpouseInitialPage() {
                     chart_data: chart
                 })
             });
-
-            if (!res.ok) {
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setResult(data);
+            } else {
                 setError('Could not load your spouse initial. Please try again.');
-                setIsLoading(false);
-                return;
             }
-
-            let resultData: any = { reading: '' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (doneData) => {
-                    resultData = { ...resultData, ...doneData };
-                    setResult({ ...resultData });
-                    localStorage.setItem('astroword_chart', JSON.stringify(chart));
-                }
-            );
         } catch (err) {
             setError('Something went wrong. Please try again.');
+        } finally {
             setIsLoading(false);
         }
     };
@@ -150,82 +127,10 @@ export default function SpouseInitialPage() {
         return (
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
-                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
-  <div className="space-y-4">
-    <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Find the First Letter of Your Spouse's Name</h1>
-    <p className="text-muted text-sm leading-relaxed">
-      Enter your birth details above to discover the most likely first letter 
-      of your future spouse's name using ancient Vedic Nakshatra Akshara mapping. 
-      AI analysis based on your Darakaraka planet, 7th house lord, and Venus nakshatra.
-    </p>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">How Vedic Astrology Predicts Your Spouse's Name Initial</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      In Vedic astrology, each of the 27 Nakshatras is associated with specific 
-      syllables called Aksharas. The Nakshatra occupied by your spouse significator 
-      planet — and specifically the pada (quarter) it falls in — gives the sound 
-      vibration most likely to match your future spouse's name initial.
-    </p>
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {[
-        { title: 'Darakaraka Method', desc: 'The planet with the lowest degree in your chart is your Darakaraka — your primary spouse significator. Its nakshatra pada gives the strongest name initial.' },
-        { title: '7th Lord Method', desc: 'The lord of your 7th house (marriage house) and its nakshatra pada provides a secondary confirmation for the spouse name initial.' },
-        { title: 'Venus Karaka Method', desc: 'Venus as the universal marriage significator adds a third data point. When all three methods agree, the prediction confidence is highest.' },
-      ].map((item) => (
-        <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-1">
-          <p className="text-white text-sm font-medium">✦ {item.title}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Nakshatra to Name Syllable — Quick Reference</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      Each nakshatra maps to specific name syllables in the traditional Vedic system. 
-      Here are some of the most common:
-    </p>
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-      {[
-        { nakshatra: 'Ashwini', syllables: 'Chu, Che, Cho, La' },
-        { nakshatra: 'Rohini', syllables: 'O, Va, Vi, Vu' },
-        { nakshatra: 'Mrigashira', syllables: 'Ve, Vo, Ka, Ki' },
-        { nakshatra: 'Punarvasu', syllables: 'Ke, Ko, Ha, Hi' },
-        { nakshatra: 'Magha', syllables: 'Ma, Mi, Mu, Me' },
-        { nakshatra: 'Hasta', syllables: 'Pu, Sha, Na, Tha' },
-        { nakshatra: 'Chitra', syllables: 'Pe, Po, Ra, Ri' },
-        { nakshatra: 'Anuradha', syllables: 'Na, Ni, Nu, Ne' },
-        { nakshatra: 'Shravan', syllables: 'Ju, Je, Jo, Gha' },
-      ].map((item) => (
-        <div key={item.nakshatra} className="bg-surface border border-border rounded-xl p-3">
-          <p className="text-white text-xs font-medium">{item.nakshatra}</p>
-          <p className="text-muted text-xs mt-0.5">{item.syllables}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction — FAQ</h2>
-    <div className="space-y-3">
-      {[
-        { q: "Can astrology really predict my spouse's name initial?", a: 'Yes — but with varying confidence. When your Darakaraka nakshatra, 7th lord nakshatra, and Venus nakshatra all point to the same syllable, the prediction is strong. AstroWord uses all three methods and shows you which letters have the highest alignment.' },
-        { q: 'What is the most accurate method for spouse name prediction?', a: 'The Darakaraka nakshatra method from Jaimini astrology is considered most accurate by classical texts. AstroWord uses the Darakaraka as the primary method, supported by 7th lord and Venus nakshatras.' },
-        { q: 'What if my spouse has a non-Indian name?', a: 'Look for phonetic similarity rather than exact letter match. The syllable "Va" might correspond to names starting with W, V, or B in different languages and scripts.' },
-        { q: 'What is Nakshatra Akshara?', a: 'Nakshatra Akshara (literally "star syllable") is the sacred sound associated with each nakshatra pada in Vedic tradition. Children named with their birth nakshatra\'s akshara are believed to resonate harmonically with their cosmic energy.' },
-        { q: 'Do I need an exact birth time for this prediction?', a: "Yes — birth time determines the Darakaraka planet's exact degree and nakshatra pada, which directly affects the name initial prediction. Approximate birth times can give incorrect results." },
-      ].map((item) => (
-        <div key={item.q} className="bg-surface2 border border-border rounded-xl p-4 space-y-2">
-          <p className="text-white text-sm font-medium">{item.q}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.a}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+                <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                    <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Find the First Letter of Your Spouse's Name</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to discover the name initial of your future spouse using ancient nakshatra akshara (syllable) mapping from your Darakaraka and 7th lord.</p>
+                </div>
             </div>
         );
     }
@@ -263,7 +168,6 @@ export default function SpouseInitialPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <TopToolsStrip currentTool="spouse-initial" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-6">
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
@@ -314,13 +218,6 @@ export default function SpouseInitialPage() {
                     </div>
                 </div>
 
-                <ShareCard
-                  question="What letter does my spouse's name start with?"
-                  answer={result.most_likely_initials?.join('  ·  ') || 'M · A · S'}
-                  subtext="Predicted from 7th lord, Darakaraka & Venus nakshatras"
-                  keywords={['Spouse Initial', 'Nakshatra', 'Jaimini Astrology', 'Marriage']}
-                />
-
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
                     <ReactMarkdown
@@ -341,39 +238,6 @@ export default function SpouseInitialPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
-
-                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
-                  <p className="text-muted text-sm leading-relaxed">
-                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Tell me more about my future spouse\'s nature');
-                        window.location.href = '/';
-                      }}
-                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
-                    >
-                      ✦ Ask the AI — Free
-                    </button>
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'What will my future spouse look like and what will they do?');
-                        window.location.href = '/';
-                      }}
-                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
-                    >
-                      What will spouse be like?
-                    </button>
-                  </div>
-                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
-                </div>
-
-                <MarriageReportPreview
-                  chartData={chartData}
-                  calculatorType="spouse-initial"
-                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">

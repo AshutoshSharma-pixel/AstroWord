@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -83,21 +84,33 @@ export default function AtmakarakaPage() {
                     karaka_type: 'atmakaraka'
                 })
             });
-            const data = await res.json();
-            if (res.ok && data.success) {
-                if (data.karaka) {
-                    setResult({
-                        ...data.karaka,
-                        reading: data.reading,
-                        keywords: data.keywords
-                    });
-                } else {
-                    setResult(data);
-                }
-                localStorage.setItem('astroword_chart', JSON.stringify(chart));
-            } else {
+
+            if (!res.ok) {
                 setError('Could not load your Atmakaraka. Please try again.');
+                setIsLoading(false);
+                return;
             }
+
+            let resultData: any = { reading: '' };
+
+            await handleStreamResponse(
+                res,
+                (meta) => {
+                    resultData = { ...resultData, ...meta };
+                    setResult({ ...resultData });
+                    setIsLoading(false); // Stop loading animation, show the result card
+                },
+                (chunk) => {
+                    resultData.reading += chunk;
+                    setResult({ ...resultData });
+                },
+                (done) => {
+                    resultData.keywords = done.keywords;
+                    setResult({ ...resultData });
+                }
+            );
+
+            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {

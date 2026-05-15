@@ -5,31 +5,27 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
-import ShareCard from '@/components/ShareCard';
-import TopToolsStrip from '@/components/TopToolsStrip';
 
-const AMATYAKARAKA_TAGLINES = [
-    "Finding your career significator...",
-    "Reading your professional destiny...",
-    "Calculating the second highest degree planet...",
-    "Decoding your ideal career path...",
-    "Your Amatyakaraka is revealed..."
+const TAGLINES = [
+    "Analyzing your 5th and 7th house...",
+    "Checking Venus and Rahu placements...",
+    "Reading love indicators in your chart...",
+    "Consulting the stars about your union...",
+    "Your marriage destiny is revealed..."
 ];
 
 const SUGGESTED_QUESTIONS = [
-    "What is my ideal career?",
-    "When will I achieve professional success?",
-    "Should I do business or job?",
-    "What are my greatest professional strengths?",
-    "Which field will bring me the most success?"
+    "When will I get married?",
+    "Will I meet my spouse through friends or family?",
+    "What obstacles will I face in marriage?",
+    "Is my current relationship leading to marriage?",
+    "What does my chart say about my love life?"
 ];
 
-export default function AmatyakarakaPage() {
+export default function MarriageTypePage() {
     const router = useRouter();
     const { user, loading: authLoading } = useAuth();
 
@@ -47,7 +43,7 @@ export default function AmatyakarakaPage() {
                 try {
                     const parsed = JSON.parse(savedChart);
                     setChartData(parsed);
-                    fetchKaraka(parsed);
+                    fetchMarriageType(parsed);
                 } catch (e) {
                     setIsLoading(false);
                 }
@@ -61,18 +57,18 @@ export default function AmatyakarakaPage() {
     useEffect(() => {
         if (isLoading && chartData && !result) {
             const interval = setInterval(() => {
-                setTaglineIndex(prev => (prev < AMATYAKARAKA_TAGLINES.length - 1 ? prev + 1 : prev));
+                setTaglineIndex(prev => (prev < TAGLINES.length - 1 ? prev + 1 : prev));
             }, 2000);
             return () => clearInterval(interval);
         }
     }, [isLoading, chartData, result]);
 
-    const fetchKaraka = async (chart: any) => {
+    const fetchMarriageType = async (chart: any) => {
         setIsLoading(true);
         setError(null);
         try {
             const idToken = user ? await user.getIdToken() : '';
-            const res = await fetch(`${API_URL}/api/karaka`, {
+            const res = await fetch(`${API_URL}/api/marriage-type`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,37 +76,15 @@ export default function AmatyakarakaPage() {
                 },
                 body: JSON.stringify({
                     user_id: user?.uid,
-                    chart_data: chart,
-                    karaka_type: 'amatyakaraka'
+                    chart_data: chart
                 })
             });
-
-            if (!res.ok) {
-                setError('Could not load your Amatyakaraka. Please try again.');
-                setIsLoading(false);
-                return;
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setResult(data);
+            } else {
+                setError('Could not load your marriage type. Please try again.');
             }
-
-            let resultData: any = { reading: '' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (done) => {
-                    resultData.keywords = done.keywords;
-                    setResult({ ...resultData });
-                }
-            );
-
-            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {
@@ -125,7 +99,7 @@ export default function AmatyakarakaPage() {
 
     const handleFormSubmit = (data: any) => {
         setChartData(data);
-        fetchKaraka(data);
+        fetchMarriageType(data);
     };
 
     if (error) {
@@ -136,7 +110,7 @@ export default function AmatyakarakaPage() {
                     <p className="text-white font-serif text-lg">The cosmos need a moment</p>
                     <p className="text-muted text-sm">{error}</p>
                     <button
-                        onClick={() => { setError(null); if (chartData) fetchKaraka(chartData); }}
+                        onClick={() => { setError(null); if (chartData) fetchMarriageType(chartData); }}
                         className="bg-gold/10 border border-gold/20 text-gold px-6 py-2 rounded-xl text-sm hover:bg-gold/20 transition-all"
                     >
                         Try Again
@@ -154,8 +128,8 @@ export default function AmatyakarakaPage() {
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
                 <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
-                    <h1 className="text-gold font-serif text-3xl">Amatyakaraka Calculator — Reveal Your Ideal Career Path</h1>
-                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to find your Amatyakaraka — the career significator in Jaimini astrology — and get an AI-powered reading about your professional destiny.</p>
+                    <h1 className="text-gold font-serif text-3xl">Love or Arranged Marriage Calculator — Vedic Astrology Prediction</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to find out whether your chart indicates a love marriage or arranged marriage, based on your 5th house, 7th house, Venus, and Rahu placements.</p>
                 </div>
             </div>
         );
@@ -180,37 +154,12 @@ export default function AmatyakarakaPage() {
                         <line x1="10" y1="350" x2="690" y2="350" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
                         <line x1="110" y1="110" x2="590" y2="590" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
                         <line x1="590" y1="110" x2="110" y2="590" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
-                        <circle cx="350" cy="10" r="10" fill="#FFD700" />
-                        <circle cx="350" cy="10" r="16" fill="#FFD700" opacity="0.2" />
-                        <circle cx="350" cy="10" r="22" fill="#FFD700" opacity="0.08" />
-                        <circle cx="690" cy="350" r="8" fill="#E8E4DC" />
-                        <circle cx="690" cy="350" r="14" fill="#E8E4DC" opacity="0.2" />
-                        <circle cx="690" cy="350" r="20" fill="#E8E4DC" opacity="0.07" />
-                        <circle cx="590" cy="110" r="7" fill="#FF4444" />
-                        <circle cx="590" cy="110" r="13" fill="#FF4444" opacity="0.2" />
-                        <circle cx="590" cy="110" r="19" fill="#FF4444" opacity="0.07" />
-                        <circle cx="590" cy="590" r="6" fill="#4CAF77" />
-                        <circle cx="590" cy="590" r="11" fill="#4CAF77" opacity="0.2" />
-                        <circle cx="590" cy="590" r="17" fill="#4CAF77" opacity="0.07" />
-                        <circle cx="110" cy="590" r="9" fill="#F0A500" />
-                        <circle cx="110" cy="590" r="15" fill="#F0A500" opacity="0.22" />
-                        <circle cx="110" cy="590" r="22" fill="#F0A500" opacity="0.08" />
-                        <circle cx="110" cy="110" r="7" fill="#FF69B4" />
-                        <circle cx="110" cy="110" r="13" fill="#FF69B4" opacity="0.2" />
-                        <circle cx="110" cy="110" r="19" fill="#FF69B4" opacity="0.07" />
-                        <circle cx="350" cy="690" r="8" fill="#7c6fcd" />
-                        <circle cx="350" cy="690" r="14" fill="#7c6fcd" opacity="0.22" />
-                        <circle cx="350" cy="690" r="20" fill="#7c6fcd" opacity="0.08" />
-                        <circle cx="10" cy="350" r="6" fill="#4A90E2" />
-                        <circle cx="10" cy="350" r="12" fill="#4A90E2" opacity="0.2" />
-                        <circle cx="490" cy="70" r="5" fill="#00BCD4" />
-                        <circle cx="490" cy="70" r="10" fill="#00BCD4" opacity="0.2" />
                     </svg>
                 </motion.div>
 
                 <div className="z-10 text-center space-y-4">
                     <p className="font-serif text-lg sm:text-2xl text-gold animate-pulse px-6">
-                        {AMATYAKARAKA_TAGLINES[taglineIndex]}
+                        {TAGLINES[taglineIndex]}
                     </p>
                 </div>
             </div>
@@ -219,40 +168,32 @@ export default function AmatyakarakaPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <TopToolsStrip currentTool="amatyakaraka" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
-                <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                    <p className="text-muted text-xs uppercase tracking-widest font-mono">
-                        Your Amatyakaraka is
-                    </p>
-                    <h1 className="text-gold font-serif text-4xl sm:text-5xl tracking-wide py-2">
-                        {result.planet}
-                    </h1>
-                    <p className="text-white text-sm tracking-wide">
-                        {result.nakshatra} Nakshatra · Pada {result.pada}
-                    </p>
-                    <p className="text-muted text-xs font-mono">
-                        {result.degree}° {result.sign}
-                        {result.retrograde && " · Retrograde"}
-                        {result.combust && " · Combust"}
-                    </p>
+                <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4">
+                    <p className="text-muted text-xs uppercase tracking-widest font-mono">Your Marriage Type</p>
+                    <h1 className="text-gold font-serif text-4xl sm:text-5xl">{result.result}</h1>
+
+                    <div className="space-y-2 mt-4 max-w-sm mx-auto">
+                        <div className="flex justify-between text-xs text-muted font-mono px-2">
+                            <span>❤️ Love {result.percentage?.love || 50}%</span>
+                            <span>🏛️ Arranged {result.percentage?.arranged || 50}%</span>
+                        </div>
+                        <div className="h-4 bg-surface rounded-full overflow-hidden border border-border">
+                            <div
+                                className="h-full bg-gradient-to-r from-pink-500 to-gold rounded-full transition-all duration-1000"
+                                style={{ width: `${result.percentage?.love || 50}%` }}
+                            />
+                        </div>
+                    </div>
 
                     <div className="flex flex-wrap gap-2 justify-center pt-4">
-                        {result.keywords?.slice(0, 6).map((kw: string, i: number) => (
-                            <span key={i} className="text-xs bg-gold/10 text-gold border border-gold/20 px-4 py-1.5 rounded-full font-mono">
-                                {kw}
+                        {result.key_indicators?.map((indicator: string, i: number) => (
+                            <span key={i} className="text-[11px] sm:text-xs bg-gold/10 text-gold border border-gold/20 px-3 py-1.5 rounded-full font-mono">
+                                {indicator}
                             </span>
                         ))}
                     </div>
                 </div>
-
-                <ShareCard
-                  question="What career was I born for?"
-                  answer={`${result.planet} — My Career Planet`}
-                  subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
-                  keywords={result.keywords?.slice(0, 4)}
-                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
@@ -275,39 +216,6 @@ export default function AmatyakarakaPage() {
                     </ReactMarkdown>
                 </div>
 
-                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
-                  <p className="text-muted text-sm leading-relaxed">
-                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Tell me more about my Amatyakaraka and ideal career');
-                        window.location.href = '/';
-                      }}
-                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
-                    >
-                      ✦ Ask the AI — Free
-                    </button>
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Does my chart show government job or private sector?');
-                        window.location.href = '/';
-                      }}
-                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
-                    >
-                      Will I get a govt job?
-                    </button>
-                  </div>
-                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
-                </div>
-
-                <MarriageReportPreview
-                  chartData={chartData}
-                  calculatorType="amatyakaraka"
-                />
-
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">
                         Ask a follow-up question
@@ -320,7 +228,7 @@ export default function AmatyakarakaPage() {
                                 className="w-full text-left bg-surface border border-border hover:border-gold/40 hover:bg-surface2 rounded-xl px-5 py-4 text-sm text-text/80 hover:text-white transition-all group flex justify-between items-center"
                             >
                                 <span>{q}</span>
-                                <span className="text-gold/50 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                                <span className="text-gold/50 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">→</span>
                             </button>
                         ))}
                     </div>
@@ -333,6 +241,55 @@ export default function AmatyakarakaPage() {
                     >
                         ← Back to Chat
                     </button>
+                </div>
+            </div>
+
+            {/* SEO Content Block */}
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Love Marriage or Arranged Marriage — What Does Vedic Astrology Say?</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Vedic astrology can indicate whether a person is more likely to have a love marriage
+                        or arranged marriage based on planetary placements in the birth chart. The 5th house
+                        governs romance and love, while the 7th house governs marriage and partnerships.
+                        The connection between these two houses and their lords is the primary indicator.
+                    </p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Love Marriage Indicators in Astrology</h2>
+                    <div className="space-y-2">
+                        {[
+                            'Rahu in 7th house or aspecting 7th lord',
+                            'Venus conjunct or aspecting 5th lord',
+                            '5th lord and 7th lord connection by aspect or conjunction',
+                            'Moon in 5th or 7th house',
+                            'Venus in 1st, 5th, 7th or 11th house',
+                            'Mars and Venus conjunction or mutual aspect',
+                            'Rahu conjunct Venus anywhere in the chart',
+                        ].map((indicator) => (
+                            <div key={indicator} className="flex items-start gap-2">
+                                <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+                                <p className="text-muted text-sm">{indicator}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Arranged Marriage Indicators in Astrology</h2>
+                    <div className="space-y-2">
+                        {[
+                            'Jupiter in 7th house (especially for females)',
+                            'Saturn aspecting or placed in 7th house',
+                            '7th lord in 12th house',
+                            'Strong benefic influence on 7th house with no Rahu connection',
+                            'Moon and Venus in traditional signs (Taurus, Cancer, Virgo)',
+                        ].map((indicator) => (
+                            <div key={indicator} className="flex items-start gap-2">
+                                <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+                                <p className="text-muted text-sm">{indicator}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

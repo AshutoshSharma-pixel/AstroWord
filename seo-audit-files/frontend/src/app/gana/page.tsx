@@ -5,31 +5,27 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
-import ShareCard from '@/components/ShareCard';
-import TopToolsStrip from '@/components/TopToolsStrip';
 
-const AMATYAKARAKA_TAGLINES = [
-    "Finding your career significator...",
-    "Reading your professional destiny...",
-    "Calculating the second highest degree planet...",
-    "Decoding your ideal career path...",
-    "Your Amatyakaraka is revealed..."
+const GANA_TAGLINES = [
+    "Reading your Moon's nakshatra...",
+    "Calculating your cosmic nature...",
+    "Consulting the ancient Gana system...",
+    "Revealing your primal soul type...",
+    "Your Gana is determined..."
 ];
 
 const SUGGESTED_QUESTIONS = [
-    "What is my ideal career?",
-    "When will I achieve professional success?",
-    "Should I do business or job?",
-    "What are my greatest professional strengths?",
-    "Which field will bring me the most success?"
+    "Am I compatible with my partner's Gana?",
+    "How does my Gana affect my marriage?",
+    "What are my Gana's biggest strengths?",
+    "Which careers suit my Gana type?",
+    "How can I balance my Gana energy?"
 ];
 
-export default function AmatyakarakaPage() {
+export default function GanaPage() {
     const router = useRouter();
     const { user, loading: authLoading } = useAuth();
 
@@ -47,7 +43,7 @@ export default function AmatyakarakaPage() {
                 try {
                     const parsed = JSON.parse(savedChart);
                     setChartData(parsed);
-                    fetchKaraka(parsed);
+                    fetchGana(parsed);
                 } catch (e) {
                     setIsLoading(false);
                 }
@@ -61,18 +57,18 @@ export default function AmatyakarakaPage() {
     useEffect(() => {
         if (isLoading && chartData && !result) {
             const interval = setInterval(() => {
-                setTaglineIndex(prev => (prev < AMATYAKARAKA_TAGLINES.length - 1 ? prev + 1 : prev));
+                setTaglineIndex(prev => (prev < GANA_TAGLINES.length - 1 ? prev + 1 : prev));
             }, 2000);
             return () => clearInterval(interval);
         }
     }, [isLoading, chartData, result]);
 
-    const fetchKaraka = async (chart: any) => {
+    const fetchGana = async (chart: any) => {
         setIsLoading(true);
         setError(null);
         try {
             const idToken = user ? await user.getIdToken() : '';
-            const res = await fetch(`${API_URL}/api/karaka`, {
+            const res = await fetch(`${API_URL}/api/gana`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,37 +76,15 @@ export default function AmatyakarakaPage() {
                 },
                 body: JSON.stringify({
                     user_id: user?.uid,
-                    chart_data: chart,
-                    karaka_type: 'amatyakaraka'
+                    chart_data: chart
                 })
             });
-
-            if (!res.ok) {
-                setError('Could not load your Amatyakaraka. Please try again.');
-                setIsLoading(false);
-                return;
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setResult(data);
+            } else {
+                setError('Could not load your Gana. Please try again.');
             }
-
-            let resultData: any = { reading: '' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (done) => {
-                    resultData.keywords = done.keywords;
-                    setResult({ ...resultData });
-                }
-            );
-
-            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {
@@ -125,7 +99,7 @@ export default function AmatyakarakaPage() {
 
     const handleFormSubmit = (data: any) => {
         setChartData(data);
-        fetchKaraka(data);
+        fetchGana(data);
     };
 
     if (error) {
@@ -136,7 +110,7 @@ export default function AmatyakarakaPage() {
                     <p className="text-white font-serif text-lg">The cosmos need a moment</p>
                     <p className="text-muted text-sm">{error}</p>
                     <button
-                        onClick={() => { setError(null); if (chartData) fetchKaraka(chartData); }}
+                        onClick={() => { setError(null); if (chartData) fetchGana(chartData); }}
                         className="bg-gold/10 border border-gold/20 text-gold px-6 py-2 rounded-xl text-sm hover:bg-gold/20 transition-all"
                     >
                         Try Again
@@ -154,8 +128,8 @@ export default function AmatyakarakaPage() {
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
                 <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
-                    <h1 className="text-gold font-serif text-3xl">Amatyakaraka Calculator — Reveal Your Ideal Career Path</h1>
-                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to find your Amatyakaraka — the career significator in Jaimini astrology — and get an AI-powered reading about your professional destiny.</p>
+                    <h1 className="text-gold font-serif text-3xl">Gana Calculator — Find Your Vedic Soul Type</h1>
+                    <p className="text-muted text-sm leading-relaxed">Enter your birth details above to discover your Gana (Deva, Manushya, or Rakshasa) based on your Moon nakshatra and understand how it shapes your nature and marriage compatibility.</p>
                 </div>
             </div>
         );
@@ -210,7 +184,7 @@ export default function AmatyakarakaPage() {
 
                 <div className="z-10 text-center space-y-4">
                     <p className="font-serif text-lg sm:text-2xl text-gold animate-pulse px-6">
-                        {AMATYAKARAKA_TAGLINES[taglineIndex]}
+                        {GANA_TAGLINES[taglineIndex]}
                     </p>
                 </div>
             </div>
@@ -219,40 +193,21 @@ export default function AmatyakarakaPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <TopToolsStrip currentTool="amatyakaraka" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
-                <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                    <p className="text-muted text-xs uppercase tracking-widest font-mono">
-                        Your Amatyakaraka is
-                    </p>
-                    <h1 className="text-gold font-serif text-4xl sm:text-5xl tracking-wide py-2">
-                        {result.planet}
-                    </h1>
-                    <p className="text-white text-sm tracking-wide">
-                        {result.nakshatra} Nakshatra · Pada {result.pada}
-                    </p>
-                    <p className="text-muted text-xs font-mono">
-                        {result.degree}° {result.sign}
-                        {result.retrograde && " · Retrograde"}
-                        {result.combust && " · Combust"}
-                    </p>
+                <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4">
+                    <p className="text-muted text-xs uppercase tracking-widest font-mono">Your Gana is</p>
+                    <h1 className="text-gold font-serif text-4xl sm:text-5xl">{result.gana} Gana</h1>
+                    <p className="text-white text-sm">Moon in {result.moon_nakshatra} Nakshatra · Pada {result.moon_pada}</p>
+                    <div className="text-4xl">{result.gana === 'Deva' ? '✨' : result.gana === 'Manushya' ? '🌿' : '🔱'}</div>
 
                     <div className="flex flex-wrap gap-2 justify-center pt-4">
-                        {result.keywords?.slice(0, 6).map((kw: string, i: number) => (
+                        {result.keywords?.map((kw: string, i: number) => (
                             <span key={i} className="text-xs bg-gold/10 text-gold border border-gold/20 px-4 py-1.5 rounded-full font-mono">
                                 {kw}
                             </span>
                         ))}
                     </div>
                 </div>
-
-                <ShareCard
-                  question="What career was I born for?"
-                  answer={`${result.planet} — My Career Planet`}
-                  subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
-                  keywords={result.keywords?.slice(0, 4)}
-                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
@@ -274,39 +229,6 @@ export default function AmatyakarakaPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
-
-                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
-                  <p className="text-muted text-sm leading-relaxed">
-                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Tell me more about my Amatyakaraka and ideal career');
-                        window.location.href = '/';
-                      }}
-                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
-                    >
-                      ✦ Ask the AI — Free
-                    </button>
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Does my chart show government job or private sector?');
-                        window.location.href = '/';
-                      }}
-                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
-                    >
-                      Will I get a govt job?
-                    </button>
-                  </div>
-                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
-                </div>
-
-                <MarriageReportPreview
-                  chartData={chartData}
-                  calculatorType="amatyakaraka"
-                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">
@@ -333,6 +255,55 @@ export default function AmatyakarakaPage() {
                     >
                         ← Back to Chat
                     </button>
+                </div>
+            </div>
+
+            {/* SEO Content Block */}
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">What is Gana in Vedic Astrology?</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Gana is one of the most important factors in Vedic astrology match making (Kundli Milan).
+                        Every person belongs to one of three Ganas based on their Moon nakshatra — Deva (divine),
+                        Manushya (human) or Rakshasa (fierce). Gana reveals your fundamental nature and temperament.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        In marriage compatibility, Gana matching carries 6 points out of 36 total in Ashtakoot
+                        matching. Same Gana couples are considered most compatible. Deva-Rakshasa combination
+                        is traditionally considered challenging.
+                    </p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Gana Compatibility Chart</h2>
+                    <div className="overflow-x-auto rounded-xl border border-border">
+                        <table className="w-full text-xs text-muted">
+                            <thead>
+                                <tr className="border-b border-border bg-surface">
+                                    <th className="text-left py-3 px-4 text-gold font-mono">Your Gana</th>
+                                    <th className="text-left py-3 px-4 text-gold font-mono">Partner's Gana</th>
+                                    <th className="text-left py-3 px-4 text-gold font-mono">Score</th>
+                                    <th className="text-left py-3 px-4 text-gold font-mono">Compatibility</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                    ['Deva', 'Deva', '6/6', 'Excellent'],
+                                    ['Deva', 'Manushya', '5/6', 'Good'],
+                                    ['Deva', 'Rakshasa', '0/6', 'Challenging'],
+                                    ['Manushya', 'Manushya', '6/6', 'Excellent'],
+                                    ['Manushya', 'Rakshasa', '0/6', 'Moderate'],
+                                    ['Rakshasa', 'Rakshasa', '6/6', 'Excellent'],
+                                ].map(([g1, g2, score, compat]) => (
+                                    <tr key={`${g1}-${g2}`} className="border-b border-border/30 hover:bg-surface/50 transition-colors">
+                                        <td className="py-3 px-4">{g1}</td>
+                                        <td className="py-3 px-4">{g2}</td>
+                                        <td className="py-3 px-4 text-gold font-mono">{score}</td>
+                                        <td className="py-3 px-4">{compat}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

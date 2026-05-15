@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -82,16 +83,40 @@ export default function MarriageTypePage() {
                     chart_data: chart
                 })
             });
-            const data = await res.json();
-            if (res.ok && data.success) {
-                setResult(data);
-                localStorage.setItem('astroword_chart', JSON.stringify(chart));
-            } else {
+
+            if (!res.ok) {
                 setError('Could not load your marriage type. Please try again.');
+                setIsLoading(false);
+                return;
             }
+
+            let resultData: any = { reading: '' };
+
+            await handleStreamResponse(
+                res,
+                (meta) => {
+                    resultData = { 
+                        ...resultData, 
+                        ...meta,
+                        result: "Analyzing...",
+                        percentage: { love: 50, arranged: 50 },
+                        key_indicators: ["Analyzing..."]
+                    };
+                    setResult({ ...resultData });
+                    setIsLoading(false); // Stop loading animation, show the result card
+                },
+                (chunk) => {
+                    resultData.reading += chunk;
+                    setResult({ ...resultData });
+                },
+                (doneData) => {
+                    resultData = { ...resultData, ...doneData };
+                    setResult({ ...resultData });
+                    localStorage.setItem('astroword_chart', JSON.stringify(chart));
+                }
+            );
         } catch (err) {
             setError('Something went wrong. Please try again.');
-        } finally {
             setIsLoading(false);
         }
     };

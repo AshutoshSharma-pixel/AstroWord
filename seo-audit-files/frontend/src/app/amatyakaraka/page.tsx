@@ -5,13 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
-import ShareCard from '@/components/ShareCard';
-import TopToolsStrip from '@/components/TopToolsStrip';
 
 const AMATYAKARAKA_TAGLINES = [
     "Finding your career significator...",
@@ -84,33 +80,20 @@ export default function AmatyakarakaPage() {
                     karaka_type: 'amatyakaraka'
                 })
             });
-
-            if (!res.ok) {
-                setError('Could not load your Amatyakaraka. Please try again.');
-                setIsLoading(false);
-                return;
-            }
-
-            let resultData: any = { reading: '' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (done) => {
-                    resultData.keywords = done.keywords;
-                    setResult({ ...resultData });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (data.karaka) {
+                    setResult({
+                        ...data.karaka,
+                        reading: data.reading,
+                        keywords: data.keywords
+                    });
+                } else {
+                    setResult(data);
                 }
-            );
-
-            localStorage.setItem('astroword_chart', JSON.stringify(chart));
+            } else {
+                setError('Could not load your Amatyakaraka. Please try again.');
+            }
         } catch (err) {
             setError('Something went wrong. Please try again.');
         } finally {
@@ -219,7 +202,6 @@ export default function AmatyakarakaPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <TopToolsStrip currentTool="amatyakaraka" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
@@ -239,20 +221,13 @@ export default function AmatyakarakaPage() {
                     </p>
 
                     <div className="flex flex-wrap gap-2 justify-center pt-4">
-                        {result.keywords?.slice(0, 6).map((kw: string, i: number) => (
+                        {result.keywords?.map((kw: string, i: number) => (
                             <span key={i} className="text-xs bg-gold/10 text-gold border border-gold/20 px-4 py-1.5 rounded-full font-mono">
                                 {kw}
                             </span>
                         ))}
                     </div>
                 </div>
-
-                <ShareCard
-                  question="What career was I born for?"
-                  answer={`${result.planet} — My Career Planet`}
-                  subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
-                  keywords={result.keywords?.slice(0, 4)}
-                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
@@ -274,39 +249,6 @@ export default function AmatyakarakaPage() {
                         {cleanReading(result.reading)}
                     </ReactMarkdown>
                 </div>
-
-                <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
-                  <p className="text-muted text-sm leading-relaxed">
-                    AstroWord&apos;s AI can answer anything about your chart — marriage timing, career, relationships, 2026 predictions — in plain language.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Tell me more about my Amatyakaraka and ideal career');
-                        window.location.href = '/';
-                      }}
-                      className="bg-gradient-to-r from-gold to-amber text-bg font-medium px-6 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm"
-                    >
-                      ✦ Ask the AI — Free
-                    </button>
-                    <button
-                      onClick={() => {
-                        sessionStorage.setItem('pending_question', 'Does my chart show government job or private sector?');
-                        window.location.href = '/';
-                      }}
-                      className="border border-gold/30 text-gold px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-all text-sm"
-                    >
-                      Will I get a govt job?
-                    </button>
-                  </div>
-                  <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
-                </div>
-
-                <MarriageReportPreview
-                  chartData={chartData}
-                  calculatorType="amatyakaraka"
-                />
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">

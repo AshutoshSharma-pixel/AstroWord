@@ -1,8 +1,9 @@
 import os
 import json
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_new, call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -182,54 +183,62 @@ Full Chart Ascendant: {data.chart_data.get('ascendant', {}).get('sign', 'Unknown
 Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown') if data.chart_data.get('current_mahadasha') else 'Unknown'}
 """
         
-        prompt = KARAKA_PROMPTS[data.karaka_type] + f"\n\nCHART DATA:\n{chart_context}"
-        
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
-        )
-        response_text = response.text.strip()
-        
-        # Extract Keywords
-        reading = response_text
-        keywords = [planet_name, planet_info["sign"], planet_info["nakshatra"]]
-        
-        if "KEYWORDS:" in response_text:
-            parts = response_text.rsplit("KEYWORDS:", 1)
-            reading = parts[0].strip()
-            kw_raw = parts[1].strip()
-            keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
-            
-        ai_result = {
-            "reading": reading,
-            "keywords": keywords
-        }
-        
-        return {
-            "success": True,
-            "karaka_type": data.karaka_type,
-            "karaka": karaka_result,
-            "reading": ai_result.get("reading", ""),
-            "keywords": ai_result.get("keywords", []),
-            "all_karakas": {
-                "atmakaraka": {
-                    "planet": sorted_planets[0][0],
-                    "degree": round(sorted_planets[0][1]["d1"]["degree"] % 30, 2)
-                },
-                "amatyakaraka": {
-                    "planet": sorted_planets[1][0],
-                    "degree": round(sorted_planets[1][1]["d1"]["degree"] % 30, 2)
-                },
-                "darakaraka": {
-                    "planet": sorted_planets[-1][0],
-                    "degree": round(sorted_planets[-1][1]["d1"]["degree"] % 30, 2)
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
+                "karaka_type": data.karaka_type,
+                "karaka": karaka_result,
+                "all_karakas": {
+                    "atmakaraka": {
+                        "planet": sorted_planets[0][0],
+                        "degree": round(sorted_planets[0][1]["d1"]["degree"] % 30, 2)
+                    },
+                    "amatyakaraka": {
+                        "planet": sorted_planets[1][0],
+                        "degree": round(sorted_planets[1][1]["d1"]["degree"] % 30, 2)
+                    },
+                    "darakaraka": {
+                        "planet": sorted_planets[-1][0],
+                        "degree": round(sorted_planets[-1][1]["d1"]["degree"] % 30, 2)
+                    }
                 }
             }
-        }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            # Default keywords
+            keywords = [planet_name, planet_info["sign"], planet_info["nakshatra"]]
+            
+            # Stream from Gemini
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=8192,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+            
+            # Extract keywords if present in the full accumulated text
+            if "KEYWORDS:" in full_text:
+                parts = full_text.rsplit("KEYWORDS:", 1)
+                kw_raw = parts[1].strip()
+                keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
+                
+            # Yield done with keywords
+            yield f"data: {json.dumps({'type': 'done', 'keywords': keywords})}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+        )
         
     except HTTPException:
         raise

@@ -1,8 +1,9 @@
 import os
 import json
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_new, call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -56,45 +57,54 @@ At the very end of your response, on a new line, provide the keywords like this:
 KEYWORDS: word 1, word 2, word 3
 """
         
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
-        )
-        response_text = response.text.strip()
-        
-        # Clean markdown code blocks
-        reading = response_text
-        keywords = [gana, moon_nakshatra, "Vedic Astrology"]
-        
-        if "KEYWORDS:" in response_text:
-            parts = response_text.rsplit("KEYWORDS:", 1)
-            reading = parts[0].strip()
-            kw_raw = parts[1].strip()
-            keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
-            
-        result = {
-            "reading": reading,
-            "keywords": keywords,
-            "compatibility": {
-                "best": "Consult a Jyotishi for detailed compatibility",
-                "challenging": "Depends on full chart analysis"
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
+                "gana": gana,
+                "moon_nakshatra": moon_nakshatra,
+                "moon_pada": moon_pada,
+                "moon_sign": moon_sign,
+                "compatibility": {
+                    "best": "Consult a Jyotishi for detailed compatibility",
+                    "challenging": "Depends on full chart analysis"
+                }
             }
-        }
-        
-        return {
-            "success": True,
-            "gana": gana,
-            "moon_nakshatra": moon_nakshatra,
-            "moon_pada": moon_pada,
-            "moon_sign": moon_sign,
-            "reading": result.get("reading", ""),
-            "keywords": result.get("keywords", []),
-            "compatibility": result.get("compatibility", {})
-        }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            # Default keywords
+            keywords = [gana, moon_nakshatra, "Vedic Astrology"]
+            
+            # Stream from Gemini
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=8192,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+            
+            # Extract keywords if present in the full accumulated text
+            if "KEYWORDS:" in full_text:
+                parts = full_text.rsplit("KEYWORDS:", 1)
+                kw_raw = parts[1].strip()
+                keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
+                
+            # Yield done with keywords
+            yield f"data: {json.dumps({'type': 'done', 'keywords': keywords})}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+        )
 
     except HTTPException:
         raise

@@ -1,7 +1,9 @@
 import os
+import json
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_new, call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -150,41 +152,57 @@ At the very end, on a new line:
 KEYWORDS: word1, word2, word3
 """
         
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
+        def generate():
+            # Yield meta first
+            meta_data = {
+                "type": "meta",
+                "success": True,
+                "is_manglik": is_manglik,
+                "is_effective_manglik": is_effective_manglik,
+                "partial_manglik": partial_manglik,
+                "severity": severity,
+                "mars_house": mars_house,
+                "mars_sign": mars_sign,
+                "mars_nakshatra": mars_nakshatra,
+                "mars_pada": mars_pada,
+                "mars_degree": mars_degree,
+                "mars_retrograde": mars_retrograde,
+                "cancellations": cancellations
+            }
+            yield f"data: {json.dumps(meta_data)}\n\n"
+            
+            # Default keywords
+            keywords = ["Manglik", mars_sign, mars_nakshatra, "Mars"]
+            
+            # Stream from Gemini
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=8192,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+            
+            # Extract keywords if present in the full accumulated text
+            if "KEYWORDS:" in full_text:
+                parts = full_text.rsplit("KEYWORDS:", 1)
+                kw_raw = parts[1].strip()
+                keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
+                
+            # Yield done with keywords
+            yield f"data: {json.dumps({'type': 'done', 'keywords': keywords[:6]})}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
         )
-        response_text = response.text.strip()
-        
-        reading = response_text
-        keywords = ["Manglik", mars_sign, mars_nakshatra, "Mars"]
-        
-        if "KEYWORDS:" in response_text:
-            parts = response_text.rsplit("KEYWORDS:", 1)
-            reading = parts[0].strip()
-            kw_raw = parts[1].strip()
-            keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
-        
-        return {
-            "success": True,
-            "is_manglik": is_manglik,
-            "is_effective_manglik": is_effective_manglik,
-            "partial_manglik": partial_manglik,
-            "severity": severity,
-            "mars_house": mars_house,
-            "mars_sign": mars_sign,
-            "mars_nakshatra": mars_nakshatra,
-            "mars_pada": mars_pada,
-            "mars_degree": mars_degree,
-            "mars_retrograde": mars_retrograde,
-            "cancellations": cancellations,
-            "reading": reading,
-            "keywords": keywords[:6]
-        }
 
     except HTTPException:
         raise
