@@ -329,6 +329,16 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
                             </>
                         )}
                     </button>
+                    <div className="text-center mt-4">
+                        <a
+                            href="/marriage-report"
+                            className="inline-flex items-center gap-1.5 text-gold/70 hover:text-gold text-sm transition-colors"
+                        >
+                            <span>✦</span>
+                            <span>Get your complete Marriage Report</span>
+                            <span className="text-xs bg-gold/10 border border-gold/20 text-gold px-2 py-0.5 rounded-full font-mono ml-1">₹199</span>
+                        </a>
+                    </div>
                 </form>
 
             </div>
