@@ -60,7 +60,8 @@ KEYWORDS: word 1, word 2, word 3
             prompt,
             config=types.GenerateContentConfig(
                 temperature=0.4,
-                max_output_tokens=8192
+                max_output_tokens=8192,
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
         response_text = response.text.strip()

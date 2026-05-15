@@ -154,7 +154,8 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
             config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192,
-                response_mime_type="application/json"
+                response_mime_type="application/json",
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
         response_text = response.text.strip()
@@ -306,7 +307,8 @@ Return ONLY VALID JSON. IMPORTANT: You must escape all newlines as \\n and quote
             config=types.GenerateContentConfig(
                 temperature=0.4,
                 max_output_tokens=8192,
-                response_mime_type="application/json"
+                response_mime_type="application/json",
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
         response_text = response.text.strip()
@@ -432,7 +434,8 @@ Do NOT repeat generic astrology. Be chart-specific.
             merged_prompt,
             config=types.GenerateContentConfig(
                 temperature=0.2,
-                max_output_tokens=1000
+                max_output_tokens=1000,
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
 
