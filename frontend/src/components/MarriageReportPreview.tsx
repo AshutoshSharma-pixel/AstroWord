@@ -173,7 +173,7 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
                             <div className="flex justify-center mb-6">
                                 <div className="relative w-48 rounded-xl overflow-hidden shadow-xl shadow-gold/10 border border-gold/20">
                                     <Image
-                                        src="/Marriage_Report_Image_.png"
+                                        src="/Marriage Report Image .png"
                                         alt="Your Vedic Marriage Report"
                                         width={300}
                                         height={350}

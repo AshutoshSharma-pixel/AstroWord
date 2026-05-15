@@ -66,7 +66,7 @@ export default function MarriageReportPage() {
           <div className="w-full md:w-2/5 flex-shrink-0">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-gold/10 border border-gold/20">
               <Image
-                src="/Marriage_Report_Image_.png"
+                src="/Marriage Report Image .png"
                 alt="AstroWord Vedic Marriage Report"
                 width={600}
                 height={700}

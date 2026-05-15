@@ -289,7 +289,16 @@ export default function MarriageYearPage() {
                                     }`}>
                                     {window.strength}
                                 </div>
-                                <p className="text-muted text-xs mt-1">{window.reason}</p>
+                                <div className="text-muted text-xs mt-1">
+                                    <ReactMarkdown
+                                        components={{
+                                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
+                                            p: ({ children }) => <span className="inline">{children}</span>
+                                        }}
+                                    >
+                                        {window.reason}
+                                    </ReactMarkdown>
+                                </div>
                             </div>
                         </div>
                     ))}
