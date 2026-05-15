@@ -246,44 +246,64 @@ Be specific, personal, and detailed. Minimum 1200 words total.
             "2026-2027 FORECAST",
             "REMEDIES & GUIDANCE"
         ]
-        
-        sections_html = ""
-        
-        # Split by section titles
-        pattern = "|".join([f"(?:^|\\n){re.escape(title)}(?:\\n|$)" for title in section_titles])
-        splits = re.split(pattern, response_text)
-        
-        # Find titles in order of appearance
-        found_titles = []
-        for line in response_text.split('\n'):
-            line_clean = line.strip()
-            if line_clean in section_titles:
-                found_titles.append(line_clean)
-                
-        # splits[0] is text before first title (usually empty or intro)
-        content_idx = 1
-        for title in found_titles:
-            if content_idx < len(splits):
-                content = splits[content_idx].strip()
-                content_idx += 1
-                
-                # Convert markdown-like content to simple HTML
-                content_html = content.replace("\n\n", "</p><p>").replace("\n", "<br>")
-                content_html = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", content_html)
-                
-                sections_html += f"""
-                <div class="section">
-                  <div class="section-title">{title}</div>
-                  <div class="section-content"><p>{content_html}</p></div>
-                </div>
-                """
 
-        # Fallback if parsing failed completely
+        # Clean response
+        cleaned = []
+        for line in response_text.split('\n'):
+            stripped = line.strip()
+            # Remove markdown heading prefixes
+            for prefix in ['### ', '## ', '# ']:
+                if stripped.startswith(prefix):
+                    stripped = stripped[len(prefix):]
+                    break
+            # Remove horizontal rules
+            if re.match(r'^-{2,}$', stripped):
+                continue
+            cleaned.append(stripped)
+        clean_response = '\n'.join(cleaned)
+
+        # Split into sections
+        sections_html = ""
+        current_title = None
+        current_content = []
+
+        for line in clean_response.split('\n'):
+            if line.strip() in section_titles:
+                # Save previous section
+                if current_title and current_content:
+                    content = '\n'.join(current_content).strip()
+                    content_html = content.replace('\n\n', '</p><p>').replace('\n', '<br>')
+                    content_html = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', content_html)
+                    content_html = re.sub(r'\*(.*?)\*', r'<i>\1</i>', content_html)
+                    sections_html += f"""
+                    <div class="section">
+                      <div class="section-title">{current_title}</div>
+                      <div class="section-content"><p>{content_html}</p></div>
+                    </div>
+                    """
+                current_title = line.strip()
+                current_content = []
+            else:
+                current_content.append(line)
+
+        # Save last section
+        if current_title and current_content:
+            content = '\n'.join(current_content).strip()
+            content_html = content.replace('\n\n', '</p><p>').replace('\n', '<br>')
+            content_html = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', content_html)
+            content_html = re.sub(r'\*(.*?)\*', r'<i>\1</i>', content_html)
+            sections_html += f"""
+            <div class="section">
+              <div class="section-title">{current_title}</div>
+              <div class="section-content"><p>{content_html}</p></div>
+            </div>
+            """
+
+        # Fallback
         if not sections_html:
-            formatted_text = response_text.replace("\n\n", "</p><p>").replace("\n", "<br>")
+            formatted_text = clean_response.replace('\n\n', '</p><p>').replace('\n', '<br>')
             sections_html = f"""
             <div class="section">
-              <div class="section-title">Your Report</div>
               <div class="section-content"><p>{formatted_text}</p></div>
             </div>
             """
