@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
 import ShareCard from '@/components/ShareCard';
-import FloatingTools from '@/components/FloatingTools';
+import TopToolsStrip from '@/components/TopToolsStrip';
 
 const TAGLINES = [
     "Analyzing your 7th house and its lord...",
@@ -246,7 +246,7 @@ export default function MarriageYearPage() {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
-            <FloatingTools currentTool="marriage-year" />
+            <TopToolsStrip currentTool="marriage-year" />
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 text-center space-y-3">
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
