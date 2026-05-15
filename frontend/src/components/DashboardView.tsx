@@ -64,6 +64,20 @@ export default function DashboardView() {
                     </div>
                 </button>
 
+                {/* Manglik Card */}
+                <button
+                    onClick={() => navigateTo('manglik')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🔴</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Manglik Dosha Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Do you have Manglik Dosha? Check if Mars is in positions that create challenges in your marriage chart.
+                    </p>
+                </button>
+
                 {/* Darakaraka Card */}
                 <button
                     onClick={() => navigateTo('darakaraka')}

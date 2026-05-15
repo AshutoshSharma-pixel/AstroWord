@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const ALL_TOOLS = [
   { slug: '/',               emoji: '✦', label: 'Ask AI',          isAI: true },
+  { slug: 'manglik',         emoji: '🔴', label: 'Manglik' },
   { slug: 'darakaraka',      emoji: '💑', label: 'Darakaraka' },
   { slug: 'atmakaraka',      emoji: '☀️', label: 'Atmakaraka' },
   { slug: 'amatyakaraka',    emoji: '💼', label: 'Amatyakaraka' },
