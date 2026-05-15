@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import TopToolsStrip from '@/components/TopToolsStrip';
 
 export const metadata: Metadata = {
     title: 'Vedic Astrology Blog — Learn Jyotish, Dasha, Nakshatra & More',
@@ -137,6 +138,7 @@ const articles = [
 export default function BlogPage() {
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-16">
+            <TopToolsStrip currentTool="blog" />
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
                 {/* Header */}

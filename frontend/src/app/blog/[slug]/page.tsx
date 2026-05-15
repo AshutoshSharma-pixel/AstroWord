@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import TopToolsStrip from '@/components/TopToolsStrip';
 
 const articles: Record<string, {
     title: string;
@@ -881,6 +882,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
+            <TopToolsStrip currentTool="blog" />
             <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
                 {/* Breadcrumb */}
@@ -943,47 +945,6 @@ export default async function ArticlePage({ params }: { params: Params }) {
                         </Link>
                     </div>
                 )}
-
-                {/* Tools Strip */}
-                <div className="mt-12 mb-2">
-                    <p className="text-xs text-muted uppercase tracking-widest font-mono mb-4 text-center">
-                        ✦ Try our free tools
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                        {[
-                            { slug: '/',                emoji: '✦', label: 'Ask AI',           desc: 'Free Vedic AI chat',      isAI: true },
-                            { slug: '/darakaraka',      emoji: '💑', label: 'Darakaraka',      desc: 'Future spouse calculator' },
-                            { slug: '/atmakaraka',      emoji: '☀️', label: 'Atmakaraka',      desc: 'Soul planet calculator' },
-                            { slug: '/amatyakaraka',    emoji: '💼', label: 'Amatyakaraka',    desc: 'Career planet calculator' },
-                            { slug: '/gana',            emoji: '🔱', label: 'Gana',            desc: 'Temperament check' },
-                            { slug: '/marriage-year',   emoji: '💍', label: 'Marriage Year',   desc: 'Dasha prediction' },
-                            { slug: '/marriage-type',   emoji: '💝', label: 'Love or Arranged', desc: 'Placement check' },
-                            { slug: '/spouse-initial',  emoji: '🔤', label: 'Spouse Initial',  desc: 'Nakshatra prediction' },
-                        ].map((t) => (
-                            <Link
-                                key={t.slug}
-                                href={t.slug}
-                                className={`group p-4 rounded-xl border transition-all ${
-                                    t.isAI 
-                                        ? 'bg-surface border-gold/30 hover:border-gold/50' 
-                                        : 'bg-surface border-border hover:border-gold/30'
-                                }`}
-                            >
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span>{t.emoji}</span>
-                                    <h3 className={`font-medium text-sm transition-colors ${
-                                        t.isAI ? 'text-gold group-hover:text-amber' : 'text-white group-hover:text-gold'
-                                    }`}>
-                                        {t.label}
-                                    </h3>
-                                </div>
-                                <p className="text-xs text-muted leading-relaxed">
-                                    {t.desc}
-                                </p>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
 
                 {/* Back to blog */}
                 <div className="text-center mt-10">
