@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Let Vercel handle domain redirects (www vs non-www)
   // Do NOT add www redirect here — Vercel domain settings already handle it
   // Adding a conflicting redirect causes ERR_TOO_MANY_REDIRECTS
