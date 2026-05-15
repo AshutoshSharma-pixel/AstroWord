@@ -24,6 +24,9 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.astroword.in'),
+  icons: {
+    icon: '/astroword-logo.svg',
+  },
   title: {
     default: "Free AI Vedic Astrologer — Ask Your Birth Chart Anything",
     template: "%s | AstroWord",
