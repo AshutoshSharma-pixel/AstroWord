@@ -2,17 +2,32 @@
 
 import { useState } from 'react';
 
+const PLANET_QUALITIES: Record<string, string[]> = {
+  Sun:     ['Authoritative', 'Confident', 'Noble', 'Ambitious'],
+  Moon:    ['Nurturing', 'Emotional', 'Caring', 'Intuitive'],
+  Mars:    ['Passionate', 'Energetic', 'Bold', 'Protective'],
+  Mercury: ['Intelligent', 'Witty', 'Communicative', 'Youthful'],
+  Jupiter: ['Wise', 'Generous', 'Spiritual', 'Optimistic'],
+  Venus:   ['Beautiful', 'Charming', 'Artistic', 'Loving'],
+  Saturn:  ['Loyal', 'Disciplined', 'Responsible', 'Enduring'],
+};
+
 interface ShareCardProps {
   question: string;
   answer: string;
   subtext: string;
   keywords?: string[];
+  planet?: string;
 }
 
-export default function ShareCard({ question, answer, subtext, keywords }: ShareCardProps) {
+export default function ShareCard({ question, answer, subtext, keywords, planet }: ShareCardProps) {
   const [copied, setCopied] = useState(false);
 
   const shareText = `${question}\n\n✦ ${answer}\n${subtext}\n\nDiscover yours free at AstroWord.in`;
+
+  const displayKeywords = planet && PLANET_QUALITIES[planet] 
+    ? PLANET_QUALITIES[planet] 
+    : keywords?.slice(0, 4) || [];
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -61,9 +76,9 @@ export default function ShareCard({ question, answer, subtext, keywords }: Share
         </p>
 
         {/* Keywords */}
-        {keywords && keywords.length > 0 && (
+        {displayKeywords.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2 mb-6">
-            {keywords.slice(0, 4).map((kw, i) => (
+            {displayKeywords.map((kw, i) => (
               <span
                 key={i}
                 className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-0.5 rounded-full font-mono"

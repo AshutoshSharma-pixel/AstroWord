@@ -239,6 +239,7 @@ export default function DarakarakaPage() {
                   answer={`${result.planet} — Your Spouse Planet`}
                   subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
                   keywords={result.keywords?.slice(0, 4)}
+                  planet={result.planet}
                 />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
