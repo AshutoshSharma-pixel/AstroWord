@@ -224,7 +224,7 @@ export default function DarakarakaPage() {
                     </p>
 
                     <div className="flex flex-wrap gap-2 justify-center pt-4">
-                        {result.keywords?.map((kw: string, i: number) => (
+                        {result.keywords?.slice(0, 6).map((kw: string, i: number) => (
                             <span key={i} className="text-xs bg-gold/10 text-gold border border-gold/20 px-4 py-1.5 rounded-full font-mono">
                                 {kw}
                             </span>
