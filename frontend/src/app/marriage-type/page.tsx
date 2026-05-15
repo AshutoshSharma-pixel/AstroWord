@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import ShareCard from '@/components/ShareCard';
 
 const TAGLINES = [
     "Analyzing your 5th and 7th house...",
@@ -263,6 +264,13 @@ export default function MarriageTypePage() {
                         ))}
                     </div>
                 </div>
+
+                <ShareCard
+                  question="Will I have a love or arranged marriage?"
+                  answer={result.result}
+                  subtext={`❤️ Love ${result.percentage?.love || 50}% · 🏛️ Arranged ${result.percentage?.arranged || 50}%`}
+                  keywords={result.key_indicators?.slice(0, 3)}
+                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />

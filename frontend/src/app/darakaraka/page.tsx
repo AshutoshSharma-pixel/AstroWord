@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import ShareCard from '@/components/ShareCard';
 
 const DARAKARAKA_TAGLINES = [
     "Finding your spouse significator...",
@@ -230,6 +231,13 @@ export default function DarakarakaPage() {
                         ))}
                     </div>
                 </div>
+
+                <ShareCard
+                  question="What is my future spouse like?"
+                  answer={`${result.planet} — Your Spouse Planet`}
+                  subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
+                  keywords={result.keywords?.slice(0, 4)}
+                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />

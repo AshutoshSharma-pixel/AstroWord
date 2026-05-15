@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import ShareCard from '@/components/ShareCard';
 
 const TAGLINES = [
     "Analyzing your 7th house and its lord...",
@@ -256,6 +257,13 @@ export default function MarriageYearPage() {
                         Most auspicious year for marriage or any romantic relationship
                     </p>
                 </div>
+
+                <ShareCard
+                  question="When will I get married?"
+                  answer={`${result.most_likely_year}`}
+                  subtext="My most auspicious marriage year based on Dasha & transits"
+                  keywords={['Marriage Timing', 'Dasha', 'Jupiter Transit', 'Vedic Astrology']}
+                />
 
                 <div className="space-y-3">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono">All Marriage Windows</p>

@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import ShareCard from '@/components/ShareCard';
 
 const TAGLINES = [
     "Calculating your Darakaraka nakshatra...",
@@ -291,6 +292,13 @@ export default function SpouseInitialPage() {
                         </div>
                     </div>
                 </div>
+
+                <ShareCard
+                  question="What letter does my spouse's name start with?"
+                  answer={result.most_likely_initials?.join('  ·  ') || 'M · A · S'}
+                  subtext="Predicted from 7th lord, Darakaraka & Venus nakshatras"
+                  keywords={['Spouse Initial', 'Nakshatra', 'Jaimini Astrology', 'Marriage']}
+                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />

@@ -9,6 +9,7 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import ShareCard from '@/components/ShareCard';
 
 const ATMAKARAKA_TAGLINES = [
     "Finding your soul significator...",
@@ -230,6 +231,13 @@ export default function AtmakarakaPage() {
                         ))}
                     </div>
                 </div>
+
+                <ShareCard
+                  question="What is my soul's true purpose?"
+                  answer={`${result.planet} — My Soul Planet`}
+                  subtext={`${result.nakshatra} Nakshatra · ${result.sign} · Pada ${result.pada}`}
+                  keywords={result.keywords?.slice(0, 4)}
+                />
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
