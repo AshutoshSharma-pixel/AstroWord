@@ -170,21 +170,23 @@ export default function MarriageReportPreview({ chartData, calculatorType }: Mar
                     ) : (
                         // Blurred Preview
                         <>
-                            <div className="flex justify-center mb-6">
-                                <div className="relative w-48 rounded-xl overflow-hidden shadow-xl shadow-gold/10 border border-gold/20">
-                                    <Image
-                                        src="/Marriage Report Image .png"
-                                        alt="Your Vedic Marriage Report"
-                                        width={300}
-                                        height={350}
-                                        className="w-full h-auto object-cover"
-                                    />
-                                </div>
-                            </div>
                             {blurredPreviewContent}
 
                             {/* OVERLAY */}
                             <div className="absolute inset-0 bg-surface/70 flex flex-col items-center justify-center p-6 text-center">
+                                {!generating && (
+                                    <div className="flex justify-center mb-4">
+                                        <div className="relative w-32 rounded-xl overflow-hidden shadow-xl shadow-gold/10 border border-gold/20">
+                                            <Image
+                                                src="/Marriage Report Image .png"
+                                                alt="Your Vedic Marriage Report"
+                                                width={200}
+                                                height={240}
+                                                className="w-full h-auto object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                                 {generating ? (
                                     <div className="flex flex-col items-center gap-3">
                                         <Loader2 className="w-8 h-8 text-gold animate-spin" />
