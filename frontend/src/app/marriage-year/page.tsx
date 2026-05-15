@@ -317,7 +317,7 @@ export default function MarriageYearPage() {
                     ))}
                 </div>
 
-                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
+                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
                     <ReactMarkdown
                         components={{
                             h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,

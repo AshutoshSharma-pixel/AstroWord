@@ -254,7 +254,7 @@ export default function AmatyakarakaPage() {
                   keywords={result.keywords?.slice(0, 4)}
                 />
 
-                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative">
+                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
                     <ReactMarkdown
                         components={{

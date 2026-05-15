@@ -1,13 +1,45 @@
 /**
  * Helper to handle streaming SSE responses from the backend.
- * Parses chunks of the format "data: {...}\n\n"
+ * Animates chunks character by character for smooth rendering.
  */
+
+// Character-by-character animator
+// Takes incoming chunks and drip-feeds them to the UI
+// so even large batches feel smooth like ChatGPT
+let animationQueue: string[] = [];
+let isAnimating = false;
+
+function resetAnimator() {
+    animationQueue = [];
+    isAnimating = false;
+}
+
+function enqueueChunk(text: string, onChunk: (char: string) => void) {
+    animationQueue.push(...text.split(''));
+    if (!isAnimating) {
+        isAnimating = true;
+        animateNext(onChunk);
+    }
+}
+
+function animateNext(onChunk: (char: string) => void) {
+    if (animationQueue.length === 0) {
+        isAnimating = false;
+        return;
+    }
+    // Drain up to 3 chars per frame for smooth but fast rendering
+    const batch = animationQueue.splice(0, 3).join('');
+    onChunk(batch);
+    requestAnimationFrame(() => animateNext(onChunk));
+}
+
 export async function handleStreamResponse(
     response: Response,
     onMeta: (data: any) => void,
     onChunk: (text: string) => void,
     onDone: (data: any) => void
 ) {
+    resetAnimator();
     const reader = response.body?.getReader();
     if (!reader) throw new Error('No reader available');
 
@@ -20,7 +52,7 @@ export async function handleStreamResponse(
 
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
-        buffer = lines.pop() || ''; // Keep the last incomplete line in buffer
+        buffer = lines.pop() || '';
 
         for (const line of lines) {
             const trimmedLine = line.trim();
@@ -30,12 +62,20 @@ export async function handleStreamResponse(
             try {
                 const parsed = JSON.parse(jsonStr);
                 if (parsed.type === 'meta') {
-                    // For meta, we often send data in a 'data' field, but sometimes it's the whole object
                     onMeta(parsed.data || parsed);
                 } else if (parsed.type === 'chunk') {
-                    onChunk(parsed.text);
+                    // Animate chunk character by character
+                    enqueueChunk(parsed.text, onChunk);
                 } else if (parsed.type === 'done') {
-                    onDone(parsed);
+                    // Wait for animation to finish before calling done
+                    const waitForAnimation = () => {
+                        if (animationQueue.length === 0 && !isAnimating) {
+                            onDone(parsed);
+                        } else {
+                            setTimeout(waitForAnimation, 50);
+                        }
+                    };
+                    waitForAnimation();
                 }
             } catch (e) {
                 console.error('Error parsing SSE chunk:', e, jsonStr);
