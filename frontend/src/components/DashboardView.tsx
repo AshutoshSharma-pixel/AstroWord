@@ -18,6 +18,34 @@ export default function DashboardView() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+                {/* Marriage Report Card */}
+                <button
+                    onClick={() => router.push('/marriage-report')}
+                    className="w-full md:col-span-2 bg-gradient-to-r from-gold/10 to-gold/5 border border-gold/40 hover:border-gold/70 hover:shadow-[0_0_30px_rgba(201,168,76,0.15)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="flex items-start justify-between">
+                        <div>
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="text-3xl">📜</span>
+                                <span className="text-xs bg-gold text-black px-2 py-0.5 rounded-full font-mono font-medium">NEW · ₹199</span>
+                            </div>
+                            <h3 className="text-gold font-serif text-xl mb-2">
+                                Your Complete Marriage Report
+                            </h3>
+                            <p className="text-muted text-sm mb-4 max-w-lg">
+                                Get a 1200+ word personalised Vedic marriage report as an instant PDF. Spouse profile, marriage timing, love or arranged prediction, 2026–2027 forecast and Vedic remedies — all from your exact birth chart.
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Future Spouse</span>
+                                <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Marriage Timing</span>
+                                <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">2026 Forecast</span>
+                                <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Instant PDF</span>
+                            </div>
+                        </div>
+                        <div className="text-gold/40 group-hover:text-gold transition-colors text-2xl ml-4">→</div>
+                    </div>
+                </button>
+
                 {/* Marriage Year Predictor Card */}
                 <button
                     onClick={() => router.push('/marriage-year')}
