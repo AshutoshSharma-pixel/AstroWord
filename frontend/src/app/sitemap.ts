@@ -55,6 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${base}/marriage-report`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.95,
+        },
+        {
             url: `${base}/blog`,
             lastModified: now,
             changeFrequency: 'weekly',
