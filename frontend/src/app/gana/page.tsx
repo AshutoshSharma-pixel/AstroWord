@@ -242,6 +242,17 @@ export default function GanaPage() {
                     </ReactMarkdown>
                 </div>
 
+                <div className="text-center py-4">
+                    <a
+                        href="/blog/what-is-gana-koota"
+                        className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors"
+                    >
+                        <span>📖</span>
+                        <span>Read: What is Gana in Vedic Astrology?</span>
+                        <span>→</span>
+                    </a>
+                </div>
+
                 <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
                   <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
                   <p className="text-muted text-sm leading-relaxed">

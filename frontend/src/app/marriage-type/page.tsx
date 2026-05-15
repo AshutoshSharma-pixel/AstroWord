@@ -295,6 +295,17 @@ export default function MarriageTypePage() {
                     </ReactMarkdown>
                 </div>
 
+                <div className="text-center py-4">
+                    <a
+                        href="/blog/love-marriage-or-arranged-marriage-astrology"
+                        className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors"
+                    >
+                        <span>📖</span>
+                        <span>Read: Love or Arranged Marriage? Astrology Guide</span>
+                        <span>→</span>
+                    </a>
+                </div>
+
                 <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
                   <p className="text-gold font-serif text-lg">Want to ask follow-up questions?</p>
                   <p className="text-muted text-sm leading-relaxed">
