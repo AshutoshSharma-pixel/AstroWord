@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   title: "Daily Planetary Transits — Today's Astrology Reading",
   description: "Check today's planetary transits and get a personalised AI reading of how they affect your life. Accurate Vedic astrology transits using Swiss Ephemeris.",
   keywords: "daily transit, planetary transits today, today's planetary positions, vedic astrology transit reading, daily horoscope today, transit moon today, planet positions now",
-  alternates: { canonical: "https://www.astroword.in/daily-transit" },
+  alternates: { canonical: "https://www.astroword.in/daily-horoscope" },
   openGraph: {
     title: "Daily Planetary Transits — Today's Astrology Reading",
     description: "Personalised daily astrology reading based on today's planetary transits and your birth chart.",
-    url: "https://www.astroword.in/daily-transit",
+    url: "https://www.astroword.in/daily-horoscope",
     siteName: "AstroWord",
     images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Daily Transits" }],
     locale: "en_IN",

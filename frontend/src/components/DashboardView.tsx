@@ -48,7 +48,7 @@ export default function DashboardView() {
 
                 {/* Daily Transit Card */}
                 <button
-                    onClick={() => navigateTo('daily-transit')}
+                    onClick={() => navigateTo('daily-horoscope')}
                     className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
                 >
                     <div className="flex items-start justify-between">

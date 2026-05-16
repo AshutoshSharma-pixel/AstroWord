@@ -151,7 +151,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
         },
         {
-            url: `${base}/daily-transit`,
+            url: `${base}/daily-horoscope`,
             lastModified: now,
             changeFrequency: 'always',
             priority: 0.95,
