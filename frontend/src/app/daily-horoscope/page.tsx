@@ -184,7 +184,7 @@ export default function DailyTransitPage() {
                     <div className="space-y-8">
                         {/* Header Section */}
                         <div className="text-center space-y-4">
-                            <h2 className="text-gold font-serif text-3xl md:text-4xl">Daily Transit Reading</h2>
+                            <h2 className="text-gold font-serif text-3xl md:text-4xl">Your Daily Horoscope</h2>
                             <p className="text-muted text-sm tracking-widest uppercase">
                                 {new Date(result.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                             </p>
