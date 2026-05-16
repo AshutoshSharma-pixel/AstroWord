@@ -6,7 +6,6 @@ import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
 import MarriageReportPreview from '@/components/MarriageReportPreview';
-import { motion } from 'framer-motion';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
 import { handleStreamResponse } from '@/utils/stream';
@@ -100,12 +99,16 @@ export default function ManglikPage() {
                     setIsLoading(false); // Stop loading animation, show the result card
                 },
                 (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
+                    setResult((prev: any) => {
+                        if (!prev) return prev;
+                        return { ...prev, reading: (prev.reading || '') + chunk };
+                    });
                 },
                 (done) => {
-                    resultData.keywords = done.keywords;
-                    setResult({ ...resultData });
+                    setResult((prev: any) => {
+                        if (!prev) return prev;
+                        return { ...prev, keywords: done.keywords };
+                    });
                 }
             );
 
@@ -163,10 +166,9 @@ export default function ManglikPage() {
     if (isLoading || !result) {
         return (
             <div className="min-h-[100dvh] bg-bg text-text flex flex-col items-center justify-center p-6 relative overflow-hidden">
-                <motion.div
+                <div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                    style={{ animation: 'spin 120s linear infinite' }}
                 >
                     <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
                         <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="0.8" opacity="0.2" />
@@ -205,7 +207,7 @@ export default function ManglikPage() {
                         <circle cx="490" cy="70" r="5" fill="#00BCD4" />
                         <circle cx="490" cy="70" r="10" fill="#00BCD4" opacity="0.2" />
                     </svg>
-                </motion.div>
+                </div>
 
                 <div className="z-10 text-center space-y-4">
                     <p className="font-serif text-lg sm:text-2xl text-gold animate-pulse px-6">

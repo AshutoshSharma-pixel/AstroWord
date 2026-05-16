@@ -99,12 +99,16 @@ export default function GanaPage() {
                     setIsLoading(false); // Stop loading animation, show the result card
                 },
                 (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
+                    setResult((prev: any) => {
+                        if (!prev) return prev;
+                        return { ...prev, reading: (prev.reading || '') + chunk };
+                    });
                 },
                 (done) => {
-                    resultData.keywords = done.keywords;
-                    setResult({ ...resultData });
+                    setResult((prev: any) => {
+                        if (!prev) return prev;
+                        return { ...prev, keywords: done.keywords };
+                    });
                 }
             );
 
