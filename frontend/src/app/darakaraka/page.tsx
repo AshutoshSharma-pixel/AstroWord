@@ -8,7 +8,6 @@ import ReactMarkdown from 'react-markdown';
 import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -90,27 +89,14 @@ export default function DarakarakaPage() {
                 return;
             }
 
-            let resultData: any = { reading: '' };
+            const data = await res.json();
+            setResult(data);
+            setIsLoading(false);
 
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false);
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (doneData) => {
-                    resultData = { ...resultData, ...doneData };
-                    setResult({ ...resultData });
-                    localStorage.setItem('astroword_chart', JSON.stringify(chart));
-                }
-            );
+            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
+        } finally {
             setIsLoading(false);
         }
     };
@@ -166,75 +152,25 @@ export default function DarakarakaPage() {
         );
     }
 
-    if (isLoading && !result) {
-        return (
-            <div className="min-h-[100dvh] bg-bg text-text flex flex-col items-center justify-center p-6 relative overflow-hidden">
-                <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                    style={{ animation: 'spin 120s linear infinite' }}
-                >
-                    <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
-                        <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="0.8" opacity="0.2" />
-                        <circle cx="350" cy="350" r="280" stroke="#c9a84c" strokeWidth="0.6" strokeDasharray="6 6" opacity="0.15" />
-                        <circle cx="350" cy="350" r="220" stroke="#c9a84c" strokeWidth="0.8" opacity="0.18" />
-                        <circle cx="350" cy="350" r="160" stroke="#c9a84c" strokeWidth="0.6" strokeDasharray="4 4" opacity="0.12" />
-                        <circle cx="350" cy="350" r="100" stroke="#c9a84c" strokeWidth="0.8" opacity="0.2" />
-                        <circle cx="350" cy="350" r="50" stroke="#c9a84c" strokeWidth="1" opacity="0.25" />
-                        <line x1="350" y1="10" x2="350" y2="690" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
-                        <line x1="10" y1="350" x2="690" y2="350" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
-                        <line x1="110" y1="110" x2="590" y2="590" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
-                        <line x1="590" y1="110" x2="110" y2="590" stroke="#c9a84c" strokeWidth="0.4" opacity="0.12" />
-                        {/* Sun */}
-                        <circle cx="350" cy="10" r="10" fill="#FFD700" />
-                        <circle cx="350" cy="10" r="16" fill="#FFD700" opacity="0.2" />
-                        <circle cx="350" cy="10" r="22" fill="#FFD700" opacity="0.08" />
-                        {/* Moon */}
-                        <circle cx="690" cy="350" r="8" fill="#E8E4DC" />
-                        <circle cx="690" cy="350" r="14" fill="#E8E4DC" opacity="0.2" />
-                        <circle cx="690" cy="350" r="20" fill="#E8E4DC" opacity="0.07" />
-                        {/* Mars */}
-                        <circle cx="590" cy="110" r="7" fill="#FF4444" />
-                        <circle cx="590" cy="110" r="13" fill="#FF4444" opacity="0.2" />
-                        <circle cx="590" cy="110" r="19" fill="#FF4444" opacity="0.07" />
-                        {/* Mercury */}
-                        <circle cx="590" cy="590" r="6" fill="#4CAF77" />
-                        <circle cx="590" cy="590" r="11" fill="#4CAF77" opacity="0.2" />
-                        <circle cx="590" cy="590" r="17" fill="#4CAF77" opacity="0.07" />
-                        {/* Jupiter */}
-                        <circle cx="110" cy="590" r="9" fill="#F0A500" />
-                        <circle cx="110" cy="590" r="15" fill="#F0A500" opacity="0.22" />
-                        <circle cx="110" cy="590" r="22" fill="#F0A500" opacity="0.08" />
-                        {/* Venus */}
-                        <circle cx="110" cy="110" r="7" fill="#FF69B4" />
-                        <circle cx="110" cy="110" r="13" fill="#FF69B4" opacity="0.2" />
-                        <circle cx="110" cy="110" r="19" fill="#FF69B4" opacity="0.07" />
-                        {/* Saturn */}
-                        <circle cx="350" cy="690" r="8" fill="#7c6fcd" />
-                        <circle cx="350" cy="690" r="14" fill="#7c6fcd" opacity="0.22" />
-                        <circle cx="350" cy="690" r="20" fill="#7c6fcd" opacity="0.08" />
-                        {/* Rahu */}
-                        <circle cx="10" cy="350" r="6" fill="#4A90E2" />
-                        <circle cx="10" cy="350" r="12" fill="#4A90E2" opacity="0.2" />
-                        {/* Ketu */}
-                        <circle cx="490" cy="70" r="5" fill="#00BCD4" />
-                        <circle cx="490" cy="70" r="10" fill="#00BCD4" opacity="0.2" />
-                    </svg>
-                </div>
-
-                <div className="z-10 text-center space-y-4">
-                    <p className="font-serif text-lg sm:text-2xl text-gold animate-pulse px-6">
-                        {DARAKARAKA_TAGLINES[taglineIndex]}
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="min-h-[100dvh] bg-bg text-text pb-20">
             <TopToolsStrip currentTool="darakaraka" />
             
             <div className="max-w-4xl mx-auto px-4 pt-8">
+                {isLoading && !result && (
+                    <div className="flex flex-col items-center justify-center py-20 space-y-6">
+                        <div className="relative">
+                            <div className="w-20 h-20 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
+                            <div className="absolute inset-0 flex items-center justify-center text-gold text-xs">
+                                {Math.round((taglineIndex / DARAKARAKA_TAGLINES.length) * 100)}%
+                            </div>
+                        </div>
+                        <p className="text-gold font-serif italic text-lg animate-pulse text-center px-6">
+                            {DARAKARAKA_TAGLINES[taglineIndex]}
+                        </p>
+                    </div>
+                )}
+
                 {result && (
                     <div className="max-w-2xl mx-auto space-y-6">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4 relative overflow-hidden">

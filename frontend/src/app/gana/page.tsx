@@ -8,7 +8,6 @@ import ReactMarkdown from 'react-markdown';
 import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -89,27 +88,14 @@ export default function GanaPage() {
                 return;
             }
 
-            let resultData: any = { reading: '' };
+            const data = await res.json();
+            setResult(data);
+            setIsLoading(false);
 
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false);
-                },
-                (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
-                },
-                (doneData) => {
-                    resultData = { ...resultData, ...doneData };
-                    setResult({ ...resultData });
-                    localStorage.setItem('astroword_chart', JSON.stringify(chart));
-                }
-            );
+            localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
             setError('Something went wrong. Please try again.');
+        } finally {
             setIsLoading(false);
         }
     };

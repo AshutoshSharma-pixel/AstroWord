@@ -79,38 +79,53 @@ async def calculate_transit(data: TransitRequest):
 
         current_date_str = now.strftime("%Y-%m-%d")
         
-        prompt = f"""You are a master Vedic astrologer. Write a personalised daily horoscope.
-Today: {current_date_str}
+        prompt = f"""You are a master Vedic astrologer providing a deeply personalised daily reading.
+Today is {current_date_str}.
 
-TODAY'S TRANSITS:
+TODAY'S PLANETARY TRANSITS (actual positions right now):
 {json.dumps(transits, indent=2)}
 
 {birth_info}
-Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown')} (ends: {data.chart_data.get('current_mahadasha', {}).get('end', 'Unknown')})
-Antardasha: {data.chart_data.get('current_antardasha', {}).get('lord', 'Unknown') if data.chart_data.get('current_antardasha') else 'Unknown'}
 
-Write a focused, personal daily reading — every sentence must reference their specific ascendant, natal placements or current Dasha. Not generic.
+Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown')} 
+(ends: {data.chart_data.get('current_mahadasha', {}).get('end', 'Unknown')})
+Current Antardasha: {data.chart_data.get('current_antardasha', {}).get('lord', 'Unknown') if data.chart_data.get('current_antardasha') else 'Unknown'}
 
-Use these ## sections:
+Write a deeply personalised daily horoscope for this person. Reference their 
+specific ascendant, natal planets, and current Dasha throughout. 
+This is NOT a generic horoscope — every sentence must relate to their chart.
 
-## Today's Energy
-2 sentences: name their ascendant, name the Moon's nakshatra today, and describe the day's overall quality.
+Use these sections with ## headers:
 
-## Key Transits for You
-Top 2-3 transits most relevant to this chart. For each: which house from ascendant, what it means today.
+## Today's Energy for You
+2-3 sentences specific to their ascendant and the Moon's nakshatra today.
+Name their ascendant explicitly. Name the Moon nakshatra.
 
-## Love & Career
-How Venus/Moon affect their 7th house today. How Sun/Mercury/Mars affect their 10th and 2nd.
+## Key Planetary Influences Today
+The 3 most significant transits for THIS person's chart specifically.
+For each: state which house it falls in from their ascendant, 
+what natal planet it aspects or conjuncts, and what that means for them today.
 
-## Dasha Lens
-One paragraph: how today's transits are filtered through their {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown')} Mahadasha.
+## Love & Relationships
+How today's Venus and Moon transits affect their 7th house specifically.
 
-## Today's Guidance & Remedy
-3 specific action points + one Vedic remedy for today.
+## Career & Finance  
+How today's Sun, Mercury, Mars transits affect their 10th and 2nd houses.
 
-Write ~300 words. Be specific, warm, insightful. Name planets, houses, nakshatras.
+## Your Dasha + Today's Transits
+How their current {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown')} Mahadasha 
+interacts with today's transits. Is today amplified or dampened by their Dasha?
 
-End with exactly:
+## Today's Guidance
+3 specific action points for today based on their chart — not generic advice.
+
+## Today's Remedy
+One specific Vedic remedy suited to the Moon's nakshatra today and their chart.
+
+Write minimum 500 words. Be warm, specific, and insightful.
+Reference actual planet names, house numbers, nakshatra names throughout.
+
+At the very end write:
 KEYWORDS: keyword1, keyword2, keyword3, keyword4, keyword5
 """
 
@@ -129,7 +144,7 @@ KEYWORDS: keyword1, keyword2, keyword3, keyword4, keyword5
                 prompt,
                 config=types.GenerateContentConfig(
                     temperature=0.5,
-                    max_output_tokens=1500,
+                    max_output_tokens=3000,
                     thinking_config=types.ThinkingConfig(thinking_budget=0)
                 )
             ):
