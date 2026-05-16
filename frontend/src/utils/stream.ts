@@ -3,48 +3,46 @@
  * Animates chunks character by character for smooth rendering.
  */
 
-// Character-by-character animator
-// Takes incoming chunks and drip-feeds them to the UI
-// so even large batches feel smooth like ChatGPT
-let animationQueue: string[] = [];
-let isAnimating = false;
-
-function resetAnimator() {
-    animationQueue = [];
-    isAnimating = false;
-}
-
-function enqueueChunk(text: string, onChunk: (char: string) => void) {
-    animationQueue.push(...text.split(''));
-    if (!isAnimating) {
-        isAnimating = true;
-        animateNext(onChunk);
-    }
-}
-
-function animateNext(onChunk: (char: string) => void) {
-    if (animationQueue.length === 0) {
-        isAnimating = false;
-        return;
-    }
-    // Drain up to 3 chars per frame for smooth but fast rendering
-    const batch = animationQueue.splice(0, 3).join('');
-    onChunk(batch);
-    requestAnimationFrame(() => animateNext(onChunk));
-}
-
 export async function handleStreamResponse(
     response: Response,
     onMeta: (data: any) => void,
     onChunk: (text: string) => void,
     onDone: (data: any) => void
 ) {
-    resetAnimator();
     const reader = response.body?.getReader();
     if (!reader) throw new Error('No reader available');
 
     const decoder = new TextDecoder();
     let buffer = '';
+
+    // Per-call animator state (not shared between calls)
+    let animationQueue: string[] = [];
+    let isAnimating = false;
+    let streamDone = false;
+    let donePayload: any = null;
+
+    function animateNext() {
+        if (animationQueue.length === 0) {
+            isAnimating = false;
+            // If stream finished and queue is empty, fire onDone
+            if (streamDone && donePayload) {
+                onDone(donePayload);
+                donePayload = null;
+            }
+            return;
+        }
+        const batch = animationQueue.splice(0, 4).join('');
+        onChunk(batch);
+        requestAnimationFrame(animateNext);
+    }
+
+    function enqueueChunk(text: string) {
+        animationQueue.push(...text.split(''));
+        if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(animateNext);
+        }
+    }
 
     while (true) {
         const { done, value } = await reader.read();
@@ -58,27 +56,29 @@ export async function handleStreamResponse(
             const trimmedLine = line.trim();
             if (!trimmedLine || !trimmedLine.startsWith('data: ')) continue;
 
-            const jsonStr = trimmedLine.substring(6);
+            const jsonStr = trimmedLine.substring(6).trim();
+            if (!jsonStr) continue;
+
             try {
                 const parsed = JSON.parse(jsonStr);
+
                 if (parsed.type === 'meta') {
-                    onMeta(parsed.data || parsed);
+                    onMeta(parsed);
                 } else if (parsed.type === 'chunk') {
-                    // Animate chunk character by character
-                    enqueueChunk(parsed.text, onChunk);
+                    if (parsed.text) {
+                        enqueueChunk(parsed.text);
+                    }
                 } else if (parsed.type === 'done') {
-                    // Wait for animation to finish before calling done
-                    const waitForAnimation = () => {
-                        if (animationQueue.length === 0 && !isAnimating) {
-                            onDone(parsed);
-                        } else {
-                            setTimeout(waitForAnimation, 50);
-                        }
-                    };
-                    waitForAnimation();
+                    streamDone = true;
+                    donePayload = parsed;
+                    // If animation already finished, fire immediately
+                    if (!isAnimating && animationQueue.length === 0) {
+                        onDone(parsed);
+                        donePayload = null;
+                    }
                 }
             } catch (e) {
-                console.error('Error parsing SSE chunk:', e, jsonStr);
+                // skip malformed chunks
             }
         }
     }
