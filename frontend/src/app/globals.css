@@ -80,11 +80,7 @@ body {
     font-size: 1.1rem !important;
   }
 
-  p,
-  div,
-  li {
-    font-size: 0.95rem !important;
-  }
+
 }
 
 .scrollbar-none::-webkit-scrollbar {
