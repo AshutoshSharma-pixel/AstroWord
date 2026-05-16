@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
-import { motion } from 'framer-motion';
+
 import { API_URL } from '@/utils/api';
 import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
@@ -158,11 +158,7 @@ export default function DailyTransitPage() {
                 {isLoading && !result && (
                     <div className="flex flex-col items-center justify-center py-20 space-y-6">
                         <div className="relative">
-                            <motion.div 
-                                className="w-20 h-20 border-2 border-gold/20 border-t-gold rounded-full"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                            />
+                            <div className="w-20 h-20 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
                             <div className="absolute inset-0 flex items-center justify-center text-gold text-xs">
                                 {Math.round((taglineIndex / TRANSIT_TAGLINES.length) * 100)}%
                             </div>
@@ -174,11 +170,7 @@ export default function DailyTransitPage() {
                 )}
 
                 {result && (
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="space-y-8"
-                    >
+                    <div className="space-y-8">
                         {/* Header Section */}
                         <div className="text-center space-y-4">
                             <h2 className="text-gold font-serif text-3xl md:text-4xl">Daily Transit Reading</h2>
@@ -207,7 +199,7 @@ export default function DailyTransitPage() {
                         </div>
 
                         {result.keywords && <ShareCard keywords={result.keywords} />}
-                    </motion.div>
+                    </div>
                 )}
             </div>
         </div>
