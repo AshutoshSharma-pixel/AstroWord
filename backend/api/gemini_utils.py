@@ -34,8 +34,24 @@ def call_gemini_new(prompt, config):
             if is_retriable and has_next_key:
                 logger.warning(f"Gemini key {i+1} failed ({error_msg[:80]}). Trying key {i+2}...")
                 continue
-            raise e
-    raise last_error
+            
+            if not is_retriable:
+                raise e
+            # If it's the last key and still retriable, we fall through to the fallback
+            break
+
+    # All keys exhausted — return a graceful fallback response object
+    logger.error(f"All Gemini keys failed. Last error: {last_error}")
+    
+    class FallbackResponse:
+        def __init__(self):
+            self.text = (
+                "We are experiencing high demand right now and could not generate "
+                "your personalised reading. Please try again in a few minutes. "
+                "Your birth chart has been calculated correctly — only the AI "
+                "interpretation is temporarily unavailable.\n\nKEYWORDS: Vedic Astrology, Birth Chart"
+            )
+    return FallbackResponse()
 
 
 def call_gemini_stream(prompt, config):
@@ -67,7 +83,19 @@ def call_gemini_stream(prompt, config):
             if is_retriable and has_next_key:
                 logger.warning(f"Gemini key {i+1} failed ({error_msg[:80]}). Trying stream key {i+2}...")
                 continue # Try the next key
-            raise e # If not retriable or no keys left, raise immediately
+            
+            if not is_retriable:
+                raise e # Raise immediately for non-retriable errors
+            break # Fall through to fallback for the last retriable key
             
     if last_error:
-        raise last_error
+        logger.error(f"All Gemini stream keys failed. Last error: {last_error}")
+        # Yield a graceful fallback message instead of raising
+        import json
+        yield type('obj', (object,), {
+            'text': (
+                "We are experiencing high demand right now. "
+                "Please try again in a few minutes. "
+                "Your birth chart has been calculated correctly."
+            )
+        })()
