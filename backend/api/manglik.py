@@ -1,8 +1,9 @@
 import os
 import json
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new
+from api.gemini_utils import call_gemini_stream
 from google.genai import types
 
 router = APIRouter()
@@ -29,36 +30,36 @@ async def calculate_manglik(data: ManglikRequest):
     try:
         planets = data.chart_data.get("planets", {})
         ascendant = data.chart_data.get("ascendant", {})
-        
+
         mars_data = planets.get("Mars", {}).get("d1", {})
         if not mars_data:
             raise HTTPException(status_code=400, detail="Mars data not found in chart")
-        
+
         mars_sign = mars_data.get("sign", "")
         mars_house = mars_data.get("house", None)
         mars_nakshatra = mars_data.get("nakshatra", "")
         mars_pada = mars_data.get("pada", 1)
         mars_degree = round(mars_data.get("degree", 0) % 30, 2)
         mars_retrograde = mars_data.get("retrograde", False)
-        
+
         # Calculate house from ascendant if house not directly available
         SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
                  "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
-        
+
         asc_sign = ascendant.get("sign", "Aries")
         if mars_house is None and asc_sign in SIGNS and mars_sign in SIGNS:
             asc_index = SIGNS.index(asc_sign)
             mars_index = SIGNS.index(mars_sign)
             mars_house = ((mars_index - asc_index) % 12) + 1
-        
+
         # Determine if Manglik
         is_manglik = mars_house in MANGLIK_HOUSES
-        
+
         # Severity
         HIGH_SEVERITY_HOUSES = [7, 8]
         MEDIUM_SEVERITY_HOUSES = [1, 4]
         LOW_SEVERITY_HOUSES = [12]
-        
+
         if not is_manglik:
             severity = "None"
         elif mars_house in HIGH_SEVERITY_HOUSES:
@@ -67,20 +68,20 @@ async def calculate_manglik(data: ManglikRequest):
             severity = "Medium"
         else:
             severity = "Low"
-        
+
         # Check cancellations
         cancellations = []
-        
+
         # Mars in own sign or exalted
         if mars_sign in ["Aries", "Scorpio"]:
             cancellations.append("Mars in own sign — reduces Manglik severity significantly")
         if mars_sign == "Capricorn":
             cancellations.append("Mars exalted in Capricorn — Manglik effects greatly reduced")
-        
+
         # Mars retrograde reduces severity
         if mars_retrograde:
             cancellations.append("Retrograde Mars — Manglik effects are internalized, less external impact")
-        
+
         # Check if Jupiter aspects Mars (simplified: Jupiter in trine or opposition)
         jupiter_data = planets.get("Jupiter", {}).get("d1", {})
         jupiter_sign = jupiter_data.get("sign", "")
@@ -90,14 +91,11 @@ async def calculate_manglik(data: ManglikRequest):
             diff = abs(jupiter_house - mars_house_check)
             if diff in [0, 4, 8, 6]:  # conjunction or trine or opposition
                 cancellations.append("Jupiter aspects Mars — Manglik dosha is partially cancelled")
-        
-        # Both partners Manglik — cancels each other
-        # (mentioned in reading as guidance)
-        
+
         # Effective Manglik status after cancellations
         is_effective_manglik = is_manglik and len(cancellations) == 0
         partial_manglik = is_manglik and len(cancellations) > 0
-        
+
         # Build AI prompt
         prompt = f"""
 You are a highly knowledgeable Vedic astrology expert specialising in Manglik Dosha.
@@ -150,41 +148,61 @@ Provide the response in pure Markdown. Do not use JSON.
 At the very end, on a new line:
 KEYWORDS: word1, word2, word3
 """
-        
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
+
+        def generate():
+            # ── Phase 1: instant structured facts ─────────────────────────
+            meta = {
+                "type": "meta",
+                "success": True,
+                "is_manglik": is_manglik,
+                "is_effective_manglik": is_effective_manglik,
+                "partial_manglik": partial_manglik,
+                "severity": severity,
+                "mars_house": mars_house,
+                "mars_sign": mars_sign,
+                "mars_nakshatra": mars_nakshatra,
+                "mars_pada": mars_pada,
+                "mars_degree": mars_degree,
+                "mars_retrograde": mars_retrograde,
+                "cancellations": cancellations,
+                "keywords": ["Manglik", mars_sign, mars_nakshatra, "Mars"]
+            }
+            yield f"data: {json.dumps(meta)}\n\n"
+
+            # ── Phase 2: stream reading text ──────────────────────────────
+            full_text = ""
+            for chunk in call_gemini_stream(
+                prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.4,
+                    max_output_tokens=2000,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)
+                )
+            ):
+                text_chunk = chunk.text
+                if text_chunk:
+                    full_text += text_chunk
+                    if "KEYWORDS:" not in full_text:
+                        yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
+                    elif "KEYWORDS:" in text_chunk:
+                        before = text_chunk.split("KEYWORDS:")[0]
+                        if before.strip():
+                            yield f"data: {json.dumps({'type': 'chunk', 'text': before})}\n\n"
+
+            # ── Phase 3: extract keywords, signal done ────────────────────
+            keywords = ["Manglik", mars_sign, mars_nakshatra, "Mars"]
+            if "KEYWORDS:" in full_text:
+                parts = full_text.rsplit("KEYWORDS:", 1)
+                kw_raw = parts[1].strip()
+                keywords = [k.strip() for k in kw_raw.split(",") if k.strip()][:6]
+
+            yield f"data: {json.dumps({'type': 'done', 'keywords': keywords})}\n\n"
+
+        return StreamingResponse(
+            generate(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
         )
-        full_text = response.text or ""
-
-        # Extract keywords
-        keywords = ["Manglik", mars_sign, mars_nakshatra, "Mars"]
-        if "KEYWORDS:" in full_text:
-            parts = full_text.rsplit("KEYWORDS:", 1)
-            full_text = parts[0].rstrip()
-            kw_raw = parts[1].strip()
-            keywords = [k.strip() for k in kw_raw.split(",") if k.strip()][:6]
-
-        return {
-            "success": True,
-            "is_manglik": is_manglik,
-            "is_effective_manglik": is_effective_manglik,
-            "partial_manglik": partial_manglik,
-            "severity": severity,
-            "mars_house": mars_house,
-            "mars_sign": mars_sign,
-            "mars_nakshatra": mars_nakshatra,
-            "mars_pada": mars_pada,
-            "mars_degree": mars_degree,
-            "mars_retrograde": mars_retrograde,
-            "cancellations": cancellations,
-            "reading": full_text,
-            "keywords": keywords
-        }
 
     except HTTPException:
         raise

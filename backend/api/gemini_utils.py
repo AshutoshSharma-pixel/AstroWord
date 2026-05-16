@@ -12,9 +12,14 @@ for i in range(1, 11): # Support up to 10 keys
     if key:
         GEMINI_KEYS.append(key)
 
+if not GEMINI_KEYS:
+    logger.error("No GEMINI_API_KEYs found in environment variables.")
+
 
 def call_gemini_new(prompt, config):
     """Fallback-aware synchronous wrapper for the new google-genai SDK."""
+    if not GEMINI_KEYS:
+        raise ValueError("No Gemini API keys configured.")
     last_error = None
     # Retry on rate limits AND on invalid/expired keys so all 4 keys are tried
     RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
@@ -40,6 +45,8 @@ def call_gemini_new(prompt, config):
 
 def call_gemini_stream(prompt, config):
     """Fallback-aware streaming wrapper — yields chunks directly to keep the client alive."""
+    if not GEMINI_KEYS:
+        raise ValueError("No Gemini API keys configured.")
     RETRIABLE_ERRORS = ("429", "Resource exhausted", "INVALID_ARGUMENT", "API key not valid", "401", "403")
     
     # We must yield directly from inside the function to keep the client instance alive,
