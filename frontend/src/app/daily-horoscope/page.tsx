@@ -248,59 +248,104 @@ export default function DailyTransitPage() {
                 )}
             </div>
 
-            {/* SEO Content Block */}
-            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-12 mt-12 border-t border-border/30 pt-12">
+            {/* SEO Content */}
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+                
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Understanding Daily Horoscope & Transits</h2>
+                    <h2 className="text-gold font-serif text-2xl">Why Generic Daily Horoscopes Are Wrong for You</h2>
                     <p className="text-muted text-sm leading-relaxed">
-                        In Vedic Astrology (Jyotish), daily transits—known as <strong>Gochara</strong>—refer to the continuous movement of planets through the zodiac signs. 
-                        While your birth chart (Lagna Kundali) remains fixed, these shifting celestial positions interact with your natal planets, creating unique opportunities and challenges each day.
+                        When Times of India publishes your "Aries horoscope today," that prediction applies to 
+                        every person born when the Sun was in Aries — roughly 700 million people worldwide. 
+                        Obviously not all of them will have the same day. Generic sun sign horoscopes are 
+                        entertainment, not real astrology.
                     </p>
                     <p className="text-muted text-sm leading-relaxed">
-                        By observing Gochara, we can understand the "celestial weather." Just as you might check the rain forecast before leaving home, 
-                        checking your daily transits helps you align your activities with the cosmic flow, ensuring better timing for important decisions.
+                        Real Vedic astrology is personal. Your ascendant changes every 2 hours at birth. 
+                        Your Moon nakshatra is one of 27 specific energy signatures. Your current Mahadasha 
+                        — the planetary period governing your life right now — is unique to your exact birth 
+                        moment. When Jupiter transits Gemini today, it activates the 7th house for Sagittarius 
+                        ascendants, the 1st house for Gemini ascendants, and the 10th house for Virgo ascendants. 
+                        Three completely different life areas. The experience is entirely different for each person.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        AstroWord calculates today's actual planetary positions using Swiss Ephemeris with Lahiri 
+                        ayanamsa, maps them to YOUR specific birth chart, and writes a reading that is genuinely 
+                        unique to you — updated every single day.
                     </p>
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">The Significance of Major Planet Transits</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <h2 className="text-gold font-serif text-2xl">How Planetary Transits Work in Vedic Astrology</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Gochara (planetary transit) is the study of how currently moving planets interact with 
+                        your natal chart. Every planet is always somewhere in the sky — and wherever it falls 
+                        in relation to your ascendant creates an active influence in a specific area of your life.
+                    </p>
+                    <ul className="text-muted text-sm leading-relaxed space-y-2 ml-4">
+                        <li>• <span className="text-white">Moon transits</span> — Changes sign every 2.5 days. The most immediate daily influence on emotions, intuition, and interactions. The Moon nakshatra today sets the general energy quality of the entire day.</li>
+                        <li>• <span className="text-white">Sun transits</span> — Changes sign monthly. Illuminates whichever house it passes through. Brings focus and vitality to that life area.</li>
+                        <li>• <span className="text-white">Mercury transits</span> — Changes sign every 3-4 weeks. Governs communication, travel, contracts, and intellect. Critical for business decisions and important conversations.</li>
+                        <li>• <span className="text-white">Venus transits</span> — Changes sign roughly monthly. Activates love, beauty, finance, and creativity.</li>
+                        <li>• <span className="text-white">Mars transits</span> — Changes sign every 6-7 weeks. Brings energy, ambition, and potential conflict to the house it activates.</li>
+                        <li>• <span className="text-white">Jupiter transits</span> — Stays in each sign ~13 months. Creates sustained opportunities and expansion in the houses it touches.</li>
+                        <li>• <span className="text-white">Saturn transits</span> — Stays in each sign 2.5 years. Brings discipline, lessons, and long-term restructuring.</li>
+                    </ul>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Dasha + Transit — The Complete Picture</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        In Vedic astrology, transits alone are never the complete picture. The same Jupiter 
+                        transit over your 7th house means something entirely different depending on which 
+                        Mahadasha you are running. During a Venus Mahadasha — the period of love and 
+                        relationships — Jupiter activating your 7th house is a powerful marriage indicator. 
+                        During a Saturn Mahadasha, the same transit might bring a serious, committed 
+                        relationship after delays and tests.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        AstroWord reads both simultaneously — your current Vimsottari Dasha period AND 
+                        today's actual transits — to give you the most contextualised daily reading possible. 
+                        This is exactly how a professional Jyotishi approaches your chart.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
+                    <div className="space-y-6">
                         {[
-                            { planet: 'Moon Transit', meaning: 'Changes signs every 2.25 days. Governs your daily mood, emotions, and general mental state.' },
-                            { planet: 'Sun Transit', meaning: 'Changes signs monthly. Influences your vitality, public life, and professional focus.' },
-                            { planet: 'Mars Transit', meaning: 'Governs your energy levels, ambition, and how you handle conflicts today.' },
-                            { planet: 'Jupiter Transit', meaning: 'The "Great Benefic." Brings growth, wisdom, and luck to whichever house it touches.' },
-                        ].map((item) => (
-                            <div key={item.planet} className="bg-surface border border-border rounded-xl p-3">
-                                <p className="text-white text-sm font-medium mb-1">{item.planet}</p>
-                                <p className="text-muted text-xs leading-relaxed">{item.meaning}</p>
+                            {
+                                q: "How is this different from a regular daily horoscope?",
+                                a: "Generic daily horoscopes apply to 1/12th of the population based on sun sign. AstroWord analyses today's actual transits against YOUR specific ascendant, natal placements, current Dasha, and nakshatra positions. Every reading is unique to your birth chart and updates daily."
+                            },
+                            {
+                                q: "What are planetary transits in Vedic astrology?",
+                                a: "Planetary transits (Gochara) are the real-time positions of planets in the sky today. When a transiting planet passes through a house in your chart, it activates the themes of that house. AstroWord calculates these live using Swiss Ephemeris."
+                            },
+                            {
+                                q: "Which planet has the most daily impact?",
+                                a: "The Moon has the most immediate daily influence — it changes sign every 2.5 days and its nakshatra sets the energy quality of each day. The Moon nakshatra today is particularly important for understanding your emotional state and how interactions will flow."
+                            },
+                            {
+                                q: "How accurate is a daily transit reading?",
+                                a: "Transit readings are most accurate when combined with Dasha analysis. AstroWord always reads both your current Dasha period and today's transits together for maximum accuracy."
+                            },
+                            {
+                                q: "Does AstroWord use real-time planetary positions?",
+                                a: "Yes. AstroWord calculates today's actual planetary positions in real time using Swiss Ephemeris with Lahiri ayanamsa — the same system used by professional Vedic astrologers in India."
+                            },
+                            {
+                                q: "Can I get a reading every day?",
+                                a: "Yes. The reading updates automatically every day as planetary positions change. Enter your birth details once and come back daily for your personalised reading."
+                            },
+                        ].map((faq, i) => (
+                            <div key={i} className="border-b border-border/40 pb-5">
+                                <h3 className="text-white text-sm font-medium mb-2">{faq.q}</h3>
+                                <p className="text-muted text-sm leading-relaxed">{faq.a}</p>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* FAQ Section */}
-                <div className="space-y-6">
-                    <h2 className="text-gold font-serif text-2xl">Daily Horoscope Frequently Asked Questions</h2>
-                    <div className="space-y-4">
-                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
-                            <h3 className="text-white font-medium mb-2">What are planetary transits?</h3>
-                            <p className="text-muted text-sm leading-relaxed">Planetary transits refer to the continuous movement of planets through the zodiac signs as seen from Earth. In Vedic astrology (Jyotish), these transits are compared with your birth chart to predict current life events.</p>
-                        </div>
-                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
-                            <h3 className="text-white font-medium mb-2">Which transit is most important for daily readings?</h3>
-                            <p className="text-muted text-sm leading-relaxed">The Moon's transit is considered the most significant for daily emotional states and events, as it changes signs approximately every 2.25 days. It determines your "Chandra Lagna" or your mental focus for the day.</p>
-                        </div>
-                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
-                            <h3 className="text-white font-medium mb-2">How does AstroWord calculate transits?</h3>
-                            <p className="text-muted text-sm leading-relaxed">AstroWord uses the professional-grade Swiss Ephemeris with the Lahiri Ayanamsa to ensure the highest degree of astronomical accuracy, providing you with real-time planetary positions calculated precisely for your location.</p>
-                        </div>
-                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
-                            <h3 className="text-white font-medium mb-2">Are transits more important than the birth chart?</h3>
-                            <p className="text-muted text-sm leading-relaxed">No, the birth chart is the foundation. Transits only deliver what is already promised in your birth chart. Think of the birth chart as the seeds and the transits as the seasons that allow those seeds to sprout.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );
