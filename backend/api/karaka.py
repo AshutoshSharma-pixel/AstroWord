@@ -1,9 +1,8 @@
 import os
 import json
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from api.gemini_utils import call_gemini_new, call_gemini_stream
+from api.gemini_utils import call_gemini_new
 from google.genai import types
 
 router = APIRouter()
@@ -185,69 +184,52 @@ Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Un
         
         prompt = KARAKA_PROMPTS[data.karaka_type] + "\n\n" + chart_context
     
-        def generate():
-            # Yield meta first
-            meta_data = {
-                "type": "meta",
-                "success": True,
-                "karaka_type": data.karaka_type,
-                "planet": karaka_result["planet"],
-                "degree": karaka_result["degree"],
-                "full_degree": karaka_result["full_degree"],
-                "sign": karaka_result["sign"],
-                "nakshatra": karaka_result["nakshatra"],
-                "pada": karaka_result["pada"],
-                "retrograde": karaka_result["retrograde"],
-                "combust": karaka_result["combust"],
-                "all_karakas": {
-                    "atmakaraka": {
-                        "planet": sorted_planets[0][0],
-                        "degree": round(sorted_planets[0][1]["d1"]["degree"] % 30, 2)
-                    },
-                    "amatyakaraka": {
-                        "planet": sorted_planets[1][0],
-                        "degree": round(sorted_planets[1][1]["d1"]["degree"] % 30, 2)
-                    },
-                    "darakaraka": {
-                        "planet": sorted_planets[-1][0],
-                        "degree": round(sorted_planets[-1][1]["d1"]["degree"] % 30, 2)
-                    }
-                }
-            }
-            yield f"data: {json.dumps(meta_data)}\n\n"
-            
-            # Default keywords
-            keywords = [planet_name, planet_info["sign"], planet_info["nakshatra"]]
-            
-            # Stream from Gemini
-            full_text = ""
-            for chunk in call_gemini_stream(
-                prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.4,
-                    max_output_tokens=8192,
-                    thinking_config=types.ThinkingConfig(thinking_budget=0)
-                )
-            ):
-                text_chunk = chunk.text
-                if text_chunk:
-                    full_text += text_chunk
-                    yield f"data: {json.dumps({'type': 'chunk', 'text': text_chunk})}\n\n"
-            
-            # Extract keywords if present in the full accumulated text
-            if "KEYWORDS:" in full_text:
-                parts = full_text.rsplit("KEYWORDS:", 1)
-                kw_raw = parts[1].strip()
-                keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
-                
-            # Yield done with keywords
-            yield f"data: {json.dumps({'type': 'done', 'keywords': keywords})}\n\n"
-
-        return StreamingResponse(
-            generate(),
-            media_type="text/event-stream",
-            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+        response = call_gemini_new(
+            prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.4,
+                max_output_tokens=8192,
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
+            )
         )
+        full_text = response.text or ""
+
+        # Extract keywords
+        keywords = [planet_name, planet_info["sign"], planet_info["nakshatra"]]
+        if "KEYWORDS:" in full_text:
+            parts = full_text.rsplit("KEYWORDS:", 1)
+            full_text = parts[0].rstrip()
+            kw_raw = parts[1].strip()
+            keywords = [k.strip() for k in kw_raw.split(",") if k.strip()]
+
+        return {
+            "success": True,
+            "karaka_type": data.karaka_type,
+            "planet": karaka_result["planet"],
+            "degree": karaka_result["degree"],
+            "full_degree": karaka_result["full_degree"],
+            "sign": karaka_result["sign"],
+            "nakshatra": karaka_result["nakshatra"],
+            "pada": karaka_result["pada"],
+            "retrograde": karaka_result["retrograde"],
+            "combust": karaka_result["combust"],
+            "all_karakas": {
+                "atmakaraka": {
+                    "planet": sorted_planets[0][0],
+                    "degree": round(sorted_planets[0][1]["d1"]["degree"] % 30, 2)
+                },
+                "amatyakaraka": {
+                    "planet": sorted_planets[1][0],
+                    "degree": round(sorted_planets[1][1]["d1"]["degree"] % 30, 2)
+                },
+                "darakaraka": {
+                    "planet": sorted_planets[-1][0],
+                    "degree": round(sorted_planets[-1][1]["d1"]["degree"] % 30, 2)
+                }
+            },
+            "reading": full_text,
+            "keywords": keywords
+        }
         
     except HTTPException:
         raise

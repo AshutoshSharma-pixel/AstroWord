@@ -8,7 +8,6 @@ import ReactMarkdown from 'react-markdown';
 import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
-import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -90,28 +89,9 @@ export default function DarakarakaPage() {
                 return;
             }
 
-            let resultData: any = { reading: '' };
-
-            await handleStreamResponse(
-                res,
-                (meta) => {
-                    resultData = { ...resultData, ...meta };
-                    setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
-                },
-                (chunk) => {
-                    setResult((prev: any) => {
-                        if (!prev) return prev;
-                        return { ...prev, reading: (prev.reading || '') + chunk };
-                    });
-                },
-                (done) => {
-                    setResult((prev: any) => {
-                        if (!prev) return prev;
-                        return { ...prev, keywords: done.keywords };
-                    });
-                }
-            );
+            const data = await res.json();
+            setResult(data);
+            setIsLoading(false);
 
             localStorage.setItem('astroword_chart', JSON.stringify(chart));
         } catch (err) {
