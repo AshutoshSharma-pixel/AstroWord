@@ -348,38 +348,61 @@ export default function AtmakarakaPage() {
             </div>
 
             {/* SEO Content Block */}
-            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-12 mt-12 border-t border-border/30 pt-12">
                 <div className="space-y-4">
                     <h2 className="text-gold font-serif text-2xl">What is Atmakaraka in Vedic Astrology?</h2>
                     <p className="text-muted text-sm leading-relaxed">
-                        Atmakaraka means "soul significator" in Sanskrit. Atma = soul, Karaka = significator.
-                        In Jaimini astrology, the Atmakaraka is the planet with the highest degree within its sign
-                        among all 7 planets. It is considered the most important planet in your entire birth chart —
-                        more significant than even your ascendant lord.
+                        Atmakaraka means "soul significator" in Sanskrit (Atma = soul, Karaka = significator). 
+                        In Jaimini astrology, it is the planet with the highest degree among all 7 planets (excluding Rahu/Ketu in some systems) in your birth chart. 
+                        It represents your soul's core identity, its deepest desires, and the primary reason for your incarnation.
                     </p>
                     <p className="text-muted text-sm leading-relaxed">
-                        The Atmakaraka reveals your soul's deepest desire, the karmic lessons you must complete
-                        in this lifetime, and your ultimate life purpose. Wherever the Atmakaraka is placed in
-                        your chart shows what your soul came here to experience and master.
+                        The Atmakaraka is often called the "King" of the chart. While your Lagna (Ascendant) 
+                        describes your physical body and social identity, your Atmakaraka reveals what your soul 
+                        needs to master to attain peace and liberation (Moksha).
                     </p>
                 </div>
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Atmakaraka by Planet — Soul's Purpose</h2>
+                    <h2 className="text-gold font-serif text-2xl">Atmakaraka by Planet — Your Soul's Path</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {[
-                            { planet: 'Sun as Atmakaraka', meaning: 'Soul seeks recognition, authority and self-expression. Lesson: ego dissolution and service' },
-                            { planet: 'Moon as Atmakaraka', meaning: 'Soul seeks emotional fulfillment and connection. Lesson: detachment from mind fluctuations' },
-                            { planet: 'Mars as Atmakaraka', meaning: 'Soul seeks courage, achievement and action. Lesson: channeling aggression into dharmic action' },
-                            { planet: 'Mercury as Atmakaraka', meaning: 'Soul seeks knowledge and communication. Lesson: using intellect in service of truth' },
-                            { planet: 'Jupiter as Atmakaraka', meaning: 'Soul seeks wisdom and spiritual growth. Lesson: sharing knowledge without arrogance' },
-                            { planet: 'Venus as Atmakaraka', meaning: 'Soul seeks love, beauty and harmony. Lesson: transcending desire through devotion' },
-                            { planet: 'Saturn as Atmakaraka', meaning: 'Soul seeks discipline and justice. Lesson: serving others without expectation of reward' },
+                            { planet: 'Sun as Atmakaraka', meaning: 'Soul seeks to overcome ego and learn true humility and service to others.' },
+                            { planet: 'Moon as Atmakaraka', meaning: 'Soul seeks emotional mastery and overcoming fluctuations of the mind.' },
+                            { planet: 'Mars as Atmakaraka', meaning: 'Soul seeks to master courage and channel energy toward non-violence.' },
+                            { planet: 'Mercury as Atmakaraka', meaning: 'Soul seeks to master speech and use intellect for spiritual truth.' },
+                            { planet: 'Jupiter as Atmakaraka', meaning: 'Soul seeks wisdom and to respect teachers, avoiding spiritual pride.' },
+                            { planet: 'Venus as Atmakaraka', meaning: 'Soul seeks to master relationships and refine desires into pure devotion.' },
+                            { planet: 'Saturn as Atmakaraka', meaning: 'Soul seeks to master discipline and accept suffering as a path to growth.' },
                         ].map((item) => (
                             <div key={item.planet} className="bg-surface border border-border rounded-xl p-3">
                                 <p className="text-white text-sm font-medium mb-1">{item.planet}</p>
                                 <p className="text-muted text-xs leading-relaxed">{item.meaning}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="space-y-6">
+                    <h2 className="text-gold font-serif text-2xl">Atmakaraka Frequently Asked Questions</h2>
+                    <div className="space-y-4">
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">How do I find my Atmakaraka planet?</h3>
+                            <p className="text-muted text-sm leading-relaxed">To find your Atmakaraka, look at the degrees of all seven main planets (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn). The planet with the highest degree (0° to 30°) is your Atmakaraka. You can use our free Atmakaraka calculator above to get your result instantly.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">What is the difference between Atmakaraka and Amatyakaraka?</h3>
+                            <p className="text-muted text-sm leading-relaxed">The Atmakaraka is the planet with the highest degree and represents the soul. The Amatyakaraka is the planet with the second-highest degree and represents your career, advisors, and how you achieve your soul's goals in the material world.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">What happens if my Atmakaraka is retrograde?</h3>
+                            <p className="text-muted text-sm leading-relaxed">A retrograde Atmakaraka suggests deep-seated karmic desires from past lives that are being revisited. It often indicates a very strong, intense soul purpose that requires looking inward rather than outward for fulfillment.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">Is Atmakaraka always the highest degree planet?</h3>
+                            <p className="text-muted text-sm leading-relaxed">Yes, in the Jaimini 7-Karaka system, the Atmakaraka is always the planet with the highest degree. In the 8-Karaka system, Rahu is also included, but most practitioners prefer the 7-planet system for soul readings.</p>
+                        </div>
                     </div>
                 </div>
             </div>

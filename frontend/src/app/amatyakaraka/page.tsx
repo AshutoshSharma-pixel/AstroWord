@@ -335,6 +335,67 @@ export default function AmatyakarakaPage() {
                     </button>
                 </div>
             </div>
+
+            {/* SEO Content Block */}
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-12 mt-12 border-t border-border/30 pt-12">
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">What is Amatyakaraka in Vedic Astrology?</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        In Jaimini astrology, the Amatyakaraka (AmK) is the planet that holds the second-highest degree 
+                        among all seven planets in your birth chart. While the Atmakaraka represents your soul, the 
+                        Amatyakaraka represents your mind, your professional advisors, and your career path.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        The Amatyakaraka acts as the "Minister" to your soul's "King." It is the primary indicator of 
+                        how you interact with the material world and what kind of work will bring you success and 
+                        financial stability. Understanding your AmK helps you align your daily actions with your 
+                        soul's higher purpose.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Amatyakaraka by Planet — Your Career Destiny</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                            { planet: 'Sun as Amatyakaraka', meaning: 'Success in leadership, politics, administration, or government roles.' },
+                            { planet: 'Moon as Amatyakaraka', meaning: 'Success in public relations, hospitality, psychology, or creative arts.' },
+                            { planet: 'Mars as Amatyakaraka', meaning: 'Success in engineering, military, surgery, or entrepreneurship.' },
+                            { planet: 'Mercury as Amatyakaraka', meaning: 'Success in business, writing, teaching, or data analysis.' },
+                            { planet: 'Jupiter as Amatyakaraka', meaning: 'Success in law, finance, philosophy, or spiritual guidance.' },
+                            { planet: 'Venus as Amatyakaraka', meaning: 'Success in luxury goods, fashion, entertainment, or design.' },
+                            { planet: 'Saturn as Amatyakaraka', meaning: 'Success in long-term projects, research, history, or social service.' },
+                        ].map((item) => (
+                            <div key={item.planet} className="bg-surface border border-border rounded-xl p-3">
+                                <p className="text-white text-sm font-medium mb-1">{item.planet}</p>
+                                <p className="text-muted text-xs leading-relaxed">{item.meaning}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="space-y-6">
+                    <h2 className="text-gold font-serif text-2xl">Amatyakaraka Frequently Asked Questions</h2>
+                    <div className="space-y-4">
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">How do I find my Amatyakaraka planet?</h3>
+                            <p className="text-muted text-sm leading-relaxed">Your Amatyakaraka is the planet that has the second-highest degree in your birth chart, ranging from 0 to 30 degrees. You can find this manually from your Jaimini Karaka list or use our free calculator above to discover it instantly.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">Can Amatyakaraka predict my career success?</h3>
+                            <p className="text-muted text-sm leading-relaxed">Yes, the Amatyakaraka is the most important planet for professional life in Jaimini astrology. Its placement in the D1 (Birth Chart) and D10 (Dashamsha) charts determines the level of fame, wealth, and authority you will achieve in your career.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">What happens if my Amatyakaraka is weak or debilitated?</h3>
+                            <p className="text-muted text-sm leading-relaxed">A weak Amatyakaraka may indicate initial struggles or obstacles in finding the right career path. However, because it represents your advisors, seeking mentorship or specialized education can help strengthen its energy and bring success.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">Is the Amatyakaraka different for everyone?</h3>
+                            <p className="text-muted text-sm leading-relaxed">Absolutely. Depending on the exact time and place of your birth, your second-highest degree planet will vary, making your professional blueprint unique to you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

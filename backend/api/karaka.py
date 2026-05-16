@@ -183,6 +183,8 @@ Full Chart Ascendant: {data.chart_data.get('ascendant', {}).get('sign', 'Unknown
 Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown') if data.chart_data.get('current_mahadasha') else 'Unknown'}
 """
         
+        prompt = KARAKA_PROMPTS[data.karaka_type] + "\n\n" + chart_context
+    
         def generate():
             # Yield meta first
             meta_data = {

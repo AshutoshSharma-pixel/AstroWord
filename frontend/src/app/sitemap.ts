@@ -150,5 +150,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.7,
         },
+        {
+            url: `${base}/daily-transit`,
+            lastModified: now,
+            changeFrequency: 'always',
+            priority: 0.95,
+        },
     ];
 }
