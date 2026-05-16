@@ -13,7 +13,7 @@ const ALL_TOOLS = [
   { slug: 'marriage-year',   emoji: '💍', label: 'Marriage Year' },
   { slug: 'marriage-type',   emoji: '💝', label: 'Love or Arranged' },
   { slug: 'spouse-initial',  emoji: '🔤', label: 'Spouse Initial' },
-  { slug: 'daily-horoscope',   emoji: '☄️', label: 'Daily Transit' },
+  { slug: 'daily-horoscope',   emoji: '☄️', label: 'Daily Horoscope' },
   { slug: 'marriage-report', emoji: '📜', label: 'Report ₹199',    isPaid: true },
 ];
 

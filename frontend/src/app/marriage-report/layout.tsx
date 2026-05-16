@@ -23,6 +23,61 @@ export const metadata: Metadata = {
   },
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is this different from a generic horoscope?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This report is generated from your exact birth details — date, time and place. Every section is calculated from your personal planetary positions, not sun sign generalisations. The AI runs all 7 Vedic calculators on your chart and then writes a 1200+ word personalised reading."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What birth details do I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You need your date of birth, exact time of birth (from birth certificate or family records), and place of birth. Time accuracy matters — even 15 minutes off can change your ascendant and house placements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which ayanamsa does AstroWord use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AstroWord uses the Lahiri ayanamsa with Swiss Ephemeris — the same standard used by most professional Vedic astrologers in India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to generate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 30-60 seconds after payment. The AI analyses your chart and writes the full report in one pass. You get an instant PDF download link."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the payment secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Payments are processed by Razorpay, India's most trusted payment gateway. AstroWord never sees or stores your card details."
+      }
+    }
+  ]
+};
+
 export default function MarriageReportLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {children}
+    </>
+  );
 }
