@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const ALL_TOOLS = [
   { slug: '/',               emoji: '✦', label: 'Ask AI',          isAI: true },
+  { slug: 'daily-horoscope',   emoji: '☄️', label: "Today's Reading" },
   { slug: 'manglik',         emoji: '🔴', label: 'Manglik' },
   { slug: 'darakaraka',      emoji: '💑', label: 'Darakaraka' },
   { slug: 'atmakaraka',      emoji: '☀️', label: 'Atmakaraka' },
@@ -13,7 +14,6 @@ const ALL_TOOLS = [
   { slug: 'marriage-year',   emoji: '💍', label: 'Marriage Year' },
   { slug: 'marriage-type',   emoji: '💝', label: 'Love or Arranged' },
   { slug: 'spouse-initial',  emoji: '🔤', label: 'Spouse Initial' },
-  { slug: 'daily-horoscope',   emoji: '☄️', label: "Today's Reading" },
   { slug: 'marriage-report', emoji: '📜', label: 'Report ₹199',    isPaid: true },
 ];
 
@@ -56,7 +56,7 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
             {tools.map(tool => (
               <button
                 key={tool.slug}
-                onClick={() => router.push(`/${tool.slug}`)}
+                onClick={() => router.push(tool.slug.startsWith('/') ? tool.slug : `/${tool.slug}`)}
                 className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all border whitespace-nowrap
                   ${tool.isAI
                     ? 'bg-gold text-black border-gold hover:bg-gold/90 font-semibold'

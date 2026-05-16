@@ -150,7 +150,7 @@ export default function DailyTransitPage() {
                 <WelcomeScreen onComplete={handleFormSubmit} />
                 <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
                     <div className="space-y-4">
-                        <h1 className="text-gold font-serif text-3xl">Daily Horoscope & Planetary Transits</h1>
+                        <h1 className="text-gold font-serif text-3xl">Your Daily Horoscope</h1>
                         <p className="text-muted text-sm leading-relaxed">
                             Vedic Astrology (Jyotish) emphasizes the importance of current planetary movements (Gochara). 
                             Enter your birth details to see how today's transits interact with your natal chart.
@@ -184,7 +184,7 @@ export default function DailyTransitPage() {
                     <div className="space-y-8">
                         {/* Header Section */}
                         <div className="text-center space-y-4">
-                            <h2 className="text-gold font-serif text-3xl md:text-4xl">Your Daily Horoscope</h2>
+                            <h1 className="text-gold font-serif text-3xl md:text-4xl">Your Daily Horoscope</h1>
                             <p className="text-muted text-sm tracking-widest uppercase">
                                 {new Date(result.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                             </p>
