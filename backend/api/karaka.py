@@ -191,7 +191,14 @@ Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Un
                 "type": "meta",
                 "success": True,
                 "karaka_type": data.karaka_type,
-                "karaka": karaka_result,
+                "planet": karaka_result["planet"],
+                "degree": karaka_result["degree"],
+                "full_degree": karaka_result["full_degree"],
+                "sign": karaka_result["sign"],
+                "nakshatra": karaka_result["nakshatra"],
+                "pada": karaka_result["pada"],
+                "retrograde": karaka_result["retrograde"],
+                "combust": karaka_result["combust"],
                 "all_karakas": {
                     "atmakaraka": {
                         "planet": sorted_planets[0][0],

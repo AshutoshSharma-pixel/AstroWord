@@ -215,7 +215,8 @@ KEYWORDS: word 1, word 2, word 3
             done_data = {
                 "type": "done",
                 "result": result_val,
-                "percentage": {"love": love_pct, "arranged": arr_pct},
+                "love_percentage": love_pct,
+                "arranged_percentage": arr_pct,
                 "key_indicators": key_indicators,
                 "timing": timing,
                 "keywords": keywords[:6]
@@ -340,11 +341,9 @@ KEYWORDS: word 1, word 2, word 3
                 "success": True,
                 "most_likely_initials": all_initials,
                 "primary_initial": method1['primary_letter'],
-                "methods": {
-                    "seventh_lord": method1,
-                    "darakaraka": method2,
-                    "venus": method3
-                }
+                "method_seventh_lord": method1,
+                "method_darakaraka": method2,
+                "method_venus": method3
             }
             yield f"data: {json.dumps(meta_data)}\n\n"
             
