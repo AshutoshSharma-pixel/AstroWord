@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ReactMarkdown from 'react-markdown';
+import { cleanReading } from '@/utils/cleanReading';
 
 import { API_URL } from '@/utils/api';
 import { handleStreamResponse } from '@/utils/stream';
@@ -207,10 +208,36 @@ export default function DailyTransitPage() {
 
                         {/* Reading Content */}
                         <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-sm">
-                            <div className="prose prose-invert prose-gold max-w-none prose-p:text-text/90 prose-p:leading-relaxed prose-headings:font-serif prose-headings:text-gold">
-                                <ReactMarkdown>{result.reading}</ReactMarkdown>
-                                {isLoading && <span className="inline-block w-2 h-4 bg-gold ml-1 animate-pulse" />}
-                            </div>
+                            <ReactMarkdown
+                                components={{
+                                    h2: ({ children }) => (
+                                        <h2 className="text-gold font-serif text-xl font-medium mt-8 mb-3 pb-1 border-b border-gold/20">
+                                            {children}
+                                        </h2>
+                                    ),
+                                    h3: ({ children }) => (
+                                        <h3 className="text-gold/80 text-lg font-medium mt-5 mb-2">{children}</h3>
+                                    ),
+                                    strong: ({ children }) => (
+                                        <strong className="text-white font-medium">{children}</strong>
+                                    ),
+                                    p: ({ children }) => (
+                                        <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>
+                                    ),
+                                    ul: ({ children }) => (
+                                        <ul className="space-y-2 mb-4 mt-2">{children}</ul>
+                                    ),
+                                    li: ({ children }) => (
+                                        <li className="flex items-start gap-3 text-text/90 text-[15px]">
+                                            <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
+                                            <span>{children}</span>
+                                        </li>
+                                    ),
+                                }}
+                            >
+                                {cleanReading(result.reading)}
+                            </ReactMarkdown>
+                            {isLoading && <span className="inline-block w-2 h-4 bg-gold ml-1 animate-pulse" />}
                         </div>
 
                         {result.keywords && (
