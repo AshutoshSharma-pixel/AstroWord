@@ -23,10 +23,57 @@ export const metadata: Metadata = {
   },
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is the marriage year prediction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Astrology shows the most auspicious \"window\" for marriage. While the AI analyzes your Dasha and transits with high precision, individual free will and societal factors also play a role."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my current Dasha doesn't support marriage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Even if the main Mahadasha is not marriage-oriented, the Antardasha (sub-period) or a favorable Jupiter transit over the 7th house can often trigger a wedding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the 7th house lord in the 8th house delay marriage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can indicate a delay or a transformation-led marriage, but it certainly doesn't deny it. Often, it points to a spouse from a different background or a sudden union."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is the Navamsa (D9) chart important for timing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The D1 chart shows the promise, but the D9 shows the strength. A planet might look weak in D1 but if it is strong in D9, the marriage will happen during that planet's period."
+      }
+    }
+  ]
+};
+
 export default function MarriageYearLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {children}
+    </>
+  );
 }

@@ -393,48 +393,69 @@ export default function MarriageTypePage() {
             </div>
 
             {/* SEO Content Block */}
-            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Love Marriage or Arranged Marriage — What Does Vedic Astrology Say?</h2>
+                    <h2 className="text-gold font-serif text-2xl">Love or Arranged Marriage? Deciphering Your Marriage Destiny</h2>
                     <p className="text-muted text-sm leading-relaxed">
-                        Vedic astrology can indicate whether a person is more likely to have a love marriage
-                        or arranged marriage based on planetary placements in the birth chart. The 5th house
-                        governs romance and love, while the 7th house governs marriage and partnerships.
-                        The connection between these two houses and their lords is the primary indicator.
+                        In Vedic Astrology, the nature of your union—whether it is a "Love Marriage" (Swayamvara) or an "Arranged Marriage"—is intricately woven into the planetary positions of your birth chart. While modern life has blurred these lines, the cosmic blueprint still identifies the primary force that will bring two souls together. 
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Our AI-powered analyzer looks beyond surface-level placements, examining the subtle connections between the houses of desire (Kama) and the houses of commitment (Dharma) to provide a probability-based reading of your marital path.
                     </p>
                 </div>
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Love Marriage Indicators in Astrology</h2>
-                    <div className="space-y-2">
+                    <h2 className="text-gold font-serif text-2xl">Key Indicators for Love Marriage (Gandharva Vivaha)</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        A love marriage is usually indicated when the planets governing romance and individual will overpower traditional family-centric houses.
+                    </p>
+                    <div className="space-y-3">
                         {[
-                            'Rahu in 7th house or aspecting 7th lord',
-                            'Venus conjunct or aspecting 5th lord',
-                            '5th lord and 7th lord connection by aspect or conjunction',
-                            'Moon in 5th or 7th house',
-                            'Venus in 1st, 5th, 7th or 11th house',
-                            'Mars and Venus conjunction or mutual aspect',
-                            'Rahu conjunct Venus anywhere in the chart',
-                        ].map((indicator) => (
-                            <div key={indicator} className="flex items-start gap-2">
+                            { t: '5th and 7th House Connection', d: 'The strongest indicator. When the lord of the 5th (romance) and the 7th (marriage) exchange houses, conjunct, or aspect each other, a love-based union is highly likely.' },
+                            { t: 'Rahu\'s Influence', d: 'Rahu represents unconventional paths. Rahu in the 7th house, or conjunct Venus/7th lord, often indicates a marriage that breaks traditional boundaries or happens outside one\'s immediate community.' },
+                            { t: 'Venus-Mars Interaction', d: 'Venus (love) and Mars (passion) together create strong physical and emotional attraction, often leading to relationships that culminate in marriage.' },
+                            { t: 'The Moon\'s Role', d: 'A Moon connected to the 7th house or its lord indicates a marriage based on deep emotional compatibility and personal choice.' }
+                        ].map((item) => (
+                            <div key={item.t} className="flex items-start gap-3">
                                 <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
-                                <p className="text-muted text-sm">{indicator}</p>
+                                <p className="text-muted text-sm"><strong className="text-text">{item.t}:</strong> {item.d}</p>
                             </div>
                         ))}
                     </div>
                 </div>
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Arranged Marriage Indicators in Astrology</h2>
-                    <div className="space-y-2">
+                    <h2 className="text-gold font-serif text-2xl">Indicators for Arranged Marriage (Traditional Union)</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        An arranged marriage is indicated when the chart shows a strong influence of tradition, family values, and "Dharma" over personal impulse.
+                    </p>
+                    <div className="space-y-3">
                         {[
-                            'Jupiter in 7th house (especially for females)',
-                            'Saturn aspecting or placed in 7th house',
-                            '7th lord in 12th house',
-                            'Strong benefic influence on 7th house with no Rahu connection',
-                            'Moon and Venus in traditional signs (Taurus, Cancer, Virgo)',
-                        ].map((indicator) => (
-                            <div key={indicator} className="flex items-start gap-2">
+                            { t: 'Jupiter\'s Dominance', d: 'Jupiter is the planet of tradition and wisdom. A strong Jupiter aspecting the 7th house or its lord suggests a marriage approved by elders and based on shared values.' },
+                            { t: '2nd, 4th, and 9th House Involvement', d: 'When the 7th lord is connected to the 2nd (family), 4th (home), or 9th (tradition), the family plays a pivotal role in choosing the spouse.' },
+                            { t: 'Sun and Saturn Influence', d: 'Sun represents the father/authority and Saturn represents duty. Their influence on the 7th house often points toward a conventional, socially accepted marriage.' }
+                        ].map((item) => (
+                            <div key={item.t} className="flex items-start gap-3">
                                 <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
-                                <p className="text-muted text-sm">{indicator}</p>
+                                <p className="text-muted text-sm"><strong className="text-text">{item.t}:</strong> {item.d}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
+                    <div className="grid grid-cols-1 gap-4">
+                        {[
+                            { q: 'Can a love marriage turn into an arranged one (Love-cum-Arranged)?', a: 'Yes. Many charts show strong 5th-7th connections (love) but also have a powerful 9th lord or Jupiter (tradition). This indicates a relationship that starts with love but eventually receives full family blessing and traditional ceremonies.' },
+                            { q: 'Is a love marriage successful according to astrology?', a: 'Success depends on the strength of the 7th house and the D9 Navamsa chart, not the type of marriage. A love marriage with a weak 7th lord may face challenges, while an arranged marriage with a strong Venus can be incredibly romantic and stable.' },
+                            { q: 'What if my chart shows mixed indicators?', a: 'Mixed indicators are common in the modern era. It usually means you will have the freedom to choose, but family values will still play a significant role in the final decision or the wedding process.' },
+                            { q: 'Does the Navamsa (D9) chart change the result?', a: 'The D9 chart is the "fruit" of the tree. If the D1 (Birth Chart) shows love but the D9 is very traditional/Saturnian, there might be initial romance that leads to a very disciplined, traditional marital life.' }
+                        ].map((item) => (
+                            <div key={item.q} className="bg-surface/40 border border-border/50 rounded-2xl p-5 space-y-2">
+                                <h4 className="text-gold font-serif text-base">{item.q}</h4>
+                                <p className="text-muted text-sm leading-relaxed">{item.a}</p>
                             </div>
                         ))}
                     </div>

@@ -414,29 +414,62 @@ export default function MarriageYearPage() {
             </div>
 
             {/* SEO Content Block */}
-            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-8 mt-12 border-t border-border/30 pt-12">
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">How Does Vedic Astrology Predict Marriage Year?</h2>
+                    <h2 className="text-gold font-serif text-2xl">Marriage Year Prediction — When Will You Get Married?</h2>
                     <p className="text-muted text-sm leading-relaxed">
-                        Vedic astrology predicts marriage timing through a combination of Dasha (planetary period)
-                        analysis, Jupiter transits, and activation of the 7th house. Unlike Western astrology,
-                        Vedic timing predictions are remarkably precise because they use your exact birth time
-                        to calculate which planetary period is running at any given moment.
+                        In Vedic Astrology (Jyotish), the timing of marriage is not a random event but a calculated convergence of planetary periods (Dashas) and celestial movements (Transits). While your birth chart shows the <em>promise</em> of marriage, the specific year is determined by when the "Marriage Karakas" and the 7th house lords become active in your life.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        AstroWord&apos;s AI analyzer examines your D1 (Birth Chart) and D9 (Navamsa) together with your current Vimshottari Dasha to identify the most probable window for your union.
                     </p>
                 </div>
+
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Key Indicators for Marriage Timing</h2>
+                    <h2 className="text-gold font-serif text-2xl">The Three Pillars of Marriage Timing</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Astrologers use three primary layers to pinpoint the year of marriage. Our AI simulates this multi-layered analysis:
+                    </p>
                     <div className="space-y-3">
                         {[
-                            { title: 'Venus Mahadasha or Antardasha', desc: 'Venus is the natural karaka of marriage. When Venus dasha runs, marriage likelihood is very high.' },
-                            { title: '7th Lord Dasha', desc: 'When the lord of your 7th house runs its Mahadasha or Antardasha, marriage often occurs.' },
-                            { title: 'Jupiter Transit over 7th House', desc: 'Jupiter transiting your 7th house or natal Venus acts as a trigger for marriage events.' },
-                            { title: 'Darakaraka Dasha', desc: 'When your Darakaraka planet runs its period, it activates the spouse significator strongly.' },
-                            { title: "Saturn's Role", desc: 'Saturn can delay marriage but also confirms it. Saturn completing Sade Sati often brings marriage after the pressure lifts.' },
+                            { t: 'The Promise (D1 & D9 Charts)', d: 'First, we check if the 7th house, its lord, and Venus (for men) or Jupiter (for women) are well-placed. The D9 Navamsa chart is then consulted to see the "strength of the fruit"—confirming if the marriage promise is strong.' },
+                            { t: 'The Time (Vimshottari Dasha)', d: 'Marriage usually occurs during the Mahadasha or Antardasha of the 7th lord, the 2nd lord (family), or planets placed in the 7th house. Venus, Rahu, and Jupiter are also major timing triggers.' },
+                            { t: 'The Trigger (Transits)', d: 'Even with a favorable Dasha, a "trigger" is needed. This usually happens when Jupiter transits or aspects the 7th house/7th lord, and Saturn simultaneously aspects the same area—a phenomenon known as the Double Transit.' }
                         ].map((item) => (
-                            <div key={item.title} className="bg-surface border border-border rounded-xl p-4">
-                                <p className="text-gold text-sm font-medium mb-1">✦ {item.title}</p>
-                                <p className="text-muted text-xs leading-relaxed">{item.desc}</p>
+                            <div key={item.t} className="flex items-start gap-3">
+                                <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+                                <p className="text-muted text-sm"><strong className="text-text">{item.t}:</strong> {item.d}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Why Does Marriage Get Delayed?</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Sometimes the "Marriage Year" seems to pass without an event. Astrology identifies several reasons for this "delayed destiny":
+                    </p>
+                    <ul className="text-muted text-sm leading-relaxed space-y-2 ml-4">
+                        <li>• <span className="text-white">Saturn&apos;s Influence:</span> Saturn in the 7th house or aspecting the 7th lord often delays marriage until after age 28 or 30, ensuring maturity.</li>
+                        <li>• <span className="text-white">Retrograde 7th Lord:</span> If the planet governing your marriage is retrograde, it can indicate multiple attempts or a feeling of "almost there" before the final union.</li>
+                        <li>• <span className="text-white">Kumbha Vivaha Indicators:</span> Certain doshas might require specific spiritual remedies before the marriage gates open.</li>
+                        <li>• <span className="text-white">Focus on Career:</span> Strong 10th house placements can shift the planetary priority from marriage to professional growth during early favorable Dashas.</li>
+                    </ul>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
+                    <div className="grid grid-cols-1 gap-4">
+                        {[
+                            { q: 'How accurate is the marriage year prediction?', a: 'Astrology shows the most favorable planetary windows. While we can identify the year with high probability based on Dasha and Transits, individual choices and free will play a final role. Our AI uses high-precision ephemeris data for the best possible estimate.' },
+                            { q: 'Can astrology predict the exact date of marriage?', a: 'Predicting a specific day is complex and requires "Pratyantar Dasha" analysis and daily transit checks. Most Vedic astrologers, including our AI, focus on the most favorable 6-12 month window.' },
+                            { q: 'What if my predicted marriage year has already passed?', a: 'This often happens if you missed a window due to personal choices or if a specific Dosha caused a delay. The AI will look for the next available favorable window in your upcoming planetary cycles.' },
+                            { q: 'Does the Navamsa chart change the timing?', a: 'The Navamsa (D9) doesn\'t change the timing, but it confirms it. If the D1 shows a favorable period but the D9 is weak, the marriage might be delayed or face obstacles. If both are strong, the marriage happens smoothly.' }
+                        ].map((item) => (
+                            <div key={item.q} className="bg-surface/40 border border-border/50 rounded-2xl p-5 space-y-2">
+                                <h4 className="text-gold font-serif text-base">{item.q}</h4>
+                                <p className="text-muted text-sm leading-relaxed">{item.a}</p>
                             </div>
                         ))}
                     </div>

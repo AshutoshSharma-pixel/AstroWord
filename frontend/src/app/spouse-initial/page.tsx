@@ -151,81 +151,70 @@ export default function SpouseInitialPage() {
             <div className="min-h-[100dvh] bg-bg text-text">
                 <WelcomeScreen onComplete={handleFormSubmit} />
                 <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
-  <div className="space-y-4">
-    <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Find the First Letter of Your Spouse's Name</h1>
-    <p className="text-muted text-sm leading-relaxed">
-      Enter your birth details above to discover the most likely first letter 
-      of your future spouse's name using ancient Vedic Nakshatra Akshara mapping. 
-      AI analysis based on your Darakaraka planet, 7th house lord, and Venus nakshatra.
-    </p>
-  </div>
+                    <div className="space-y-4">
+                        <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Vedic Nakshatra Akshara Analysis</h1>
+                        <p className="text-muted text-sm leading-relaxed">
+                            Discover the sacred sound vibration associated with your future life partner. Using ancient Vedic astrology and the Jaimini system, we analyze your Darakaraka and 7th house placements to reveal the most likely first letter of your spouse's name.
+                        </p>
+                    </div>
 
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">How Vedic Astrology Predicts Your Spouse's Name Initial</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      In Vedic astrology, each of the 27 Nakshatras is associated with specific 
-      syllables called Aksharas. The Nakshatra occupied by your spouse significator 
-      planet — and specifically the pada (quarter) it falls in — gives the sound 
-      vibration most likely to match your future spouse's name initial.
-    </p>
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {[
-        { title: 'Darakaraka Method', desc: 'The planet with the lowest degree in your chart is your Darakaraka — your primary spouse significator. Its nakshatra pada gives the strongest name initial.' },
-        { title: '7th Lord Method', desc: 'The lord of your 7th house (marriage house) and its nakshatra pada provides a secondary confirmation for the spouse name initial.' },
-        { title: 'Venus Karaka Method', desc: 'Venus as the universal marriage significator adds a third data point. When all three methods agree, the prediction confidence is highest.' },
-      ].map((item) => (
-        <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-1">
-          <p className="text-white text-sm font-medium">✦ {item.title}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
+                    <div className="space-y-4">
+                        <h2 className="text-gold font-serif text-2xl">How the Stars Reveal a Name</h2>
+                        <p className="text-muted text-sm leading-relaxed">
+                            In the Vedic tradition, every individual is born under a specific Nakshatra (Lunar Mansion), which carries a unique phonetic vibration called an "Akshara." By identifying the Nakshatra of your spouse significator, we can trace the sound that will likely initiate their name.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {[
+                                { title: 'The Darakaraka', desc: 'In Jaimini astrology, the planet with the lowest degree is your Darakaraka—the indicator of your spouse\'s soul and identity.' },
+                                { title: '7th House Lord', d: 'The ruler of your marriage house provides a secondary layer of confirmation for the spouse\'s name initial.' },
+                                { title: 'Venus Nakshatra', d: 'As the universal karaka for marriage, the constellation Venus occupies adds the final phonetic alignment.' },
+                            ].map((item) => (
+                                <div key={item.title} className="bg-surface/50 border border-border/50 rounded-xl p-4 space-y-1">
+                                    <p className="text-white text-sm font-medium">✦ {item.title}</p>
+                                    <p className="text-muted text-[11px] leading-relaxed">{item.desc || item.d}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Nakshatra to Name Syllable — Quick Reference</h2>
-    <p className="text-muted text-sm leading-relaxed">
-      Each nakshatra maps to specific name syllables in the traditional Vedic system. 
-      Here are some of the most common:
-    </p>
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-      {[
-        { nakshatra: 'Ashwini', syllables: 'Chu, Che, Cho, La' },
-        { nakshatra: 'Rohini', syllables: 'O, Va, Vi, Vu' },
-        { nakshatra: 'Mrigashira', syllables: 'Ve, Vo, Ka, Ki' },
-        { nakshatra: 'Punarvasu', syllables: 'Ke, Ko, Ha, Hi' },
-        { nakshatra: 'Magha', syllables: 'Ma, Mi, Mu, Me' },
-        { nakshatra: 'Hasta', syllables: 'Pu, Sha, Na, Tha' },
-        { nakshatra: 'Chitra', syllables: 'Pe, Po, Ra, Ri' },
-        { nakshatra: 'Anuradha', syllables: 'Na, Ni, Nu, Ne' },
-        { nakshatra: 'Shravan', syllables: 'Ju, Je, Jo, Gha' },
-      ].map((item) => (
-        <div key={item.nakshatra} className="bg-surface border border-border rounded-xl p-3">
-          <p className="text-white text-xs font-medium">{item.nakshatra}</p>
-          <p className="text-muted text-xs mt-0.5">{item.syllables}</p>
-        </div>
-      ))}
-    </div>
-  </div>
+                    <div className="space-y-4">
+                        <h2 className="text-gold font-serif text-2xl">Phonetic Mapping Table</h2>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            {[
+                                { n: 'Ashwini', s: 'Chu, Che, Cho, La' },
+                                { n: 'Rohini', s: 'O, Va, Vi, Vu' },
+                                { n: 'Mrigashira', s: 'Ve, Vo, Ka, Ki' },
+                                { n: 'Punarvasu', s: 'Ke, Ko, Ha, Hi' },
+                                { n: 'Magha', s: 'Ma, Mi, Mu, Me' },
+                                { n: 'Hasta', s: 'Pu, Sha, Na, Tha' },
+                                { n: 'Chitra', s: 'Pe, Po, Ra, Ri' },
+                                { n: 'Anuradha', s: 'Na, Ni, Nu, Ne' },
+                                { n: 'Shravan', s: 'Ju, Je, Jo, Gha' },
+                            ].map((item) => (
+                                <div key={item.n} className="bg-surface/30 border border-border/30 rounded-xl p-3">
+                                    <p className="text-white text-xs font-medium">{item.n}</p>
+                                    <p className="text-gold/60 text-[10px] mt-0.5">{item.s}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-  <div className="space-y-4">
-    <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction — FAQ</h2>
-    <div className="space-y-3">
-      {[
-        { q: "Can astrology really predict my spouse's name initial?", a: 'Yes — but with varying confidence. When your Darakaraka nakshatra, 7th lord nakshatra, and Venus nakshatra all point to the same syllable, the prediction is strong. AstroWord uses all three methods and shows you which letters have the highest alignment.' },
-        { q: 'What is the most accurate method for spouse name prediction?', a: 'The Darakaraka nakshatra method from Jaimini astrology is considered most accurate by classical texts. AstroWord uses the Darakaraka as the primary method, supported by 7th lord and Venus nakshatras.' },
-        { q: 'What if my spouse has a non-Indian name?', a: 'Look for phonetic similarity rather than exact letter match. The syllable "Va" might correspond to names starting with W, V, or B in different languages and scripts.' },
-        { q: 'What is Nakshatra Akshara?', a: 'Nakshatra Akshara (literally "star syllable") is the sacred sound associated with each nakshatra pada in Vedic tradition. Children named with their birth nakshatra\'s akshara are believed to resonate harmonically with their cosmic energy.' },
-        { q: 'Do I need an exact birth time for this prediction?', a: "Yes — birth time determines the Darakaraka planet's exact degree and nakshatra pada, which directly affects the name initial prediction. Approximate birth times can give incorrect results." },
-      ].map((item) => (
-        <div key={item.q} className="bg-surface2 border border-border rounded-xl p-4 space-y-2">
-          <p className="text-white text-sm font-medium">{item.q}</p>
-          <p className="text-muted text-xs leading-relaxed">{item.a}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+                    <div className="space-y-4">
+                        <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
+                        <div className="space-y-3">
+                            {[
+                                { q: "How accurate is the spouse name prediction?", a: "Astrology predicts phonetic vibrations (sounds) rather than specific spellings. While the alignment is often uncanny, it is best used as a guide to recognize the 'soul vibration' of your partner." },
+                                { q: "Does this work for non-Sanskrit names?", a: "Yes. The 52 sounds of the Sanskrit alphabet cover the entire range of human vocalization. For example, the 'Va' vibration often maps to English names starting with V, W, or B." },
+                                { q: "Why do I need my exact birth time?", a: "The Nakshatra changes every 13 degrees, and the 'Pada' (quarter) changes every 3 degrees. Even a 15-minute difference can change the predicted initial." }
+                            ].map((item) => (
+                                <div key={item.q} className="bg-surface2/50 border border-border/50 rounded-xl p-4 space-y-2">
+                                    <p className="text-white text-sm font-medium">{item.q}</p>
+                                    <p className="text-muted text-xs leading-relaxed">{item.a}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -400,6 +389,49 @@ export default function SpouseInitialPage() {
                     >
                         ← Back to Chat
                     </button>
+                </div>
+            </div>
+
+            {/* SEO Content Block */}
+            <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">The Science of Sound: Predicting Spouse Initial in Vedic Astrology</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Vedic Astrology is deeply rooted in the science of sound vibrations. The universe is believed to be a collection of frequencies, and our names are the specific vibrations we respond to throughout our lives. By analyzing your birth chart, we can identify the cosmic frequencies that will be present in your spouse's name.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Understanding Nakshatra Aksharas</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Each of the 27 Nakshatras is divided into four quarters (Padas). Each Pada is assigned a specific syllable (Akshara).
+                    </p>
+                    <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                            <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+                            <p className="text-muted text-sm"><strong className="text-text">Primary Vibrations:</strong> These are the sounds that most closely match the soul frequency of the person you are destined to marry.</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                            <span className="text-gold text-xs mt-1 flex-shrink-0">✦</span>
+                            <p className="text-muted text-sm"><strong className="text-text">Cross-Cultural Phonetics:</strong> While these sounds are Sanskrit in origin, they apply globally. For instance, the 'Ka' syllable corresponds to names like Kevin, Katherine, or Kabir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Spouse Name Initial — FAQ</h2>
+                    <div className="grid grid-cols-1 gap-4">
+                        {[
+                            { q: 'Why does it show multiple possible initials?', a: 'Your chart has multiple marriage indicators—the 7th lord, the Darakaraka, and Venus. In most cases, these planets occupy different Nakshatras. If two or more point to the same sound, that initial is extremely likely.' },
+                            { q: 'Is the initial for the first name or surname?', a: 'In Vedic tradition, this calculation refers to the "calling name" or the first name, as that is the vibration the individual responds to most frequently.' },
+                            { q: 'What if the initial doesn\'t match my current partner?', a: 'Astrology shows potential and destiny. If you are in a relationship that doesn\'t match the predicted initial, look at the qualities of the planet. Often, the partner will embody the energy of the predicted planet even if the name initial differs.' }
+                        ].map((item) => (
+                            <div key={item.q} className="bg-surface/40 border border-border/50 rounded-2xl p-5 space-y-2">
+                                <h4 className="text-gold font-serif text-base">{item.q}</h4>
+                                <p className="text-muted text-sm leading-relaxed">{item.a}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
