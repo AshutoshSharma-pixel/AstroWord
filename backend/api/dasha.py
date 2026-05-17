@@ -103,10 +103,24 @@ async def calculate_dasha(request: DashaRequest):
             or chart.get("input", {}).get("date")
             or chart.get("input", {}).get("dob")
         )
+
+        # Fallback for old cached charts: chart.py already computed correct dashas.
+        # Use the start date of the first dasha entry as a proxy for birth_date.
+        existing_dashas = chart.get("dashas", [])
+
         if birth_date_str:
             birth_dt = _parse_date(str(birth_date_str))
+        elif existing_dashas and existing_dashas[0].get("start"):
+            # Dates stored as YYYY-MM-DD by chart.py
+            try:
+                birth_dt = datetime.strptime(existing_dashas[0]["start"], "%Y-%m-%d")
+            except ValueError:
+                birth_dt = datetime(2000, 1, 1)
         else:
             birth_dt = datetime(2000, 1, 1)
+
+        print(f"DEBUG dasha: birth_date_str={birth_date_str!r} birth_dt={birth_dt.date()}")
+
 
         start_idx = DASHA_SEQUENCE.index(starting_lord)
 

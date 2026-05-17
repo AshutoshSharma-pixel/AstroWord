@@ -339,7 +339,10 @@ async def generate_chart(data: ChartRequest):
                 "sign": get_zodiac_sign(asc_deg_sidereal)
             },
             "divisional_ascendants": {},
-            "planets": {}
+            "planets": {},
+            "birth_date": data.dob,        # YYYY-MM-DD — used by /dasha endpoint
+            "birth_time": data.tob,        # HH:MM
+            "birth_place": data.pob        # city string
         }
         
         # Calculate Divisional Ascendants
