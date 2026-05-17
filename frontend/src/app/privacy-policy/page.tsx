@@ -32,10 +32,10 @@ export default function PrivacyPolicyPage() {
                             by its founder. We provide personalised birth chart readings, predictive astrology,
                             and related spiritual tools. For any privacy-related concerns, contact us at{' '}
                             <a
-                                href="mailto:itsashutosh769@gmail.com"
+                                href="mailto:info@astroword.in"
                                 className="text-[#c9a84c] underline hover:opacity-80"
                             >
-                                itsashutosh769@gmail.com
+                                info@astroword.in
                             </a>.
                         </p>
                     </section>
@@ -139,8 +139,8 @@ export default function PrivacyPolicyPage() {
                         </ul>
                         <p className="mt-3">
                             To exercise any of these rights, email us at{' '}
-                            <a href="mailto:itsashutosh769@gmail.com" className="text-[#c9a84c] underline hover:opacity-80">
-                                itsashutosh769@gmail.com
+                            <a href="mailto:info@astroword.in" className="text-[#c9a84c] underline hover:opacity-80">
+                                info@astroword.in
                             </a>.
                         </p>
                     </section>
@@ -183,7 +183,7 @@ export default function PrivacyPolicyPage() {
 
                     <div className="border-t border-white/10 pt-8 text-sm text-white/40 font-mono">
                         <p>AstroWord — Precision Vedic AI</p>
-                        <p>Contact: itsashutosh769@gmail.com</p>
+                        <p>Contact: info@astroword.in</p>
                         <p>Governed by the laws of India · DPDP Act 2023 · IT Act 2000</p>
                     </div>
 

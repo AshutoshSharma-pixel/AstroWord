@@ -103,8 +103,8 @@ export default function TermsPage() {
                         </div>
                         <p className="mt-3 text-sm">
                             For refund requests, email{' '}
-                            <a href="mailto:itsashutosh769@gmail.com" className="text-[#c9a84c] underline hover:opacity-80">
-                                itsashutosh769@gmail.com
+                            <a href="mailto:info@astroword.in" className="text-[#c9a84c] underline hover:opacity-80">
+                                info@astroword.in
                             </a>{' '}
                             with your registered email address and payment ID.
                         </p>
@@ -218,15 +218,15 @@ export default function TermsPage() {
                         <p>
                             For any questions, concerns, or complaints regarding these Terms, please contact us
                             at:{' '}
-                            <a href="mailto:itsashutosh769@gmail.com" className="text-[#c9a84c] underline hover:opacity-80">
-                                itsashutosh769@gmail.com
+                            <a href="mailto:info@astroword.in" className="text-[#c9a84c] underline hover:opacity-80">
+                                info@astroword.in
                             </a>
                         </p>
                     </section>
 
                     <div className="border-t border-white/10 pt-8 text-sm text-white/40 font-mono">
                         <p>AstroWord — Precision Vedic AI</p>
-                        <p>Contact: itsashutosh769@gmail.com</p>
+                        <p>Contact: info@astroword.in</p>
                         <p>Governed by the laws of India · IT Act 2000 · Consumer Protection Act 2019</p>
                     </div>
 
