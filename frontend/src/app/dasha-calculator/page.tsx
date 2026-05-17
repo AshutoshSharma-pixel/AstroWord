@@ -227,6 +227,54 @@ export default function DashaCalculatorPage() {
                     )}
                 </div>
 
+                {/* 120-year Mahadasha Timeline */}
+                <div className="bg-surface2 border border-border rounded-2xl p-6">
+                    <h2 className="text-white font-serif text-xl mb-1">Your Complete 120-Year Dasha Timeline</h2>
+                    <p className="text-muted text-xs mb-4">Past · Current · Upcoming</p>
+                    <div className="space-y-2">
+                        {result.mahadashas.map((m: any, i: number) => {
+                            const today = new Date();
+                            const endDt = new Date(m.end.replace(/(\d{2}) (\w{3}) (\d{4})/, '$2 $1 $3'));
+                            const startDt = new Date(m.start.replace(/(\d{2}) (\w{3}) (\d{4})/, '$2 $1 $3'));
+                            const isPast = !m.is_current && endDt < today;
+                            const isFuture = !m.is_current && startDt > today;
+                            return (
+                                <div
+                                    key={i}
+                                    className={`flex justify-between items-center p-3 rounded-xl transition-all ${
+                                        m.is_current
+                                            ? 'bg-gold/10 border border-gold/30'
+                                            : isPast
+                                            ? 'bg-surface border border-border/30 opacity-40'
+                                            : 'bg-surface border border-border/50'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className={`font-mono text-sm ${
+                                            m.is_current ? 'text-gold font-medium' : isPast ? 'text-muted' : 'text-muted'
+                                        }`}>
+                                            {m.is_current ? '▶ ' : ''}{m.lord} Mahadasha
+                                        </span>
+                                        {m.is_current && (
+                                            <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full font-mono">Current</span>
+                                        )}
+                                        {isFuture && i === result.mahadashas.findIndex((x: any) => {
+                                            const s = new Date(x.start.replace(/(\d{2}) (\w{3}) (\d{4})/, '$2 $1 $3'));
+                                            return s > today && !x.is_current;
+                                        }) && (
+                                            <span className="text-xs bg-surface2 text-muted/60 border border-border/40 px-2 py-0.5 rounded-full font-mono">Next</span>
+                                        )}
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-muted text-xs">{m.start} — {m.end}</p>
+                                        <p className="text-muted text-xs">{m.years} yrs</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
                 {/* Antardasha timeline */}
                 <div className="bg-surface2 border border-border rounded-2xl p-6">
                     <h2 className="text-white font-serif text-xl mb-4">
@@ -310,34 +358,7 @@ export default function DashaCalculatorPage() {
                     <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
                 </div>
 
-                {/* Full 120-year timeline */}
-                <div className="bg-surface2 border border-border rounded-2xl p-6">
-                    <h2 className="text-white font-serif text-xl mb-4">Your Complete 120-Year Dasha Timeline</h2>
-                    <div className="space-y-2">
-                        {result.mahadashas.map((m: any, i: number) => (
-                            <div
-                                key={i}
-                                className={`flex justify-between items-center p-3 rounded-xl ${m.is_current
-                                    ? 'bg-gold/10 border border-gold/30'
-                                    : 'bg-surface border border-border/50'
-                                }`}
-                            >
-                                <div className="flex items-center gap-2">
-                                    <span className={`font-mono text-sm ${m.is_current ? 'text-gold font-medium' : 'text-muted'}`}>
-                                        {m.is_current ? '▶ ' : ''}{m.lord} Mahadasha
-                                    </span>
-                                    {m.is_current && (
-                                        <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">Current</span>
-                                    )}
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-muted text-xs">{m.start} — {m.end}</p>
-                                    <p className="text-muted text-xs">{m.years} years</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+
 
                 {/* Marriage Report Upsell */}
                 <MarriageReportPreview chartData={chartData} calculatorType="dasha" />
