@@ -7,9 +7,14 @@ from google.genai import types
 
 
 def _add_years(dt: datetime, years: float) -> datetime:
-    """Add a fractional number of years to a datetime using stdlib only."""
-    days = int(years * 365.25)
-    return dt + timedelta(days=days)
+    """Add a fractional number of years accurately using dt.replace for whole years."""
+    full_years = int(years)
+    remaining_days = (years - full_years) * 365.25
+    try:
+        result = dt.replace(year=dt.year + full_years)
+    except ValueError:  # Feb 29 edge case
+        result = dt.replace(year=dt.year + full_years, day=28)
+    return result + timedelta(days=remaining_days)
 
 
 def _parse_date(s: str) -> datetime:
@@ -72,14 +77,19 @@ async def calculate_dasha(request: DashaRequest):
         starting_lord = NAKSHATRA_LORDS[nak_index]
 
         # --- Balance of first Dasha at birth ---
-        nakshatra_span = 360.0 / 27.0  # 13.3333° per nakshatra
+        # moon["degree"] from Swiss Ephemeris is the full sidereal ecliptic longitude (0–360°)
+        # This is the authoritative value — use it directly.
+        nakshatra_span = 360.0 / 27.0  # 13.3333...° per nakshatra
 
-        full_degree = moon.get("full_degree", None)
-        if full_degree is not None:
-            degree_in_nakshatra = float(full_degree) % nakshatra_span
-        else:
-            pada_span = nakshatra_span / 4.0
-            degree_in_nakshatra = (pada - 1) * pada_span + (float(moon_degree_in_sign) % pada_span)
+        full_moon_longitude = float(moon["degree"])  # 0–360, already sidereal
+
+        # Degree within this nakshatra (0 to 13.333)
+        nak_index_0 = NAKSHATRA_INDEX.get(nakshatra_name, 1) - 1
+        nakshatra_start_degree = nak_index_0 * nakshatra_span
+        degree_in_nakshatra = full_moon_longitude - nakshatra_start_degree
+
+        # Clamp to valid range (handles floating point edge cases)
+        degree_in_nakshatra = max(0.0, min(degree_in_nakshatra, nakshatra_span))
 
         balance_fraction = (nakshatra_span - degree_in_nakshatra) / nakshatra_span
         starting_years = DASHA_YEARS[starting_lord]
@@ -90,6 +100,8 @@ async def calculate_dasha(request: DashaRequest):
             chart.get("birth_date")
             or chart.get("birthDate")
             or chart.get("date_of_birth")
+            or chart.get("input", {}).get("date")
+            or chart.get("input", {}).get("dob")
         )
         if birth_date_str:
             birth_dt = _parse_date(str(birth_date_str))
@@ -149,15 +161,17 @@ async def calculate_dasha(request: DashaRequest):
         maha_lord = current_maha["lord"]
         maha_start_dt = datetime.strptime(current_maha["start"], "%d %b %Y")
         maha_total_years = current_maha["years"]
+        # Use full DASHA_YEARS for the Mahadasha lord (not the partial balance_years for 1st Mahadasha)
+        maha_full_years = DASHA_YEARS[maha_lord]
         maha_lord_idx = DASHA_SEQUENCE.index(maha_lord)
         ad_current = maha_start_dt
 
         for j in range(9):
             ad_idx = (maha_lord_idx + j) % 9
             ad_lord = DASHA_SEQUENCE[ad_idx]
-            ad_fraction = DASHA_YEARS[ad_lord] / 120.0
-            ad_days = int(maha_total_years * ad_fraction * 365.25)
-            ad_end = ad_current + timedelta(days=ad_days)
+            # Antardasha duration = (maha_years * antar_years) / 120 years
+            ad_years = (maha_full_years * DASHA_YEARS[ad_lord]) / 120.0
+            ad_end = _add_years(ad_current, ad_years)
             is_current_ad = ad_current <= today <= ad_end
             antardashas.append({
                 "lord": ad_lord,
