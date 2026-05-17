@@ -1,11 +1,29 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from api.gemini_utils import call_gemini_new
 from google.genai import types
-from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse as parse_date
+
+
+def _add_years(dt: datetime, years: float) -> datetime:
+    """Add a fractional number of years to a datetime using stdlib only."""
+    days = int(years * 365.25)
+    return dt + timedelta(days=days)
+
+
+def _parse_date(s: str) -> datetime:
+    """Parse common date string formats without dateutil."""
+    for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%Y/%m/%d", "%d %b %Y", "%B %d, %Y"):
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    # Last resort: take the first 10 chars and try ISO format
+    try:
+        return datetime.strptime(str(s)[:10], "%Y-%m-%d")
+    except ValueError:
+        return datetime(2000, 1, 1)
 
 router = APIRouter()
 
@@ -74,7 +92,7 @@ async def calculate_dasha(request: DashaRequest):
             or chart.get("date_of_birth")
         )
         if birth_date_str:
-            birth_dt = parse_date(str(birth_date_str))
+            birth_dt = _parse_date(str(birth_date_str))
         else:
             birth_dt = datetime(2000, 1, 1)
 
@@ -85,8 +103,7 @@ async def calculate_dasha(request: DashaRequest):
         current_date = birth_dt
 
         # First Mahadasha (partial balance)
-        days_first = int(balance_years * 365.25)
-        first_end = birth_dt + relativedelta(days=days_first)
+        first_end = _add_years(birth_dt, balance_years)
         mahadashas.append({
             "lord": starting_lord,
             "start": birth_dt.strftime("%d %b %Y"),
@@ -101,7 +118,7 @@ async def calculate_dasha(request: DashaRequest):
             idx = (start_idx + i) % 9
             lord = DASHA_SEQUENCE[idx]
             yrs = DASHA_YEARS[lord]
-            end_date = current_date + relativedelta(years=yrs)
+            end_date = _add_years(current_date, yrs)
             mahadashas.append({
                 "lord": lord,
                 "start": current_date.strftime("%d %b %Y"),
@@ -140,7 +157,7 @@ async def calculate_dasha(request: DashaRequest):
             ad_lord = DASHA_SEQUENCE[ad_idx]
             ad_fraction = DASHA_YEARS[ad_lord] / 120.0
             ad_days = int(maha_total_years * ad_fraction * 365.25)
-            ad_end = ad_current + relativedelta(days=ad_days)
+            ad_end = ad_current + timedelta(days=ad_days)
             is_current_ad = ad_current <= today <= ad_end
             antardashas.append({
                 "lord": ad_lord,
