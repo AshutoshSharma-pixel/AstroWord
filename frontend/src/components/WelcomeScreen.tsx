@@ -184,7 +184,7 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
                 </svg>
             </div>
 
-            <div className="max-w-md w-full relative z-10 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <div className="max-w-md w-full relative z-10 space-y-8">
 
                 {/* Header */}
                 <div className="text-center space-y-3">
