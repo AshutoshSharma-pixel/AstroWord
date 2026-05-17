@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 interface MarriageReportPreviewProps {
   chartData: any;
-  calculatorType: 'darakaraka' | 'atmakaraka' | 'amatyakaraka' | 'gana' | 'marriage-year' | 'marriage-type' | 'spouse-initial' | 'manglik';
+  calculatorType: 'darakaraka' | 'atmakaraka' | 'amatyakaraka' | 'gana' | 'marriage-year' | 'marriage-type' | 'spouse-initial' | 'manglik' | 'dasha';
 }
 
 export default function MarriageReportPreview({ chartData, calculatorType }: MarriageReportPreviewProps) {
