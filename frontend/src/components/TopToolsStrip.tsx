@@ -52,7 +52,7 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
         }`}
       >
         <div className="bg-[#0a0a0f]/90 backdrop-blur-md border-b border-gold/15">
-          <div className="flex items-center justify-start sm:justify-center gap-2 px-3 py-2.5 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center justify-start sm:justify-center gap-2 h-12 px-3 overflow-x-auto scrollbar-hide">
             {tools.map(tool => (
               <button
                 key={tool.slug}
