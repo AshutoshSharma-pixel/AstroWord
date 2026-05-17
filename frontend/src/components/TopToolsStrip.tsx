@@ -7,6 +7,7 @@ const ALL_TOOLS = [
   { slug: '/',               emoji: '✦', label: 'Ask AI',          isAI: true },
   { slug: 'daily-horoscope',   emoji: '☄️', label: "Today's Reading" },
   { slug: 'manglik',         emoji: '🔴', label: 'Manglik' },
+  { slug: 'dasha-calculator', emoji: '🪐', label: 'Dasha' },
   { slug: 'darakaraka',      emoji: '💑', label: 'Darakaraka' },
   { slug: 'atmakaraka',      emoji: '☀️', label: 'Atmakaraka' },
   { slug: 'amatyakaraka',    emoji: '💼', label: 'Amatyakaraka' },

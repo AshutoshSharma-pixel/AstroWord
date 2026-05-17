@@ -99,6 +99,25 @@ export default function DashboardView() {
                     </p>
                 </button>
 
+                {/* Dasha Calculator Card */}
+                <button
+                    onClick={() => navigateTo('dasha-calculator')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🪐</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Dasha Calculator
+                    </h3>
+                    <p className="text-muted text-sm mb-3">
+                        Find your current Mahadasha &amp; Antardasha with AI-powered personalised Vedic reading.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Vimshottari</span>
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Mahadasha</span>
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Antardasha</span>
+                    </div>
+                </button>
+
                 {/* Darakaraka Card */}
                 <button
                     onClick={() => navigateTo('darakaraka')}
