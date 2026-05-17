@@ -21,6 +21,7 @@ export default function LoginPage() {
     const [errorMsg, setErrorMsg] = useState('');
     const [showSplash, setShowSplash] = useState(true);
     const [taglineIndex, setTaglineIndex] = useState(0);
+    const [agreed, setAgreed] = useState(false);
 
     const router = useRouter();
 
@@ -53,6 +54,10 @@ export default function LoginPage() {
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!agreed) {
+            setErrorMsg('Please agree to the Privacy Policy and Terms of Service to continue.');
+            return;
+        }
         setIsLoading(true);
         setErrorMsg('');
 
@@ -75,6 +80,10 @@ export default function LoginPage() {
     };
 
     const signInWithGoogle = async () => {
+        if (!agreed) {
+            setErrorMsg('Please agree to the Privacy Policy and Terms of Service to continue.');
+            return;
+        }
         try {
             await signInWithPopup(auth, googleProvider);
             router.push('/');
@@ -275,10 +284,31 @@ export default function LoginPage() {
                             </div>
                         )}
 
+                        {/* Consent Checkbox */}
+                        <div className="flex items-start gap-3 text-sm text-muted mt-2">
+                            <input
+                                type="checkbox"
+                                id="agree"
+                                checked={agreed}
+                                onChange={(e) => setAgreed(e.target.checked)}
+                                className="mt-0.5 accent-yellow-500 cursor-pointer flex-shrink-0"
+                            />
+                            <label htmlFor="agree" className="leading-relaxed cursor-pointer select-none">
+                                I agree to the{' '}
+                                <a href="/privacy-policy" target="_blank" className="text-gold underline hover:opacity-80">
+                                    Privacy Policy
+                                </a>{' '}
+                                and{' '}
+                                <a href="/terms" target="_blank" className="text-gold underline hover:opacity-80">
+                                    Terms of Service
+                                </a>
+                            </label>
+                        </div>
+
                         <button
                             type="submit"
-                            disabled={isLoading}
-                            className="w-full bg-text text-bg hover:bg-gold font-medium py-3 rounded-lg flex items-center justify-center gap-2 transition-all mt-6 disabled:opacity-50"
+                            disabled={isLoading || !agreed}
+                            className={`w-full bg-text text-bg font-medium py-3 rounded-lg flex items-center justify-center gap-2 transition-all mt-4 disabled:opacity-50 ${agreed ? 'hover:bg-gold' : 'cursor-not-allowed'}`}
                         >
                             {isLoading ? (
                                 <div className="w-5 h-5 border-2 border-bg/30 border-t-bg rounded-full animate-spin" />
@@ -304,7 +334,8 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={signInWithGoogle}
-                            className="mt-4 w-full bg-surface hover:bg-white/5 border border-border text-text font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all"
+                            disabled={!agreed}
+                            className={`mt-4 w-full bg-surface border border-border text-text font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-50 ${agreed ? 'hover:bg-white/5' : 'cursor-not-allowed'}`}
                         >
                             <svg className="w-4 h-4" viewBox="0 0 24 24">
                                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
