@@ -1,8 +1,13 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuth } from '@/components/AuthProvider';
+import MarriageReportPreview from '@/components/MarriageReportPreview';
+import WelcomeScreen from '@/components/WelcomeScreen';
+import { API_URL } from '@/utils/api';
 
 const SECTIONS = [
   { icon: '👤', title: 'Your Future Spouse', desc: 'Appearance, personality, profession and nature of your destined partner based on Darakaraka and 7th house analysis.' },
@@ -44,16 +49,50 @@ const FAQS = [
 
 export default function MarriageReportPage() {
   const router = useRouter();
+  const { user } = useAuth();
+  
+  const [chartData, setChartData] = useState<any>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [checkingChart, setCheckingChart] = useState(true);
 
-  const handleGetReport = () => {
+  useEffect(() => {
     const savedChart = localStorage.getItem('astroword_chart');
     if (savedChart) {
-      // User already has chart data — go straight to darakaraka where MarriageReportPreview lives
-      router.push('/darakaraka#marriage-report');
-    } else {
-      // No chart yet — send them to homepage to enter birth details first
-      router.push('/?action=marriage-report');
+      try {
+        setChartData(JSON.parse(savedChart));
+      } catch (e) {
+        console.error('Failed to parse chart data', e);
+      }
     }
+    setCheckingChart(false);
+  }, []);
+
+  const handleGetReport = () => {
+    if (chartData) {
+      const el = document.getElementById('marriage-report-payment');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      setShowForm(true);
+      setTimeout(() => {
+        const el = document.getElementById('birth-form-section');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleChartComplete = (data: any) => {
+    setChartData(data);
+    setShowForm(false);
+    setTimeout(() => {
+      const el = document.getElementById('marriage-report-payment');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
@@ -97,11 +136,13 @@ export default function MarriageReportPage() {
               onClick={handleGetReport}
               className="bg-gold text-black px-10 py-4 rounded-xl font-medium text-lg hover:bg-gold/90 transition-colors shadow-lg shadow-gold/10 mb-4 w-full md:w-auto"
             >
-              Get My Marriage Report — ₹199
+              {chartData ? "Get My Marriage Report — ₹199" : "Enter Birth Details & Get Report"}
             </button>
-            <p className="text-muted text-xs mt-2 text-center">
-              Enter your birth details to generate your personalised report
-            </p>
+            {!chartData && (
+              <p className="text-muted text-xs mt-2 text-center">
+                Enter your birth details to generate your personalised report
+              </p>
+            )}
             <p className="text-muted text-xs mt-3">Enter your birth details → Pay → Download PDF in 60 seconds</p>
           </div>
 
@@ -170,11 +211,13 @@ export default function MarriageReportPage() {
               onClick={handleGetReport}
               className="bg-gold text-black px-6 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors"
             >
-              Unlock Full Report — ₹199
+              {chartData ? "Unlock Full Report — ₹199" : "Enter Birth Details & Get Report"}
             </button>
-            <p className="text-muted text-xs mt-2 text-center">
-              Enter your birth details to generate your personalised report
-            </p>
+            {!chartData && (
+              <p className="text-muted text-xs mt-2 text-center">
+                Enter your birth details to generate your personalised report
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -201,12 +244,31 @@ export default function MarriageReportPage() {
           onClick={handleGetReport}
           className="bg-gold text-black px-10 py-4 rounded-xl font-medium text-lg hover:bg-gold/90 transition-colors shadow-lg shadow-gold/10"
         >
-          Get My Marriage Report — ₹199
+          {chartData ? "Get My Marriage Report — ₹199" : "Enter Birth Details & Get Report"}
         </button>
-        <p className="text-muted text-xs mt-2 text-center">
-          Enter your birth details to generate your personalised report
-        </p>
+        {!chartData && (
+          <p className="text-muted text-xs mt-2 text-center">
+            Enter your birth details to generate your personalised report
+          </p>
+        )}
       </section>
+
+      {/* Birth details form — shown when user has no chart */}
+      {showForm && !chartData && (
+        <div id="birth-form-section" className="max-w-md mx-auto px-4 py-8">
+          <p className="text-center text-muted text-sm mb-6">
+            Enter your birth details to generate your personalised Marriage Report
+          </p>
+          <WelcomeScreen onComplete={handleChartComplete} />
+        </div>
+      )}
+
+      {/* Payment section — shown when chart is available */}
+      {chartData && (
+        <div id="marriage-report-payment" className="max-w-2xl mx-auto px-4 py-8">
+          <MarriageReportPreview chartData={chartData} calculatorType="darakaraka" />
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer className="border-t border-border px-6 py-8 text-center">
