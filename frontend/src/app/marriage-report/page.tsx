@@ -46,7 +46,14 @@ export default function MarriageReportPage() {
   const router = useRouter();
 
   const handleGetReport = () => {
-    router.push('/darakaraka');
+    const savedChart = localStorage.getItem('astroword_chart');
+    if (savedChart) {
+      // User already has chart data — go straight to darakaraka where MarriageReportPreview lives
+      router.push('/darakaraka#marriage-report');
+    } else {
+      // No chart yet — send them to homepage to enter birth details first
+      router.push('/?action=marriage-report');
+    }
   };
 
   return (
@@ -92,6 +99,9 @@ export default function MarriageReportPage() {
             >
               Get My Marriage Report — ₹199
             </button>
+            <p className="text-muted text-xs mt-2 text-center">
+              Enter your birth details to generate your personalised report
+            </p>
             <p className="text-muted text-xs mt-3">Enter your birth details → Pay → Download PDF in 60 seconds</p>
           </div>
 
@@ -155,13 +165,16 @@ export default function MarriageReportPage() {
             <div className="h-3 bg-white/10 rounded-full w-full"></div>
           </div>
           {/* Overlay CTA */}
-          <div className="absolute inset-0 bg-surface/60 flex items-center justify-center">
+          <div className="absolute inset-0 bg-surface/60 flex flex-col items-center justify-center">
             <button
               onClick={handleGetReport}
               className="bg-gold text-black px-6 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors"
             >
               Unlock Full Report — ₹199
             </button>
+            <p className="text-muted text-xs mt-2 text-center">
+              Enter your birth details to generate your personalised report
+            </p>
           </div>
         </div>
       </section>
@@ -190,6 +203,9 @@ export default function MarriageReportPage() {
         >
           Get My Marriage Report — ₹199
         </button>
+        <p className="text-muted text-xs mt-2 text-center">
+          Enter your birth details to generate your personalised report
+        </p>
       </section>
 
       {/* FOOTER */}
