@@ -13,103 +13,88 @@ class KarakaRequest(BaseModel):
 
 KARAKA_PROMPTS = {
     "darakaraka": """
-You are a Jaimini Vedic astrology expert. Based on the Darakaraka planet provided,
-give a detailed reading about the person's future spouse including:
+You are an expert Vedic astrologer specialising in Jaimini astrology.
+
+Chart Context:
+{chart_context}
+
+Write a concise Darakaraka reading covering these sections. Be specific to the chart, not generic. Total response should be 400-500 words maximum.
 
 ## Spouse Nature & Personality
-- Core personality traits based on the Darakaraka planet
-- Emotional nature and temperament
-- How they will treat the native
+2 short paragraphs. Cover core personality traits and emotional nature together. Include nakshatra influence.
+
+## How They Will Treat You
+1 paragraph. Practical and specific.
 
 ## Physical Appearance
-- Likely physical features based on the planet and nakshatra
+4 bullet points maximum. Only the most distinctive features based on the planet and sign.
 
 ## Career & Status
-- Likely profession of the spouse
-- Their social standing and financial nature
+5 bullet points maximum. Likely professions only, no explanations.
 
-## Relationship Dynamics  
-- Nature of the marriage
-- Challenges and strengths of the partnership
+## Relationship Dynamics
+3 strengths and 3 challenges. One line each.
 
-## Timing
-- Based on the Darakaraka planet's dasha period, when marriage is likely
-
-Always reference the specific planet, its nakshatra, pada, and sign placement.
-Be specific, not generic. This is Jaimini astrology — the Darakaraka is the
-planet with the lowest degree within its sign among all 7 planets.
-
-Provide a highly detailed, expansive, and comprehensive reading for each section. Do not restrict the length.
+## Marriage Timing
+2-3 paragraphs. Cover Mahadasha/Antardasha timing specific to their current dasha period. This is the most important section. Be precise.
 
 Provide the response in pure Markdown. Do not use JSON.
-At the very end of your response, on a new line, provide the keywords like this:
-KEYWORDS: word 1, word 2, word 3
+End with:
+KEYWORDS: [5-7 keywords]
 """,
     "atmakaraka": """
-You are a Jaimini Vedic astrology expert. Based on the Atmakaraka planet provided,
-give a detailed reading about the person's soul purpose including:
+You are an expert Vedic astrologer specialising in Jaimini astrology.
+
+Chart Context:
+{chart_context}
+
+Write a concise Atmakaraka reading that is specific to the chart, not generic. Total response should be 300-400 words maximum.
 
 ## Soul's Core Desire
-- What the soul craves most in this lifetime
-- The central theme of this person's life journey
+1 short paragraph. Cover what the soul wants most and the central life theme. Include nakshatra influence.
 
 ## Karmic Lessons
-- What lessons the soul must master
-- Past life karma connected to this planet
+3 bullet points maximum. Keep them specific and practical.
 
 ## Life Path & Purpose
-- How this planet shapes the person's destiny
-- What they are here to achieve or experience
+1 short paragraph on destiny and what the person is here to embody or achieve.
 
 ## Spiritual Path
-- Which spiritual practices align with this Atmakaraka
-- How to work with this energy consciously
+3 bullet points maximum. Only the most suitable practices or attitudes.
 
 ## Strengths & Challenges
-- Natural gifts from this placement
-- Obstacles the soul will repeatedly face
-
-Always reference the specific planet, nakshatra, pada, and sign.
-The Atmakaraka is the planet with the HIGHEST degree within its sign.
-
-Provide a highly detailed, expansive, and comprehensive reading for each section. Do not restrict the length.
+3 strengths and 3 challenges. One line each.
 
 Provide the response in pure Markdown. Do not use JSON.
-At the very end of your response, on a new line, provide the keywords like this:
-KEYWORDS: word 1, word 2, word 3
+End with:
+KEYWORDS: [5-7 keywords]
 """,
     "amatyakaraka": """
-You are a Jaimini Vedic astrology expert. Based on the Amatyakaraka planet provided,
-give a detailed reading about the person's career destiny including:
+You are an expert Vedic astrologer specialising in Jaimini astrology.
+
+Chart Context:
+{chart_context}
+
+Write a concise Amatyakaraka reading that is specific to the chart, not generic. Total response should be 300-400 words maximum.
 
 ## Ideal Career Fields
-- Specific professions aligned with this planet
-- Industries and sectors that will bring success
+5 bullet points maximum. Specific professions or sectors only.
 
 ## Professional Strengths
-- Natural talents in the workplace
-- Leadership style and work approach
+3 bullet points maximum. Focus on practical workplace strengths.
 
 ## Path to Success
-- How success will come — gradually or suddenly?
-- Key periods for career growth based on this planet's dasha
+1 short paragraph. Explain how progress comes and mention dasha-linked growth periods.
 
 ## Business vs Job
-- Whether the person is suited for employment or entrepreneurship
-- Best professional environments
+1 short paragraph. Give a clear preference and ideal work environment.
 
 ## Financial Potential
-- Wealth accumulation patterns
-- How this planet influences earning capacity
-
-Always reference the specific planet, nakshatra, pada, and sign.
-The Amatyakaraka is the planet with the SECOND HIGHEST degree within its sign.
-
-Provide a highly detailed, expansive, and comprehensive reading for each section. Do not restrict the length.
+3 bullet points maximum. Focus on earning style and wealth pattern.
 
 Provide the response in pure Markdown. Do not use JSON.
-At the very end of your response, on a new line, provide the keywords like this:
-KEYWORDS: word 1, word 2, word 3
+End with:
+KEYWORDS: [5-7 keywords]
 """
 }
 
@@ -182,13 +167,13 @@ Full Chart Ascendant: {data.chart_data.get('ascendant', {}).get('sign', 'Unknown
 Current Mahadasha: {data.chart_data.get('current_mahadasha', {}).get('lord', 'Unknown') if data.chart_data.get('current_mahadasha') else 'Unknown'}
 """
         
-        prompt = KARAKA_PROMPTS[data.karaka_type] + "\n\n" + chart_context
+        prompt = KARAKA_PROMPTS[data.karaka_type].format(chart_context=chart_context.strip())
     
         response = call_gemini_new(
             prompt,
             config=types.GenerateContentConfig(
                 temperature=0.4,
-                max_output_tokens=8192,
+                max_output_tokens=4096,
                 thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
