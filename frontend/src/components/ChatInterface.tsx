@@ -147,17 +147,41 @@ export default function ChatInterface({
     };
 
     const answerBufferRef = useRef('');
+    const chunkQueueRef = useRef<string[]>([]);
+    const isAnimatingRef = useRef(false);
 
-    const animateChunk = (text: string, getCurrentAnswer: () => string, setAnswer: (s: string) => void) => {
-        const chars = text.split('');
+    const processQueue = () => {
+        if (isAnimatingRef.current) return;
+        if (chunkQueueRef.current.length === 0) {
+            isAnimatingRef.current = false;
+            return;
+        }
+
+        isAnimatingRef.current = true;
+        const chunk = chunkQueueRef.current.shift()!;
+        const chars = chunk.split('');
         let i = 0;
+
         const tick = () => {
-            if (i >= chars.length) return;
-            const batch = chars.slice(i, i + 3).join('');
-            setAnswer(getCurrentAnswer() + batch);
+            if (i >= chars.length) {
+                isAnimatingRef.current = false;
+                processQueue();
+                return;
+            }
+            answerBufferRef.current += chars.slice(i, i + 3).join('');
+            const current = answerBufferRef.current;
+            setChatMessages(prev => {
+                const updated = [...prev];
+                updated[updated.length - 1] = {
+                    ...updated[updated.length - 1],
+                    content: current
+                };
+                return updated;
+            });
             i += 3;
             requestAnimationFrame(tick);
         };
+
         requestAnimationFrame(tick);
     };
 
@@ -180,6 +204,8 @@ export default function ChatInterface({
         const aiMsgId = (Date.now() + 1).toString();
         const aiPlaceholder: Message = { id: aiMsgId, role: 'ai', content: '', tags: [] };
         answerBufferRef.current = '';
+        chunkQueueRef.current = [];
+        isAnimatingRef.current = false;
 
         setInput('');
         setIsTyping(true);
@@ -235,22 +261,8 @@ export default function ChatInterface({
                         const parsed = JSON.parse(jsonStr);
 
                         if (parsed.type === 'chunk') {
-                            animateChunk(
-                                parsed.text || '',
-                                () => answerBufferRef.current,
-                                (nextAnswer) => {
-                                    answerBufferRef.current = nextAnswer;
-                                    streamedAnswer = answerBufferRef.current;
-                                    setChatMessages(prev => {
-                                        const updated = [...prev];
-                                        updated[updated.length - 1] = {
-                                            ...updated[updated.length - 1],
-                                            content: nextAnswer
-                                        };
-                                        return updated;
-                                    });
-                                }
-                            );
+                            chunkQueueRef.current.push(parsed.text || '');
+                            processQueue();
                             streamedAnswer = answerBufferRef.current;
                         }
 
