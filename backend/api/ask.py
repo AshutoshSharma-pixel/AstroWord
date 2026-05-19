@@ -295,8 +295,6 @@ async def ask_astrologer(data: AskRequest):
 
         prompt = f"""
 {fallback_instruction}
-{SYSTEM_PROMPT}
-
 Charts analyzed for this question: {charts_used}
 (Selected based on question topic and user plan: {plan.upper()})
 
@@ -313,7 +311,9 @@ USER QUESTION: {data.question}
             prompt=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
-                response_mime_type="application/json"
+                response_mime_type="application/json",
+                max_output_tokens=4096,
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
         
@@ -398,8 +398,8 @@ async def ask_stream(data: AskRequest):
                     mins = int(((midnight - now).total_seconds() % 3600) // 60)
                     reset_time = f"{hrs} hours and {mins} minutes" if hrs > 0 else f"{mins} minutes"
                     async def _limit_gen():
-                        yield f"data: {json.dumps({'limit_reached': True, 'reset_time': reset_time})}\n\n"
-                        yield "data: [DONE]\n\n"
+                        yield f"data: {json.dumps({'type': 'limit_reached', 'reset_time': reset_time})}\n\n"
+                        yield f"data: {json.dumps({'type': 'done'})}\n\n"
                     return StreamingResponse(_limit_gen(), media_type="text/event-stream")
         except Exception:
             pass
@@ -452,13 +452,17 @@ Write your full analysis in plain markdown following the structure above. Do NOT
                 response_stream = client.models.generate_content_stream(
                     model="gemini-2.5-flash",
                     contents=_prompt,
-                    config=types.GenerateContentConfig(temperature=0.3)
+                    config=types.GenerateContentConfig(
+                        temperature=0.3,
+                        max_output_tokens=4096,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0)
+                    )
                 )
                 for chunk in response_stream:
                     try:
                         text_chunk = chunk.text
                         if text_chunk:
-                            clean_chunk = json.dumps({'chunk': text_chunk})
+                            clean_chunk = json.dumps({'type': 'chunk', 'text': text_chunk})
                             yield f"data: {clean_chunk}\n\n"
                     except Exception:
                         pass
@@ -468,7 +472,7 @@ Write your full analysis in plain markdown following the structure above. Do NOT
                         _user_ref.update({"questions_today": firestore.Increment(1)})
                     except Exception:
                         pass
-                yield "data: [DONE]\n\n"
+                yield f"data: {json.dumps({'type': 'done'})}\n\n"
                 return
                 
             except Exception as e:
@@ -481,17 +485,16 @@ Write your full analysis in plain markdown following the structure above. Do NOT
                 has_next_key = i < len(_keys) - 1
                 if is_retriable and has_next_key:
                     continue
-                yield f"data: {json.dumps({'error': str(e)})}\n\n"
-                yield "data: [DONE]\n\n"
+                yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+                yield f"data: {json.dumps({'type': 'done'})}\n\n"
                 return
         
         if last_error:
-            yield f"data: {json.dumps({'error': str(last_error)})}\n\n"
-        yield "data: [DONE]\n\n"
+            yield f"data: {json.dumps({'type': 'error', 'message': str(last_error)})}\n\n"
+        yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
     return StreamingResponse(
         generate(),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
     )
-

@@ -178,85 +178,111 @@ export default function ChatInterface({
         });
         const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` };
 
-        console.log("DEBUG: Sending request to /api/ask");
+        console.log("DEBUG: Sending request to /api/ask/stream");
         console.log("DEBUG: user_id:", user?.uid);
         console.log("DEBUG: chartData exists:", !!chartData);
         console.log("DEBUG: fetchBody:", fetchBody);
 
         try {
-            const res = await fetch(`${API_URL}/api/ask`, {
+            const res = await fetch(`${API_URL}/api/ask/stream`, {
                 method: 'POST',
                 headers,
                 body: fetchBody
             });
 
-            const data = await res.json();
-
-            if (!res.ok || !data.success) {
-                if (data.limit_reached) {
-                    const resetTimeStr = data.reset_time || 'midnight';
-                    const limitMsgs = [
-                        ...initialMessages, newMsg,
-                        { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
-                    ];
-                    setChatMessages(limitMsgs);
-                    if (user && activeChatId) {
-                        const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
-                        setDoc(chatRef, {
-                            title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                            messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
-                            updated_at: serverTimestamp()
-                        }, { merge: true }).catch(() => { });
-                    }
-                    return;
-                }
-                throw new Error(data.detail || 'Failed to get AI response');
+            if (!res.ok || !res.body) {
+                throw new Error('Failed to get AI response');
             }
 
-            let parsed = data.data || data;
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let streamedAnswer = '';
+            let limitReached = false;
+            let resetTime = '';
+            let streamError = '';
 
-            // Sometimes the AI returns stringified JSON inside the response text itself
-            if (typeof parsed === 'string') {
-                try {
-                    parsed = JSON.parse(parsed);
-                } catch (e) {
-                    // Try to aggressively extract the "answer": "..." content if JSON.parse fails
-                    const answerMatch = parsed.match(/"answer"\s*:\s*"([\s\S]*?)"\s*(?:,\s*"confidence"|\})/);
-                    if (answerMatch && answerMatch[1]) {
-                        parsed = { answer: answerMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') };
-                    }
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (!line.startsWith('data: ')) continue;
+                    const jsonStr = line.slice(6).trim();
+                    if (!jsonStr) continue;
+
+                    try {
+                        const parsed = JSON.parse(jsonStr);
+
+                        if (parsed.type === 'chunk') {
+                            streamedAnswer += parsed.text || '';
+                            setChatMessages(prev => {
+                                const updated = [...prev];
+                                updated[updated.length - 1] = {
+                                    ...updated[updated.length - 1],
+                                    content: streamedAnswer
+                                };
+                                return updated;
+                            });
+                        }
+
+                        if (parsed.type === 'limit_reached') {
+                            limitReached = true;
+                            resetTime = parsed.reset_time || '';
+                        }
+
+                        if (parsed.type === 'error') {
+                            streamError = parsed.message || 'I encountered an error. Please try again.';
+                        }
+
+                        if (parsed.type === 'done') {
+                            if (limitReached) {
+                                const resetTimeStr = resetTime || 'midnight';
+                                const limitMsgs = [
+                                    ...initialMessages, newMsg,
+                                    { id: aiMsgId, role: 'ai', content: `LIMIT_REACHED:${resetTimeStr}`, tags: [] } as Message
+                                ];
+                                setChatMessages(limitMsgs);
+                                if (user && activeChatId) {
+                                    const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                                    setDoc(chatRef, {
+                                        title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                                        messages: limitMsgs.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                                        updated_at: serverTimestamp()
+                                    }, { merge: true }).catch(() => { });
+                                }
+                            } else if (streamError) {
+                                setChatMessages(prev => {
+                                    const updated = [...prev];
+                                    updated[updated.length - 1] = {
+                                        ...updated[updated.length - 1],
+                                        content: streamError
+                                    };
+                                    return updated;
+                                });
+                            } else {
+                                const newMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: streamedAnswer, tags: [] } as Message];
+                                setChatMessages(newMessages);
+
+                                if (user && activeChatId) {
+                                    const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
+                                    const updateData: any = {
+                                        title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
+                                        messages: newMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
+                                        updated_at: serverTimestamp(),
+                                        chart_data: chartData
+                                    };
+                                    if (initialMessages.length === 1) updateData.created_at = serverTimestamp();
+                                    setDoc(chatRef, updateData, { merge: true }).catch(e => console.error('Failed to save chat', e));
+                                }
+                            }
+                        }
+                    } catch { }
                 }
-            }
-            if (typeof parsed.answer === 'string' && parsed.answer.trim().startsWith('{')) {
-                try {
-                    const innerParsed = JSON.parse(parsed.answer);
-                    if (innerParsed.answer) parsed = innerParsed;
-                } catch (e) {
-                    // Try to aggressively extract if inner parse fails
-                    const answerMatch = parsed.answer.match(/"answer"\s*:\s*"([\s\S]*?)"\s*(?:,\s*"confidence"|\})/);
-                    if (answerMatch && answerMatch[1]) {
-                        parsed.answer = answerMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
-                    }
-                }
-            }
-
-            console.log("parsed response:", parsed);
-            console.log("answer text:", parsed.answer);
-            const answerText = parsed.answer || (typeof parsed === 'string' ? parsed : 'The cosmos are silent. Try asking again.');
-            const tags = parsed.tags || [];
-            const newMessages = [...initialMessages, newMsg, { id: aiMsgId, role: 'ai', content: answerText, tags } as Message];
-            setChatMessages(newMessages);
-
-            if (user && activeChatId) {
-                const chatRef = doc(db, 'users', user.uid, 'chats', activeChatId);
-                const updateData: any = {
-                    title: initialMessages.length <= 1 ? userMsg.substring(0, 40) : (initialMessages[1]?.content?.substring(0, 40) || 'Astrology Reading'),
-                    messages: newMessages.map(m => ({ role: m.role, content: m.content, timestamp: Date.now() })),
-                    updated_at: serverTimestamp(),
-                    chart_data: chartData
-                };
-                if (initialMessages.length === 1) updateData.created_at = serverTimestamp();
-                setDoc(chatRef, updateData, { merge: true }).catch(e => console.error('Failed to save chat', e));
             }
 
         } catch (err: any) {
