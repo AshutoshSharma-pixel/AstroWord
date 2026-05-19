@@ -240,7 +240,7 @@ export default function BirthTithiPage() {
                 </div>
               </div>
 
-              <MarriageReportPreview />
+              <MarriageReportPreview chartData={chartData} calculatorType="tithi" />
             </>
           )}
 
