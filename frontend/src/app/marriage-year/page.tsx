@@ -112,7 +112,7 @@ export default function MarriageYearPage() {
                     streamBufferRef.current += chunk;
                     if (streamTimerRef.current) clearTimeout(streamTimerRef.current);
                     streamTimerRef.current = setTimeout(() => {
-                        setResult(prev => prev ? { ...prev, reading: streamBufferRef.current } : prev);
+                        setResult((prev: any) => prev ? { ...prev, reading: streamBufferRef.current } : prev);
                     }, 100);
                 },
                 (done) => {
