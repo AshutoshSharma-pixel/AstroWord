@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
@@ -38,6 +38,8 @@ export default function MarriageYearPage() {
     const [result, setResult] = useState<any>(null);
     const [taglineIndex, setTaglineIndex] = useState(0);
     const [error, setError] = useState<string | null>(null);
+    const streamBufferRef = useRef('');
+    const streamTimerRef = useRef<any>(null);
 
     // Initial load: check auth and local storage
     useEffect(() => {
@@ -67,6 +69,12 @@ export default function MarriageYearPage() {
         }
     }, [isLoading, chartData, result]);
 
+    useEffect(() => {
+        return () => {
+            if (streamTimerRef.current) clearTimeout(streamTimerRef.current);
+        };
+    }, []);
+
     const fetchMarriageYear = async (chart: any) => {
         setIsLoading(true);
         setError(null);
@@ -91,6 +99,7 @@ export default function MarriageYearPage() {
             }
 
             let resultData: any = { reading: '## Marriage Timing Analysis\n\n' };
+            streamBufferRef.current = resultData.reading;
 
             await handleStreamResponse(
                 res,
@@ -100,13 +109,19 @@ export default function MarriageYearPage() {
                     setIsLoading(false); // Stop loading animation, show the result card
                 },
                 (chunk) => {
-                    resultData.reading += chunk;
-                    setResult({ ...resultData });
+                    streamBufferRef.current += chunk;
+                    if (streamTimerRef.current) clearTimeout(streamTimerRef.current);
+                    streamTimerRef.current = setTimeout(() => {
+                        setResult(prev => prev ? { ...prev, reading: streamBufferRef.current } : prev);
+                    }, 100);
                 },
                 (done) => {
                     // done contains windows, most_likely_year, keywords
+                    if (streamTimerRef.current) clearTimeout(streamTimerRef.current);
+                    resultData.reading = cleanReading(streamBufferRef.current);
                     resultData = { ...resultData, ...done };
                     setResult({ ...resultData });
+                    streamBufferRef.current = '';
                 }
             );
 
@@ -318,23 +333,25 @@ export default function MarriageYearPage() {
                 </div>
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
-                    <ReactMarkdown
-                        components={{
-                            h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,
-                            h3: ({ children }) => <h3 className="text-gold/80 text-lg font-medium mt-4 mb-2">{children}</h3>,
-                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
-                            p: ({ children }) => <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>,
-                            ul: ({ children }) => <ul className="space-y-2 mb-4 mt-2">{children}</ul>,
-                            li: ({ children }) => (
-                                <li className="flex items-start gap-3 text-text/90 text-[15px]">
-                                    <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
-                                    <span>{children}</span>
-                                </li>
-                            ),
-                        }}
-                    >
-                        {cleanReading(result.reading)}
-                    </ReactMarkdown>
+                    <div className="min-h-[200px]">
+                        <ReactMarkdown
+                            components={{
+                                h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,
+                                h3: ({ children }) => <h3 className="text-gold/80 text-lg font-medium mt-4 mb-2">{children}</h3>,
+                                strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
+                                p: ({ children }) => <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>,
+                                ul: ({ children }) => <ul className="space-y-2 mb-4 mt-2">{children}</ul>,
+                                li: ({ children }) => (
+                                    <li className="flex items-start gap-3 text-text/90 text-[15px]">
+                                        <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
+                                        <span>{children}</span>
+                                    </li>
+                                ),
+                            }}
+                        >
+                            {result.reading}
+                        </ReactMarkdown>
+                    </div>
                 </div>
 
                 <div className="text-center py-4">

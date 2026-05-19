@@ -31,7 +31,7 @@ export async function handleStreamResponse(
             }
             return;
         }
-        const batch = animationQueue.splice(0, 4).join('');
+        const batch = animationQueue.splice(0, 20).join('');
         onChunk(batch);
         requestAnimationFrame(animateNext);
     }
