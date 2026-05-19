@@ -263,9 +263,10 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
                                         <div className="max-h-60 overflow-y-auto">
                                             {suggestions.map((s, i) => (
                                                 <div
-                                                    key={i}
+                                                    key={`${s.lat}-${s.lon}-${i}`}
                                                     className="px-4 py-3 text-sm text-text hover:bg-surface2 cursor-pointer border-b border-border/50 last:border-0 transition-colors"
-                                                    onClick={() => {
+                                                    onMouseDown={(e) => {
+                                                        e.preventDefault(); // prevents outside-click listener from firing first
                                                         setFormData({
                                                             ...formData,
                                                             pob: s.label,
