@@ -146,6 +146,21 @@ export default function ChatInterface({
         }
     };
 
+    const answerBufferRef = useRef('');
+
+    const animateChunk = (text: string, getCurrentAnswer: () => string, setAnswer: (s: string) => void) => {
+        const chars = text.split('');
+        let i = 0;
+        const tick = () => {
+            if (i >= chars.length) return;
+            const batch = chars.slice(i, i + 3).join('');
+            setAnswer(getCurrentAnswer() + batch);
+            i += 3;
+            requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
@@ -164,6 +179,7 @@ export default function ChatInterface({
         const newMsg: Message = { id: Date.now().toString(), role: 'user', content: userMsg };
         const aiMsgId = (Date.now() + 1).toString();
         const aiPlaceholder: Message = { id: aiMsgId, role: 'ai', content: '', tags: [] };
+        answerBufferRef.current = '';
 
         setInput('');
         setIsTyping(true);
@@ -219,15 +235,23 @@ export default function ChatInterface({
                         const parsed = JSON.parse(jsonStr);
 
                         if (parsed.type === 'chunk') {
-                            streamedAnswer += parsed.text || '';
-                            setChatMessages(prev => {
-                                const updated = [...prev];
-                                updated[updated.length - 1] = {
-                                    ...updated[updated.length - 1],
-                                    content: streamedAnswer
-                                };
-                                return updated;
-                            });
+                            animateChunk(
+                                parsed.text || '',
+                                () => answerBufferRef.current,
+                                (nextAnswer) => {
+                                    answerBufferRef.current = nextAnswer;
+                                    streamedAnswer = answerBufferRef.current;
+                                    setChatMessages(prev => {
+                                        const updated = [...prev];
+                                        updated[updated.length - 1] = {
+                                            ...updated[updated.length - 1],
+                                            content: nextAnswer
+                                        };
+                                        return updated;
+                                    });
+                                }
+                            );
+                            streamedAnswer = answerBufferRef.current;
                         }
 
                         if (parsed.type === 'limit_reached') {
