@@ -10,6 +10,7 @@ import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
+import Link from 'next/link';
 
 const DARAKARAKA_TAGLINES = [
     "Finding your spouse significator...",
@@ -309,6 +310,29 @@ export default function DarakarakaPage() {
                         uses the Darakaraka to reveal the nature, appearance, profession, and personality of your
                         future spouse with remarkable precision.
                     </p>
+                    <p className="text-muted text-sm leading-relaxed mt-3">
+                        While Darakaraka reveals your spouse, your{' '}
+                        <Link href="/atmakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Atmakaraka</Link>
+                        {' '}reveals your soul&apos;s deepest desire, and your{' '}
+                        <Link href="/amatyakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Amatyakaraka</Link>
+                        {' '}shows your path to achievement.
+                    </p>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                        <p className="text-gold/50 text-xs uppercase tracking-wider">
+                            Also explore
+                        </p>
+                        <Link href="/atmakaraka" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+                            <span>🔮</span>
+                            <span>Atmakaraka Calculator — your soul planet, the most powerful in your chart</span>
+                            <span>→</span>
+                        </Link>
+                        <Link href="/amatyakaraka" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+                            <span>💼</span>
+                            <span>Amatyakaraka Calculator — your planet of career and highest achievement</span>
+                            <span>→</span>
+                        </Link>
+                    </div>
                 </div>
                 <div className="space-y-4">
                     <h2 className="text-gold font-serif text-2xl">How is Darakaraka Calculated?</h2>

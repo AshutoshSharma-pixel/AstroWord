@@ -72,8 +72,8 @@ const articles = [
     },
     {
         slug: 'what-is-amatyakaraka',
-        title: 'What is Amatyakaraka? Your Career Planet in Jaimini Astrology',
-        description: 'Amatyakaraka is the second most important planet in your chart. Discover what it reveals about your ideal career, professional strengths, and path to success.',
+        title: 'Amatyakaraka: The Planet That Decides Your Career in Vedic Astrology',
+        description: 'Discover which planet is your Amatyakaraka and what it reveals about your ideal career and professional strengths. Free Jaimini astrology calculator included.',
         category: 'Jaimini Astrology',
         readTime: '6 min read',
         date: 'May 1, 2026',
@@ -133,6 +133,42 @@ const articles = [
         date: 'May 7, 2026',
         emoji: '🌑'
     },
+    {
+        slug: 'what-is-manglik-dosha',
+        title: "Manglik Dosha: What It Is, What It Isn't, and What It Means for Your Marriage",
+        description: "Find out if you are Manglik, what Mars placement actually means for marriage, the real cancellations, and whether Manglik Dosha should actually worry you. Free calculator.",
+        category: "Vedic Astrology",
+        readTime: "6 min read",
+        date: "May 20, 2026",
+        emoji: "🔴"
+    },
+    {
+        slug: 'vimshottari-dasha-explained',
+        title: "Vimshottari Dasha: The 120-Year System That Times Every Event in Your Life",
+        description: "Understand how Vimshottari Dasha works, what your current Mahadasha means, and how to use planetary periods to predict career, marriage, and major life events. Free calculator.",
+        category: "Vedic Astrology",
+        readTime: "7 min read",
+        date: "May 20, 2026",
+        emoji: "⏳"
+    },
+    {
+        slug: 'birth-tithi-astrology',
+        title: "Birth Tithi in Vedic Astrology: What Your Lunar Birthday Reveals About You",
+        description: "Discover what your birth Tithi means in Vedic astrology — your personality, relationships, karma, and the deity that governs your lunar day. Free birth Tithi calculator.",
+        category: "Vedic Astrology",
+        readTime: "5 min read",
+        date: "May 20, 2026",
+        emoji: "🌙"
+    },
+    {
+        slug: 'marriage-timing-astrology',
+        title: "When Will I Get Married? How Vedic Astrology Predicts Your Marriage Year",
+        description: "Learn how Vedic astrology predicts marriage timing using Dasha periods, Jupiter transits, and the 7th house. Discover your personal marriage window with our free calculator.",
+        category: "Marriage Astrology",
+        readTime: "6 min read",
+        date: "May 20, 2026",
+        emoji: "💍"
+    }
 ];
 
 export default function BlogPage() {

@@ -12,6 +12,7 @@ import { API_URL } from '@/utils/api';
 import { handleStreamResponse } from '@/utils/stream';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
+import Link from 'next/link';
 
 const TAGLINES = [
     "Calculating your Darakaraka nakshatra...",
@@ -152,7 +153,7 @@ export default function SpouseInitialPage() {
                 <WelcomeScreen onComplete={handleFormSubmit} />
                 <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
                     <div className="space-y-4">
-                        <h1 className="text-gold font-serif text-3xl">Spouse Name Initial Predictor — Vedic Nakshatra Akshara Analysis</h1>
+                        <h1 className="text-gold font-serif text-3xl">Spouse Name Prediction by Astrology — Vedic Nakshatra Akshara Analysis</h1>
                         <p className="text-muted text-sm leading-relaxed">
                             Discover the sacred sound vibration associated with your future life partner. Using ancient Vedic astrology and the Jaimini system, we analyze your Darakaraka and 7th house placements to reveal the most likely first letter of your spouse's name.
                         </p>
@@ -395,9 +396,12 @@ export default function SpouseInitialPage() {
             {/* SEO Content Block */}
             <div className="max-w-2xl mx-auto px-4 pb-16 space-y-10 mt-12 border-t border-border/30 pt-12">
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">The Science of Sound: Predicting Spouse Initial in Vedic Astrology</h2>
+                    <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction by Astrology: The Science of Sound</h2>
                     <p className="text-muted text-sm leading-relaxed">
-                        Vedic Astrology is deeply rooted in the science of sound vibrations. The universe is believed to be a collection of frequencies, and our names are the specific vibrations we respond to throughout our lives. By analyzing your birth chart, we can identify the cosmic frequencies that will be present in your spouse's name.
+                        Wondering what your future spouse's name starts with? This Vedic astrology tool predicts your spouse's name first letter using your Darakaraka planet and its nakshatra — the most accurate method in the Jaimini system for spouse name prediction. By analyzing your birth chart, we can identify the cosmic frequencies that will be present in your spouse's name.
+                    </p>
+                    <p className="text-muted text-sm leading-relaxed">
+                        This prediction is based on your <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka planet</Link> — the planet with the lowest degree in your birth chart, which represents your spouse in Jaimini astrology.
                     </p>
                 </div>
 
@@ -419,11 +423,11 @@ export default function SpouseInitialPage() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Spouse Name Initial — FAQ</h2>
+                    <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction — FAQ</h2>
                     <div className="grid grid-cols-1 gap-4">
                         {[
-                            { q: 'Why does it show multiple possible initials?', a: 'Your chart has multiple marriage indicators—the 7th lord, the Darakaraka, and Venus. In most cases, these planets occupy different Nakshatras. If two or more point to the same sound, that initial is extremely likely.' },
-                            { q: 'Is the initial for the first name or surname?', a: 'In Vedic tradition, this calculation refers to the "calling name" or the first name, as that is the vibration the individual responds to most frequently.' },
+                            { q: 'How does spouse name prediction work when it shows multiple possible initials?', a: 'Your chart has multiple marriage indicators—the 7th lord, the Darakaraka, and Venus. In most cases, these planets occupy different Nakshatras. If two or more point to the same sound, that initial is extremely likely.' },
+                            { q: 'When you predict my spouse\'s name, is the initial for the first name or surname?', a: 'In Vedic tradition, this calculation refers to the "calling name" or the first name, as that is the vibration the individual responds to most frequently.' },
                             { q: 'What if the initial doesn\'t match my current partner?', a: 'Astrology shows potential and destiny. If you are in a relationship that doesn\'t match the predicted initial, look at the qualities of the planet. Often, the partner will embody the energy of the predicted planet even if the name initial differs.' }
                         ].map((item) => (
                             <div key={item.q} className="bg-surface/40 border border-border/50 rounded-2xl p-5 space-y-2">

@@ -501,8 +501,8 @@ const articles: Record<string, {
     },
 
     'what-is-amatyakaraka': {
-        title: 'What is Amatyakaraka? Your Career Planet in Jaimini Astrology',
-        description: 'Amatyakaraka is the second most important planet in your chart after Atmakaraka. Discover what it reveals about your ideal career and path to professional success.',
+        title: 'Amatyakaraka: The Planet That Decides Your Career in Vedic Astrology',
+        description: 'Find your Amatyakaraka planet and discover what it reveals about your career, profession, and path to success in Jaimini Vedic astrology. Free calculator included.',
         category: 'Jaimini Astrology',
         date: 'May 1, 2026',
         readTime: '6 min read',
@@ -550,6 +550,15 @@ const articles: Record<string, {
                 <p><strong>Q: Does Amatyakaraka work the same for men and women?</strong><br />Yes, the calculation and interpretation are the same regardless of gender.</p>
                 <p><strong>Q: My Amatyakaraka is debilitated — does that mean career failure?</strong><br />Not necessarily. A debilitated Amatyakaraka may indicate career challenges or working in unconventional ways, but cancellation of debilitation (Neecha Bhanga) can turn this into exceptional strength. Always read the full chart in context.</p>
                 <p>Ready to find your Amatyakaraka? Use AstroWord&apos;s free <Link href="/amatyakaraka">Amatyakaraka Calculator</Link> and get an AI-powered reading about your career destiny.</p>
+                
+                <h2>Find Your Amatyakaraka Free</h2>
+                <p>
+                    Knowing the theory is just the beginning. Use our free 
+                    Amatyakaraka calculator to instantly find your Amatyakaraka 
+                    planet and get a personalised AI-powered reading of what it 
+                    means for your specific career path.
+                </p>
+                <p><Link href="/amatyakaraka">Calculate Your Amatyakaraka →</Link></p>
             </>
         ),
     },
@@ -837,6 +846,254 @@ const articles: Record<string, {
                 <p><strong>Q: Will I marry a foreigner with Rahu in 7th?</strong><br />It is more likely than average, especially if Rahu is also connected to the 9th house or aspected by foreign-indicating planets. But &quot;foreign&quot; in Vedic astrology can simply mean someone very different from your own background — not necessarily a different nationality.</p>
                 <p><strong>Q: When will I get married with Rahu in 7th?</strong><br />This requires a full Dasha analysis. Common marriage-triggering periods include Rahu Mahadasha, Venus Antardasha within Rahu Mahadasha, and Jupiter transiting the 7th house or natal Rahu.</p>
                 <p>Find out when your marriage is most likely — try AstroWord&apos;s <Link href="/marriage-year">Marriage Year Predictor</Link> for a personalised Dasha and transit analysis.</p>
+            </>
+        ),
+    },
+    'what-is-manglik-dosha': {
+        title: "Manglik Dosha: What It Is, What It Isn't, and What It Means for Your Marriage",
+        description: "Find out if you are Manglik, what Mars placement actually means for marriage, the real cancellations, and whether Manglik Dosha should actually worry you. Free calculator.",
+        category: "Vedic Astrology",
+        date: "May 20, 2026",
+        readTime: "6 min read",
+        relatedCalculator: { label: 'Check My Manglik Dosha', href: '/manglik', emoji: '🔴' },
+        content: (
+            <>
+                <p>
+                    Manglik Dosha is one of the most feared and most misunderstood concepts in Indian astrology. When families discover a son or daughter is &quot;Manglik&quot;, panic often follows. But the reality of this dosha is far more nuanced than the myths suggest. This guide separates fact from fear — using classical Vedic astrology, not superstition.
+                </p>
+
+                <h2>What is Manglik Dosha?</h2>
+                <p>
+                    Mars (Mangal) in 1st, 2nd, 4th, 7th, 8th, or 12th house from Lagna, Moon, or Venus = Manglik. Explain each house briefly. Note: calculated from 3 reference points — lagna is weakest, Moon is strong, Venus is strongest because Venus = spouse.
+                </p>
+
+                <h2>How Many People Are Actually Manglik?</h2>
+                <p>
+                    Since Mars can be in 6 of 12 houses — and from 3 reference points — statistically 40-60% of people have some form of Manglik Dosha. This is why blanket fear is irrational. The intensity varies enormously.
+                </p>
+
+                <h2>The 7 Real Manglik Dosha Cancellations</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        "Both partners are Manglik — energies neutralize",
+                        "Mars in its own sign (Aries, Scorpio) or exalted (Capricorn)",
+                        "Mars conjunct or aspected by Jupiter — Jupiter pacifies Mars",
+                        "Mars in 1st house for Aries ascendant — own sign, no dosha",
+                        "Mars in 4th house for Scorpio ascendant — own sign",
+                        "Mars in 7th house for Capricorn ascendant — exalted",
+                        "Marriage after age 28 — dosha loses much of its intensity"
+                    ].map((item, index) => (
+                        <div key={index} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-white text-sm font-medium">{index + 1}. {item}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>What Manglik Dosha Actually Affects</h2>
+                <p>
+                    Not &quot;death of spouse&quot; — that&apos;s myth. Real effects: tendency toward conflict, dominance, and high energy in marriage. Mars energy needs an outlet. If channeled well (career, fitness, ambition), marriage is fine. If suppressed, it causes friction.
+                </p>
+
+                <h2>Manglik Dosha by Planet Position — What Each House Means</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { house: '1st', desc: 'Strong personality, assertive — mildest form' },
+                        { house: '2nd', desc: 'Financial tensions, sharp speech in family' },
+                        { house: '4th', desc: 'Domestic restlessness, frequent home changes' },
+                        { house: '7th', desc: 'Most direct effect on spouse — needs matching energy' },
+                        { house: '8th', desc: 'Intensity in intimacy, possible health issues for spouse' },
+                        { house: '12th', desc: 'Emotional distance, foreign-based marriage possible' },
+                    ].map((item) => (
+                        <div key={item.house} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.house} House</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Should You Worry?</h2>
+                <p>
+                    Strong closing: Most happily married couples have Manglik Dosha. The chart must be read as a whole. A Manglik with a strong Jupiter and well-placed Venus often has a better marriage than a non-Manglik with an afflicted 7th house. Use AstroWord&apos;s free calculator to check your actual chart — not just the myth. Try checking your <Link href="/manglik" className="text-gold/70 hover:text-gold underline underline-offset-2">Manglik Dosha</Link> alongside your <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka planet</Link> for a complete picture.
+                </p>
+            </>
+        ),
+    },
+
+    'vimshottari-dasha-explained': {
+        title: "Vimshottari Dasha: The 120-Year System That Times Every Event in Your Life",
+        description: "Understand how Vimshottari Dasha works, what your current Mahadasha means, and how to use planetary periods to predict career, marriage, and major life events. Free calculator.",
+        category: "Vedic Astrology",
+        date: "May 20, 2026",
+        readTime: "7 min read",
+        relatedCalculator: { label: 'Calculate My Dasha Timeline', href: '/dasha-calculator', emoji: '⏳' },
+        content: (
+            <>
+                <p>
+                    Your birth chart shows your potential. Your Dasha shows WHEN that potential activates. Vimshottari Dasha is the primary timing system in Vedic astrology — a 120-year cycle of 9 planetary periods that governs every major event in your life. Understanding your current Dasha is like having a map of the years ahead.
+                </p>
+
+                <h2>What is Vimshottari Dasha?</h2>
+                <p>
+                    &quot;Vimshottari&quot; = 120 in Sanskrit. Total lifespan in Vedic tradition. 9 planets each rule a fixed period. The sequence and your starting point are determined by your Moon&apos;s nakshatra at birth. This is why accurate birth time is critical.
+                </p>
+
+                <h2>The 9 Mahadashas and Their Durations</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { planet: 'Ketu', years: '7', meaning: 'Spiritual detachment, past life karma activation' },
+                        { planet: 'Venus', years: '20', meaning: 'Relationships, luxury, creativity, marriage' },
+                        { planet: 'Sun', years: '6', meaning: 'Authority, career, father, recognition' },
+                        { planet: 'Moon', years: '10', meaning: 'Emotions, mother, public life, mind' },
+                        { planet: 'Mars', years: '7', meaning: 'Energy, property, siblings, action' },
+                        { planet: 'Rahu', years: '18', meaning: 'Worldly ambition, foreign, unconventional path' },
+                        { planet: 'Jupiter', years: '16', meaning: 'Wisdom, children, expansion, dharma' },
+                        { planet: 'Saturn', years: '19', meaning: 'Hard work, discipline, karma, delays with rewards' },
+                        { planet: 'Mercury', years: '17', meaning: 'Communication, business, intelligence, trade' },
+                    ].map((item) => (
+                        <div key={item.planet} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.planet} — {item.years} years</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.meaning}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>How to Read Your Current Mahadasha</h2>
+                <p>
+                    The Mahadasha planet&apos;s placement in your birth chart is everything. A well-placed Mahadasha lord brings its best gifts. A poorly placed one brings lessons. Check: which house it sits in, which house it rules, what aspects it receives, whether it is benefic or malefic for your ascendant.
+                </p>
+
+                <h2>Mahadasha + Antardasha: The Two-Level System</h2>
+                <p>
+                    Each Mahadasha is subdivided into 9 Antardashas (sub-periods) in the same planetary sequence. Major life events — marriage, career change, relocation — happen at Antardasha level, not just Mahadasha. Example: Venus Mahadasha / Jupiter Antardasha is classically one of the best periods for marriage.
+                </p>
+
+                <h2>When Does Marriage Happen in Dasha?</h2>
+                <p>
+                    Marriage most commonly occurs during: Mahadasha or Antardasha of 7th lord, Venus Mahadasha/Antardasha, <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka</Link> planet&apos;s period, Jupiter transit over natal Venus or 7th house. This is why knowing your <Link href="/dasha-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Dasha</Link> is essential for <Link href="/marriage-year" className="text-gold/70 hover:text-gold underline underline-offset-2">marriage timing</Link> — not just your sun sign.
+                </p>
+
+                <h2>Dasha Transitions: The Most Powerful Moments</h2>
+                <p>
+                    The shift from one Mahadasha to the next is often the most dramatic point in a person&apos;s life. Career pivots, relocations, relationship changes — these often cluster around Dasha sandhi (junction points). Pay special attention to the 6 months before and after a Mahadasha change.
+                </p>
+            </>
+        ),
+    },
+
+    'birth-tithi-astrology': {
+        title: "Birth Tithi in Vedic Astrology: What Your Lunar Birthday Reveals About You",
+        description: "Discover what your birth Tithi means in Vedic astrology — your personality, relationships, karma, and the deity that governs your lunar day. Free birth Tithi calculator.",
+        category: "Vedic Astrology",
+        date: "May 20, 2026",
+        readTime: "5 min read",
+        relatedCalculator: { label: 'Find My Birth Tithi', href: '/birth-tithi-calculator', emoji: '🌙' },
+        content: (
+            <>
+                <p>
+                    Most people know their solar birthday. But in Vedic astrology, there is a deeper birthday — your Janma Tithi, the lunar day on which you were born. Your birth Tithi is determined by the angular relationship between the Sun and Moon at birth. It reveals your emotional nature, relationships, karma, and spiritual path in ways that planetary positions alone cannot.
+                </p>
+
+                <h2>What is a Tithi?</h2>
+                <p>
+                    A Tithi is one lunar day — the time it takes for the Moon to move exactly 12° away from the Sun. There are 30 Tithis in a lunar month: 15 in Shukla Paksha (waxing Moon, 1-15) and 15 in Krishna Paksha (waning Moon, 1-15). Since the Moon&apos;s speed varies, a Tithi can last 19 to 26 solar hours — sometimes two Tithis fall in one day, sometimes one Tithi spans two days. This is why your birth time matters for Tithi calculation.
+                </p>
+
+                <h2>The 5 Types of Tithi and Their Meaning</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { type: 'Nanda (1, 6, 11)', desc: 'Joy, new beginnings, creativity — these natives are enthusiastic starters' },
+                        { type: 'Bhadra (2, 7, 12)', desc: 'Stability, foundation, journey — these natives build lasting structures' },
+                        { type: 'Jaya (3, 8, 13)', desc: 'Victory, competition, overcoming — these natives are fighters and achievers' },
+                        { type: 'Rikta (4, 9, 14)', desc: 'Introspective, intense, releasing — these natives process deeply before acting' },
+                        { type: 'Purna (5, 10, 15/30)', desc: 'Complete, abundant, spiritual — these natives carry a sense of wholeness' },
+                    ].map((item) => (
+                        <div key={item.type} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.type}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Shukla Paksha vs Krishna Paksha Birth</h2>
+                <p>
+                    Born in Shukla Paksha (waxing Moon, Tithis 1-15): outward energy, visible in the world, expressive, building phase karma. Born in Krishna Paksha (waning Moon, Tithis 16-30): inward energy, reflective, depth-seeking, releasing phase karma. Neither is better — they are different orientations of the soul.
+                </p>
+
+                <h2>Your Birth Tithi and Relationships</h2>
+                <p>
+                    In Vedic tradition, the Tithi is governed by Venus and the water element — both connected to relationships and emotions. Your birth Tithi reveals how you relate to others: your giving and receiving patterns, emotional needs in partnership, and even the karma you carry from past relationships into this life.
+                </p>
+
+                <h2>Tithi Lords and Deities</h2>
+                <p>
+                    Each Tithi has a ruling deity and planet. These govern the nature of the day&apos;s energy and the native&apos;s spiritual inclinations. For example: Pratipada (1st Tithi) is ruled by Agni (fire), Panchami (5th) by Naga (serpent wisdom), Ekadashi (11th) by Vishnu — fasting on your Janma Tithi&apos;s ruling day deepens the spiritual benefit.
+                </p>
+
+                <h2>Your Real Vedic Birthday</h2>
+                <p>
+                    In classical Vedic tradition, your birthday is celebrated when the Tithi returns — not when the solar date returns. This is called Tithi Pravesha, your true Vedic new year. Many traditional families still celebrate it this way. Knowing your <Link href="/birth-tithi-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">birth Tithi</Link> reconnects you to this ancient rhythm. You can also track the current Tithi in your <Link href="/daily-horoscope" className="text-gold/70 hover:text-gold underline underline-offset-2">daily horoscope</Link>.
+                </p>
+            </>
+        ),
+    },
+
+    'marriage-timing-astrology': {
+        title: "When Will I Get Married? How Vedic Astrology Predicts Your Marriage Year",
+        description: "Learn how Vedic astrology predicts marriage timing using Dasha periods, Jupiter transits, and the 7th house. Discover your personal marriage window with our free calculator.",
+        category: "Marriage Astrology",
+        date: "May 20, 2026",
+        readTime: "6 min read",
+        relatedCalculator: { label: 'Find My Marriage Year', href: '/marriage-year', emoji: '💍' },
+        content: (
+            <>
+                <p>
+                    &quot;When will I get married?&quot; is one of the most searched astrology questions in India. Vedic astrology has a precise, multi-layered system for answering it — far beyond sun sign generalizations. The answer lies in your Dasha periods, Jupiter&apos;s position, and the strength of your 7th house.
+                </p>
+
+                <h2>The 3 Pillars of Marriage Timing in Vedic Astrology</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { title: '1. Dasha System', desc: 'Your current Mahadasha and Antardasha determine the timing window. Marriage happens in the period of 7th lord, Venus, or Darakaraka — not randomly.' },
+                        { title: '2. Jupiter Transit', desc: 'Jupiter takes 12 years to circle the zodiac. When it transits your 7th house, conjuncts natal Venus, or aspects the 7th lord, it opens a marriage window.' },
+                        { title: '3. 7th House Activation', desc: 'When multiple Dasha + transit triggers align on your 7th house simultaneously, that is the strongest window for marriage.' },
+                    ].map((item) => (
+                        <div key={item.title} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.title}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Which Dasha Brings Marriage?</h2>
+                <p>
+                    Marriage most commonly arrives during: Venus Mahadasha or Antardasha (Venus is the natural significator of marriage for all charts), <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka</Link> planet&apos;s period (your personal spouse significator in Jaimini astrology), 7th lord&apos;s Mahadasha or Antardasha, Jupiter&apos;s Antardasha within a favorable Mahadasha. The Jaimini system adds another layer — the Darakaraka planet is uniquely personal to your chart, making the prediction far more specific than generic methods.
+                </p>
+
+                <h2>Why Jupiter Is the Marriage Planet</h2>
+                <p>
+                    Jupiter is the Deva Guru — the planet of blessings, expansion, and auspicious events. In Vedic tradition, no major life milestone happens without Jupiter&apos;s blessing. Jupiter transiting your 7th house brings marriage opportunities. Jupiter transiting natal Venus activates romantic energy. Even in arranged marriages, the formal proposal (rishta) typically arrives under a favorable Jupiter transit.
+                </p>
+
+                <h2>What Delays Marriage in Astrology?</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { condition: 'Saturn aspecting 7th house or 7th lord', desc: 'Delays but ensures stability — marriage after 28 is often stronger' },
+                        { condition: 'Venus combust or retrograde', desc: 'Difficulty expressing love and attracting the right partner' },
+                        { condition: 'Rahu in 7th house', desc: 'Unconventional path — foreign partner, late marriage, or multiple relationships' },
+                        { condition: 'Manglik Dosha without cancellation', desc: 'Friction that needs matching energy or specific Dasha timing' },
+                        { condition: 'Ketu in 7th house', desc: 'Detachment from marriage — spiritual path may take priority' },
+                    ].map((item) => (
+                        <div key={item.condition} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.condition}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>AstroWord&apos;s Approach: Jaimini + Dasha Together</h2>
+                <p>
+                    Most marriage calculators only look at the 7th house. AstroWord combines the Jaimini Darakaraka system with your <Link href="/dasha-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Vimshottari Dasha</Link> timeline to give you a personalised marriage window — not a generic prediction. Check for <Link href="/manglik" className="text-gold/70 hover:text-gold underline underline-offset-2">Manglik Dosha</Link> combinations, enter your birth details, and get AI-powered analysis of your specific <Link href="/marriage-year" className="text-gold/70 hover:text-gold underline underline-offset-2">marriage timing</Link>.
+                </p>
             </>
         ),
     },

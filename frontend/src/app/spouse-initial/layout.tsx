@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spouse Name Initial Predictor — Free Nakshatra Reading",
-  description: "Predict the first letter of your future spouse's name using ancient Vedic nakshatra akshara mapping. Free AI analysis based on your Darakaraka and 7th lord.",
-  keywords: "spouse name initial, future spouse name, nakshatra akshara, jaimini astrology name prediction, marriage astrology",
+  title: "Spouse Name Prediction by Astrology | First Letter Calculator",
+  description: "Predict your spouse's name first letter using Vedic astrology. Our AI-powered tool uses your Darakaraka nakshatra and Jaimini system for accurate spouse name prediction.",
+  keywords: "spouse name initial, future spouse name, nakshatra akshara, jaimini astrology name prediction, marriage astrology, spouse name prediction astrology, predict spouse name, husband name prediction astrology, wife name prediction astrology",
   alternates: { canonical: "https://www.astroword.in/spouse-initial" },
   openGraph: {
-    title: "Spouse Name Initial Predictor — Free Nakshatra Reading",
-    description: "Predict the first letter of your future spouse's name using ancient Vedic nakshatra akshara mapping. Free AI analysis based on your Darakaraka and 7th lord.",
+    title: "Spouse Name Prediction by Astrology | First Letter Calculator",
+    description: "Predict your spouse's name first letter using Vedic astrology. Our AI-powered tool uses your Darakaraka nakshatra and Jaimini system for accurate spouse name prediction.",
     url: "https://www.astroword.in/spouse-initial",
     siteName: "AstroWord",
-    images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Spouse Name Initial Predictor" }],
+    images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Spouse Name Prediction" }],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spouse Name Initial Predictor — Free Nakshatra Reading",
-    description: "Predict the first letter of your future spouse's name using ancient Vedic nakshatra akshara mapping. Free AI analysis based on your Darakaraka and 7th lord.",
+    title: "Spouse Name Prediction by Astrology | First Letter Calculator",
+    description: "Predict your spouse's name first letter using Vedic astrology. Our AI-powered tool uses your Darakaraka nakshatra and Jaimini system for accurate spouse name prediction.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
   },
@@ -29,7 +29,7 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why does it show multiple possible initials?",
+      "name": "How does spouse name prediction work in astrology?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Your chart has multiple marriage indicators—the 7th lord, the Darakaraka, and Venus. In most cases, these planets occupy different Nakshatras. If two or more point to the same sound, that initial is extremely likely."
@@ -37,7 +37,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Is the initial for the first name or surname?",
+      "name": "Can you predict my spouse's name using Vedic astrology?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "In Vedic tradition, this calculation refers to the \"calling name\" or the first name, as that is the vibration the individual responds to most frequently."
