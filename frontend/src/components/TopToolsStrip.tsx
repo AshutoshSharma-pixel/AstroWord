@@ -29,6 +29,17 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
   const lastScrollY = useRef(0);
   const tools = ALL_TOOLS.filter(t => t.slug !== currentTool);
 
+  const [showRightFade, setShowRightFade] = useState(true);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleHorizontalScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setShowLeftFade(el.scrollLeft > 10);
+    setShowRightFade(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -53,8 +64,22 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
           visible ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
-        <div className="bg-[#0a0a0f]/90 backdrop-blur-md border-b border-gold/15">
-          <div className="flex items-center justify-start sm:justify-center gap-2 h-12 px-3 overflow-x-auto scrollbar-hide">
+        <div className="bg-[#0a0a0f]/90 backdrop-blur-md border-b border-gold/15 relative">
+          
+          {/* Left fade */}
+          {showLeftFade && (
+            <div className="absolute left-0 top-0 h-full w-8 z-10 pointer-events-none"
+              style={{background: 'linear-gradient(to right, #0a0a0f, transparent)'}}
+            />
+          )}
+
+          {/* Scrollable tools */}
+          <div 
+            ref={scrollRef}
+            onScroll={handleHorizontalScroll}
+            className="flex items-center justify-start sm:justify-center gap-2 h-12 px-3 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden"
+            style={{scrollbarWidth:'none', msOverflowStyle:'none'}}
+          >
             {tools.map(tool => (
               <button
                 key={tool.slug}
@@ -72,6 +97,15 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
               </button>
             ))}
           </div>
+
+          {/* Right fade + chevron */}
+          {showRightFade && (
+            <div className="absolute right-0 top-0 h-full w-12 z-10 pointer-events-none flex items-center justify-end pr-1"
+              style={{background: 'linear-gradient(to left, #0a0a0f, transparent)'}}
+            >
+              <span className="text-gold/50 text-xs">›</span>
+            </div>
+          )}
         </div>
       </div>
 
