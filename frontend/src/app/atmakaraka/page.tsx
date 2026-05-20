@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { cleanReading } from '@/utils/cleanReading';
 import { API_URL } from '@/utils/api';
+import Link from 'next/link';
 import ShareCard from '@/components/ShareCard';
 import TopToolsStrip from '@/components/TopToolsStrip';
 
@@ -310,23 +311,45 @@ export default function AtmakarakaPage() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-gold font-serif text-2xl">Atmakaraka by Planet — Your Soul's Path</h2>
+                    <h2 className="text-gold font-serif text-2xl">Atmakaraka by Planet — What Each Planet Means</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {[
-                            { planet: 'Sun as Atmakaraka', meaning: 'Soul seeks to overcome ego and learn true humility and service to others.' },
-                            { planet: 'Moon as Atmakaraka', meaning: 'Soul seeks emotional mastery and overcoming fluctuations of the mind.' },
-                            { planet: 'Mars as Atmakaraka', meaning: 'Soul seeks to master courage and channel energy toward non-violence.' },
-                            { planet: 'Mercury as Atmakaraka', meaning: 'Soul seeks to master speech and use intellect for spiritual truth.' },
-                            { planet: 'Jupiter as Atmakaraka', meaning: 'Soul seeks wisdom and to respect teachers, avoiding spiritual pride.' },
-                            { planet: 'Venus as Atmakaraka', meaning: 'Soul seeks to master relationships and refine desires into pure devotion.' },
-                            { planet: 'Saturn as Atmakaraka', meaning: 'Soul seeks to master discipline and accept suffering as a path to growth.' },
+                            { planet: 'Sun as Atmakaraka', meaning: 'Soul driven by recognition, leadership, and self-expression. Life lessons involve ego, authority, and learning to lead without dominating. Career in government, leadership, or medicine fulfils the soul.' },
+                            { planet: 'Moon as Atmakaraka', meaning: 'Soul driven by emotional connection, nurturing, and belonging. Life lessons involve attachment, letting go, and emotional security. Drawn to healing, caregiving, and community.' },
+                            { planet: 'Mars as Atmakaraka', meaning: 'Soul driven by courage, action, and protection. Life lessons involve anger, patience, and channeling aggression constructively. Drawn to engineering, military, surgery, or athletics.' },
+                            { planet: 'Mercury as Atmakaraka', meaning: 'Soul driven by learning, communication, and mastery of knowledge. Life lessons involve focus — tendency to scatter across too many interests. Drawn to writing, teaching, technology.' },
+                            { planet: 'Jupiter as Atmakaraka', meaning: 'Soul driven by wisdom, dharma, and guiding others. Life lessons involve humility — the teacher must also remain a student. Drawn to teaching, law, spirituality, counselling.' },
+                            { planet: 'Venus as Atmakaraka', meaning: 'Soul driven by beauty, harmony, and love. Life lessons involve desire and detachment — learning to love without losing self. Drawn to arts, music, fashion, relationships.' },
+                            { planet: 'Saturn as Atmakaraka', meaning: 'Soul driven by justice, discipline, and service. Life lessons involve patience, delayed gratification, and humility. Often indicates a soul that chose a difficult life for spiritual growth.' },
                         ].map((item) => (
-                            <div key={item.planet} className="bg-surface border border-border rounded-xl p-3">
+                            <div key={item.planet} className="bg-surface border border-border rounded-xl p-4">
                                 <p className="text-white text-sm font-medium mb-1">{item.planet}</p>
                                 <p className="text-muted text-xs leading-relaxed">{item.meaning}</p>
                             </div>
                         ))}
                     </div>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Atmakaraka vs Darakaraka — Soul vs Spouse</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        The Atmakaraka is your soul planet — the highest degree planet, representing your karmic mission this lifetime. The Darakaraka is your spouse planet — the lowest degree planet, representing who you will attract as a partner. Together they tell the story of your soul's journey and the person who will walk it with you.
+                        When your Darakaraka planet is the same as your partner's Atmakaraka — or vice versa — it indicates a deeply karmic relationship where each person helps the other fulfil their soul's purpose. <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Calculate your Darakaraka here</Link>.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">How to Use Your Atmakaraka in Daily Life</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Your Atmakaraka planet reveals which area of life needs the most attention and growth. Strengthening your Atmakaraka through its natural significations — wearing its gemstone, worshipping its deity, working in its domain — accelerates your spiritual growth and reduces karmic friction. The Atmakaraka's placement in the Navamsa (D9) chart, called the Karakamsa, is one of the most sacred points in Jaimini astrology.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Atmakaraka in the Navamsa Chart</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        The sign occupied by your Atmakaraka in the D9 Navamsa chart is called the Karakamsa Lagna. The planets placed in or aspecting the Karakamsa give specific predictions about career, spirituality, and life purpose. This is one of the most detailed predictive techniques in classical Jaimini astrology — and AstroWord's AI reads all of these layers together.
+                    </p>
                 </div>
 
                 {/* FAQ Section */}
@@ -348,6 +371,14 @@ export default function AtmakarakaPage() {
                         <div className="bg-surface2/50 border border-border rounded-xl p-5">
                             <h3 className="text-white font-medium mb-2">Is Atmakaraka always the highest degree planet?</h3>
                             <p className="text-muted text-sm leading-relaxed">Yes, in the Jaimini 7-Karaka system, the Atmakaraka is always the planet with the highest degree. In the 8-Karaka system, Rahu is also included, but most practitioners prefer the 7-planet system for soul readings.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">Is Atmakaraka the same as Lagna lord?</h3>
+                            <p className="text-muted text-sm leading-relaxed">No. The Lagna lord is the ruler of your rising sign and represents your physical self and life direction. The Atmakaraka is the planet with the highest degree across all seven planets and represents your soul's karmic mission — a deeper, more spiritual layer of your chart.</p>
+                        </div>
+                        <div className="bg-surface2/50 border border-border rounded-xl p-5">
+                            <h3 className="text-white font-medium mb-2">Which Atmakaraka is most powerful?</h3>
+                            <p className="text-muted text-sm leading-relaxed">All Atmakarakas are equally significant as they represent the soul's chosen lessons. However, Jupiter and Venus as Atmakaraka are considered particularly auspicious in classical texts as they are natural benefics. Saturn as Atmakaraka often indicates a soul that has chosen significant karmic challenges for accelerated spiritual growth.</p>
                         </div>
                     </div>
                 </div>

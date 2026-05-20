@@ -423,12 +423,53 @@ export default function SpouseInitialPage() {
                 </div>
 
                 <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">The 27 Nakshatras and Their Aksharas (Sound Syllables)</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Each of the 27 nakshatras is associated with 4 sounds (padas). The Darakaraka nakshatra's pada determines the starting sound of your spouse's name. This is why two people with the same Darakaraka planet can get different initials — the nakshatra pada adds a second layer of specificity.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {[
+                            { name: 'Ashwini', sounds: 'Chu, Che, Cho, La' },
+                            { name: 'Bharani', sounds: 'Li, Lu, Le, Lo' },
+                            { name: 'Krittika', sounds: 'A, I, U, E' },
+                            { name: 'Rohini', sounds: 'O, Va, Vi, Vu' },
+                            { name: 'Mrigashira', sounds: 'Ve, Vo, Ka, Ki' },
+                            { name: 'Ardra', sounds: 'Ku, Gha, Na, Chha' },
+                            { name: 'Punarvasu', sounds: 'Ke, Ko, Ha, Hi' },
+                            { name: 'Pushya', sounds: 'Hu, He, Ho, Da' },
+                            { name: 'Ashlesha', sounds: 'Di, Du, De, Do' }
+                        ].map((item) => (
+                            <div key={item.name} className="bg-surface border border-border rounded-xl p-3">
+                                <p className="text-white text-sm font-medium mb-1">{item.name}</p>
+                                <p className="text-muted text-xs leading-relaxed">{item.sounds}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">How Accurate is Spouse Name Prediction?</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        The Nakshatra Akshara method is one of the oldest techniques in Jaimini astrology for spouse name prediction. Its accuracy depends on: correct birth time (even 4 minutes changes the nakshatra pada), whether the spouse goes by their given name or a nickname, and which name the spouse is primarily known by — first name, middle name, or family name. Most practitioners report 60-75% accuracy when birth time is precise to within 5 minutes.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction Across Different Traditions</h2>
+                    <p className="text-muted text-sm leading-relaxed">
+                        Different regional traditions in India use slightly different nakshatra-to-syllable mappings, particularly for South Indian and North Indian naming conventions. AstroWord uses the classical North Indian mapping which is most widely documented in Jaimini texts. The prediction gives the most likely starting sound — often matching the first letter of the first name, though in some cases it matches the family name or a commonly used nickname.
+                    </p>
+                </div>
+
+                <div className="space-y-4">
                     <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction — FAQ</h2>
                     <div className="grid grid-cols-1 gap-4">
                         {[
                             { q: 'How does spouse name prediction work when it shows multiple possible initials?', a: 'Your chart has multiple marriage indicators—the 7th lord, the Darakaraka, and Venus. In most cases, these planets occupy different Nakshatras. If two or more point to the same sound, that initial is extremely likely.' },
                             { q: 'When you predict my spouse\'s name, is the initial for the first name or surname?', a: 'In Vedic tradition, this calculation refers to the "calling name" or the first name, as that is the vibration the individual responds to most frequently.' },
-                            { q: 'What if the initial doesn\'t match my current partner?', a: 'Astrology shows potential and destiny. If you are in a relationship that doesn\'t match the predicted initial, look at the qualities of the planet. Often, the partner will embody the energy of the predicted planet even if the name initial differs.' }
+                            { q: 'What if the initial doesn\'t match my current partner?', a: 'Astrology shows potential and destiny. If you are in a relationship that doesn\'t match the predicted initial, look at the qualities of the planet. Often, the partner will embody the energy of the predicted planet even if the name initial differs.' },
+                            { q: 'What if my spouse\'s name doesn\'t start with the predicted letter?', a: 'This can happen for several reasons: slightly imprecise birth time shifting the nakshatra pada, the spouse using a nickname or middle name, or regional variations in nakshatra syllable mapping. The prediction indicates the most likely sound — treat it as a strong clue, not an absolute certainty. Pair it with your full Darakaraka reading for the most complete picture.' },
+                            { q: 'Does spouse name prediction work for second marriages?', a: 'In classical Jaimini astrology, the Darakaraka represents the primary spouse significator. For second marriages, some practitioners look at the Upapada Lagna and its lord for additional layers. AstroWord\'s prediction focuses on the primary spouse indication from the Darakaraka nakshatra.' }
                         ].map((item) => (
                             <div key={item.q} className="bg-surface/40 border border-border/50 rounded-2xl p-5 space-y-2">
                                 <h4 className="text-gold font-serif text-base">{item.q}</h4>
