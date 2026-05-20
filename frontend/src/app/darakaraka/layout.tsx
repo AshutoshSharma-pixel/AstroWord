@@ -6,20 +6,25 @@ export const metadata: Metadata = {
   keywords: "darakaraka calculator, future spouse prediction, vedic astrology spouse, jaimini astrology, marriage prediction",
   alternates: { canonical: "https://www.astroword.in/darakaraka" },
   openGraph: {
-    title: "Darakaraka Calculator — Free AI Spouse Reading",
-    description: "Find your Darakaraka planet and get a free AI-powered reading about your future spouse's personality, appearance, and career. Based on authentic Jaimini astrology.",
-    url: "https://www.astroword.in/darakaraka",
-    siteName: "AstroWord",
-    images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Darakaraka Calculator" }],
-    locale: "en_IN",
-    type: "website",
+    title: 'Darakaraka Calculator — Find Your Future Spouse | AstroWord',
+    description: 'Find your Darakaraka planet and discover your future spouse personality, appearance, and career using Jaimini Vedic astrology. Free AI-powered calculator.',
+    url: 'https://www.astroword.in/darakaraka',
+    type: 'website',
+    locale: 'en_IN',
+    siteName: 'AstroWord',
+    images: [{
+      url: 'https://www.astroword.in/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Darakaraka Calculator — AstroWord'
+    }]
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Darakaraka Calculator — Free AI Spouse Reading",
-    description: "Find your Darakaraka planet and get a free AI-powered reading about your future spouse's personality, appearance, and career. Based on authentic Jaimini astrology.",
-    images: ["https://www.astroword.in/og-image.png"],
-    site: "@astroword_in",
+    card: 'summary_large_image',
+    title: 'Darakaraka Calculator — Find Your Future Spouse | AstroWord',
+    description: 'Find your Darakaraka planet and discover your future spouse personality, appearance, and career using Jaimini Vedic astrology.',
+    site: '@astroword_in',
+    images: ['https://www.astroword.in/og-image.png']
   },
 };
 

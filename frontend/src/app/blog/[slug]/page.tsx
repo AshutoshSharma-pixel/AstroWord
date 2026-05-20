@@ -10,6 +10,8 @@ const articles: Record<string, {
     date: string;
     readTime: string;
     relatedCalculator?: { label: string; href: string; emoji: string };
+    keywords?: string[];
+    faqs?: { q: string, a: string }[];
     content: React.ReactNode;
 }> = {
     'what-is-darakaraka': {
@@ -855,6 +857,12 @@ const articles: Record<string, {
         category: "Vedic Astrology",
         date: "May 20, 2026",
         readTime: "6 min read",
+        keywords: ['manglik dosha', 'mangal dosha', 'am i manglik', 'manglik dosha calculator', 'manglik dosha cancellation', 'kuja dosha', 'manglik meaning marriage', 'is manglik dosha real', 'manglik dosha effects'],
+        faqs: [
+            { q: "Am I Manglik if Mars is in the 7th house?", a: "Yes. Mars in the 7th house is one of the strongest forms of Manglik Dosha as it directly aspects the house of marriage. However, this dosha can be cancelled if Mars is in its own sign, exalted, or if both partners are Manglik." },
+            { q: "Does Manglik Dosha cause death of spouse?", a: "No. This is a myth with no classical astrological basis. Manglik Dosha indicates the need for a partner who can match Mars energy — not physical harm. Many happily married people have Manglik Dosha." },
+            { q: "Can Manglik Dosha be cancelled?", a: "Yes. There are several classical cancellations: both partners being Manglik, Mars in its own sign or exalted, Jupiter aspecting Mars, and marriage after age 28 significantly reduces its intensity." }
+        ],
         relatedCalculator: { label: 'Check My Manglik Dosha', href: '/manglik', emoji: '🔴' },
         content: (
             <>
@@ -864,7 +872,7 @@ const articles: Record<string, {
 
                 <h2>What is Manglik Dosha?</h2>
                 <p>
-                    Mars (Mangal) in 1st, 2nd, 4th, 7th, 8th, or 12th house from Lagna, Moon, or Venus = Manglik. Explain each house briefly. Note: calculated from 3 reference points — lagna is weakest, Moon is strong, Venus is strongest because Venus = spouse.
+                    Mars (Mangal) in the 1st, 2nd, 4th, 7th, 8th, or 12th house from your Lagna (ascendant), Moon sign, or Venus creates Manglik Dosha. This is calculated from three reference points — Lagna is the weakest form, Moon sign is moderate, and Venus is the strongest because Venus directly represents your spouse and relationships in Vedic astrology. Most classical texts primarily check from Lagna and Moon; checking from Venus gives the most marriage-specific result.
                 </p>
 
                 <h2>How Many People Are Actually Manglik?</h2>
@@ -913,7 +921,7 @@ const articles: Record<string, {
 
                 <h2>Should You Worry?</h2>
                 <p>
-                    Strong closing: Most happily married couples have Manglik Dosha. The chart must be read as a whole. A Manglik with a strong Jupiter and well-placed Venus often has a better marriage than a non-Manglik with an afflicted 7th house. Use AstroWord&apos;s free calculator to check your actual chart — not just the myth. Try checking your <Link href="/manglik" className="text-gold/70 hover:text-gold underline underline-offset-2">Manglik Dosha</Link> alongside your <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka planet</Link> for a complete picture.
+                    Most happily married couples have Manglik Dosha. The chart must be read as a whole. A Manglik with a strong Jupiter and well-placed Venus often has a better marriage than a non-Manglik with an afflicted 7th house. Use AstroWord&apos;s free <Link href='/manglik' className='text-gold/70 hover:text-gold underline underline-offset-2'>Manglik Dosha calculator</Link> to check your actual Mars placement — not just the myth. Pair it with your <Link href='/darakaraka' className='text-gold/70 hover:text-gold underline underline-offset-2'>Darakaraka planet</Link> for a complete picture of your marriage karma.
                 </p>
             </>
         ),
@@ -925,6 +933,12 @@ const articles: Record<string, {
         category: "Vedic Astrology",
         date: "May 20, 2026",
         readTime: "7 min read",
+        keywords: ['vimshottari dasha', 'mahadasha', 'antardasha', 'dasha calculator', 'current mahadasha', 'vimshottari dasha system', 'planetary periods astrology', 'dasha periods vedic astrology', 'when will i get married dasha'],
+        faqs: [
+            { q: "How do I find my current Mahadasha?", a: "Your Mahadasha is calculated from your Moon's nakshatra at birth. The nakshatra determines which planet's period starts first and the remaining balance. Use AstroWord's free Dasha calculator — enter your birth date, time, and place for your complete timeline." },
+            { q: "Which Mahadasha is best for marriage?", a: "Venus Mahadasha is classically the most favourable for marriage as Venus is the natural significator. The Antardasha of your 7th lord within any major period is also a strong indicator. Jupiter Antardasha within Venus Mahadasha is one of the strongest combinations." },
+            { q: "How long does a Mahadasha last?", a: "Each of the 9 planets rules a fixed period: Ketu 7 years, Venus 20 years, Sun 6 years, Moon 10 years, Mars 7 years, Rahu 18 years, Jupiter 16 years, Saturn 19 years, Mercury 17 years. The total cycle is 120 years." }
+        ],
         relatedCalculator: { label: 'Calculate My Dasha Timeline', href: '/dasha-calculator', emoji: '⏳' },
         content: (
             <>
@@ -986,6 +1000,12 @@ const articles: Record<string, {
         category: "Vedic Astrology",
         date: "May 20, 2026",
         readTime: "5 min read",
+        keywords: ['birth tithi', 'janma tithi', 'tithi in astrology', 'birth tithi calculator', 'what is tithi', 'shukla paksha krishna paksha', 'tithi meaning vedic astrology', 'lunar day astrology', 'birth tithi personality'],
+        faqs: [
+            { q: "What is birth Tithi in astrology?", a: "Birth Tithi is the lunar day on which you were born, determined by the angular distance between the Sun and Moon at your birth time. It is one of the five limbs of the Vedic Panchang and reveals your emotional nature, relationships, and karmic patterns." },
+            { q: "How is birth Tithi calculated?", a: "Tithi is calculated by finding the difference between the Sun and Moon's longitude at birth. Every 12 degrees of separation completes one Tithi. There are 30 Tithis in a lunar month — 15 in Shukla Paksha (waxing) and 15 in Krishna Paksha (waning)." },
+            { q: "What does my birth Tithi reveal?", a: "Your birth Tithi reveals your emotional patterns, relationship karma, and spiritual inclinations. Each Tithi belongs to one of five categories — Nanda, Bhadra, Jaya, Rikta, or Purna — each with distinct personality traits and life themes." }
+        ],
         relatedCalculator: { label: 'Find My Birth Tithi', href: '/birth-tithi-calculator', emoji: '🌙' },
         content: (
             <>
@@ -1043,6 +1063,12 @@ const articles: Record<string, {
         category: "Marriage Astrology",
         date: "May 20, 2026",
         readTime: "6 min read",
+        keywords: ['when will i get married astrology', 'marriage timing vedic astrology', 'marriage prediction by date of birth', 'jupiter transit marriage', '7th house marriage astrology', 'marriage year prediction', 'dasha marriage timing', 'marriage age astrology india'],
+        faqs: [
+            { q: "Which Dasha period brings marriage?", a: "Marriage most commonly occurs during Venus Mahadasha or Antardasha, the period of your 7th house lord, your Darakaraka planet's Dasha period, or Jupiter's Antardasha within a favorable Mahadasha. The exact timing depends on your personal birth chart." },
+            { q: "Does Jupiter transit predict marriage?", a: "Yes. Jupiter transiting your 7th house, natal Venus, or the 7th lord is one of the most reliable marriage timing indicators in Vedic astrology. Most marriages in India happen during a favorable Jupiter transit combined with a supporting Dasha period." },
+            { q: "What delays marriage in astrology?", a: "Common delay factors include Saturn aspecting the 7th house or its lord, Venus being combust or retrograde, Rahu or Ketu in the 7th house, and Manglik Dosha without cancellation. These delay but rarely deny marriage — they shift timing, often resulting in a more stable union." }
+        ],
         relatedCalculator: { label: 'Find My Marriage Year', href: '/marriage-year', emoji: '💍' },
         content: (
             <>
@@ -1108,6 +1134,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     return {
         title: article.title,
         description: article.description,
+        keywords: article.keywords,
         alternates: { canonical: `https://www.astroword.in/blog/${slug}` },
         openGraph: {
             title: article.title,
@@ -1137,8 +1164,27 @@ export default async function ArticlePage({ params }: { params: Params }) {
     const article = articles[slug];
     if (!article) notFound();
 
+    const faqSchema = article.faqs ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": article.faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+            }
+        }))
+    } : null;
+
     return (
         <div className="min-h-[100dvh] bg-bg text-text py-12">
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
             <TopToolsStrip currentTool="blog" />
             <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
