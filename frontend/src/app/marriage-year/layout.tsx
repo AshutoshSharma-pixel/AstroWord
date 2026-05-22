@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MarriageYearSEOContent from "./MarriageYearSEO";
 
 export const metadata: Metadata = {
   title: "When Will I Get Married? Free AI Vedic Prediction",
@@ -6,8 +7,8 @@ export const metadata: Metadata = {
   keywords: "marriage year predictor, when will i get married, dasha timing, marriage prediction calculator, vedic dasha analysis",
   alternates: { canonical: "https://www.astroword.in/marriage-year" },
   openGraph: {
-    title: "When Will I Get Married? Free AI Vedic Prediction",
-    description: "Get a free AI-powered Vedic astrology prediction for your marriage year. Based on Vimsottari Dasha, Jupiter transits, and 7th house activation in your birth chart.",
+    title: "Marriage Year Predictor — Vedic Astrology Timeline | AstroWord",
+    description: "Discover your most auspicious marriage years and active relationship windows using Vedic Dasha and transit analysis. Get your timeline.",
     url: "https://www.astroword.in/marriage-year",
     siteName: "AstroWord",
     images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Marriage Year Predictor" }],
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "When Will I Get Married? Free AI Vedic Prediction",
-    description: "Get a free AI-powered Vedic astrology prediction for your marriage year. Based on Vimsottari Dasha, Jupiter transits, and 7th house activation in your birth chart.",
+    title: "Marriage Year Predictor — Vedic Astrology Timeline | AstroWord",
+    description: "Discover your most auspicious marriage years and active relationship windows using Vedic Dasha and transit analysis. Get your timeline.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
   },
@@ -68,12 +69,13 @@ export default function MarriageYearLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <MarriageYearSEOContent />
+    </div>
   );
 }

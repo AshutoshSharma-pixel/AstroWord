@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SpouseInitialSEOContent from "./SpouseInitialSEO";
 
 export const metadata: Metadata = {
   title: "Spouse Name Prediction by Astrology | First Letter Calculator",
@@ -6,8 +7,8 @@ export const metadata: Metadata = {
   keywords: "spouse name initial, future spouse name, nakshatra akshara, jaimini astrology name prediction, marriage astrology, spouse name prediction astrology, predict spouse name, husband name prediction astrology, wife name prediction astrology",
   alternates: { canonical: "https://www.astroword.in/spouse-initial" },
   openGraph: {
-    title: "Spouse Name Prediction by Astrology | First Letter Calculator",
-    description: "Predict your spouse's name first letter using Vedic astrology. Our AI-powered tool uses your Darakaraka nakshatra and Jaimini system for accurate spouse name prediction.",
+    title: "Spouse Name Initial Predictor — Vedic Astrology | AstroWord",
+    description: "Predict your future spouse's first name initial using Nakshatra sounds and Vedic astrology. Free AI-powered reading.",
     url: "https://www.astroword.in/spouse-initial",
     siteName: "AstroWord",
     images: [{ url: "https://www.astroword.in/og-image.png", width: 1200, height: 630, alt: "AstroWord Spouse Name Prediction" }],
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spouse Name Prediction by Astrology | First Letter Calculator",
-    description: "Predict your spouse's name first letter using Vedic astrology. Our AI-powered tool uses your Darakaraka nakshatra and Jaimini system for accurate spouse name prediction.",
+    title: "Spouse Name Initial Predictor — Vedic Astrology | AstroWord",
+    description: "Predict your future spouse's first name initial using Nakshatra sounds and Vedic astrology. Free AI-powered reading.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
   },
@@ -60,12 +61,14 @@ export default function SpouseInitialLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <SpouseInitialSEOContent />
+    </div>
   );
 }
+

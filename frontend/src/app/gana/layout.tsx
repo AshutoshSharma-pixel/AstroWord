@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GanaSEOContent from "./GanaSEO";
 
 export const metadata: Metadata = {
   title: "Gana Calculator — Free Vedic Soul Type Reading",
@@ -68,12 +69,13 @@ export default function GanaLayout({
   };
 
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {children}
-    </>
+      <GanaSEOContent />
+    </div>
   );
 }
