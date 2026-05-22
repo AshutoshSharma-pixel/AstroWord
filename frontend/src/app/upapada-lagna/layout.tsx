@@ -78,14 +78,17 @@ const faqSchema = {
   ]
 };
 
+import UpapadaSEOContent from './UpapadaSEO';
+
 export default function UpapadaLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <UpapadaSEOContent />
+    </div>
   );
 }

@@ -78,14 +78,17 @@ const faqSchema = {
   ]
 };
 
+import ArudhaSEOContent from './ArudhaSEO';
+
 export default function ArudhaLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <ArudhaSEOContent />
+    </div>
   );
 }
