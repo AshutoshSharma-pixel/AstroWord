@@ -242,16 +242,16 @@ async def ask_astrologer(data: AskRequest):
                     questions_limit = user_data.get("questions_limit", 5)
                     
                     if questions_today >= questions_limit:
-                        # Calculate time until midnight reset
-                        now = datetime.now()
-                        midnight = datetime.combine(now.date() + timedelta(days=1), datetime.min.time())
-                        hours_remaining = int((midnight - now).total_seconds() // 3600)
-                        minutes_remaining = int(((midnight - now).total_seconds() % 3600) // 60)
-                        
-                        if hours_remaining > 0:
-                            reset_time = f"{hours_remaining} hours and {minutes_remaining} minutes"
-                        else:
-                            reset_time = f"{minutes_remaining} minutes"
+                        IST = timezone(timedelta(hours=5, minutes=30))
+                        now = datetime.now(IST)
+                        midnight_ist = datetime.combine(
+                            now.date() + timedelta(days=1), 
+                            datetime.min.time(), 
+                            tzinfo=IST
+                        )
+                        hrs = int((midnight_ist - now).total_seconds() // 3600)
+                        mins = int(((midnight_ist - now).total_seconds() % 3600) // 60)
+                        reset_time = f"{hrs} hours and {mins} minutes" if hrs > 0 else f"{mins} minutes"
                         
                         return {
                             "success": False,
@@ -271,8 +271,9 @@ async def ask_astrologer(data: AskRequest):
                         "plan": "FREE",
                         "last_reset_date": today_str
                     })
-            except Exception:
-                pass  # Non-fatal — limit tracking unavailable
+            except Exception as e:
+                print(f"[ASK] User limit check error: {e}")
+                pass
 
         if not os.environ.get("GEMINI_API_KEY"):
             raise HTTPException(status_code=500, detail="GEMINI_API_KEY environment variable is missing.")
@@ -395,16 +396,22 @@ async def ask_stream(data: AskRequest):
                 plan = user_data.get("plan", "FREE").lower()
                 questions_limit = user_data.get("questions_limit", 5)
                 if questions_today >= questions_limit:
-                    now = datetime.now()
-                    midnight = datetime.combine(now.date() + timedelta(days=1), datetime.min.time())
-                    hrs = int((midnight - now).total_seconds() // 3600)
-                    mins = int(((midnight - now).total_seconds() % 3600) // 60)
+                    IST = timezone(timedelta(hours=5, minutes=30))
+                    now = datetime.now(IST)
+                    midnight_ist = datetime.combine(
+                        now.date() + timedelta(days=1), 
+                        datetime.min.time(), 
+                        tzinfo=IST
+                    )
+                    hrs = int((midnight_ist - now).total_seconds() // 3600)
+                    mins = int(((midnight_ist - now).total_seconds() % 3600) // 60)
                     reset_time = f"{hrs} hours and {mins} minutes" if hrs > 0 else f"{mins} minutes"
                     async def _limit_gen():
                         yield f"data: {json.dumps({'type': 'limit_reached', 'reset_time': reset_time})}\n\n"
                         yield f"data: {json.dumps({'type': 'done'})}\n\n"
                     return StreamingResponse(_limit_gen(), media_type="text/event-stream")
-        except Exception:
+        except Exception as e:
+            print(f"[ASK STREAM] User limit check error: {e}")
             pass
 
     # Build prompt (plain markdown — no JSON output request)
