@@ -1123,6 +1123,172 @@ const articles: Record<string, {
             </>
         ),
     },
+
+    'upapada-lagna-marriage': {
+        title: "Upapada Lagna: The Real Marriage Indicator Most Astrologers Miss",
+        description: "Learn how Upapada Lagna reveals your spouse's true nature, marriage quality, and in-laws — beyond what the 7th house shows. Free UL calculator included.",
+        category: "Marriage Astrology",
+        date: "May 22, 2026",
+        readTime: "6 min read",
+        keywords: ['upapada lagna', 'upapada lagna calculator', 'upapada lagna marriage', 'jaimini astrology marriage', 'spouse indicator vedic astrology', 'UL astrology', 'arudha 12th house', 'marriage quality astrology'],
+        faqs: [
+            { q: "What is Upapada Lagna?", a: "Upapada Lagna (UL) is the Arudha of the 12th house from the Ascendant. It is the Jaimini astrology indicator for the quality of your marriage, the nature of your spouse, and the role of your in-laws in your life." },
+            { q: "Is Upapada Lagna more important than the 7th house?", a: "They show different things. The 7th house shows the legal and social bond of marriage. Upapada Lagna shows the lived reality — the quality of life you experience within the marriage, your spouse's real character, and long-term marital happiness." },
+            { q: "Which planets in UL indicate a happy marriage?", a: "Jupiter or Venus in or aspecting the Upapada Lagna strongly indicates a harmonious, loving marriage. The nature of the UL lord also matters — a strong, well-placed UL lord generally brings a supportive and compatible spouse." },
+        ],
+        relatedCalculator: { label: 'Calculate My Upapada Lagna', href: '/upapada-lagna', emoji: '💒' },
+        content: (
+            <>
+                <p>
+                    Most people know to check the 7th house for marriage. But in Jaimini astrology, the 7th house only shows the legal bond — who society thinks you married. If you want to know the true lived reality of your marriage, you need to look at the Upapada Lagna. This is the indicator that serious Vedic astrologers check when standard analysis isn&apos;t specific enough.
+                </p>
+
+                <h2>What Is Upapada Lagna?</h2>
+                <p>
+                    Upapada Lagna (UL) is the Arudha of the 12th house. The 12th house in Vedic astrology represents bed pleasures, foreign lands, and — most importantly — loss. The Arudha of this house becomes the manifestation point of what you &apos;lose&apos; yourself in: your most intimate bond. In Jaimini astrology, this is the primary indicator for the quality and character of your marriage and your spouse.
+                </p>
+
+                <h2>How Upapada Lagna Is Calculated</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { step: '1. Find the 12th house from your Ascendant', desc: 'Count 12 signs forward from your Lagna sign.' },
+                        { step: '2. Identify the lord of that sign', desc: 'Each zodiac sign has a ruling planet. Find the lord of your 12th house sign.' },
+                        { step: '3. Count the distance from the 12th house to its lord', desc: 'Count how many signs from the 12th house to where its lord is placed in your chart.' },
+                        { step: '4. Count the same distance forward from the lord', desc: 'Starting from the lord\'s sign, count the same number of signs forward. That sign is your Upapada Lagna.' },
+                    ].map((item) => (
+                        <div key={item.step} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.step}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>What Upapada Lagna Reveals About Your Marriage</h2>
+                <p>
+                    The sign of your UL describes the environment of your marriage. The lord of UL describes your spouse&apos;s character and the quality of your marital life. Planets placed in or aspecting the UL heavily colour what you experience within the marriage.
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { planet: 'Jupiter in/aspecting UL', meaning: 'A wise, generous, and dharmic spouse. Marriage brings growth, happiness, and social elevation.' },
+                        { planet: 'Venus in/aspecting UL', meaning: 'A beautiful, artistic, and loving spouse. Marriage is harmonious and pleasurable.' },
+                        { planet: 'Saturn in/aspecting UL', meaning: 'A serious, older, or career-focused spouse. Marriage may be delayed but stable and dutiful.' },
+                        { planet: 'Mars in/aspecting UL', meaning: 'An energetic, ambitious, or short-tempered spouse. Passion runs high but so does conflict.' },
+                        { planet: 'Rahu in/aspecting UL', meaning: 'An unconventional, foreign, or ambitious spouse. The marriage may be non-traditional or karmic.' },
+                        { planet: 'Ketu in/aspecting UL', meaning: 'Detachment within marriage — spiritual path may overshadow marital life. Past-life connection with spouse.' },
+                    ].map((item) => (
+                        <div key={item.planet} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.planet}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.meaning}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>UL vs 7th House: What&apos;s the Difference?</h2>
+                <p>
+                    Think of the 7th house as the wedding certificate and the Upapada Lagna as the actual marriage. The 7th house tells you about legal partnerships and what society sees. The UL tells you what you actually live — your spouse&apos;s true temperament, the quality of intimacy, and whether the marriage nourishes or drains you. Two people with identical 7th houses can have completely different marriages — the UL explains why.
+                </p>
+
+                <h2>Can Upapada Lagna Indicate Second Marriage?</h2>
+                <p>
+                    Yes. In Jaimini astrology, there is also a second Upapada Lagna (A12 from the 2nd UL) that can indicate a second marriage or relationship. Additionally, afflictions to the UL — particularly malefics in the 2nd from UL (the house of sustenance of the UL) — can indicate separation or divorce. This is a more advanced reading that requires careful chart analysis.
+                </p>
+
+                <h2>How to Use AstroWord&apos;s Free UL Calculator</h2>
+                <p>
+                    Our <Link href="/upapada-lagna" className="text-gold/70 hover:text-gold underline underline-offset-2">Upapada Lagna calculator</Link> takes your date, time, and place of birth and computes your UL using the traditional Jaimini method. It also generates an AI-powered reading explaining what your specific UL placement means for your marriage quality, your spouse&apos;s nature, and the in-law dynamic. It is one of the most specific marriage indicators available in a free tool.
+                </p>
+            </>
+        ),
+    },
+
+    'arudha-lagna-identity': {
+        title: "Arudha Lagna: Why the World Sees You Differently Than You See Yourself",
+        description: "Discover how Arudha Lagna reveals your public image, social reputation, and how the world perceives you — separate from your true self. Free AL calculator included.",
+        category: "Jaimini Astrology",
+        date: "May 22, 2026",
+        readTime: "6 min read",
+        keywords: ['arudha lagna', 'arudha lagna calculator', 'arudha lagna meaning', 'AL jaimini astrology', 'public image astrology', 'social reputation vedic astrology', 'maya astrology', 'arudha lagna sign'],
+        faqs: [
+            { q: "What is Arudha Lagna?", a: "Arudha Lagna (AL) is the reflection or 'image' of your Ascendant as perceived by the external world. It represents your public persona, social reputation, material status, and how others see you — which is often very different from how you see yourself." },
+            { q: "Is Arudha Lagna the same as Ascendant?", a: "No. Your Ascendant (Lagna) is your true self — your inner nature, soul, and fundamental character. Arudha Lagna is your worldly reflection — your image, status, and how you appear to others in society." },
+            { q: "Which sign is good for Arudha Lagna?", a: "Any sign can be powerful. The strength and dignity of the AL lord matters most. A strong AL lord placed in a Kendra or Trikona from the AL itself generally brings a positive and influential public image." },
+        ],
+        relatedCalculator: { label: 'Calculate My Arudha Lagna', href: '/arudha-lagna', emoji: '🪞' },
+        content: (
+            <>
+                <p>
+                    In Vedic astrology, there is a profound gap between who you truly are and how the world perceives you. Your Ascendant (Lagna) is your soul — your inner truth. Your Arudha Lagna is your image — the reflection the world sees. Understanding this gap is one of the most powerful applications of Jaimini astrology.
+                </p>
+
+                <h2>What Is Arudha Lagna?</h2>
+                <p>
+                    Arudha Lagna (AL) is derived by finding the Arudha of the 1st house. &quot;Arudha&quot; means &quot;mounted upon&quot; or &quot;reflected image.&quot; In Jaimini philosophy, every house has an Arudha — the point in the chart that represents the worldly manifestation or external perception of what that house signifies. The Arudha of the 1st house (your identity) is your social image, your material status, and your reputation in the world. It is the mask you wear — or the mask others place on you.
+                </p>
+
+                <h2>How Arudha Lagna Is Calculated</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { step: '1. Find your Ascendant sign', desc: 'Your Lagna sign is the starting point for all Arudha calculations.' },
+                        { step: '2. Find the lord of your Ascendant', desc: 'Each sign has a ruling planet. Identify where that planet sits in your chart.' },
+                        { step: '3. Count from Lagna to its lord', desc: 'Count the number of signs from your Lagna sign to the sign occupied by the Lagna lord.' },
+                        { step: '4. Count the same number forward from the lord', desc: 'Starting from the lord\'s sign, count the same number of signs forward. That is your Arudha Lagna. (If the result falls on the Lagna or 7th from Lagna, use a special exception rule.)' },
+                    ].map((item) => (
+                        <div key={item.step} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.step}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>What Each AL Sign Says About Your Public Image</h2>
+                <p>
+                    The sign of your Arudha Lagna colours how you appear to the world. Planets placed in or aspecting the AL modify this image significantly.
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { sign: 'Aries AL', image: 'Perceived as bold, energetic, and a natural leader. Others see you as action-oriented and courageous.' },
+                        { sign: 'Taurus AL', image: 'Perceived as wealthy, stable, and refined. Others see you as someone who appreciates luxury and comfort.' },
+                        { sign: 'Gemini AL', image: 'Perceived as intelligent, communicative, and versatile. Others see you as social, witty, and connected.' },
+                        { sign: 'Cancer AL', image: 'Perceived as nurturing, emotional, and family-oriented. Others see you as caring and traditional.' },
+                        { sign: 'Leo AL', image: 'Perceived as charismatic, authoritative, and influential. Others see you as a public figure or someone of status.' },
+                        { sign: 'Virgo AL', image: 'Perceived as analytical, disciplined, and detail-oriented. Others see you as hardworking and precise.' },
+                    ].map((item) => (
+                        <div key={item.sign} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.sign}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.image}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>The Gap Between Lagna and Arudha Lagna</h2>
+                <p>
+                    The most revealing part of Arudha Lagna analysis is what happens when your Lagna and AL are very different signs. For example, a person with Scorpio Lagna (secretive, deep, and intense by inner nature) but Leo AL (perceived as glamorous, outgoing, and socially dominant) experiences a constant tension between who they truly are and who the world believes them to be. This is the &quot;Maya&quot; (illusion) that Jaimini described. Understanding your AL helps you navigate this gap consciously.
+                </p>
+
+                <h2>Planets in Arudha Lagna: Key Combinations</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { planet: 'Jupiter in AL', effect: 'Perceived as wise, respected, and dharmic. A guru-like public image. Often seen in teachers, judges, and advisors.' },
+                        { planet: 'Venus in AL', effect: 'Perceived as beautiful, charming, and artistic. Strong social appeal. Often seen in creative professionals and public figures.' },
+                        { planet: 'Saturn in AL', effect: 'Perceived as serious, hardworking, and responsible. Image improves with age. Success comes through discipline.' },
+                        { planet: 'Rahu in AL', effect: 'Perceived as unconventional, ambitious, or foreign. The image may be larger than life — or controversial.' },
+                        { planet: 'Sun in AL', effect: 'Perceived as authoritative, confident, and leadership-oriented. A bright, visible public image.' },
+                        { planet: 'Moon in AL', effect: 'Perceived as nurturing, popular, and emotionally accessible. Strong public appeal and likability.' },
+                    ].map((item) => (
+                        <div key={item.planet} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.planet}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.effect}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Why Arudha Lagna Matters in the Modern World</h2>
+                <p>
+                    In an age of social media, personal branding, and public personas, Arudha Lagna is more relevant than ever. Your AL describes your Instagram image, your professional reputation, how colleagues perceive you, and what strangers assume about your status. Understanding your AL doesn&apos;t mean becoming the image — it means understanding the gap between your truth and your perception, and using that insight strategically. Use our free <Link href="/arudha-lagna" className="text-gold/70 hover:text-gold underline underline-offset-2">Arudha Lagna calculator</Link> to discover your AL sign and get an AI-powered reading of what it means for your social identity.
+                </p>
+            </>
+        ),
+    },
 };
 
 type Params = Promise<{ slug: string }>;

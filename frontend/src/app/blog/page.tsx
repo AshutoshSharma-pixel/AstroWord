@@ -168,6 +168,24 @@ const articles = [
         readTime: "6 min read",
         date: "May 20, 2026",
         emoji: "💍"
+    },
+    {
+        slug: 'upapada-lagna-marriage',
+        title: "Upapada Lagna: The Real Marriage Indicator Most Astrologers Miss",
+        description: "Learn how Upapada Lagna reveals your spouse's true nature, marriage quality, and in-laws — beyond what the 7th house shows. Free UL calculator included.",
+        category: "Marriage Astrology",
+        readTime: "6 min read",
+        date: "May 22, 2026",
+        emoji: "💒"
+    },
+    {
+        slug: 'arudha-lagna-identity',
+        title: "Arudha Lagna: Why the World Sees You Differently Than You See Yourself",
+        description: "Discover how Arudha Lagna reveals your public image, social reputation, and how the world perceives you — separate from your true self. Free AL calculator included.",
+        category: "Jaimini Astrology",
+        readTime: "6 min read",
+        date: "May 22, 2026",
+        emoji: "🪞"
     }
 ];
 
