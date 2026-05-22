@@ -114,7 +114,7 @@ export default function ArudhaPage() {
                     </div>
                 </>
             ) : isLoading || !result ? (
-                <div className="flex flex-col items-center justify-center py-32 p-6 relative overflow-hidden">
+                <div className="min-h-[100dvh] flex flex-col items-center justify-center p-6 relative overflow-hidden">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ animation: 'spin 120s linear infinite' }}>
                         <svg width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ width: 'min(700px, 95vw)', height: 'min(700px, 95vw)' }}>
                             <circle cx="350" cy="350" r="340" stroke="#c9a84c" strokeWidth="0.8" opacity="0.2" />
