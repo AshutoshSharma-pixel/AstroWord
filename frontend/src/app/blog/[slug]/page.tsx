@@ -1201,7 +1201,7 @@ const articles: Record<string, {
         ),
     },
 
-    'arudha-lagna-identity': {
+    'arudha-lagna-public-image': {
         title: "Arudha Lagna: Why the World Sees You Differently Than You See Yourself",
         description: "Discover how Arudha Lagna reveals your public image, social reputation, and how the world perceives you — separate from your true self. Free AL calculator included.",
         category: "Jaimini Astrology",
