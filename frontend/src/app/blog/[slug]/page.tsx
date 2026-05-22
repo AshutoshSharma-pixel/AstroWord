@@ -1163,6 +1163,17 @@ const articles: Record<string, {
                     ))}
                 </div>
 
+                <p>
+                    There is one important exception in the Jaimini
+                    system: if the lord of the 12th house is placed in
+                    the 12th house itself, the Upapada Lagna cannot fall
+                    on the same sign or the 7th sign from it. In this
+                    case, count 10 houses forward from that position.
+                    This exception rule is what most manual calculations
+                    get wrong — AstroWord&apos;s calculator applies it
+                    automatically.
+                </p>
+
                 <h2>What Upapada Lagna Reveals About Your Marriage</h2>
                 <p>
                     The sign of your UL describes the environment of your marriage. The lord of UL describes your spouse&apos;s character and the quality of your marital life. Planets placed in or aspecting the UL heavily colour what you experience within the marriage.
@@ -1239,6 +1250,15 @@ const articles: Record<string, {
                         </div>
                     ))}
                 </div>
+
+                <p>
+                    The key exception: if the result of your Arudha
+                    Lagna calculation falls on the Ascendant itself or
+                    the 7th house from it, the Arudha shifts 10 houses
+                    forward. This is a common manual calculation error.
+                    Our calculator handles this automatically using the
+                    classical Jaimini exception rules.
+                </p>
 
                 <h2>What Each AL Sign Says About Your Public Image</h2>
                 <p>
