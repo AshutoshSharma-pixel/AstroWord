@@ -102,7 +102,11 @@ export default function TermsPage() {
                             </div>
                         </div>
                         <p className="mt-3 text-sm">
-                            For refund requests, email{' '}
+                            For refund requests, see our{' '}
+                            <Link href="/refund-policy" className="text-[#c9a84c] underline hover:opacity-80">
+                                Refund Policy
+                            </Link>
+                            . You can also email{' '}
                             <a href="mailto:info@astroword.in" className="text-[#c9a84c] underline hover:opacity-80">
                                 info@astroword.in
                             </a>{' '}

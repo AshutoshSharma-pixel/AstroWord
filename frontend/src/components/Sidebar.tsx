@@ -413,10 +413,14 @@ export default function Sidebar({
                     )}
 
                     {/* Privacy & Terms */}
-                    <div className="flex gap-3 px-3 pb-1 text-xs text-muted">
+                    <div className="flex flex-wrap gap-x-2 gap-y-1 px-3 pb-1 text-xs text-muted">
                         <a href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</a>
                         <span className="opacity-30">·</span>
                         <a href="/terms" className="hover:text-gold transition-colors">Terms</a>
+                        <span className="opacity-30">·</span>
+                        <a href="/support" className="hover:text-gold transition-colors">Support</a>
+                        <span className="opacity-30">·</span>
+                        <a href="/refund-policy" className="hover:text-gold transition-colors">Refund Policy</a>
                     </div>
                 </div>
 
