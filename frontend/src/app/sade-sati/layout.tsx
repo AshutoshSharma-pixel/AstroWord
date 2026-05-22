@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sade Sati Calculator — Free Shani Sade Sati Check | AstroWord",
+  title: "Sade Sati Calculator — Am I in Shani Sade Sati?",
   description: "Free Sade Sati calculator. Find out instantly if you are going through Shani Sade Sati or Shani Dhaiya, your current phase, timeline, and get a personalised AI reading with Vedic remedies.",
   keywords: "sade sati calculator, shani sade sati check, sade sati status, shani dhaiya calculator, ashtama shani, kantaka shani, saturn transit calculator, sade sati timeline, sade sati remedies",
   alternates: { canonical: "https://www.astroword.in/sade-sati" },
   openGraph: {
-    title: "Sade Sati Calculator — Free Shani Sade Sati Check | AstroWord",
+    title: "Sade Sati Calculator — Am I in Shani Sade Sati? | AstroWord",
     description: "Free Sade Sati calculator. Discover if you are under Sade Sati or Dhaiya, identify your phase, view your timeline, and get a personalised AI reading with remedies.",
     url: "https://www.astroword.in/sade-sati",
     siteName: "AstroWord",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sade Sati Calculator — Free Shani Sade Sati Check",
+    title: "Sade Sati Calculator — Am I in Shani Sade Sati?",
     description: "Free Sade Sati calculator with AI reading and Vedic remedies. Instant result.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
