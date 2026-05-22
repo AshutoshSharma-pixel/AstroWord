@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Birth Tithi Calculator — Find Your Janma Tithi & AI Reading | AstroWord",
+  title: "Birth Tithi Calculator — Find Your Janma Tithi & AI Reading",
   description: "Free Birth Tithi calculator by date of birth. Find your Janma Tithi, Paksha, ruling planet and get an AI-powered personalised Vedic reading based on your exact birth chart. Powered by Swiss Ephemeris.",
   keywords: "birth tithi calculator, janma tithi calculator, what is my birth tithi, birth tithi by date of birth, janma tithi meaning, ekadashi tithi born, purnima tithi birth, amavasya tithi born, shukla paksha birth, krishna paksha birth, tithi personality vedic astrology, birth tithi personality",
   alternates: {
     canonical: "https://www.astroword.in/birth-tithi-calculator"
   },
   openGraph: {
-    title: "Birth Tithi Calculator — Find Your Janma Tithi & AI Reading | AstroWord",
+    title: "Birth Tithi Calculator — Find Your Janma Tithi & AI Reading",
     description: "Find your Janma Tithi and Paksha with a personalised AI reading based on your actual birth chart. Free, instant, powered by Swiss Ephemeris.",
     url: "https://www.astroword.in/birth-tithi-calculator",
     siteName: "AstroWord",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Birth Tithi Calculator — Your Janma Tithi & AI Reading | AstroWord",
+    title: "Birth Tithi Calculator — Your Janma Tithi & AI Reading",
     description: "Find your Janma Tithi with personalised AI Vedic reading. Free, instant.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in"

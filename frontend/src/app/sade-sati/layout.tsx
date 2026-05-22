@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   keywords: "sade sati calculator, shani sade sati check, sade sati status, shani dhaiya calculator, ashtama shani, kantaka shani, saturn transit calculator, sade sati timeline, sade sati remedies",
   alternates: { canonical: "https://www.astroword.in/sade-sati" },
   openGraph: {
-    title: "Sade Sati Calculator — Am I in Shani Sade Sati? | AstroWord",
+    title: "Sade Sati Calculator — Am I in Shani Sade Sati?",
     description: "Free Sade Sati calculator. Discover if you are under Sade Sati or Dhaiya, identify your phase, view your timeline, and get a personalised AI reading with remedies.",
     url: "https://www.astroword.in/sade-sati",
     siteName: "AstroWord",

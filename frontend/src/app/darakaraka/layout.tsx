@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   keywords: "darakaraka calculator, future spouse prediction, vedic astrology spouse, jaimini astrology, marriage prediction",
   alternates: { canonical: "https://www.astroword.in/darakaraka" },
   openGraph: {
-    title: 'Darakaraka Calculator — Find Your Future Spouse | AstroWord',
+    title: 'Darakaraka Calculator — Find Your Future Spouse',
     description: 'Find your Darakaraka planet and discover your future spouse personality, appearance, and career using Jaimini Vedic astrology. Free AI-powered calculator.',
     url: 'https://www.astroword.in/darakaraka',
     type: 'website',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Darakaraka Calculator — Find Your Future Spouse | AstroWord',
+    title: 'Darakaraka Calculator — Find Your Future Spouse',
     description: 'Find your Darakaraka planet and discover your future spouse personality, appearance, and career using Jaimini Vedic astrology.',
     site: '@astroword_in',
     images: ['https://www.astroword.in/og-image.png']

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: "marriage year predictor, when will i get married, dasha timing, marriage prediction calculator, vedic dasha analysis",
   alternates: { canonical: "https://www.astroword.in/marriage-year" },
   openGraph: {
-    title: "Marriage Year Predictor — Vedic Astrology Timeline | AstroWord",
+    title: "Marriage Year Predictor — Vedic Astrology Timeline",
     description: "Discover your most auspicious marriage years and active relationship windows using Vedic Dasha and transit analysis. Get your timeline.",
     url: "https://www.astroword.in/marriage-year",
     siteName: "AstroWord",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marriage Year Predictor — Vedic Astrology Timeline | AstroWord",
+    title: "Marriage Year Predictor — Vedic Astrology Timeline",
     description: "Discover your most auspicious marriage years and active relationship windows using Vedic Dasha and transit analysis. Get your timeline.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",

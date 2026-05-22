@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     canonical: "https://www.astroword.in/dasha-calculator"
   },
   openGraph: {
-    title: "Vimshottari Dasha Calculator — Your Current Mahadasha & AI Reading | AstroWord",
+    title: "Vimshottari Dasha Calculator — Your Current Mahadasha & AI Reading",
     description: "Find your current Mahadasha and Antardasha with personalised AI interpretation based on your actual birth chart positions. Free, instant, no signup.",
     url: "https://www.astroword.in/dasha-calculator",
     siteName: "AstroWord",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vimshottari Dasha Calculator — Your Current Mahadasha | AstroWord",
+    title: "Vimshottari Dasha Calculator — Your Current Mahadasha",
     description: "Find your current Mahadasha and Antardasha with AI-powered personalised Vedic reading. Free, instant.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in"

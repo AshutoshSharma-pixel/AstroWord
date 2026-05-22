@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: "spouse name initial, future spouse name, nakshatra akshara, jaimini astrology name prediction, marriage astrology, spouse name prediction astrology, predict spouse name, husband name prediction astrology, wife name prediction astrology",
   alternates: { canonical: "https://www.astroword.in/spouse-initial" },
   openGraph: {
-    title: "Spouse Name Initial Predictor — Vedic Astrology | AstroWord",
+    title: "Spouse Name Initial Predictor — Vedic Astrology",
     description: "Predict your future spouse's first name initial using Nakshatra sounds and Vedic astrology. Free AI-powered reading.",
     url: "https://www.astroword.in/spouse-initial",
     siteName: "AstroWord",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spouse Name Initial Predictor — Vedic Astrology | AstroWord",
+    title: "Spouse Name Initial Predictor — Vedic Astrology",
     description: "Predict your future spouse's first name initial using Nakshatra sounds and Vedic astrology. Free AI-powered reading.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",

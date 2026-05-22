@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: "atmakaraka calculator, soul planet, life purpose astrology, vedic charts, jaimini karakas",
   alternates: { canonical: "https://www.astroword.in/atmakaraka" },
   openGraph: {
-    title: "Atmakaraka Calculator — Discover Your Soul Planet | AstroWord",
+    title: "Atmakaraka Calculator — Discover Your Soul Planet",
     description: "Find your Atmakaraka planet and discover your soul's purpose, karmic lessons, and spiritual path using Jaimini Vedic astrology. Free AI-powered calculator.",
     url: "https://www.astroword.in/atmakaraka",
     type: "website",
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
       url: "https://www.astroword.in/og-image.png",
       width: 1200,
       height: 630,
-      alt: "Atmakaraka Calculator — Discover Your Soul Planet | AstroWord"
+      alt: "Atmakaraka Calculator — Discover Your Soul Planet"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atmakaraka Calculator — Discover Your Soul Planet | AstroWord",
+    title: "Atmakaraka Calculator — Discover Your Soul Planet",
     description: "Find your Atmakaraka planet and discover your soul's purpose, karmic lessons, and spiritual path using Jaimini Vedic astrology. Free AI-powered calculator.",
     site: "@astroword_in",
     images: ["https://www.astroword.in/og-image.png"]

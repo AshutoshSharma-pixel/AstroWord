@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: "love or arranged marriage, marriage astrology, 7th house lord, d9 chart analysis, marriage prediction ai",
   alternates: { canonical: "https://www.astroword.in/marriage-type" },
   openGraph: {
-    title: "Love or Arranged Marriage Calculator — Vedic Astrology | AstroWord",
+    title: "Love or Arranged Marriage Calculator — Vedic Astrology",
     description: "Find out if your chart indicates love or arranged marriage using AI-powered Vedic analysis of your 5th house, 7th house, Venus, and Rahu. Get instant predictions.",
     url: "https://www.astroword.in/marriage-type",
     siteName: "AstroWord",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Love or Arranged Marriage Calculator — Vedic Astrology | AstroWord",
+    title: "Love or Arranged Marriage Calculator — Vedic Astrology",
     description: "Find out if your chart indicates love or arranged marriage using AI-powered Vedic analysis of your 5th house, 7th house, Venus, and Rahu. Get instant predictions.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
