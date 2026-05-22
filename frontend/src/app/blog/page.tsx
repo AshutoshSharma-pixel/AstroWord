@@ -186,6 +186,24 @@ const articles = [
         readTime: "6 min read",
         date: "May 22, 2026",
         emoji: "🪞"
+    },
+    {
+        slug: 'kaal-sarp-dosha-explained',
+        title: "Kaal Sarp Dosha: The 12 Serpent Yogas & Their Real Remedies",
+        description: "Understand the 12 types of Kaal Sarp Dosha, from Anant to Sheshnag. Discover how this planetary hemming shapes your destiny and key Vedic remedies.",
+        category: "Vedic Astrology",
+        readTime: "7 min read",
+        date: "May 22, 2026",
+        emoji: "🐍"
+    },
+    {
+        slug: 'sade-sati-guide',
+        title: "Shani Sade Sati: A Complete Survival Guide for Saturn's Transit",
+        description: "Demystify Shani Sade Sati's 3 phases and Shani Dhaiya. Learn how Saturn's transit affects your Moon sign and simple Saturday remedies.",
+        category: "Vedic Astrology",
+        readTime: "6 min read",
+        date: "May 22, 2026",
+        emoji: "🔵"
     }
 ];
 

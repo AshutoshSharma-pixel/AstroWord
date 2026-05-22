@@ -263,6 +263,34 @@ export default function DashboardView() {
                     </p>
                 </button>
 
+                {/* Kaal Sarp Dosha Card */}
+                <button
+                    onClick={() => navigateTo('kaal-sarp-dosha')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🐍</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Kaal Sarp Dosha
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Check if Rahu and Ketu are hemming your planetary chart and explore the 12 serpent yogas.
+                    </p>
+                </button>
+
+                {/* Sade Sati Card */}
+                <button
+                    onClick={() => navigateTo('sade-sati')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🔵</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Shani Sade Sati
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Find out if you are undergoing Shani Sade Sati or Shani Dhaiya transits and learn practical remedies.
+                    </p>
+                </button>
+
             </div>
         </div>
     );

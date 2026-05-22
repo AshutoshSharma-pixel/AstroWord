@@ -85,6 +85,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${base}/kaal-sarp-dosha`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
+            url: `${base}/sade-sati`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
             url: `${base}/marriage-report`,
             lastModified: now,
             changeFrequency: 'monthly' as const,
@@ -206,6 +218,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${base}/blog/arudha-lagna-public-image`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/kaal-sarp-dosha-explained`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/sade-sati-guide`,
             lastModified: now,
             changeFrequency: 'monthly',
             priority: 0.7,

@@ -18,6 +18,8 @@ const ALL_TOOLS = [
   { slug: 'upapada-lagna',   emoji: '💍', label: 'Upapada Lagna' },
   { slug: 'arudha-lagna',    emoji: '🪞', label: 'Arudha Lagna' },
   { slug: 'spouse-initial',  emoji: '🔤', label: 'Spouse Initial' },
+  { slug: 'kaal-sarp-dosha', emoji: '🐍', label: 'Kaal Sarp' },
+  { slug: 'sade-sati',       emoji: '🔵', label: 'Sade Sati' },
   { slug: 'marriage-report', emoji: '📜', label: 'Report ₹199',    isPaid: true },
 ];
 

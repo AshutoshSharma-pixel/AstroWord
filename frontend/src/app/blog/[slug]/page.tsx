@@ -1309,6 +1309,132 @@ const articles: Record<string, {
             </>
         ),
     },
+    'kaal-sarp-dosha-explained': {
+        title: "Kaal Sarp Dosha: The 12 Serpent Yogas & Their Real Remedies",
+        description: "Understand the 12 types of Kaal Sarp Dosha, from Anant to Sheshnag. Discover how this planetary hemming shapes your destiny and key Vedic remedies.",
+        category: "Vedic Astrology",
+        date: "May 22, 2026",
+        readTime: "7 min read",
+        relatedCalculator: { label: 'Check Kaal Sarp Dosha', href: '/kaal-sarp-dosha', emoji: '🐍' },
+        content: (
+            <>
+                <p>
+                    In the vast and intricate system of Vedic astrology, few terms evoke as much anxiety and curiosity as <strong>Kaal Sarp Dosha</strong>. Often described in popular folklore as a celestial curse or a binding contract of struggles, this combination represents a profound karmic configuration in a birth chart. In Sanskrit, "Kaal" translates to time or death, "Sarp" means serpent, and "Dosha" refers to a planetary blemish or challenge.
+                </p>
+                <p>
+                    Astronomically and astrologically, Kaal Sarp Dosha is formed when all seven primary physical planets in Vedic astrology — the Sun, Moon, Mars, Mercury, Jupiter, Venus, and Saturn — are positioned on one side of the chart, hemmed within the axis formed by the shadow planets <strong>Rahu</strong> (the North Node of the Moon) and <strong>Ketu</strong> (the South Node of the Moon).
+                </p>
+
+                <h2>How the Serpent of Time Operates</h2>
+                <p>
+                    To visualize this, imagine the zodiac as a 360-degree circle divided into twelve houses. Rahu and Ketu are always exactly 180 degrees apart, facing each other across the chart. If Rahu is in the first house, Ketu will inevitably occupy the seventh house. When all other seven planets are clustered in the houses between them (for example, houses 2 through 6, or houses 8 through 12), the Kaal Sarp loop is closed.
+                </p>
+                <p>
+                    If even one planet sits outside this boundary, the configuration is broken, resulting in what astrologers call a <strong>Partial Kaal Sarp Dosha</strong>, which has significantly less impact. When the loop is fully closed, it creates a concentrating effect. It is as if the native's life path is funneled through the desires of Rahu and the spiritual detachments of Ketu, leading to intense experiences, sudden rises, and equally sudden falls.
+                </p>
+
+                <h2>The 12 Types of Kaal Sarp Dosha</h2>
+                <p>
+                    Depending on which houses Rahu and Ketu occupy in your D1 natal chart, there are twelve distinct variations of this dosha. Each type highlights a specific struggle and brings unique karmic lessons:
+                </p>
+                <ul>
+                    <li><strong>Anant Kaal Sarp Dosha (Rahu in 1st, Ketu in 7th)</strong>: Affects the self and partnerships. The struggle is between personal identity and accommodating a spouse or business partner. Delays in marriage and self-doubt are common.</li>
+                    <li><strong>Kulik Kaal Sarp Dosha (Rahu in 2nd, Ketu in 8th)</strong>: Focuses on speech, family accumulation, and finances. It causes unexpected financial changes, speech conflicts, and challenges with in-laws.</li>
+                    <li><strong>Vasuki Kaal Sarp Dosha (Rahu in 3rd, Ketu in 9th)</strong>: Impacts communication, efforts, siblings, and fortune. The native must work twice as hard to secure luck, and sibling relationships require constant patience.</li>
+                    <li><strong>Shankhpal Kaal Sarp Dosha (Rahu in 4th, Ketu in 10th)</strong>: Affects domestic peace, mother, property, and career. The native may struggle to find inner peace and faces frequent fluctuations in professional status.</li>
+                    <li><strong>Padma Kaal Sarp Dosha (Rahu in 5th, Ketu in 11th)</strong>: Targets education, children, intellect, and gains. It can cause obstacles in higher studies, delays in conceiving, or worries regarding financial returns.</li>
+                    <li><strong>Mahapadma Kaal Sarp Dosha (Rahu in 6th, Ketu in 12th)</strong>: Governs enemies, debt, health, and isolation. While it gives the ability to conquer obstacles, it demands strict care regarding health and debt management.</li>
+                    <li><strong>Takshak Kaal Sarp Dosha (Rahu in 7th, Ketu in 1st)</strong>: The reverse of Anant, focusing heavily on marriage stability. Relationships are tested constantly, and partnerships require absolute transparency.</li>
+                    <li><strong>Karkotak Kaal Sarp Dosha (Rahu in 8th, Ketu in 2nd)</strong>: Concerns sudden events, secrets, and legacy. It can bring sudden transformations, physical accidents, or unexpected inheritances.</li>
+                    <li><strong>Shankhnaad Kaal Sarp Dosha (Rahu in 9th, Ketu in 3rd)</strong>: Affects luck, higher education, father, and belief systems. The native's faith is tested, and luck may turn back at key moments.</li>
+                    <li><strong>Ghatak Kaal Sarp Dosha (Rahu in 10th, Ketu in 4th)</strong>: Impacts public image, career, and authority. The native must learn to manage authority figures and avoid sudden loss of status.</li>
+                    <li><strong>Vishdhar Kaal Sarp Dosha (Rahu in 11th, Ketu in 5th)</strong>: Governs income flow and social networks. Financial earnings may fluctuate, and friendships require caution to avoid betrayal.</li>
+                    <li><strong>Sheshnag Kaal Sarp Dosha (Rahu in 12th, Ketu in 6th)</strong>: Focuses on expenses, sleep, and foreign links. The native may spend heavily and must learn to manage stress and sleep hygiene.</li>
+                </ul>
+
+                <h2>Anulom vs. Vilom: Clockwise and Counter-Clockwise</h2>
+                <p>
+                    Vedic texts categorize the dosha into two directions. <strong>Anulom</strong> (or standard) occurs when all planets are placed in the houses going clockwise from Rahu to Ketu. <strong>Vilom</strong> (or reverse) occurs when they are placed clockwise from Ketu to Rahu. Vilom Kaal Sarp is widely considered less aggressive because Ketu leads the axis, driving the native toward spiritual detachment and introspective growth rather than Rahu's outward, obsessive desires.
+                </p>
+
+                <h2>Debunking the Myth: It Is Not a Curse</h2>
+                <p>
+                    It is crucial to recognize that Kaal Sarp Dosha does not prevent success. In fact, the intense focus and resilience forced by this configuration have produced some of the world's most successful figures. People like Prime Minister <strong>Jawaharlal Nehru</strong>, cricket legend <strong>Sachin Tendulkar</strong>, President <strong>Abraham Lincoln</strong>, and human rights champion <strong>Nelson Mandela</strong> all had full Kaal Sarp configurations. The dosha creates a pressurized environment that, when handled with maturity, turns carbon into diamonds.
+                </p>
+
+                <h2>Practical & Vedic Remedies</h2>
+                <p>
+                    If your chart shows Kaal Sarp Dosha, Vedic tradition recommends several highly effective remedies to balance the planetary nodes:
+                </p>
+                <ul>
+                    <li><strong>Shiva Worship</strong>: Lord Shiva controls the energy of the serpent nodes. Chanting the Maha Mrityunjaya Mantra daily or offering water mixed with black sesame seeds to a Shiva Linga on Mondays is the most powerful remedy.</li>
+                    <li><strong>Rahu & Ketu Chants</strong>: Regularly chanting the Rahu Beej Mantra (<em>Om Bhram Bhreem Bhroum Sah Rahave Namah</em>) helps stabilize erratic desires.</li>
+                    <li><strong>Saturday Charity</strong>: Donating dark blankets, iron tools, or offering sesame oil to those in need helps neutralize karmic friction.</li>
+                    <li><strong>Spiritual Pilgrimage</strong>: A one-time specialized puja at Srikalahasti or Trimbakeshwar is highly recommended for severe high-severity charts.</li>
+                </ul>
+            </>
+        ),
+    },
+    'sade-sati-guide': {
+        title: "Shani Sade Sati: A Complete Survival Guide for Saturn's Transit",
+        description: "Demystify Shani Sade Sati's 3 phases and Shani Dhaiya. Learn how Saturn's transit affects your Moon sign and simple Saturday remedies.",
+        category: "Vedic Astrology",
+        date: "May 22, 2026",
+        readTime: "6 min read",
+        relatedCalculator: { label: 'Check Sade Sati Status', href: '/sade-sati', emoji: '🔵' },
+        content: (
+            <>
+                <p>
+                    In Vedic astrology, no planet commands as much reverence and caution as <strong>Saturn</strong>, known affectionately and respectfully as Shani Dev. Saturn is the planet of karma, boundaries, discipline, structure, and time. When Saturn transits close to the natal Moon — which represents the human mind, emotions, and comfort zone — it triggers a 7.5-year cycle known as <strong>Shani Sade Sati</strong>.
+                </p>
+                <p>
+                    The word "Sade Sati" literally means "seven and a half" in Hindi. Since Saturn is a slow-moving planet that takes approximately 2.5 years to transit through a single zodiac sign, the transit across three consecutive signs takes exactly 7.5 years. This cycle begins when Saturn enters the sign immediately preceding your natal Moon, peaks when Saturn sits directly on your Moon sign, and sets when Saturn transits the sign immediately following your Moon.
+                </p>
+
+                <h2>The 3 Crucial Phases of Sade Sati</h2>
+                <p>
+                    Sade Sati is not a uniform block of time; it operates in three distinct 2.5-year phases, each highlighting different dimensions of life:
+                </p>
+                <ul>
+                    <li><strong>Phase 1: The Rising Phase (12th House from Moon)</strong>: This phase begins as Saturn enters the 12th house of expenditures, losses, sleep, and isolation relative to your Moon. The focus here is financial and psychological. You may experience sudden expenses, changes in residence, or a feeling of being misunderstood by close ones. It teaches financial prudence and letting go of pride.</li>
+                    <li><strong>Phase 2: The Peak Phase (1st House from Moon)</strong>: The most intense phase, occurring when Saturn sits directly on your natal Moon sign. Since the Moon governs the head and mind, this phase brings emotional weight, career pressure, fatigue, and relationship testing. It forces you to look at your health, organize your lifestyle, and build emotional resilience.</li>
+                    <li><strong>Phase 3: The Setting Phase (2nd House from Moon)</strong>: The final phase starts as Saturn moves into the 2nd house of wealth, family, speech, and values from the Moon. The heavy mental pressure begins to lift, but you must be extremely mindful of your words, as speech conflicts can impact family harmony. This is a period of financial reconstruction.</li>
+                </ul>
+
+                <h2>What is Shani Dhaiya?</h2>
+                <p>
+                    Saturn also impacts signs that are not under Sade Sati through a 2.5-year transit known as <strong>Shani Dhaiya</strong>. This occurs under two specific transits:
+                </p>
+                <ul>
+                    <li><strong>Kantaka Shani (4th House from Moon)</strong>: "Kantaka" means thorn. It impacts domestic peace, home environment, mother's health, and introduces obstacles in career stability. It demands emotional grounding.</li>
+                    <li><strong>Ashtama Shani (8th House from Moon)</strong>: A highly transformative transit. The 8th house governs secrets, sudden events, and transformations. Saturn here brings sudden changes in career, financial caution, and deep spiritual lessons.</li>
+                </ul>
+
+                <h2>Who is Affected by Saturn in 2026?</h2>
+                <p>
+                    In 2026, Saturn transits through the water sign of <strong>Pisces</strong>. As a result, the following Moon signs will experience active Shani transits:
+                </p>
+                <ol>
+                    <li><strong>Aries Moon</strong>: Rising Phase of Sade Sati (Saturn in Pisces is 12th from Aries).</li>
+                    <li><strong>Pisces Moon</strong>: Peak Phase of Sade Sati (Saturn sitting directly on Pisces Moon).</li>
+                    <li><strong>Aquarius Moon</strong>: Setting Phase of Sade Sati (Saturn in Pisces is 2nd from Aquarius).</li>
+                    <li><strong>Leo Moon</strong>: Ashtama Shani Dhaiya (Saturn in Pisces is 8th from Leo).</li>
+                    <li><strong>Sagittarius Moon</strong>: Kantaka Shani Dhaiya (Saturn in Pisces is 4th from Sagittarius).</li>
+                </ol>
+
+                <h2>How to Survive and Thrive During Sade Sati</h2>
+                <p>
+                    Saturn is not a punisher; Saturn is a stern teacher. The easiest way to pass Saturn's exam is to align with Saturn's preferred virtues: humility, truthfulness, cleanliness, hard work, and charity. Here are the classical remedies recommended for Sade Sati:
+                </p>
+                <ul>
+                    <li><strong>Hanuman Chalisa</strong>: Reciting the Hanuman Chalisa on Saturday mornings or evenings is highly effective. Astrological texts state that Shani Dev promised Lord Hanuman that those who worship Hanuman will be protected from the worst of Saturn's wrath.</li>
+                    <li><strong>Saturday Charity</strong>: Feed crows on Saturdays, or donate black sesame seeds, mustard oil, and black blankets to laborers, the elderly, or disabled individuals. Saturn represents the working class, and serving them directly pleases Shani Dev.</li>
+                    <li><strong>Lighting a Sesame Oil Lamp</strong>: Light a small sesame or mustard oil lamp under a Peepal tree on Saturday evenings after sunset.</li>
+                    <li><strong>Shani Beej Mantra</strong>: Chant the Shani Beej Mantra (<em>Om Pram Preem Proum Sah Shanishcharaya Namah</em>) 108 times daily or on Saturdays.</li>
+                </ul>
+            </>
+        ),
+    },
 };
 
 type Params = Promise<{ slug: string }>;
