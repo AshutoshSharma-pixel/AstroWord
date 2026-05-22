@@ -53,7 +53,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from api import chart, ask, payment, karaka, gana, user, marriage, marriage_report, manglik, daily_transit, dasha, tithi
+from api import chart, ask, payment, karaka, gana, user, marriage, marriage_report, manglik, daily_transit, dasha, tithi, upapada, arudha
 from api.email import router as email_router
 
 app = FastAPI(title="AstroWord API", version="1.1.0")  # v1.1.0 – streaming support
@@ -84,6 +84,8 @@ app.include_router(manglik.router, prefix="/api")
 app.include_router(dasha.router, prefix="/api")
 app.include_router(tithi.router, prefix="/api")
 app.include_router(daily_transit.router, prefix="/api")
+app.include_router(upapada.router, prefix="/api")
+app.include_router(arudha.router, prefix="/api")
 app.include_router(email_router)
 
 @app.exception_handler(RequestValidationError)

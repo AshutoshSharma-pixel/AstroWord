@@ -137,6 +137,48 @@ export default function DashboardView() {
                     </div>
                 </button>
 
+                {/* Upapada Lagna Card */}
+                <button
+                    onClick={() => navigateTo('upapada-lagna')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="flex items-start justify-between">
+                        <div className="text-3xl mb-4">💍</div>
+                        <span className="text-[10px] bg-gold/10 text-gold border border-gold/20 px-2 py-0.5 rounded-full font-mono font-medium">JAIMINI</span>
+                    </div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Upapada Lagna
+                    </h3>
+                    <p className="text-muted text-sm mb-3">
+                        Discover your Jaimini marriage sign — the cosmic DNA of your future spouse and your karmic marriage bond.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">12th House Arudha</span>
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Spouse Sign</span>
+                    </div>
+                </button>
+
+                {/* Arudha Lagna Card */}
+                <button
+                    onClick={() => navigateTo('arudha-lagna')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="flex items-start justify-between">
+                        <div className="text-3xl mb-4">🪞</div>
+                        <span className="text-[10px] bg-gold/10 text-gold border border-gold/20 px-2 py-0.5 rounded-full font-mono font-medium">JAIMINI</span>
+                    </div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Arudha Lagna
+                    </h3>
+                    <p className="text-muted text-sm mb-3">
+                        How does the world see you? Reveal your Maya Lagna — the public image and social reputation others hold of you.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Maya Lagna</span>
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Public Image</span>
+                    </div>
+                </button>
+
                 {/* Darakaraka Card */}
                 <button
                     onClick={() => navigateTo('darakaraka')}

@@ -15,6 +15,8 @@ const ALL_TOOLS = [
   { slug: 'gana',            emoji: '🔱', label: 'Gana' },
   { slug: 'marriage-year',   emoji: '💍', label: 'Marriage Year' },
   { slug: 'marriage-type',   emoji: '💝', label: 'Love or Arranged' },
+  { slug: 'upapada-lagna',   emoji: '💍', label: 'Upapada Lagna' },
+  { slug: 'arudha-lagna',    emoji: '🪞', label: 'Arudha Lagna' },
   { slug: 'spouse-initial',  emoji: '🔤', label: 'Spouse Initial' },
   { slug: 'marriage-report', emoji: '📜', label: 'Report ₹199',    isPaid: true },
 ];

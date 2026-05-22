@@ -73,6 +73,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${base}/upapada-lagna`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
+            url: `${base}/arudha-lagna`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
             url: `${base}/marriage-report`,
             lastModified: now,
             changeFrequency: 'monthly' as const,
