@@ -75,18 +75,21 @@ const faqSchema = {
   ]
 };
 
+import DarakarakaSEOContent from './DarakarakaSEO';
+
 export default function DarakarakaLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <DarakarakaSEOContent />
+    </div>
   );
 }

@@ -98,12 +98,15 @@ const softwareSchema = {
   "url": "https://www.astroword.in/birth-tithi-calculator"
 };
 
+import BirthTithiSEOContent from "./BirthTithiSEO";
+
 export default function BirthTithiLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       {children}
-    </>
+      <BirthTithiSEOContent />
+    </div>
   );
 }

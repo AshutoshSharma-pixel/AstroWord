@@ -123,9 +123,11 @@ const softwareSchema = {
   "url": "https://www.astroword.in/dasha-calculator"
 };
 
+import DashaSEOContent from "./DashaSEO";
+
 export default function DashaLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -135,6 +137,7 @@ export default function DashaLayout({ children }: { children: React.ReactNode })
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       {children}
-    </>
+      <DashaSEOContent />
+    </div>
   );
 }

@@ -78,14 +78,17 @@ const faqSchema = {
   ]
 };
 
+import ManglikSEOContent from './ManglikSEO';
+
 export default function ManglikLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <ManglikSEOContent />
+    </div>
   );
 }
