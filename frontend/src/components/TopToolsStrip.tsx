@@ -79,7 +79,7 @@ export default function TopToolsStrip({ currentTool }: TopToolsStripProps) {
           <div 
             ref={scrollRef}
             onScroll={handleHorizontalScroll}
-            className="flex items-center justify-start sm:justify-center gap-2 h-12 px-3 pl-1 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden"
+            className="flex items-center justify-start gap-2 h-12 px-3 pl-1 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden"
             style={{scrollbarWidth:'none', msOverflowStyle:'none'}}
           >
             {tools.map(tool => (
