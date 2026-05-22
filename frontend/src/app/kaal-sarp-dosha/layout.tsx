@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kaal Sarp Dosha Calculator — Find Your Kaal Sarp Type & Remedies | AstroWord",
+  title: "Kaal Sarp Dosha Calculator — Am I Affected? Check Free",
   description: "Free Kaal Sarp Dosha calculator. Find out instantly if you have Kaal Sarp Dosha in your birth chart, your specific type, severity level, and get a personalised AI reading with Vedic remedies.",
   keywords: "kaal sarp dosha calculator, kaal sarp dosha check, kaal sarp dosha remedies, anant kaal sarp dosha, kulik kaal sarp dosha, sheshnag kaal sarp dosha, rahu ketu dosha, vedic astrology calculator, kaal sarp dosha types",
   alternates: { canonical: "https://www.astroword.in/kaal-sarp-dosha" },
   openGraph: {
-    title: "Kaal Sarp Dosha Calculator — Find Your Kaal Sarp Type & Remedies | AstroWord",
+    title: "Kaal Sarp Dosha Calculator — Am I Affected? Check Free",
     description: "Free Kaal Sarp Dosha calculator. Discover if you have Kaal Sarp Dosha, its type, severity, and get a personalised AI reading with remedies based on your birth chart.",
     url: "https://www.astroword.in/kaal-sarp-dosha",
     siteName: "AstroWord",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kaal Sarp Dosha Calculator — Find Your Kaal Sarp Type & Remedies",
+    title: "Kaal Sarp Dosha Calculator — Am I Affected? Check Free",
     description: "Free Kaal Sarp Dosha calculator with AI reading and Vedic remedies. Instant result.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",
