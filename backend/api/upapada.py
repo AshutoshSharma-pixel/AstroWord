@@ -182,7 +182,7 @@ Give 4-5 specific remedies to strengthen the Upapada Lagna and attract a compati
 Tailor remedies to {upapada_sign} Upapada and {upapada_lord} as the Upapada lord.
 Include mantras, days, colours, rituals, and behavioural suggestions.
 
-Provide an expansive, rich reading. Do not restrict length.
+Write a focused, insightful reading of 500-600 words total across all sections. Be specific and personal — not lengthy and generic.
 Use pure Markdown — no JSON.
 At the very end, on a new line:
 KEYWORDS: word1, word2, word3
@@ -192,7 +192,7 @@ KEYWORDS: word1, word2, word3
             prompt,
             config=types.GenerateContentConfig(
                 temperature=0.45,
-                max_output_tokens=8192,
+                max_output_tokens=4096,
                 thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )

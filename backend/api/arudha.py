@@ -191,7 +191,7 @@ What specific shifts in reputation, visibility, or social standing can be expect
 Give 4-5 specific, practical suggestions to strengthen and harmonise the Arudha Lagna.
 Include: which planet to strengthen through remedies, colours and materials to wear, lifestyle alignment with {arudha_sign} energy, mantras if relevant, and any behavioural shifts to align the inner self with the outer image authentically.
 
-Provide an expansive, rich reading. Do not restrict length.
+Write a focused, insightful reading of 500-600 words total across all sections. Be specific and personal — not lengthy and generic.
 Use pure Markdown — no JSON.
 At the very end, on a new line:
 KEYWORDS: word1, word2, word3
@@ -201,7 +201,7 @@ KEYWORDS: word1, word2, word3
             prompt,
             config=types.GenerateContentConfig(
                 temperature=0.45,
-                max_output_tokens=8192,
+                max_output_tokens=4096,
                 thinking_config=types.ThinkingConfig(thinking_budget=0)
             )
         )
