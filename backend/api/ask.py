@@ -5,7 +5,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import firebase_admin
 from firebase_admin import credentials, firestore
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 from api.gemini_utils import call_gemini_new, call_gemini_stream, GEMINI_KEYS
 from google.genai import types
 from google import genai as new_genai
@@ -225,7 +225,8 @@ async def ask_astrologer(data: AskRequest):
                 
                 if user_doc.exists:
                     user_data = user_doc.to_dict()
-                    today_str = datetime.now().strftime("%Y-%m-%d")
+                    IST = timezone(timedelta(hours=5, minutes=30))
+                    today_str = datetime.now(IST).strftime("%Y-%m-%d")
                     last_reset = user_data.get("last_reset_date", "")
                     
                     if last_reset != today_str:
@@ -262,7 +263,8 @@ async def ask_astrologer(data: AskRequest):
                             }
                         }
                 else:
-                    today_str = datetime.now().strftime("%Y-%m-%d")
+                    IST = timezone(timedelta(hours=5, minutes=30))
+                    today_str = datetime.now(IST).strftime("%Y-%m-%d")
                     user_ref.set({
                         "questions_today": 0,
                         "questions_limit": 5,
@@ -382,7 +384,8 @@ async def ask_stream(data: AskRequest):
             user_doc = user_ref.get()
             if user_doc.exists:
                 user_data = user_doc.to_dict()
-                today_str = datetime.now().strftime("%Y-%m-%d")
+                IST = timezone(timedelta(hours=5, minutes=30))
+                today_str = datetime.now(IST).strftime("%Y-%m-%d")
                 last_reset = user_data.get("last_reset_date", "")
                 if last_reset != today_str:
                     user_ref.update({"questions_today": 0, "last_reset_date": today_str})
