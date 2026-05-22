@@ -60,8 +60,8 @@ SADE_SATI_MAP = {
         "phase": "None",
         "has_dhaiya": True,
         "dhaiya_type": "Ashtama Shani",
-        "start_year": "N/A",
-        "end_year": "N/A",
+        "start_year": "2025",
+        "end_year": "Feb 2028",
         "current_phase_end": "Feb 2028",
         "next_start": "2041"
     },
@@ -100,8 +100,8 @@ SADE_SATI_MAP = {
         "phase": "None",
         "has_dhaiya": True,
         "dhaiya_type": "Kantaka Shani",
-        "start_year": "N/A",
-        "end_year": "N/A",
+        "start_year": "2025",
+        "end_year": "Feb 2028",
         "current_phase_end": "Feb 2028",
         "next_start": "2052"
     },
@@ -193,9 +193,11 @@ No headers. Pure flowing prose. 400 words max."""
         return {
             "success": True,
             "is_active": sign_info["is_active"],
+            "is_sade_sati": sign_info["is_active"],
             "phase": sign_info["phase"],
             "has_dhaiya": sign_info["has_dhaiya"],
             "dhaiya_type": sign_info["dhaiya_type"],
+            "dhaiya": sign_info["dhaiya_type"] if sign_info["has_dhaiya"] else None,
             "moon_sign": moon_sign,
             "saturn_sign": "Pisces",
             "start_year": sign_info["start_year"],

@@ -199,21 +199,21 @@ export default function SadeSatiPage() {
     }
 
     const getStatusHeader = () => {
-        if (result.is_active) {
+        if (result.is_sade_sati) {
             return `Active — ${result.phase} Phase`;
         }
-        if (result.has_dhaiya) {
-            return `Active Dhaiya — ${result.dhaiya_type}`;
+        if (result.dhaiya) {
+            return `Shani Dhaiya Active`;
         }
         return "Sade Sati Inactive";
     };
 
     const getStatusBadgeColor = () => {
-        if (result.is_active) {
+        if (result.is_sade_sati) {
             if (result.phase === 'Peak') return 'text-red-400 border-red-400/20 bg-red-400/10';
             return 'text-amber-400 border-amber-400/20 bg-amber-400/10';
         }
-        if (result.has_dhaiya) {
+        if (result.dhaiya) {
             return 'text-amber-400 border-amber-400/20 bg-amber-400/10';
         }
         return 'text-green-400 border-green-400/20 bg-green-400/10';
@@ -228,7 +228,7 @@ export default function SadeSatiPage() {
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
                         Saturn Transit Analysis (2026)
                     </p>
-                    <h1 className={`font-serif text-3xl sm:text-4xl tracking-wide py-2 ${result.is_active && result.phase === 'Peak' ? 'text-red-400' : result.is_active || result.has_dhaiya ? 'text-amber-400' : 'text-green-400'}`}>
+                    <h1 className={`font-serif text-3xl sm:text-4xl tracking-wide py-2 ${result.is_sade_sati && result.phase === 'Peak' ? 'text-red-400' : result.is_sade_sati || result.dhaiya ? 'text-amber-400' : 'text-green-400'}`}>
                         {getStatusHeader()}
                     </h1>
                     <p className="text-white text-sm tracking-wide">
@@ -236,48 +236,93 @@ export default function SadeSatiPage() {
                     </p>
                     <div className="flex justify-center">
                         <span className={`text-xs border px-4 py-1.5 rounded-full font-mono ${getStatusBadgeColor()}`}>
-                            {result.is_active ? '7.5 Years Cycle Active' : result.has_dhaiya ? '2.5 Years Cycle Active' : 'Transit Safe'}
+                            {result.is_sade_sati ? '7.5 Years Cycle Active' : result.dhaiya ? '2.5 Years Cycle Active' : 'Transit Safe'}
                         </span>
                     </div>
 
-                    {/* Phase Visualizer */}
-                    <div className="mt-6 pt-4 border-t border-border/30">
-                        <p className="text-xs text-muted uppercase tracking-widest font-mono mb-4">Sade Sati Phase Tracker</p>
-                        <div className="grid grid-cols-3 gap-2">
-                            {[
-                                { title: '1. Rising', desc: '12th House (Aquarius)', name: 'Rising' },
-                                { title: '2. Peak', desc: '1st House (Pisces)', name: 'Peak' },
-                                { title: '3. Setting', desc: '2nd House (Aries)', name: 'Setting' }
-                            ].map((ph, i) => {
-                                const isActivePhase = result.is_active && result.phase === ph.name;
-                                return (
-                                    <div 
-                                        key={i} 
-                                        className={`p-3 rounded-xl border transition-all text-center ${isActivePhase ? 'bg-amber-400/10 border-amber-400 text-white shadow-[0_0_12px_rgba(245,158,11,0.1)]' : 'bg-surface/50 border-border/50 text-muted'}`}
-                                    >
-                                        <p className={`text-xs font-mono font-medium ${isActivePhase ? 'text-gold' : 'text-muted'}`}>{ph.title}</p>
-                                        <p className="text-[10px] mt-1 leading-tight">{ph.desc}</p>
-                                        {isActivePhase && (
-                                            <span className="inline-block mt-2 text-[9px] bg-gold/20 text-gold border border-gold/30 px-2 py-0.5 rounded-full font-mono">
-                                                Current
-                                            </span>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                    {/* Phase Visualizer - Only for Sade Sati */}
+                    {result.is_sade_sati === true && (
+                        <div className="mt-6 pt-4 border-t border-border/30">
+                            <p className="text-xs text-muted uppercase tracking-widest font-mono mb-4">Sade Sati Phase Tracker</p>
+                            <div className="grid grid-cols-3 gap-2">
+                                {[
+                                    { title: '1. Rising', desc: '12th House (Aquarius)', name: 'Rising' },
+                                    { title: '2. Peak', desc: '1st House (Pisces)', name: 'Peak' },
+                                    { title: '3. Setting', desc: '2nd House (Aries)', name: 'Setting' }
+                                ].map((ph, i) => {
+                                    const isActivePhase = result.is_sade_sati && result.phase === ph.name;
+                                    return (
+                                        <div 
+                                            key={i} 
+                                            className={`p-3 rounded-xl border transition-all text-center ${isActivePhase ? 'bg-amber-400/10 border-amber-400 text-white shadow-[0_0_12px_rgba(245,158,11,0.1)]' : 'bg-surface/50 border-border/50 text-muted'}`}
+                                        >
+                                            <p className={`text-xs font-mono font-medium ${isActivePhase ? 'text-gold' : 'text-muted'}`}>{ph.title}</p>
+                                            <p className="text-[10px] mt-1 leading-tight">{ph.desc}</p>
+                                            {isActivePhase && (
+                                                <span className="inline-block mt-2 text-[9px] bg-gold/20 text-gold border border-gold/30 px-2 py-0.5 rounded-full font-mono">
+                                                    Current
+                                                </span>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
 
-                    {/* Dhaiya Box */}
-                    {result.has_dhaiya && (
-                        <div className="mt-4 text-left bg-surface/50 p-4 rounded-xl border border-amber-500/20">
-                            <p className="text-xs text-amber-400 uppercase tracking-widest font-mono mb-2">⚠ Shani Dhaiya Active:</p>
-                            <p className="text-sm text-text/90 leading-relaxed">
-                                You are currently experiencing <strong className="text-white">{result.dhaiya_type}</strong>. 
-                                {result.dhaiya_type === 'Kantaka Shani' 
-                                    ? ' This transit occurs through the 4th house from the Moon, impacting domestic stability, mental peace, and focus in work/career.' 
-                                    : ' This transit occurs through the 8th house from the Moon, bringing sudden transformations, challenges in investments, and karmic life lessons.'}
-                            </p>
+                    {/* Dhaiya Details - Only for Dhaiya active users */}
+                    {result.is_sade_sati === false && result.dhaiya !== null && (
+                        <div className="mt-6 pt-4 border-t border-border/30 text-left space-y-4">
+                            <p className="text-xs text-muted uppercase tracking-widest font-mono text-center sm:text-left">Dhaiya Transit Details</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Status</span>
+                                    <span className="text-amber-400 font-serif text-base font-medium block mt-1">Shani Dhaiya Active</span>
+                                </div>
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Type</span>
+                                    <span className="text-white font-serif text-base font-medium block mt-1">
+                                        {result.dhaiya} ({result.dhaiya === "Ashtama Shani" ? "8th" : "4th"} from Moon)
+                                    </span>
+                                </div>
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Duration</span>
+                                    <span className="text-white font-serif text-base font-medium block mt-1">2.5 Year Transit</span>
+                                </div>
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Current Phase</span>
+                                    <span className="text-white font-serif text-base font-medium block mt-1">
+                                        Active (Ends {result.current_phase_end})
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4 mt-2">
+                                <p className="text-xs text-amber-400 uppercase tracking-widest font-mono mb-2">About Dhaiya</p>
+                                <p className="text-sm text-text/80 leading-relaxed">
+                                    Dhaiya is a single 2.5-year transit — it does not have Rising, Peak, and Setting phases like Sade Sati. Saturn is currently in the {result.dhaiya === "Ashtama Shani" ? "8" : "4"}th house from your Moon sign.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Inactive details - For users with neither active */}
+                    {result.is_sade_sati === false && result.dhaiya === null && (
+                        <div className="mt-6 pt-4 border-t border-border/30 text-left space-y-4">
+                            <p className="text-xs text-muted uppercase tracking-widest font-mono text-center sm:text-left">Transit Status</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Status</span>
+                                    <span className="text-green-400 font-serif text-base font-medium block mt-1">Not Active</span>
+                                </div>
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
+                                    <span className="text-muted block text-xs font-mono uppercase">Sade Sati & Dhaiya</span>
+                                    <span className="text-white font-serif text-base font-medium block mt-1">No Sade Sati or Dhaiya currently</span>
+                                </div>
+                                <div className="bg-surface/50 border border-border/50 rounded-xl p-4 sm:col-span-2">
+                                    <span className="text-muted block text-xs font-mono uppercase">Next Sade Sati Starts</span>
+                                    <span className="text-white font-serif text-base font-medium block mt-1">{result.next_start}</span>
+                                </div>
+                            </div>
                         </div>
                     )}
 
@@ -307,7 +352,7 @@ export default function SadeSatiPage() {
 
                 <ShareCard
                   question="Am I in Sade Sati?"
-                  answer={result.is_active ? `Yes — ${result.phase} Phase` : result.has_dhaiya ? `Dhaiya: ${result.dhaiya_type}` : "No — Inactive"}
+                  answer={result.is_sade_sati ? `Yes — ${result.phase} Phase` : result.dhaiya ? `Dhaiya: ${result.dhaiya}` : "No — Inactive"}
                   subtext={result.is_active ? `Sade Sati active till ${result.end_year}` : `Next starts: ${result.next_start}`}
                   keywords={result.is_active ? ['Sade Sati', result.phase, result.moon_sign] : ['Saturn Transit', result.moon_sign]}
                 />
