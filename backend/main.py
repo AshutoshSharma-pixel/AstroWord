@@ -53,7 +53,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from api import chart, ask, payment, karaka, gana, user, marriage, marriage_report, manglik, daily_transit, dasha, tithi, upapada, arudha, kaal_sarp, sade_sati
+from api import chart, ask, payment, karaka, gana, user, marriage, marriage_report, manglik, daily_transit, dasha, tithi, upapada, arudha, kaal_sarp, sade_sati, moon_sign, nakshatra, lagna, ishta_devata, pitra_dosha
 from api.email import router as email_router
 
 app = FastAPI(title="AstroWord API", version="1.1.0")  # v1.1.0 – streaming support
@@ -66,6 +66,7 @@ app.add_middleware(
         "https://astroword.in",
         "https://www.astroword.in",
         "https://astroword.vercel.app",
+        "https://astroword.dev",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
@@ -88,6 +89,11 @@ app.include_router(upapada.router, prefix="/api")
 app.include_router(arudha.router, prefix="/api")
 app.include_router(kaal_sarp.router, prefix="/api")
 app.include_router(sade_sati.router, prefix="/api")
+app.include_router(moon_sign.router, prefix="/api")
+app.include_router(nakshatra.router, prefix="/api")
+app.include_router(lagna.router, prefix="/api")
+app.include_router(ishta_devata.router, prefix="/api")
+app.include_router(pitra_dosha.router, prefix="/api")
 app.include_router(email_router)
 
 @app.exception_handler(RequestValidationError)

@@ -6,6 +6,11 @@ import { useEffect, useState, useRef } from 'react';
 const ALL_TOOLS = [
   { slug: '/',               emoji: '✦', label: 'Ask AI',          isAI: true },
   { slug: 'daily-horoscope',   emoji: '☄️', label: "Today's Reading" },
+  { slug: 'moon-sign',       emoji: '🌙', label: 'Moon Sign' },
+  { slug: 'nakshatra-calculator', emoji: '⭐', label: 'Nakshatra' },
+  { slug: 'lagna-calculator', emoji: '🌅', label: 'Lagna' },
+  { slug: 'ishta-devata',    emoji: '🕉️', label: 'Ishta Devata' },
+  { slug: 'pitra-dosha',     emoji: '💀', label: 'Pitra Dosha' },
   { slug: 'manglik',         emoji: '🔴', label: 'Manglik' },
   { slug: 'dasha-calculator', emoji: '🪐', label: 'Dasha' },
   { slug: 'birth-tithi-calculator', emoji: '🌙', label: 'Birth Tithi' },

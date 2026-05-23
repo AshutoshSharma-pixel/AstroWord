@@ -67,6 +67,79 @@ export default function DashboardView() {
                     </div>
                 </button>
 
+                {/* Moon Sign Card */}
+                <button
+                    onClick={() => navigateTo('moon-sign')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🌙</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Moon Sign Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Find your Chandra Rashi. Discover your emotional nature, ruling elements, and mental patterns from the Moon's exact birth degree.
+                    </p>
+                </button>
+
+                {/* Nakshatra Calculator Card */}
+                <button
+                    onClick={() => navigateTo('nakshatra-calculator')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">⭐</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Nakshatra Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Find your Janma Nakshatra (birth star) and Pada. Reveal your ruling deity, planetary lord, gana, and detailed personality traits.
+                    </p>
+                </button>
+
+                {/* Lagna Calculator Card */}
+                <button
+                    onClick={() => navigateTo('lagna-calculator')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">🌅</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Lagna Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Calculate your Ascendant rising sign and find where your Lagna lord resides to see the core direction of your life's path.
+                    </p>
+                </button>
+
+                {/* Ishta Devata Card */}
+                <button
+                    onClick={() => navigateTo('ishta-devata')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="flex items-start justify-between">
+                        <div className="text-3xl mb-4">🕉️</div>
+                        <span className="text-[10px] bg-gold/10 text-gold border border-gold/20 px-2 py-0.5 rounded-full font-mono font-medium">JAIMINI</span>
+                    </div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Ishta Devata Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Discover your personal guiding deity (chosen deity) and sacred mantra using the Jaimini Karakamsha method.
+                    </p>
+                </button>
+
+                {/* Pitra Dosha Card */}
+                <button
+                    onClick={() => navigateTo('pitra-dosha')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">💀</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Pitra Dosha Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Check if you carry ancestral karmic afflictions like Sun-Rahu conjunct, and explore tailored Vedic remedies.
+                    </p>
+                </button>
+
                 {/* Marriage Year Predictor Card */}
                 <button
                     onClick={() => router.push('/marriage-year')}

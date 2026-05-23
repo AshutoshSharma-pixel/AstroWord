@@ -1435,6 +1435,349 @@ const articles: Record<string, {
             </>
         ),
     },
+    'moon-sign-meaning': {
+        title: "What is My Moon Sign? The Rashi That Governs Your Mind & Emotions",
+        description: "Discover the significance of your Janma Rashi or Moon Sign in Jyotish, how it shapes your psychology, and why it is more important than your Sun Sign.",
+        category: "Vedic Astrology",
+        date: "May 23, 2026",
+        readTime: "5 min read",
+        keywords: ['moon sign', 'janma rashi', 'rashi calculator', 'vedic moon sign', 'moon sign meaning', 'astrology moon sign', 'find my rashi'],
+        faqs: [
+            { q: "What is a Moon Sign (Janma Rashi)?", a: "Your Moon Sign or Janma Rashi is the zodiac sign where the Moon was transiting at the exact time of your birth. In Vedic astrology, it represents your mind, emotions, and subconscious patterns." },
+            { q: "Why is the Moon Sign more important in Vedic astrology than the Sun Sign?", a: "The Sun represents the ego and soul, but the Moon represents the mind, perceptions, and emotions. Also, the Vimshottari Dasha system (timing of life events) is calculated based on the Moon's exact position at birth." },
+            { q: "How do I find my Vedic Moon Sign?", a: "Use a Vedic calculator (like AstroWord) that uses the Sidereal zodiac. Since it accounts for the Earth's axial precession, it is usually 24 degrees behind your Western (Tropical) Moon sign." }
+        ],
+        relatedCalculator: { label: 'Calculate My Moon Sign', href: '/moon-sign', emoji: '🌙' },
+        content: (
+            <>
+                <p>
+                    In Western astrology, when someone asks, &quot;What is your sign?&quot; they are referring to your Sun Sign — the zodiac sign the Sun was transiting on your birthday. However, in the ancient and highly detailed system of Vedic astrology (Jyotish), the primary identifier is your <strong>Moon Sign</strong>, known in Sanskrit as the <strong>Janma Rashi</strong>.
+                </p>
+                <p>
+                    The Moon is the fastest-moving body in astrology, staying in each zodiac sign for only about 2.25 days. Because of this speed, the Moon Sign is much more personalized than the Sun Sign, which remains the same for a month. In Jyotish, the Moon represents the mind (<em>Manas</em>), emotions, subconscious habits, perceptions, and overall mental health. Understanding your Moon Sign is the key to understanding your emotional blueprint and how you perceive the world.
+                </p>
+
+                <h2>Why the Moon Sign is Primary in Vedic Astrology</h2>
+                <p>
+                    Vedic astrology places supreme importance on the Moon Sign for several critical reasons:
+                </p>
+                <ul>
+                    <li><strong>Foundation of the Dasha System:</strong> The absolute timing of events in your life via the 120-year Vimshottari Dasha system is calculated entirely from the exact degree of the Moon at the moment of your birth. Without the Moon Sign, it is impossible to time when your career will peak or when you will marry.</li>
+                    <li><strong>The Chandra Kundli:</strong> Astrologers construct a secondary birth chart called the <em>Chandra Kundli</em> (Moon Chart) by rotating the chart so the Moon sign becomes the first house. This chart is analyzed alongside the natal chart (Lagnesh) to verify all life events, especially emotional wellbeing and marriage.</li>
+                    <li><strong>Emotional Filter:</strong> The Sun represents your soul&apos;s light and ego, but the Moon represents how you process everyday reality. Two people with the same Sun sign will react completely differently to stress if one has an emotional, water-ruled Scorpio Moon and the other has a rational, air-ruled Gemini Moon.</li>
+                </ul>
+
+                <h2>Moon Signs by Element — How You Process Emotions</h2>
+                <p>
+                    The twelve Moon signs are divided into four elements, which define the general temperament of your mind:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
+                    <div className="bg-surface border border-border/60 rounded-xl p-4">
+                        <strong className="text-gold block mb-1">🔥 Fire Signs (Aries, Leo, Sagittarius)</strong>
+                        <p className="text-muted text-xs leading-relaxed">
+                            Emotionally expressive, passionate, and quick to react. You need action and freedom. You process emotions through movement, creativity, or enthusiasm, but can struggle with impatience.
+                        </p>
+                    </div>
+                    <div className="bg-surface border border-border/60 rounded-xl p-4">
+                        <strong className="text-gold block mb-1">🌱 Earth Signs (Taurus, Virgo, Capricorn)</strong>
+                        <p className="text-muted text-xs leading-relaxed">
+                            Emotionally stable, practical, and grounded. You seek security, routine, and tangible results. You process stress by organizing your physical life, but can become overly rigid or anxious.
+                        </p>
+                    </div>
+                    <div className="bg-surface border border-border/60 rounded-xl p-4">
+                        <strong className="text-gold block mb-1">💨 Air Signs (Gemini, Libra, Aquarius)</strong>
+                        <p className="text-muted text-xs leading-relaxed">
+                            Intellectual, communicative, and socially conscious. You process emotions by thinking and talking about them. You seek variety and social interaction, but can detach from deep feelings.
+                        </p>
+                    </div>
+                    <div className="bg-surface border border-border/60 rounded-xl p-4">
+                        <strong className="text-gold block mb-1">💧 Water Signs (Cancer, Scorpio, Pisces)</strong>
+                        <p className="text-muted text-xs leading-relaxed">
+                            Highly intuitive, empathetic, and sensitive. You absorb the energy of your environment. You process emotions deeply, seeking spiritual connection, but can struggle with mood swings.
+                        </p>
+                    </div>
+                </div>
+
+                <h2>The Role of Moon Sign Lords</h2>
+                <p>
+                    Each Moon Sign is ruled by a planetary lord. The condition, placement, and relationship of your Moon lord determine how easily you navigate your emotional waves. For example, if you have a Taurus Moon, your Moon lord is Venus. If Venus is placed in a friendly sign in the 9th house, you will naturally have a pleasant, optimistic outlook. If your Moon lord is afflicted, it indicates karmic lessons related to mental peace and emotional stability that you must resolve.
+                </p>
+                <p>
+                    To find your Sidereal Moon Sign, birth Nakshatra, degree, and planetary lord, use our free <Link href="/moon-sign" className="text-gold/70 hover:text-gold underline underline-offset-2">Moon Sign Calculator</Link> to get a detailed AI-powered reading of your emotional landscape.
+                </p>
+            </>
+        ),
+    },
+    'nakshatra-secrets': {
+        title: "Secrets of the 27 Nakshatras: How Lunar Mansions Reveal Your Destiny",
+        description: "Go beyond zodiac signs. Learn how the 27 Nakshatras add highly specific layers to your personality, emotional landscape, and future timing.",
+        category: "Vedic Astrology",
+        date: "May 23, 2026",
+        readTime: "6 min read",
+        keywords: ['nakshatra', '27 nakshatras', 'lunar mansions', 'birth star calculator', 'find my nakshatra', 'nakshatra meaning', 'janma nakshatra'],
+        faqs: [
+            { q: "What is a Nakshatra?", a: "A Nakshatra is a lunar mansion or star constellation. The 360-degree zodiac is divided into 27 Nakshatras of 13 degrees 20 minutes each, which represent the daily transit of the Moon." },
+            { q: "What is a Nakshatra Pada?", a: "Each Nakshatra is divided into 4 quarters or Padas of 3 degrees 20 minutes each. This results in 108 Padas across the entire zodiac, representing different sub-influences of the birth star." },
+            { q: "How does my Nakshatra affect my life?", a: "Your birth Nakshatra determines your emotional nature, thinking patterns, physical traits, and determines the planetary Dasha timeline that you start your life with." }
+        ],
+        relatedCalculator: { label: 'Calculate My Nakshatra', href: '/nakshatra-calculator', emoji: '✨' },
+        content: (
+            <>
+                <p>
+                    If you only look at your 12 zodiac signs, you are only scratching the surface of Vedic astrology. The true heart of Jyotish precision lies in the <strong>27 Nakshatras</strong>, also known as the &quot;Lunar Mansions.&quot;
+                </p>
+                <p>
+                    While the Sun takes a full month to cross one zodiac sign (30 degrees), the Moon transits the entire zodiac circle in 27.3 days, spending roughly one day in each of the 27 Nakshatras (each spanning 13°20&apos;). This makes Nakshatra analysis the most precise tool for understanding a person&apos;s birth details, choosing auspicious timings (Muhurthas), and calculating relationship compatibility (Kundli Milan).
+                </p>
+
+                <h2>What is a Nakshatra?</h2>
+                <p>
+                    In Sanskrit, <em>Nakshatra</em> means &quot;that which does not decay&quot; or &quot;map of stars.&quot; Historically, ancient seers looked at the night sky and divided the ecliptic into 27 equal segments, each identified by a prominent star constellation. 
+                </p>
+                <p>
+                    Each Nakshatra is further divided into 4 parts called <strong>Padas</strong> (quarters), each spanning 3°20&apos;. This means the 360-degree zodiac consists of 108 Padas. The 108 beads on a Hindu mala directly represent these 108 cosmic steps, symbolizing the journey of the soul through the cosmos.
+                </p>
+
+                <h2>The Three Nakshatra Ganas (Temperaments)</h2>
+                <p>
+                    Each Nakshatra belongs to one of three psychological classifications or <em>Ganas</em>, which determine your fundamental behavioral temperament:
+                </p>
+                <ul>
+                    <li><strong>Deva Gana (Divine):</strong> Representing purity, kindness, empathy, and charity. People born under Deva Nakshatras (like Ashwini, Pushya, or Hasta) seek harmony and naturally avoid conflict.</li>
+                    <li><strong>Manushya Gana (Human):</strong> Representing ambition, practical action, family focus, and dynamic effort. People born under Manushya Nakshatras (like Bharani, Rohini, or Purva Phalguni) are focused on worldly achievements, relationships, and societal duties.</li>
+                    <li><strong>Rakshasa Gana (Demonic/Assertive):</strong> Representing strong willpower, sharp intuition, independence, and the capacity to fight obstacles. People born under Rakshasa Nakshatras (like Jyeshtha, Ashlesha, or Magha) have powerful survival instincts, are highly protective, and can face heavy challenges head-on.</li>
+                </ul>
+
+                <h2>The 27 Nakshatras at a Glance</h2>
+                <p>
+                    Every Nakshatra has a ruling planet, a presiding deity, and a primary symbol that defines its energy. The Nakshatras are divided across the 12 signs of the zodiac:
+                </p>
+                <div className="overflow-x-auto rounded-xl border border-border my-4">
+                    <table className="w-full text-sm text-muted">
+                        <thead>
+                            <tr className="border-b border-border bg-surface">
+                                <th className="text-left py-3 px-4 text-gold font-mono">Sign Span</th>
+                                <th className="text-left py-3 px-4 text-gold font-mono">Nakshatras</th>
+                                <th className="text-left py-3 px-4 text-gold font-mono">Core Theme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {[
+                                ['Aries', 'Ashwini, Bharani, Krittika (1/4)', 'Beginnings, speed, purification, initiation'],
+                                ['Taurus', 'Krittika (3/4), Rohini, Mrigashira (1/2)', 'Growth, beauty, artistic talent, preservation'],
+                                ['Gemini', 'Mrigashira (1/2), Ardra, Punarvasu (3/4)', 'Curiosity, chaos, intellect, rejuvenation'],
+                                ['Cancer', 'Punarvasu (1/4), Pushya, Ashlesha', 'Nurturing, wisdom, spirituality, deep intuition'],
+                                ['Leo', 'Magha, Purva Phalguni, Uttara Phalguni (1/4)', 'Power, heritage, creativity, leadership'],
+                                ['Virgo', 'Uttara Phalguni (3/4), Hasta, Chitra (1/2)', 'Precision, analysis, craft, communication'],
+                                ['Libra', 'Chitra (1/2), Swati, Vishakha (3/4)', 'Harmony, trade, balance, ambition'],
+                                ['Scorpio', 'Vishakha (1/4), Anuradha, Jyeshtha', 'Depth, secrecy, friendship, transformation'],
+                                ['Sagittarius', 'Mula, Purva Ashadha, Uttara Ashadha (1/4)', 'Truth-seeking, destruction of illusion, philosophy'],
+                                ['Capricorn', 'Uttara Ashadha (3/4), Shravana, Dhanishtha (1/2)', 'Discipline, structure, listening, achievements'],
+                                ['Aquarius', 'Dhanishtha (1/2), Shatabhisha, Purva Bhadrapada (3/4)', 'Unconventional ideas, healing, networks'],
+                                ['Pisces', 'Purva Bhadrapada (1/4), Uttara Bhadrapada, Revati', 'Liberation, final journey, empathy, spirituality'],
+                            ].map(([sign, nakshatras, theme]) => (
+                                <tr key={sign} className="border-b border-border/30">
+                                    <td className="py-3 px-4 text-white">{sign}</td>
+                                    <td className="py-3 px-4">{nakshatras}</td>
+                                    <td className="py-3 px-4 text-xs">{theme}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Nakshatras and Your Life Path</h2>
+                <p>
+                    Your birth Nakshatra governs your mental patterns, physical attributes, and the sequence of major dashas you will experience in life. For example, if you are born with the Moon in Ashwini Nakshatra, your life starts under the Ketu Mahadasha. If you are born under Rohini, your life starts under the Moon Mahadasha.
+                </p>
+                <p>
+                    Use our free <Link href="/nakshatra-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Nakshatra Calculator</Link> to discover your birth Nakshatra, Pada, animal symbol, and receive a personalized AI analysis of your destiny.
+                </p>
+            </>
+        ),
+    },
+    'rising-sign-astrology': {
+        title: "Vedic Rising Sign: How Your Lagna Shapes Your Appearance & Purpose",
+        description: "Your Lagna (Ascendant) is the starting point of your chart. Learn how it determines your physical look, self-identity, and the houses of your life path.",
+        category: "Vedic Astrology",
+        date: "May 23, 2026",
+        readTime: "6 min read",
+        keywords: ['rising sign', 'lagna calculator', 'ascendant astrology', 'vedic rising sign', 'lagna lord', 'first house astrology'],
+        faqs: [
+            { q: "What is the Lagna or Rising Sign?", a: "Lagna (Ascendant) is the zodiac sign rising on the eastern horizon at the exact time and place of your birth. It determines the structure of your 12 houses and represents your physical body and identity." },
+            { q: "Who is the Lagna Lord?", a: "The Lagna Lord is the planet that rules your rising sign. Its position and strength in your birth chart show where your primary energy is focused and directs your life path." },
+            { q: "Why is the Vedic rising sign different from the Western rising sign?", a: "Vedic astrology uses the Sidereal zodiac (aligned with stars) while Western uses the Tropical zodiac (aligned with seasons). Due to precession, they differ by about 24 degrees, often shifting your rising sign back by one sign." }
+        ],
+        relatedCalculator: { label: 'Calculate My Lagna', href: '/lagna-calculator', emoji: '🌅' },
+        content: (
+            <>
+                <p>
+                    When you look at your horoscope, the 1st house is the starting point of everything. In Vedic astrology, this house is called the <strong>Lagna</strong>, or the <strong>Rising Sign</strong> / <strong>Ascendant</strong>. It is the zodiac sign that was rising on the eastern horizon at the exact minute and place of your birth.
+                </p>
+                <p>
+                    Because the Earth rotates once every 24 hours, all 12 signs of the zodiac pass through the horizon in a day, meaning the Lagna changes sign approximately every two hours. This fast movement makes your Lagna the most unique and time-sensitive point in your entire birth chart. It represents the physical body, the self-identity, health, first impressions, and your overall approach to life.
+                </p>
+
+                <h2>Why the Lagna Defines Your Horoscope</h2>
+                <p>
+                    The Lagna is the anchor of your chart. When an astrologer draws your birth chart, the Lagna sign is placed in the first house. All other houses are then arranged sequentially. If you have an Aries Lagna, Taurus becomes your 2nd house (wealth), Gemini your 3rd house (communication), and so on.
+                </p>
+                <p>
+                    This layout defines where your planets will sit. A person born on the exact same day as you will have the same planetary positions, but if they are born 4 hours later, their Lagna will be different. Consequently, a planet that represents career in your chart might represent expenditures or health issues in theirs. This is why the Lagna is the absolute key to personalizing any astrological reading.
+                </p>
+
+                <h2>Lagna Lord — The Life Director</h2>
+                <p>
+                    Every zodiac sign is ruled by a planet. The planet that rules your Lagna sign is designated as your <strong>Lagna Lord</strong> (or <em>Lagnesha</em>). In Jyotish, the Lagna Lord is your personal guardian angel. Its placement in your chart represents where your primary energy, attention, and destiny will unfold.
+                </p>
+                <ul>
+                    <li><strong>Lagna Lord in the 1st House:</strong> Strong self-focus, high vitality, independent nature, and focus on self-improvement.</li>
+                    <li><strong>Lagna Lord in the 2nd House:</strong> Focus on family accumulation, finance, values, and speech-oriented work.</li>
+                    <li><strong>Lagna Lord in the 5th House:</strong> Creative pursuits, love of learning, connection with children, and speculative ventures.</li>
+                    <li><strong>Lagna Lord in the 9th House:</strong> Spiritual inclination, love for higher learning, travel, and a fortunate life path.</li>
+                    <li><strong>Lagna Lord in the 10th House:</strong> Career-oriented, public recognition, leadership roles, and strong sense of duty.</li>
+                </ul>
+
+                <h2>Vedic vs. Western Rising Signs</h2>
+                <p>
+                    It is common to find that your Vedic rising sign is different from your Western rising sign. This is because Western astrology uses the <strong>Tropical Zodiac</strong> (aligned with seasons), while Vedic astrology uses the <strong>Sidereal Zodiac</strong> (aligned with actual stars). Due to the precession of the equinoxes, the difference between the two systems is currently about 24 degrees. In most cases, this shifts your rising sign back by one full sign in Vedic astrology.
+                </p>
+                <p>
+                    Use our free <Link href="/lagna-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Lagna Calculator</Link> to find your Vedic Ascendant sign, degree, Lagna lord, and get a personalized AI-powered reading about your appearance and life direction.
+                </p>
+            </>
+        ),
+    },
+    'find-ishta-devata': {
+        title: "How to Find Your Ishta Devata: The Soul's Guiding Divine Force",
+        description: "Use Jaimini astrology to calculate the planet 12th from your Karakamsha. Find your personal guiding deity and their sacred mantra for spiritual protection.",
+        category: "Soul Astrology",
+        date: "May 23, 2026",
+        readTime: "5 min read",
+        keywords: ['ishta devata', 'calculate ishta devata', 'atmakaraka deity', 'karakamsha deity', 'jaimini ishta devata', 'spiritual guide astrology'],
+        faqs: [
+            { q: "What is an Ishta Devata?", a: "Your Ishta Devata is the personal form of the Divine closest to your soul. In Vedic tradition, worshipping your Ishta Devata protects you from negative karmas and guides you toward Moksha (liberation)." },
+            { q: "How is Ishta Devata calculated in Jaimini astrology?", a: "Find the planet with the highest degree in your chart (Atmakaraka). Locate its sign in the Navamsa chart (Karakamsha). The planet ruling the 12th house from the Karakamsha indicates your Ishta Devata." },
+            { q: "What should I do after finding my Ishta Devata?", a: "Chant their simple beej mantra daily (like Om Namah Shivaya for Shiva), light a ghee lamp, and maintain a clean altar at home. Expressing gratitude to ancestors also strengthens this connection." }
+        ],
+        relatedCalculator: { label: 'Find My Ishta Devata', href: '/ishta-devata', emoji: '🕉️' },
+        content: (
+            <>
+                <p>
+                    Among the spiritual teachings of Vedic astrology, the concept of the <strong>Ishta Devata</strong> (cherished deity) is perhaps the most personal and sacred. It represents the form of the Divine that is closest to your soul, acting as a personal guide, shield of protection, and gateway to spiritual liberation (<em>Moksha</em>).
+                </p>
+                <p>
+                    Unlike general religious choices, Jaimini astrology offers a precise method to calculate your Ishta Devata based on your soul&apos;s planetary structure. By identifying the planet that represents your soul (Atmakaraka) and analyzing its position in the Navamsa chart, you can discover which divine frequency is uniquely aligned with your path.
+                </p>
+
+                <h2>The Calculation Explained</h2>
+                <p>
+                    To find your Ishta Devata, Vedic astrologers follow a step-by-step Jaimini calculation:
+                </p>
+                <ol>
+                    <li><strong>Identify the Atmakaraka (AK):</strong> The planet (excluding Rahu/Ketu) that occupies the highest degree in your birth chart (D1). This planet represents the soul&apos;s current incarnation lesson.</li>
+                    <li><strong>Locate the AK in D9 Navamsa:</strong> The D9 chart is the divisional chart representing the inner potential and spiritual path. The sign occupied by your Atmakaraka in the Navamsa is called the <strong>Karakamsha</strong>.</li>
+                    <li><strong>Count 12 houses from Karakamsha:</strong> The 12th house represents liberation (Moksha) and surrender. The sign in this 12th house, along with any planets placed there, determines your Ishta Devata.</li>
+                </ol>
+
+                <h2>Deities Associated with the 12th House from Karakamsha</h2>
+                <p>
+                    The ruling planet of the 12th house from your Karakamsha sign corresponds to the following divine energies:
+                </p>
+                <ul>
+                    <li><strong>Sun or Rahu:</strong> Lord Shiva or Goddess Durga. These deities represent transcendence, destruction of ego, and absolute protection.</li>
+                    <li><strong>Moon:</strong> Lord Shiva or Goddess Gauri. Represents emotional peace, nurturing care, and meditative stillness.</li>
+                    <li><strong>Mars:</strong> Lord Kartikeya (Muruga) or Lord Ganesha. Represents spiritual warriorship, removal of blockages, and courage.</li>
+                    <li><strong>Mercury:</strong> Lord Vishnu or Sri Krishna. Represents preservation, intellect, divine play (Lila), and wisdom.</li>
+                    <li><strong>Jupiter:</strong> Lord Dattatreya, Lord Brahma, or Lord Shiva. Represents the supreme guru, non-dual wisdom, and guidance.</li>
+                    <li><strong>Venus:</strong> Goddess Lakshmi. Represents abundance, grace, purity, and spiritual beauty.</li>
+                    <li><strong>Saturn:</strong> Lord Yama, Shani Dev, or Hanuman. Represents discipline, law, service, and burning of heavy karmas.</li>
+                    <li><strong>Ketu:</strong> Lord Ganesha. Represents the dissolution of past karma, sudden insights, and the ultimate doorway to Moksha.</li>
+                </ul>
+
+                <h2>How to Connect with Your Ishta Devata</h2>
+                <p>
+                    Connecting with your Ishta Devata does not require complex or expensive fire rituals. Simple daily practices are highly effective:
+                </p>
+                <ul>
+                    <li><strong>Mantra Japa:</strong> Chant the short beej mantra associated with your deity (e.g., <em>Om Namah Shivaya</em> for Shiva, <em>Om Namo Bhagavate Vasudevaya</em> for Vishnu) 108 times daily using a mala.</li>
+                    <li><strong>Lighting a Lamp:</strong> Keep a clean image or idol of your deity in your home altar. Light a ghee or sesame oil lamp in front of it every morning.</li>
+                    <li><strong>Ancestor gratitude:</strong> The blessings of ancestors (Pitras) help in opening the connection to the Ishta Devata. Express gratitude to your ancestors before starting your spiritual practice.</li>
+                </ul>
+                <p>
+                    Use our free <Link href="/ishta-devata" className="text-gold/70 hover:text-gold underline underline-offset-2">Ishta Devata Calculator</Link> to find your Atmakaraka, Karakamsha sign, 12th house of liberation, and get your personal deity reading and mantra.
+                </p>
+            </>
+        ),
+    },
+    'pitra-dosha-remedies': {
+        title: "Pitra Dosha Remedies: Healing Ancestral Karma in Your Birth Chart",
+        description: "Find out how Sun-Rahu conjunctions, 9th house afflictions, and ancestral debt manifest in life, and the classic acts of charity to resolve them.",
+        category: "Vedic Astrology",
+        date: "May 23, 2026",
+        readTime: "6 min read",
+        keywords: ['pitra dosha', 'pitra dosha remedies', 'ancestral karma astrology', 'sun rahu conjunction', '9th house affliction', 'ancestral debt astrology'],
+        faqs: [
+            { q: "What is Pitra Dosha?", a: "Pitra Dosha is a planetary configuration in a birth chart indicating ancestral debt or unresolved karmic lessons from fathers/forefathers, often diagnosed through Sun-Rahu conjunctions or 9th house afflictions." },
+            { q: "What are the symptoms of Pitra Dosha?", a: "Common symptoms include constant delays in career or marriage, frequent household arguments, lack of domestic peace, difficulties in conceiving, or unexplained financial setbacks." },
+            { q: "What are the best remedies for Pitra Dosha?", a: "Classical remedies include donating food to animals (crows, cows, dogs), performing Tarpan during Pitru Paksha, watering a Peepal tree on Saturdays, and chanting the Gayatri Mantra." }
+        ],
+        relatedCalculator: { label: 'Check Pitra Dosha', href: '/pitra-dosha', emoji: '🌳' },
+        content: (
+            <>
+                <p>
+                    In Vedic astrology, <strong>Pitra Dosha</strong> is one of the most frequently discussed and misunderstood configurations. The word <em>Pitra</em> refers to ancestors or fathers, and <em>Dosha</em> represents an affliction or karmic blemish. Thus, Pitra Dosha refers to the karmic debt or unresolved lessons of your ancestors that are reflected in your own birth chart.
+                </p>
+                <p>
+                    Rather than a curse or punishment from your forefathers, Pitra Dosha represents ancestral DNA — both physical and spiritual. If ancestors departed with unfulfilled desires, suffered sudden trauma, or committed negative deeds without making amends, these energies manifest in the charts of their descendants as planetary blocks, inviting us to resolve them through conscious actions.
+                </p>
+
+                <h2>How Pitra Dosha Forms in a Chart</h2>
+                <p>
+                    Astrologically, Pitra Dosha is diagnosed when the indicators of ancestors, father, and dharma are afflicted:
+                </p>
+                <ul>
+                    <li><strong>The Sun (Significator of Father & Ancestors)</strong>: When the Sun is conjoined with Rahu or Ketu (within 10 degrees), it creates an Eclipse Yoga. This is the most direct indicator of paternal ancestor debt.</li>
+                    <li><strong>The 9th House (Ancestors & Fortune)</strong>: When the 9th house is occupied or aspected by Rahu, Ketu, or Saturn, the flow of luck and ancestral support is obstructed.</li>
+                    <li><strong>9th House Lord</strong>: If the lord of the 9th house is conjoined with Rahu/Ketu, or placed in a difficult house (6th, 8th, or 12th) under malefic aspect.</li>
+                    <li><strong>The Moon (Significator of Mother & Peace)</strong>: When conjoined with Rahu or Ketu, it indicates maternal ancestor debt, causing emotional unrest.</li>
+                </ul>
+
+                <h2>Symptoms of Unresolved Pitra Dosha</h2>
+                <p>
+                    When ancestral karma is heavy and unaddressed, it manifests as invisible barriers in worldly life:
+                </p>
+                <ul>
+                    <li><strong>Unexplained Delays:</strong> Constant, frustrating delays in career growth, promotions, or marriage, despite qualifications and effort.</li>
+                    <li><strong>Family Friction:</strong> Inexplicable arguments and lack of harmony inside the household, or feel a heavy sense of worry.</li>
+                    <li><strong>Lineage Obstacles:</strong> Difficulties in conceiving, recurring problems related to children, or sudden setbacks in business.</li>
+                    <li><strong>Vitality Issues:</strong> Genetic illnesses, low vitality, or lack of drive that does not respond to ordinary remedies.</li>
+                </ul>
+
+                <h2>Top 4 Classical Remedies for Ancestral Healing</h2>
+                <p>
+                    Vedic tradition offers simple, powerful actions to satisfy departed souls, converting ancestral debt into blessings:
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { title: '1. Food Donation (Daana)', desc: 'Feeding cows (representing all gods), crows (representing Saturn and ancestral messengers), and stray dogs on Saturdays or Amavasya (New Moon) days is the most direct physical remedy.' },
+                        { title: '2. Pitru Paksha Tarpan', desc: 'Offering water and black sesame seeds (Tarpan) or organizing shradh ceremonies during the 16-day period of Pitru Paksha (when the Sun transits Virgo in September/October) brings immense relief.' },
+                        { title: '3. Peepal Tree Worship', desc: 'Watering a Peepal tree daily (except Sundays) or lighting a mustard oil lamp under it on Saturdays. The Peepal tree is believed to house ancestral energies.' },
+                        { title: '4. Chanting Gayatri Mantra', desc: 'Chanting the Gayatri Mantra or Aditya Hrudaya Stotra daily strengthens the Sun in your chart, clearing the shadow planetary blockages.' },
+                    ].map((item) => (
+                        <div key={item.title} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-white text-sm font-medium mb-1">{item.title}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <p>
+                    Use our free <Link href="/pitra-dosha" className="text-gold/70 hover:text-gold underline underline-offset-2">Pitra Dosha Calculator</Link> to check your birth details, find if you have active configurations, and get a detailed AI-powered reading with tailored remedies.
+                </p>
+            </>
+        ),
+    },
 };
 
 type Params = Promise<{ slug: string }>;

@@ -204,6 +204,51 @@ const articles = [
         readTime: "6 min read",
         date: "May 22, 2026",
         emoji: "🔵"
+    },
+    {
+        slug: 'moon-sign-meaning',
+        title: "What is My Moon Sign? The Rashi That Governs Your Mind & Emotions",
+        description: "Discover the significance of your Janma Rashi or Moon Sign in Jyotish, how it shapes your psychology, and why it is more important than your Sun Sign.",
+        category: "Vedic Astrology",
+        readTime: "5 min read",
+        date: "May 23, 2026",
+        emoji: "🌙"
+    },
+    {
+        slug: 'nakshatra-secrets',
+        title: "Secrets of the 27 Nakshatras: How Lunar Mansions Reveal Your Destiny",
+        description: "Go beyond zodiac signs. Learn how the 27 Nakshatras add highly specific layers to your personality, emotional landscape, and future timing.",
+        category: "Vedic Astrology",
+        readTime: "6 min read",
+        date: "May 23, 2026",
+        emoji: "✨"
+    },
+    {
+        slug: 'rising-sign-astrology',
+        title: "Vedic Rising Sign: How Your Lagna Shapes Your Appearance & Purpose",
+        description: "Your Lagna (Ascendant) is the starting point of your chart. Learn how it determines your physical look, self-identity, and the houses of your life path.",
+        category: "Vedic Astrology",
+        readTime: "6 min read",
+        date: "May 23, 2026",
+        emoji: "🌅"
+    },
+    {
+        slug: 'find-ishta-devata',
+        title: "How to Find Your Ishta Devata: The Soul's Guiding Divine Force",
+        description: "Use Jaimini astrology to calculate the planet 12th from your Karakamsha. Find your personal guiding deity and their sacred mantra for spiritual protection.",
+        category: "Soul Astrology",
+        readTime: "5 min read",
+        date: "May 23, 2026",
+        emoji: "🕉️"
+    },
+    {
+        slug: 'pitra-dosha-remedies',
+        title: "Pitra Dosha Remedies: Healing Ancestral Karma in Your Birth Chart",
+        description: "Find out how Sun-Rahu conjunctions, 9th house afflictions, and ancestral debt manifest in life, and the classic acts of charity to resolve them.",
+        category: "Vedic Astrology",
+        readTime: "6 min read",
+        date: "May 23, 2026",
+        emoji: "🌳"
     }
 ];
 
