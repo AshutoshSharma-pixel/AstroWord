@@ -92,6 +92,107 @@ export default function MarriageTypeSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Planetary Combinations for Love Marriage in Vedic Astrology</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Venus + Rahu conjunction",
+              desc: "Strongest love marriage indicator. Rahu breaks traditions and Venus rules romance. Together they create intense unconventional attractions that lead to love marriages. Very common in celebrity and inter-caste marriages."
+            },
+            {
+              title: "5th lord + 7th lord connection",
+              desc: "When lord of romance (5th house) and lord of marriage (7th house) are conjunct, aspect each other, or exchange signs — the love affair converts to marriage. This is the most reliable love marriage yoga."
+            },
+            {
+              title: "Rahu in 5th or 7th house",
+              desc: "Rahu's unconventional energy in these houses indicates attraction outside traditional boundaries — love marriage, intercaste, or foreign partner possible."
+            },
+            {
+              title: "Moon + Venus conjunction",
+              desc: "Deep emotional and romantic combination. Strong feelings that develop into committed relationships. Common in charts where love marriage happens."
+            },
+            {
+              title: "Mars + Venus conjunction",
+              desc: "Passionate physical attraction drives the relationship. Often indicates a love marriage with intense initial chemistry."
+            }
+          ].map((item) => (
+            <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{item.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Planetary Combinations for Arranged Marriage in Vedic Astrology</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Strong Jupiter in 7th",
+              desc: "Jupiter's traditional dharmic energy favors family-approved unions. Indicates a spouse from a good family found through conventional channels."
+            },
+            {
+              title: "7th lord in 2nd or 4th house",
+              desc: "Marriage connected to family (2nd house) or home life (4th house) — classic arranged marriage placement in Parashari astrology."
+            },
+            {
+              title: "Saturn aspecting 7th house",
+              desc: "Delays but when marriage happens, often through family connections and traditional channels. Saturn brings a conventional, responsible approach to marriage."
+            },
+            {
+              title: "No connection between 5th and 7th",
+              desc: "When houses of romance and marriage are unconnected, love affairs rarely convert to marriage — the arranged path is more likely."
+            },
+            {
+              title: "Moon in 7th with benefics",
+              desc: "Emotional nurturing marriage through family arrangement. Comfortable traditional union with strong family support."
+            }
+          ].map((item) => (
+            <div key={item.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{item.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">The Navamsa D9 Chart — Confirming Your Marriage Type</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          The birth chart (D1) shows the potential for love or arranged marriage. The Navamsa (D9) chart confirms it. 
+          Professional astrologers always check both. If the same indicators appear in both D1 and D9 — Venus 
+          strong, Rahu in 7th, 5th-7th lord connection — the prediction is highly reliable. If D1 and 
+          D9 contradict each other, the situation is mixed — perhaps starting as love but proceeding 
+          with family approval.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Love-Cum-Arranged Marriage — The Third Path</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          In modern India, a third category is increasingly common: the relationship starts as love but proceeds 
+          with family approval. This &quot;love-cum-arranged&quot; path shows astrologically as: moderate 5th-7th connection 
+          (not strong enough for pure love marriage), Jupiter moderating Rahu or Venus energy, or Moon in the 
+          5th creating emotional attachment that families eventually support. This is neither purely traditional 
+          nor fully self-chosen — it is the modern Indian middle path. AstroWord&apos;s AI specifically identifies 
+          this combination in your chart.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Does Manglik Dosha Affect Love or Arranged Marriage?</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          Yes — <Link href="/manglik" className="text-gold/70 hover:text-gold underline underline-offset-2">Manglik Dosha</Link> (Mars 
+          in 1st, 2nd, 4th, 7th, 8th, or 12th house) affects marriage type as well as timing. A strong Mars 
+          influencing the 7th house creates passionate, sometimes combative energy in relationships. Manglik 
+          individuals often have intense love affairs but face resistance from families — leading to the 
+          love-cum-arranged path. When both partners are Manglik, the energy neutralizes and both paths 
+          become equally possible.
+        </p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
         <div className="grid grid-cols-1 gap-4">
           {[

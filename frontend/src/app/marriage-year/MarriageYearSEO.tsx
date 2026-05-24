@@ -86,6 +86,138 @@ export default function MarriageYearSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Marriage Age Windows — When Does It Typically Happen?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Ages 22-25",
+              desc: "Venus Mahadasha or strong Venus Antardasha in early life. Jupiter transiting 7th house for the first time. Most common window for early marriages in India."
+            },
+            {
+              title: "Ages 25-28",
+              desc: "7th lord Dasha periods often activate in mid-20s. Saturn first return at age 29 often brings major life commitments."
+            },
+            {
+              title: "Ages 28-32",
+              desc: "Post Sade Sati relief often releases blocked marriage energy. Jupiter's second pass over 7th house for many charts."
+            },
+            {
+              title: "Ages 32-36",
+              desc: "Rahu/Ketu axis shift creates new relationship opportunities. Strong window for charts with delayed indicators."
+            },
+            {
+              title: "Ages 36+",
+              desc: "Saturn Mahadasha natives often marry later — delayed but deeply stable partnerships built on solid foundations."
+            }
+          ].map((win) => (
+            <div key={win.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{win.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{win.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Which Dasha Period Brings Marriage? — The Complete Guide</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Venus Mahadasha (20 years)",
+              desc: "Most powerful marriage period. Venus is natural karaka for marriage. Venus-Jupiter or Venus-Moon Antardasha within this period is the strongest combination."
+            },
+            {
+              title: "7th Lord Dasha",
+              desc: "The ruling planet of your 7th house brings marriage during its Mahadasha or Antardasha. Most chart-specific indicator."
+            },
+            {
+              title: "Darakaraka Dasha (Jaimini)",
+              desc: (
+                <>
+                  Your Darakaraka planet's Dasha — unique to your chart. More specific than the generic 7th lord method.{" "}
+                  <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Find your Darakaraka</Link>.
+                </>
+              )
+            },
+            {
+              title: "Jupiter Antardasha",
+              desc: "Within any favorable Mahadasha, Jupiter's sub-period brings blessings and marriage opportunities."
+            },
+            {
+              title: "Rahu Mahadasha (18 years)",
+              desc: "For some charts, Rahu's period brings unconventional or foreign marriages, especially when Rahu is placed in or aspecting the 7th house."
+            }
+          ].map((dasha) => (
+            <div key={dasha.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{dasha.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{dasha.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">What Delays Marriage in Your Chart?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Saturn aspecting 7th house or lord",
+              desc: "Most common delay factor. Adds 3-7 years to natural timing but rewards with stability. Marriage after Saturn's influence is often the strongest."
+            },
+            {
+              title: "Venus combust or debilitated",
+              desc: "Venus too close to Sun loses strength. Difficulty attracting the right partner until Venus strengthens through transits."
+            },
+            {
+              title: "Rahu in 7th house",
+              desc: "Unconventional path — often delays conventional marriage while creating intense but complex relationships."
+            },
+            {
+              title: "Ketu in 7th house",
+              desc: "Spiritual detachment from marriage. May prioritize other life areas before settling down."
+            },
+            {
+              title: "Manglik Dosha without cancellation",
+              desc: (
+                <>
+                  Mars energy creates friction in partnerships until matched or cancelled.{" "}
+                  <Link href="/manglik" className="text-gold/70 hover:text-gold underline underline-offset-2">Check Manglik status</Link>.
+                </>
+              )
+            },
+            {
+              title: "Sade Sati over Moon",
+              desc: (
+                <>
+                  Saturn transiting Moon sign suppresses emotional availability for partnership during the 7.5-year period.{" "}
+                  <Link href="/sade-sati" className="text-gold/70 hover:text-gold underline underline-offset-2">Am I in Sade Sati?</Link>.
+                </>
+              )
+            }
+          ].map((delay) => (
+            <div key={delay.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{delay.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{delay.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Jupiter Transit and Marriage — Which Years Are Favorable?</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          Jupiter takes approximately 12 years to complete one full orbit, spending about 1 year in each sign. 
+          The years when Jupiter transits your 7th house from Lagna, conjuncts your natal Venus, or aspects the 
+          7th lord are your strongest marriage windows. When Jupiter&apos;s transit aligns with a supporting 
+          Dasha period — that is when marriage most commonly manifests.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          Jupiter is currently in Gemini (2025-2026) moving to Cancer (2025). Check which house this falls in 
+          from your Lagna to understand your current Jupiter influence on marriage.
+        </p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
         <div className="grid grid-cols-1 gap-4">
           {[
