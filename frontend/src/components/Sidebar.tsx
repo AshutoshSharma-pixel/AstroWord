@@ -15,6 +15,7 @@ import {
     Menu
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import UpgradeModal from './UpgradeModal';
 import ProfileModal from './ProfileModal';
 import { useAuth } from '@/components/AuthProvider';
@@ -170,7 +171,9 @@ export default function Sidebar({
                 >
                     <Menu className="w-5 h-5 text-white" />
                 </button>
-                <img src="/astroword-logo.svg" alt="AstroWord" className="h-7" />
+                <Link href="/">
+                    <img src="/astroword-logo.svg" alt="AstroWord" className="h-7 cursor-pointer" />
+                </Link>
             </div>
 
             {/* Backdrop overlay — mobile only */}
@@ -190,7 +193,9 @@ export default function Sidebar({
             `}>
                 {/* Logo — hidden on mobile since the top bar shows it */}
                 <div className="p-4 pl-5 hidden md:block">
-                    <img src="/astroword-logo.svg" alt="AstroWord" className="h-10" />
+                    <Link href="/">
+                        <img src="/astroword-logo.svg" alt="AstroWord" className="h-10 cursor-pointer" />
+                    </Link>
                 </div>
 
                 {/* New Chat Button */}
