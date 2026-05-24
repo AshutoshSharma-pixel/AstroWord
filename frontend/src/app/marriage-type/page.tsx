@@ -111,7 +111,14 @@ export default function MarriageTypePage() {
                     setResult({ ...resultData });
                 },
                 (doneData) => {
-                    resultData = { ...resultData, ...doneData };
+                    resultData = { 
+                        ...resultData, 
+                        ...doneData,
+                        percentage: {
+                            love: doneData.love_percentage || 50,
+                            arranged: doneData.arranged_percentage || 50
+                        }
+                    };
                     setResult({ ...resultData });
                     localStorage.setItem('astroword_chart', JSON.stringify(chart));
                 }
@@ -293,12 +300,14 @@ export default function MarriageTypePage() {
                     </div>
                 </div>
 
-                <ShareCard
-                  question="Will I have a love or arranged marriage?"
-                  answer={result.result}
-                  subtext={`❤️ Love ${result.percentage?.love || 50}% · 🏛️ Arranged ${result.percentage?.arranged || 50}%`}
-                  keywords={result.key_indicators?.slice(0, 3)}
-                />
+                {result.result !== "Analyzing..." && (
+                    <ShareCard
+                      question="Will I have a love or arranged marriage?"
+                      answer={result.result}
+                      subtext={`❤️ Love ${result.percentage?.love || 50}% · 🏛️ Arranged ${result.percentage?.arranged || 50}%`}
+                      keywords={result.key_indicators?.slice(0, 3)}
+                    />
+                )}
 
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
