@@ -56,6 +56,56 @@ export default function SpouseInitialSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">All 27 Nakshatras and Their Spouse Name Syllables</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          In Vedic astrology, each of the 27 Nakshatras is associated with specific Sanskrit syllables 
+          (aksharas). The nakshatra of your Darakaraka planet determines the starting sound of your 
+          spouse&apos;s name. Here is the complete table:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            { name: 'Ashwini', sounds: 'Chu, Che, Cho, La' },
+            { name: 'Bharani', sounds: 'Li, Lu, Le, Lo' },
+            { name: 'Krittika', sounds: 'A, I, U, E' },
+            { name: 'Rohini', sounds: 'O, Va, Vi, Vu' },
+            { name: 'Mrigashira', sounds: 'Ve, Vo, Ka, Ki' },
+            { name: 'Ardra', sounds: 'Ku, Gha, Na, Chha' },
+            { name: 'Punarvasu', sounds: 'Ke, Ko, Ha, Hi' },
+            { name: 'Pushya', sounds: 'Hu, He, Ho, Da' },
+            { name: 'Ashlesha', sounds: 'Di, Du, De, Do' },
+            { name: 'Magha', sounds: 'Ma, Mi, Mu, Me' },
+            { name: 'Purva Phalguni', sounds: 'Mo, Ta, Ti, Tu' },
+            { name: 'Uttara Phalguni', sounds: 'Te, To, Pa, Pi' },
+            { name: 'Hasta', sounds: 'Pu, Sha, Na, Tha' },
+            { name: 'Chitra', sounds: 'Pe, Po, Ra, Ri' },
+            { name: 'Swati', sounds: 'Ru, Re, Ro, Ta' },
+            { name: 'Vishakha', sounds: 'Ti, Tu, Te, To' },
+            { name: 'Anuradha', sounds: 'Na, Ni, Nu, Ne' },
+            { name: 'Jyeshtha', sounds: 'No, Ya, Yi, Yu' },
+            { name: 'Mula', sounds: 'Ye, Yo, Ba, Bi' },
+            { name: 'Purva Ashadha', sounds: 'Bu, Dha, Bha, Dha' },
+            { name: 'Uttara Ashadha', sounds: 'Be, Bo, Ja, Ji' },
+            { name: 'Shravana', sounds: 'Ju/Khi, Je/Khu, Jo/Khe, Gha/Kho' },
+            { name: 'Dhanishtha', sounds: 'Ga, Gi, Gu, Ge' },
+            { name: 'Shatabhisha', sounds: 'Go, Sa, Si, Su' },
+            { name: 'Purva Bhadrapada', sounds: 'Se, So, Da, Di' },
+            { name: 'Uttara Bhadrapada', sounds: 'Du, Tha, Jha, Da' },
+            { name: 'Revati', sounds: 'De, Do, Cha, Chi' }
+          ].map((item) => (
+            <div key={item.name} className="bg-surface border border-border rounded-xl p-3">
+              <p className="text-white text-sm font-medium mb-1">{item.name}</p>
+              <p className="text-muted text-xs leading-relaxed">{item.sounds}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-muted text-sm leading-relaxed">
+          Your specific Pada (quarter) within the nakshatra determines which of the 4 syllables 
+          applies. AstroWord&apos;s calculator automatically identifies your Darakaraka nakshatra and pada 
+          to give you the most precise prediction.
+        </p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">How Accurate is Spouse Name Prediction?</h2>
         <p className="text-muted text-sm leading-relaxed">
           The Nakshatra Akshara method is one of the oldest techniques in Jaimini astrology for spouse name prediction. Its accuracy depends on: correct birth time (even 4 minutes changes the nakshatra pada), whether the spouse goes by their given name or a nickname, and which name the spouse is primarily known by — first name, middle name, or family name. Most practitioners report 60-75% accuracy when birth time is precise to within 5 minutes.
