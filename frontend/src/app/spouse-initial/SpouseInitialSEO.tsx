@@ -70,6 +70,53 @@ export default function SpouseInitialSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction by Vedic Astrology — How Accurate Is It?</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          Spouse name prediction using Vedic astrology is based on the Nakshatra Akshara system — one 
+          of the oldest predictive techniques in Jaimini astrology. Your Darakaraka planet&apos;s nakshatra 
+          determines the phonetic sounds (aksharas) associated with your spouse&apos;s name. This method 
+          has been used by Jyotishis for centuries to identify the starting syllable of a future 
+          spouse&apos;s name before marriage.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          The accuracy of spouse name prediction depends on three factors: the precision of your birth 
+          time (even 4 minutes changes the nakshatra pada), whether your spouse uses their given name or a 
+          nickname, and which name they are primarily known by. When birth time is accurate to within 5 
+          minutes, most practitioners report 65-75% accuracy for the first letter of the spouse&apos;s 
+          primary name.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Methods of Spouse Name Prediction in Astrology</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Nakshatra Akshara Method (Jaimini)",
+              desc: "Most specific — uses Darakaraka nakshatra pada to identify exact syllables. AstroWord uses this method."
+            },
+            {
+              title: "7th House Lord Nakshatra",
+              desc: "Traditional Parashari method — find 7th house lord's nakshatra for name syllables."
+            },
+            {
+              title: "Navamsa 7th Lord",
+              desc: "Check 7th lord in D9 Navamsa chart — its nakshatra gives alternate name syllables."
+            },
+            {
+              title: "Venus Nakshatra",
+              desc: "Venus as natural spouse karaka — its nakshatra pada gives additional clues about spouse name initial."
+            }
+          ].map((method) => (
+            <div key={method.title} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+              <h3 className="text-white text-base font-medium">{method.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{method.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">Spouse Name Prediction — FAQ</h2>
         <div className="grid grid-cols-1 gap-4">
           {[
