@@ -21,15 +21,35 @@ const PUBLIC_ROUTES = [
     '/atmakaraka',
     '/amatyakaraka',
     '/gana',
+    '/manglik',
     '/marriage-type',
     '/marriage-year',
     '/spouse-initial',
+    '/daily-horoscope',
+    '/dasha-calculator',
+    '/birth-tithi-calculator',
+    '/kaal-sarp-dosha',
+    '/sade-sati',
+    '/moon-sign',
+    '/nakshatra-calculator',
+    '/lagna-calculator',
+    '/ishta-devata',
+    '/pitra-dosha',
+    '/upapada-lagna',
+    '/arudha-lagna',
+    '/marriage-report',
     '/login',
     '/blog',
+    '/privacy-policy',
+    '/terms',
+    '/refund-policy',
+    '/support',
 ];
 
-const isPublicRoute = (path: string) =>
-    PUBLIC_ROUTES.some((route) => path === route || path.startsWith(route + '/'));
+const isPublicRoute = (path: string) => {
+    return PUBLIC_ROUTES.includes(path) || 
+           path.startsWith('/blog/');
+};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
