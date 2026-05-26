@@ -11,52 +11,57 @@ class D9ChartRequest(BaseModel):
 async def get_d9_chart(req: D9ChartRequest):
     chart = req.chart_data
     planets = chart.get("planets", {})
-    
+
     PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
-    
+
     # Build D9 planet list
     d9_planets = []
     for planet in PLANET_ORDER:
         if planet in planets:
             p = planets[planet]
+            d1_info = p.get("d1", {})
             d9_info = p.get("d9", {})
+            d1_sign = d1_info.get("sign", "")
             d9_sign = d9_info.get("sign", "")
-            d1_sign = p.get("sign", "")
             is_vargottama = (d1_sign == d9_sign) and d1_sign != ""
             d9_planets.append({
                 "planet": planet,
                 "d9_sign": d9_sign,
                 "d1_sign": d1_sign,
                 "is_vargottama": is_vargottama,
-                "retrograde": p.get("retrograde", False),
+                "retrograde": d1_info.get("retrograde", False),
             })
-    
-    # D9 ascendant
+
+    # D9 ascendant — stored at chart.d9_ascendant or divisional_ascendants
     d9_ascendant = chart.get("d9_ascendant", "")
-    
-    # Atmakaraka (highest degree planet) for Karakamsha
+    if not d9_ascendant:
+        d9_ascendant = chart.get("divisional_ascendants", {}).get("D9", {}).get("sign", "")
+
+    # Atmakaraka — highest degree planet using d1.degree
     atmakaraka = None
     atmakaraka_d9_sign = None
     max_deg = -1
     for planet in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
         if planet in planets:
-            deg = planets[planet].get("degree_in_sign", 0)
-            if deg > max_deg:
-                max_deg = deg
+            deg = planets[planet].get("d1", {}).get("degree", 0)
+            # degree is absolute (0-360), get degree within sign
+            deg_in_sign = deg % 30
+            if deg_in_sign > max_deg:
+                max_deg = deg_in_sign
                 atmakaraka = planet
                 atmakaraka_d9_sign = planets[planet].get("d9", {}).get("sign", "")
-    
+
     # Vargottama list
     vargottama_planets = [p["planet"] for p in d9_planets if p["is_vargottama"]]
-    
-    # 7th house from D9 ascendant (spouse house)
+
+    # 7th house from D9 ascendant
     SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
              "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
     d9_spouse_sign = ""
     if d9_ascendant in SIGNS:
         idx = SIGNS.index(d9_ascendant)
         d9_spouse_sign = SIGNS[(idx + 6) % 12]
-    
+
     return {
         "d9_planets": d9_planets,
         "d9_ascendant": d9_ascendant,
