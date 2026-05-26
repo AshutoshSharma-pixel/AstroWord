@@ -7,7 +7,7 @@ router = APIRouter()
 class D9ChartRequest(BaseModel):
     chart_data: Dict[str, Any]
 
-@router.post("/api/d9-chart")
+@router.post("/d9-chart")
 async def get_d9_chart(req: D9ChartRequest):
     chart = req.chart_data
     planets = chart.get("planets", {})
