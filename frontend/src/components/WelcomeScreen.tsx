@@ -221,15 +221,40 @@ export default function WelcomeScreen({ onComplete }: { onComplete: (chartData: 
                                 />
                             </div>
 
-                            <div className="relative">
-                                <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
-                                <input
-                                    type="time"
-                                    required
-                                    className="w-full bg-surface border border-border rounded-lg pl-10 pr-4 py-3 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-text/90"
-                                    value={formData.tob}
-                                    onChange={(e) => setFormData({ ...formData, tob: e.target.value })}
-                                />
+                            <div className="relative flex gap-2">
+                                <div className="relative flex-1">
+                                    <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none z-10" />
+                                    <select
+                                        required
+                                        className="w-full bg-surface border border-border rounded-lg pl-10 pr-2 py-3 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-text/90 appearance-none"
+                                        value={formData.tob ? formData.tob.split(':')[0] : ''}
+                                        onChange={(e) => {
+                                            const mins = formData.tob ? formData.tob.split(':')[1] || '00' : '00';
+                                            setFormData({ ...formData, tob: `${e.target.value}:${mins}` });
+                                        }}
+                                    >
+                                        <option value="" disabled>HH</option>
+                                        {Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0')).map(h => (
+                                            <option key={h} value={h}>{h}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="relative flex-1">
+                                    <select
+                                        required
+                                        className="w-full bg-surface border border-border rounded-lg px-2 py-3 text-sm focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-text/90 appearance-none"
+                                        value={formData.tob ? formData.tob.split(':')[1] : ''}
+                                        onChange={(e) => {
+                                            const hrs = formData.tob ? formData.tob.split(':')[0] || '00' : '00';
+                                            setFormData({ ...formData, tob: `${hrs}:${e.target.value}` });
+                                        }}
+                                    >
+                                        <option value="" disabled>MM</option>
+                                        {Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')).map(m => (
+                                            <option key={m} value={m}>{m}</option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
