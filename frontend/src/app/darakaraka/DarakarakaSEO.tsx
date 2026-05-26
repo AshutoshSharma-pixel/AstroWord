@@ -38,6 +38,11 @@ export default function DarakarakaSEOContent() {
             <span>Amatyakaraka Calculator — your planet of career and highest achievement</span>
             <span>→</span>
           </Link>
+          <Link href="/d9-chart" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+            <span>📊</span>
+            <span>Navamsa D9 Chart — see your planets in Navamsa</span>
+            <span>→</span>
+          </Link>
         </div>
       </div>
       <div className="space-y-4">

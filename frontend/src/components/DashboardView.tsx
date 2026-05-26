@@ -322,6 +322,23 @@ export default function DashboardView() {
                     </p>
                 </button>
 
+                {/* D9 Navamsa Chart Card */}
+                <button
+                    onClick={() => navigateTo('d9-chart')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="flex items-start justify-between">
+                        <div className="text-3xl mb-4">📊</div>
+                        <span className="text-[10px] bg-gold/10 text-gold border border-gold/20 px-2 py-0.5 rounded-full font-mono font-medium">DIVISIONAL</span>
+                    </div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Navamsa D9 Chart
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Generate your Navamsa D9 chart to discover your soul purpose, Vargottama planets, and future spouse details.
+                    </p>
+                </button>
+
                 {/* Spouse Initial Calculator Card */}
                 <button
                     onClick={() => navigateTo('spouse-initial')}

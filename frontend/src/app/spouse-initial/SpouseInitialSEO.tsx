@@ -183,6 +183,18 @@ export default function SpouseInitialSEOContent() {
           ))}
         </div>
       </div>
+      <div className="space-y-3">
+        <p className="text-gold/50 text-xs uppercase tracking-wider">Also explore</p>
+        <Link href="/darakaraka" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>💑</span><span>Darakaraka Calculator — your spouse significator planet</span><span>→</span>
+        </Link>
+        <Link href="/d9-chart" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>📊</span><span>Navamsa D9 Chart — see your planets in Navamsa</span><span>→</span>
+        </Link>
+        <Link href="/upapada-lagna" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>💍</span><span>Upapada Lagna — marriage reality from D9</span><span>→</span>
+        </Link>
+      </div>
     </div>
   );
 }

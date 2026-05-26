@@ -127,6 +127,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${base}/d9-chart`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
             url: `${base}/marriage-report`,
             lastModified: now,
             changeFrequency: 'monthly' as const,

@@ -57,6 +57,14 @@ export default function AtmakarakaSEOContent() {
         <p className="text-muted text-sm leading-relaxed">
           The sign occupied by your Atmakaraka in the D9 Navamsa chart is called the Karakamsa Lagna. The planets placed in or aspecting the Karakamsa give specific predictions about career, spirituality, and life purpose. This is one of the most detailed predictive techniques in classical Jaimini astrology — and AstroWord's AI reads all of these layers together.
         </p>
+        <div className="flex flex-col gap-2 mt-4">
+          <p className="text-gold/50 text-xs uppercase tracking-wider">Also explore</p>
+          <Link href="/d9-chart" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+            <span>📊</span>
+            <span>Navamsa D9 Chart — see your planets in Navamsa</span>
+            <span>→</span>
+          </Link>
+        </div>
       </div>
 
       {/* FAQ Section */}

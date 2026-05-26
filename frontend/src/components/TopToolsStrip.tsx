@@ -22,6 +22,7 @@ const ALL_TOOLS = [
   { slug: 'marriage-type',   emoji: '💝', label: 'Love or Arranged' },
   { slug: 'upapada-lagna',   emoji: '💍', label: 'Upapada Lagna' },
   { slug: 'arudha-lagna',    emoji: '🪞', label: 'Arudha Lagna' },
+  { slug: 'd9-chart',        emoji: '📊', label: 'D9 Chart' },
   { slug: 'spouse-initial',  emoji: '🔤', label: 'Spouse Initial' },
   { slug: 'kaal-sarp-dosha', emoji: '🐍', label: 'Kaal Sarp' },
   { slug: 'sade-sati',       emoji: '🔵', label: 'Sade Sati' },

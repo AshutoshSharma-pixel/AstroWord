@@ -38,6 +38,7 @@ const PUBLIC_ROUTES = [
     '/upapada-lagna',
     '/arudha-lagna',
     '/marriage-report',
+    '/d9-chart',
     '/login',
     '/blog',
     '/privacy-policy',
