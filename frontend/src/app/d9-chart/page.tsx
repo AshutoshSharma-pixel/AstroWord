@@ -17,16 +17,7 @@ const LOADING_TAGLINES = [
   "Your Navamsa chart is ready..."
 ];
 
-const SIGN_SYMBOLS: Record<string, string> = {
-  Aries: "♈", Taurus: "♉", Gemini: "♊", Cancer: "♋",
-  Leo: "♌", Virgo: "♍", Libra: "♎", Scorpio: "♏",
-  Sagittarius: "♐", Capricorn: "♑", Aquarius: "♒", Pisces: "♓"
-};
 
-const PLANET_SYMBOLS: Record<string, string> = {
-  Sun: "☀️", Moon: "🌙", Mars: "♂", Mercury: "☿",
-  Jupiter: "♃", Venus: "♀", Saturn: "♄", Rahu: "☊", Ketu: "☋"
-};
 
 export default function D9ChartPage() {
   const router = useRouter();
@@ -155,7 +146,7 @@ export default function D9ChartPage() {
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
               <p className="text-muted text-xs uppercase tracking-widest font-mono">Your Navamsa Ascendant</p>
               <h1 className="text-gold font-serif text-4xl sm:text-5xl tracking-wide py-2">
-                {SIGN_SYMBOLS[result.d9_ascendant] || ''} {result.d9_ascendant}
+                {result.d9_ascendant}
               </h1>
               <p className="text-white/70 text-sm">D9 Lagna · Navamsa Chart</p>
 
@@ -191,7 +182,7 @@ export default function D9ChartPage() {
                 <div className="flex flex-wrap gap-2 pt-1">
                   {result.vargottama_planets.map((p: string) => (
                     <span key={p} className="text-xs bg-gold/10 text-gold border border-gold/20 px-4 py-1.5 rounded-full font-mono">
-                      {PLANET_SYMBOLS[p]} {p}
+                      {p}
                     </span>
                   ))}
                 </div>
@@ -205,7 +196,6 @@ export default function D9ChartPage() {
                 {result.d9_planets?.map((p: any) => (
                   <div key={p.planet} className={`flex items-center justify-between py-2.5 px-3 rounded-xl text-sm ${p.is_vargottama ? 'bg-gold/10 border border-gold/20' : 'bg-surface border border-border/50'}`}>
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{PLANET_SYMBOLS[p.planet]}</span>
                       <span className={p.is_vargottama ? 'text-gold font-medium' : 'text-white/80'}>{p.planet}</span>
                       {p.is_vargottama && <span className="text-xs text-gold/60 font-mono">★ Vargottama</span>}
                       {p.retrograde && <span className="text-xs text-muted font-mono">(R)</span>}
