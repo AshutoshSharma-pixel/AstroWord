@@ -17,8 +17,6 @@ const LOADING_TAGLINES = [
   "Your Navamsa chart is ready..."
 ];
 
-
-
 export default function D9ChartPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
