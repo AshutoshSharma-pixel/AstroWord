@@ -92,7 +92,9 @@ export default function D9ChartSEO() {
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <p className="text-gold/50 text-xs uppercase tracking-wider">Also explore</p>
+        <p className="text-gold/50 text-xs uppercase tracking-wider">
+          Also explore
+        </p>
         <Link href="/darakaraka" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
           <span>💑</span>
           <span>Darakaraka Calculator — your spouse significator planet</span>
