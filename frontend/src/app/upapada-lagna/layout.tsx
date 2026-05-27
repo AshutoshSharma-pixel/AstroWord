@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Upapada Lagna Calculator — Free Jaimini Marriage Sign Calculator",
-  description: "Calculate your Upapada Lagna (UL) free — the Jaimini astrology indicator for marriage destiny, spouse character, and marital karma. Based on your exact birth chart using Swiss Ephemeris with Lahiri ayanamsa.",
-  keywords: "upapada lagna calculator, upapada lagna free, UL calculator jaimini, jaimini marriage lagna, arudha 12th house, upapada lagna meaning, marriage karma astrology, jaimini astrology calculator",
+  title: "Upapada Lagna Calculator (UL) — Free Spouse & Marriage Prediction",
+  description: "Calculate your Upapada Lagna free. The most accurate Jaimini astrology indicator for spouse character, marriage quality, and marital karma. Discover planets in your UL, the 2nd from UL rule, and get a personalised AI reading.",
+  keywords: "upapada lagna calculator, upapada lagna free, UL calculator jaimini, upapada lagna spouse prediction, upapada lagna meaning, jaimini marriage calculator, arudha 12th house marriage, upapada lagna online free",
   alternates: { canonical: "https://www.astroword.in/upapada-lagna" },
   openGraph: {
-    title: "Upapada Lagna Calculator — Jaimini Marriage Sign",
+    title: "Upapada Lagna Calculator (UL) — Free Spouse & Marriage Prediction",
     description: "Free Upapada Lagna calculator. Find your UL sign, interpret your marriage destiny, and get a personalised AI reading based on your exact birth chart.",
     url: "https://www.astroword.in/upapada-lagna",
     siteName: "AstroWord",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Upapada Lagna Calculator — Jaimini Marriage Sign",
+    title: "Upapada Lagna Calculator (UL) — Free Spouse & Marriage Prediction",
     description: "Free Upapada Lagna calculator with AI reading. Discover your marriage destiny from your Jaimini chart.",
     images: ["https://www.astroword.in/og-image.png"],
     site: "@astroword_in",

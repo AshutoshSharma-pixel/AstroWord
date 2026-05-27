@@ -55,6 +55,76 @@ export default function UpapadaSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Planets in Upapada Lagna — What Each Planet Means for Your Marriage</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          When planets are placed directly in your Upapada Lagna sign, they powerfully color the quality, character, and experience of your marriage. This is one of the most specific marriage indicators in all of Jaimini astrology — more revealing than even Venus in the 7th house for predicting the lived reality of your partnership.
+        </p>
+        <div className="space-y-3">
+          {[
+            { planet: "Jupiter in Upapada Lagna", meaning: "One of the most auspicious placements. The marriage is dharmic, expansive, and deeply blessed. The spouse is wise, educated, generous, and acts as a guide and protector. The marriage brings overall good fortune, social elevation, and children who do well. If Jupiter is strong and unafflicted, this is one of the clearest indicators of a happy, lasting marriage in Jaimini astrology." },
+            { planet: "Venus in Upapada Lagna", meaning: "A beautiful, loving, and harmonious marriage. The spouse is charming, artistic, refined, and physically attractive. Strong mutual affection defines the relationship. The marriage has a pleasurable, aesthetic quality — the couple tends to be admired socially. This is one of the best indicators of genuine marital happiness and romantic fulfillment." },
+            { planet: "Saturn in Upapada Lagna", meaning: "A serious, disciplined, and exceptionally long-lasting marriage. The spouse may be older, more mature, or highly career-focused and responsible. The marriage is built on duty, structure, and shared work rather than romance. It requires patience in early years but becomes deeply stable and enduring. Saturn here gives one of the most reliable, committed marriages." },
+            { planet: "Mars in Upapada Lagna", meaning: "A passionate, energetic, and action-oriented marriage. The spouse is ambitious, assertive, physically active, and direct. Strong physical chemistry defines the attraction. However, Mars also brings potential for ego clashes, impatience, and short-temper in the partner. The marriage thrives when both partners have independent outlets for their energy and drive." },
+            { planet: "Sun in Upapada Lagna", meaning: "A dignified, status-conscious marriage. The spouse has a commanding presence, strong sense of self-respect, and natural authority. The marriage is visible and respected in the social circle. There may be ego dynamics — the spouse needs to feel respected and recognized. The marriage elevates the native's social standing when the Sun is well-placed." },
+            { planet: "Moon in Upapada Lagna", meaning: "A nurturing, emotionally rich, and family-centred marriage. The spouse is sensitive, caring, and deeply attached to home and family. Strong emotional bond and intuitive connection define the relationship. The marriage may go through emotional cycles but the underlying care is genuine and consistent. Spouse likely to be attractive, gentle, and highly family-oriented." },
+            { planet: "Mercury in Upapada Lagna", meaning: "An intellectually stimulating, communicative, and adaptable marriage. The spouse is witty, business-minded, communicative, and youthful in nature. The relationship thrives on mental compatibility, shared ideas, and constant conversation. The couple may work together or share intellectual interests. Spouse likely to be in business, media, writing, or technology." },
+            { planet: "Rahu in Upapada Lagna", meaning: "An unconventional, intense, and often karmic marriage. The spouse may be from a very different background, culture, religion, or even nationality. The marriage arrives through unusual circumstances — often surprising to the family. There is intense initial attraction with a complex karmic dimension. The relationship may be non-traditional in some significant way." },
+            { planet: "Ketu in Upapada Lagna", meaning: "A spiritually significant, detached, and past-life marriage. The bond with the spouse carries deep karmic weight — a feeling of having known each other before this lifetime. The marriage may have a quality of inevitable destiny. There can be periods of emotional detachment or the spiritual path taking priority over domestic life. A profound but sometimes otherworldly union." },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-white text-sm font-medium mb-1">{item.planet}</p>
+              <p className="text-muted text-sm leading-relaxed">{item.meaning}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">The 2nd from Upapada — Will Your Marriage Last?</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          In Jaimini astrology, the 2nd house from the Upapada Lagna is called the sustaining house of marriage. While the UL sign itself shows what the marriage looks like and who the spouse is, the 2nd from UL shows whether the marriage will be long-lasting and fulfilling — or whether it will face challenges, separation, or end prematurely.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          This is one of the most important and least-known rules in Jaimini marriage analysis:
+        </p>
+        <div className="space-y-3">
+          {[
+            { condition: "Benefic planets in 2nd from UL (Jupiter, Venus, Mercury, Moon)", result: "The marriage is long-lasting, deeply fulfilling, and emotionally nourishing. The relationship sustains through difficulties and grows stronger over time. These are the clearest indicators of a stable, happy long-term marriage." },
+            { condition: "Malefic planets in 2nd from UL (Saturn, Mars, Sun, Rahu, Ketu)", result: "The marriage faces sustained pressure or challenges in its sustaining dimension. This does not automatically mean divorce — but requires more conscious effort, communication, and patience to maintain. Saturn here often means the marriage is stable but feels heavy; Mars can indicate conflict; Rahu can indicate unconventional dynamics." },
+            { condition: "Empty 2nd from UL (no planets)", result: "Look at the lord of the 2nd from UL sign. Its placement and strength determines the sustainability of the marriage. A well-placed 2nd lord in a Kendra or Trikona indicates good sustenance. A poorly placed 2nd lord in Dusthana houses (6th, 8th, 12th) needs careful analysis." },
+            { condition: "Jupiter aspecting the 2nd from UL", result: "Even if malefics are present in the 2nd from UL, Jupiter's full aspect (5th, 7th, or 9th aspect) on this house brings protection, wisdom, and the ability to navigate marital challenges with grace. This is one of the most powerful modifiers." },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-gold text-sm font-medium mb-1">✦ {item.condition}</p>
+              <p className="text-muted text-sm leading-relaxed">{item.result}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">UL2 — Upapada Lagna for Second Marriage</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          Classical Jaimini astrology provides a method for calculating the second Upapada Lagna (UL2) — the indicator for a second marriage or significant long-term relationship after the first. This is one of the most advanced and least-known techniques in Jaimini marriage analysis.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          UL2 is calculated by counting 8 signs forward from your first Upapada Lagna. The sign you reach becomes the second Upapada Lagna. The same rules of analysis apply — the sign character, planets placed there, and the 2nd from UL2 all describe the nature of the second marriage.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          Indicators that UL2 may activate in a chart include: Rahu in or aspecting the first UL, the first UL lord placed in the 6th or 8th house, strong malefic influence on the 2nd from UL with no Jupiter protection, or the 7th lord of the D9 Navamsa being severely afflicted. However, activating UL2 requires specific Dasha conditions — a strong UL2 in the chart does not automatically mean a second marriage will occur. It is a potential, not a certainty.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          For a complete marriage analysis combining Upapada Lagna with your{' '}
+          <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka planet</Link>
+          {', your '}
+          <Link href="/d9-chart" className="text-gold/70 hover:text-gold underline underline-offset-2">D9 Navamsa chart</Link>
+          {', and your '}
+          <Link href="/marriage-year" className="text-gold/70 hover:text-gold underline underline-offset-2">marriage year prediction</Link>
+          {' — AstroWord provides all three free, each with a personalised AI reading based on your exact birth chart.'}
+        </p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
         <div className="space-y-6">
           {[
