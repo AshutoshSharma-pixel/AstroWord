@@ -1,6 +1,8 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Any, Dict
+from api.gemini_utils import call_gemini_new
+from google.genai import types
 
 router = APIRouter()
 
@@ -71,6 +73,55 @@ async def get_d9_chart(req: D9ChartRequest):
         idx = SIGNS.index(d9_ascendant)
         d9_spouse_sign = SIGNS[(idx + 6) % 12]
 
+    # Resolve additional prompt variables
+    asc_sign = chart.get("ascendant", {}).get("sign", "Unknown")
+    d9_planets_str = ", ".join([f"{p['planet']} in {p['d9_sign']}" for p in d9_planets if p['d9_sign']])
+    vargottama_str = ", ".join(vargottama_planets) if vargottama_planets else "None"
+    seventh_d9 = d9_spouse_sign
+    seventh_planets_list = [p['planet'] for p in d9_planets if p['d9_sign'] == d9_spouse_sign]
+    seventh_planets = ", ".join(seventh_planets_list) if seventh_planets_list else "no planets"
+    karakamsha = atmakaraka_d9_sign or "Unknown"
+    vargottama = len(vargottama_planets) > 0
+
+    prompt = f"""You are a Vedic astrologer expert in Navamsa (D9) chart analysis. Write a personalised 400-word reading in 4 paragraphs. Address the person as "you/your". Be specific — cite actual placements from this chart. Use markdown with ## headers for each paragraph.
+
+D9 Chart Data:
+- D1 Ascendant: {asc_sign}
+- D9 Ascendant: {d9_ascendant}
+- All planets in D9: {d9_planets_str}
+- Vargottama planets: {vargottama_str}
+- 7th house of D9 ({seventh_d9}): {seventh_planets}
+- Atmakaraka: {atmakaraka}
+- Karakamsha (AK in D9): {karakamsha}
+
+## Your Inner Self — The {d9_ascendant} Navamsa
+Paragraph about what D9 ascendant {d9_ascendant} reveals about their true inner nature vs outer D1 ascendant {asc_sign}.
+
+## Marriage & Spouse from D9
+Paragraph about the 7th house being {seventh_d9} with {seventh_planets} — what this reveals about spouse nature and married life.
+
+## Vargottama Strength
+{"Paragraph about Vargottama planets: " + vargottama_str + " — their exceptional strength and what they promise." if vargottama else "Paragraph about which planets are strongest in D9 overall and what they deliver."}
+
+## Karakamsha — Your Soul's Purpose
+Paragraph about Atmakaraka {atmakaraka} in {karakamsha} in D9 — what this reveals about the soul's dharmic path and Ishta Devata."""
+
+    reading = ""
+    try:
+        response = call_gemini_new(
+            prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.4,
+                max_output_tokens=4096,
+                thinking_config=types.ThinkingConfig(thinking_budget=0)
+            )
+        )
+        reading = response.text or ""
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        reading = "Unable to generate AI reading at this time."
+
     return {
         "d9_planets": d9_planets,
         "d9_ascendant": d9_ascendant,
@@ -78,4 +129,5 @@ async def get_d9_chart(req: D9ChartRequest):
         "karakamsha_sign": atmakaraka_d9_sign,
         "vargottama_planets": vargottama_planets,
         "d9_spouse_sign": d9_spouse_sign,
+        "reading": reading,
     }

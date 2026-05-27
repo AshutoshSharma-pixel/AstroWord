@@ -8,6 +8,8 @@ import MarriageReportPreview from '@/components/MarriageReportPreview';
 import { API_URL } from '@/utils/api';
 import TopToolsStrip from '@/components/TopToolsStrip';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import { cleanReading } from '@/utils/cleanReading';
 
 const LOADING_TAGLINES = [
   "Reading your Navamsa divisions...",
@@ -210,6 +212,29 @@ export default function D9ChartPage() {
                 ))}
               </div>
             </div>
+
+            {result.reading && (
+              <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
+                <ReactMarkdown
+                  components={{
+                    h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,
+                    h3: ({ children }) => <h3 className="text-gold/80 text-lg font-medium mt-4 mb-2">{children}</h3>,
+                    strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
+                    p: ({ children }) => <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>,
+                    ul: ({ children }) => <ul className="space-y-2 mb-4 mt-2">{children}</ul>,
+                    li: ({ children }) => (
+                      <li className="flex items-start gap-3 text-text/90 text-[15px]">
+                        <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
+                        <span>{children}</span>
+                      </li>
+                    ),
+                  }}
+                >
+                  {cleanReading(result.reading)}
+                </ReactMarkdown>
+              </div>
+            )}
 
             {/* AI CTA */}
             <div className="bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">

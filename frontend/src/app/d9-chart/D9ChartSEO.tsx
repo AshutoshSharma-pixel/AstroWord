@@ -91,19 +91,27 @@ export default function D9ChartSEO() {
         </p>
       </div>
 
-      <div className="space-y-3">
+      <div className="flex flex-col gap-2 mt-4">
         <p className="text-gold/50 text-xs uppercase tracking-wider">Also explore</p>
-        <Link href="/darakaraka" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
-          <span>💑</span><span>Darakaraka Calculator — your spouse significator planet</span><span>→</span>
+        <Link href="/darakaraka" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>💑</span>
+          <span>Darakaraka Calculator — your spouse significator planet</span>
+          <span>→</span>
         </Link>
-        <Link href="/atmakaraka" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
-          <span>🔮</span><span>Atmakaraka Calculator — your soul planet and Karakamsha</span><span>→</span>
+        <Link href="/atmakaraka" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>🔮</span>
+          <span>Atmakaraka Calculator — your soul planet and Karakamsha</span>
+          <span>→</span>
         </Link>
-        <Link href="/ishta-devata" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
-          <span>🕉️</span><span>Ishta Devata Calculator — your personal deity from D9</span><span>→</span>
+        <Link href="/ishta-devata" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>🕉️</span>
+          <span>Ishta Devata Calculator — your personal deity from D9</span>
+          <span>→</span>
         </Link>
-        <Link href="/upapada-lagna" className="flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
-          <span>💍</span><span>Upapada Lagna — marriage reality from D9</span><span>→</span>
+        <Link href="/upapada-lagna" className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-sm transition-colors">
+          <span>💍</span>
+          <span>Upapada Lagna — marriage reality from D9</span>
+          <span>→</span>
         </Link>
       </div>
 
