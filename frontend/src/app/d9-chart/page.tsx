@@ -33,6 +33,7 @@ export default function D9ChartPage() {
         try {
           const parsed = JSON.parse(savedChart);
           setChartData(parsed);
+          localStorage.removeItem('astroword_chart');
           fetchD9Chart(parsed);
         } catch (e) {
           setIsLoading(false);
@@ -144,7 +145,7 @@ export default function D9ChartPage() {
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
               <p className="text-muted text-xs uppercase tracking-widest font-mono">Your Navamsa Ascendant</p>
               <h1 className="text-gold font-serif text-4xl sm:text-5xl tracking-wide py-2">
-                {result.d9_ascendant}
+                {typeof result.d9_ascendant === 'string' ? result.d9_ascendant : result.d9_ascendant?.sign ?? '—'}
               </h1>
               <p className="text-white/70 text-sm">D9 Lagna · Navamsa Chart</p>
 
@@ -152,12 +153,16 @@ export default function D9ChartPage() {
               <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-border/30">
                 <div className="text-center">
                   <p className="text-muted text-xs uppercase tracking-wider mb-1">Karakamsha</p>
-                  <p className="text-gold text-sm font-medium">{result.karakamsha_sign || '—'}</p>
+                  <p className="text-gold text-sm font-medium">
+                    {typeof result.karakamsha_sign === 'string' ? result.karakamsha_sign : result.karakamsha_sign?.sign ?? '—'}
+                  </p>
                   <p className="text-muted text-xs">({result.atmakaraka})</p>
                 </div>
                 <div className="text-center">
                   <p className="text-muted text-xs uppercase tracking-wider mb-1">7th House D9</p>
-                  <p className="text-gold text-sm font-medium">{result.d9_spouse_sign || '—'}</p>
+                  <p className="text-gold text-sm font-medium">
+                    {typeof result.d9_spouse_sign === 'string' ? result.d9_spouse_sign : result.d9_spouse_sign?.sign ?? '—'}
+                  </p>
                   <p className="text-muted text-xs">Spouse sign</p>
                 </div>
                 <div className="text-center">

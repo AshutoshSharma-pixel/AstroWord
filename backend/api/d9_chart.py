@@ -33,9 +33,18 @@ async def get_d9_chart(req: D9ChartRequest):
             })
 
     # D9 ascendant — stored at chart.d9_ascendant or divisional_ascendants
-    d9_ascendant = chart.get("d9_ascendant", "")
+    d9_ascendant_raw = chart.get("d9_ascendant", "")
+    if isinstance(d9_ascendant_raw, dict):
+        d9_ascendant = d9_ascendant_raw.get("sign", "")
+    else:
+        d9_ascendant = d9_ascendant_raw
+
     if not d9_ascendant:
-        d9_ascendant = chart.get("divisional_ascendants", {}).get("D9", {}).get("sign", "")
+        d9_asc_d9 = chart.get("divisional_ascendants", {}).get("D9", {})
+        if isinstance(d9_asc_d9, dict):
+            d9_ascendant = d9_asc_d9.get("sign", "")
+        else:
+            d9_ascendant = d9_asc_d9
 
     # Atmakaraka — highest degree planet using d1.degree
     atmakaraka = None
