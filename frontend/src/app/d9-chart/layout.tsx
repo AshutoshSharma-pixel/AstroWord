@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import D9ChartSEO from './D9ChartSEO';
 
 export const metadata: Metadata = {
-  title: "Navamsa Chart Calculator (D9 Chart) — Free AI Reading",
-  description: "Generate your Navamsa (D9) chart instantly. Discover your D9 ascendant, Vargottama planets, Karakamsha sign, and get a free AI-powered reading about your marriage and soul purpose. Based on Jaimini Vedic astrology.",
-  keywords: "navamsa chart calculator, d9 chart calculator, navamsa chart, d9 chart, vargottama planets, karakamsha, navamsa lagna, jaimini astrology",
+  title: "Navamsa Chart Calculator (D9) — Free AI Reading, Vargottama & Karakamsha",
+  description: "Generate your free Navamsa D9 chart instantly. Discover your Vargottama planets, Karakamsha sign, D9 ascendant, and get a personalised AI reading about your marriage, spouse, and soul purpose. Based on Jaimini Vedic astrology.",
+  keywords: ["navamsa chart calculator", "D9 chart calculator", "navamsa chart free online", "vargottama calculator", "karakamsha calculator", "navamsa chart marriage", "D9 navamsa reading", "D9 chart analysis", "navamsa lagna calculator", "D9 chart vedic astrology", "navamsa chart free", "vargottama planets"],
   alternates: { canonical: "https://www.astroword.in/d9-chart" },
   openGraph: {
-    title: 'Navamsa Chart Calculator (D9 Chart) — Free AI Reading',
-    description: 'Generate your Navamsa D9 chart and get an AI-powered reading about your marriage, spouse, and soul purpose. Free Jaimini Vedic astrology calculator.',
+    title: "Navamsa Chart Calculator (D9) — Free AI Reading, Vargottama & Karakamsha",
+    description: "Generate your free Navamsa D9 chart instantly. Discover your Vargottama planets, Karakamsha sign, D9 ascendant, and get a personalised AI reading about your marriage, spouse, and soul purpose. Based on Jaimini Vedic astrology.",
     url: 'https://www.astroword.in/d9-chart',
     type: 'website',
     locale: 'en_IN',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Navamsa Chart Calculator (D9 Chart) — Free AI Reading',
+    title: "Navamsa Chart Calculator (D9) — Free AI Reading, Vargottama & Karakamsha",
     description: 'Generate your Navamsa D9 chart and get a free AI reading about your marriage and soul purpose.',
     site: '@astroword_in',
     images: ['https://www.astroword.in/og-image.png']
