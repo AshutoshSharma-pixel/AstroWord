@@ -301,6 +301,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
         },
         {
+            url: `${base}/blog/how-to-read-navamsa-chart`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/vargottama-planets-meaning`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/navamsa-lagna-all-12-signs`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
             url: `${base}/privacy-policy`,
             lastModified: now,
             changeFrequency: 'yearly',

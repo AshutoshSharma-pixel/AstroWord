@@ -249,6 +249,33 @@ const articles = [
         readTime: "6 min read",
         date: "May 23, 2026",
         emoji: "🌳"
+    },
+    {
+        slug: 'how-to-read-navamsa-chart',
+        title: "How to Read Navamsa Chart (D9): Complete Step-by-Step Guide",
+        description: "Learn how to read your Navamsa D9 chart step by step. Understand D9 ascendant, 7th house spouse analysis, Vargottama planets, Karakamsha, and Venus in Navamsa. The most complete guide to D9 chart reading.",
+        category: "Divisional Charts",
+        readTime: "10 min read",
+        date: "May 27, 2026",
+        emoji: "🌙"
+    },
+    {
+        slug: 'vargottama-planets-meaning',
+        title: "Vargottama Planets in Vedic Astrology — Meaning, Effects & All 7 Planets",
+        description: "What is a Vargottama planet? Complete guide to Vargottama meaning in Navamsa, effects of all 7 planets when Vargottama, debilitated Vargottama, Mahavargottama, and how to find yours free.",
+        category: "Vedic Astrology",
+        readTime: "10 min read",
+        date: "May 27, 2026",
+        emoji: "🔱"
+    },
+    {
+        slug: 'navamsa-lagna-all-12-signs',
+        title: "Navamsa Lagna (D9 Ascendant) for All 12 Signs — Complete Meaning & Marriage",
+        description: "What does your Navamsa ascendant mean? Complete guide to D9 lagna for all 12 signs — Aries to Pisces. Discover your inner nature, marriage destiny, and soul purpose from your Navamsa lagna.",
+        category: "Divisional Charts",
+        readTime: "12 min read",
+        date: "May 27, 2026",
+        emoji: "🌅"
     }
 ];
 
