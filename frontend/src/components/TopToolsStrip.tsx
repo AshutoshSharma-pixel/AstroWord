@@ -12,6 +12,7 @@ const ALL_TOOLS = [
   { slug: 'ishta-devata',    emoji: '🕉️', label: 'Ishta Devata' },
   { slug: 'pitra-dosha',     emoji: '💀', label: 'Pitra Dosha' },
   { slug: 'manglik',         emoji: '🔴', label: 'Manglik' },
+  { slug: 'raja-yoga',       emoji: '👑', label: 'Raja Yoga' },
   { slug: 'dasha-calculator', emoji: '🪐', label: 'Dasha' },
   { slug: 'birth-tithi-calculator', emoji: '🌙', label: 'Birth Tithi' },
   { slug: 'darakaraka',      emoji: '💑', label: 'Darakaraka' },

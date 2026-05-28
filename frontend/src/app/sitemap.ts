@@ -133,6 +133,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${base}/raja-yoga`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
             url: `${base}/marriage-report`,
             lastModified: now,
             changeFrequency: 'monthly' as const,
@@ -314,6 +320,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${base}/blog/navamsa-lagna-all-12-signs`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/raja-yoga-in-astrology`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/gaja-kesari-yoga`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${base}/blog/panch-mahapurusha-yoga`,
             lastModified: now,
             changeFrequency: 'monthly',
             priority: 0.7,

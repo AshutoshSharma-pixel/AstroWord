@@ -270,12 +270,39 @@ const articles = [
     },
     {
         slug: 'navamsa-lagna-all-12-signs',
-        title: "Navamsa Lagna (D9 Ascendant) for All 12 Signs — Complete Meaning & Marriage",
-        description: "What does your Navamsa ascendant mean? Complete guide to D9 lagna for all 12 signs — Aries to Pisces. Discover your inner nature, marriage destiny, and soul purpose from your Navamsa lagna.",
-        category: "Divisional Charts",
-        readTime: "12 min read",
-        date: "May 27, 2026",
-        emoji: "🌅"
+        title: 'Navamsa Lagna (D9 Ascendant) for All 12 Signs — Complete Meaning & Marriage',
+        description: 'What does your Navamsa ascendant mean? Complete guide to D9 lagna for all 12 signs — Aries to Pisces. Discover your inner nature, marriage destiny, and soul purpose from your Navamsa lagna.',
+        category: 'Divisional Charts',
+        readTime: '12 min read',
+        date: 'May 27, 2026',
+        emoji: '🌅'
+    },
+    {
+        slug: 'raja-yoga-in-astrology',
+        title: 'Raja Yoga in Vedic Astrology — Complete Guide to All Types, Strength & Timing',
+        description: 'What is Raja Yoga in astrology? Complete guide covering all types of Raja Yoga, how to identify them in your kundli, strength calculation, Dasha timing, and the difference between strong and weak yogas.',
+        category: 'Vedic Astrology',
+        readTime: '10 min read',
+        date: 'May 28, 2026',
+        emoji: '👑'
+    },
+    {
+        slug: 'gaja-kesari-yoga',
+        title: 'Gaja Kesari Yoga — Is Yours Strong or Weak? Complete Guide with Calculator',
+        description: 'Gaja Kesari Yoga forms when Jupiter is in Kendra from Moon. But 25% of charts have it — why do results vary so much? Learn how to judge strength, timing, and whether your Gaja Kesari is truly powerful.',
+        category: 'Vedic Astrology',
+        readTime: '8 min read',
+        date: 'May 28, 2026',
+        emoji: '🐘'
+    },
+    {
+        slug: 'panch-mahapurusha-yoga',
+        title: 'Panch Mahapurusha Yoga — All 5 Types Explained: Ruchaka, Bhadra, Hamsa, Malavya, Shasha',
+        description: 'The 5 Panch Mahapurusha Yogas form when Mars, Mercury, Jupiter, Venus or Saturn occupy a Kendra in own or exalted sign. Complete guide to all 5 types, how to check yours, strength factors, and famous examples.',
+        category: 'Vedic Astrology',
+        readTime: '9 min read',
+        date: 'May 28, 2026',
+        emoji: '🔱'
     }
 ];
 

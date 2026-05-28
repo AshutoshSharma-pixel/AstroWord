@@ -2181,6 +2181,363 @@ const articles: Record<string, {
             </>
         ),
     },
+    'raja-yoga-in-astrology': {
+        title: "Raja Yoga in Vedic Astrology — Complete Guide to All Types, Strength & Timing",
+        description: "What is Raja Yoga in astrology? Complete guide covering all types of Raja Yoga, how to identify them in your kundli, strength calculation, Dasha timing, and the difference between strong and weak yogas.",
+        category: "Vedic Astrology",
+        date: "May 28, 2026",
+        readTime: "10 min read",
+        keywords: ['raja yoga', 'raj yoga in kundli', 'types of raja yoga', 'raja yoga calculator', 'dharma karmadhipati yoga', 'what is raja yoga astrology', 'panch mahapurusha yoga', 'raja yoga dasha timing'],
+        relatedCalculator: { label: 'Find My Raja Yogas', href: '/raja-yoga', emoji: '👑' },
+        faqs: [
+            { q: "What is Raja Yoga in astrology?", a: "Raja Yoga is a powerful planetary combination formed when lords of Kendra houses (1st, 4th, 7th, 10th) and Trikona houses (1st, 5th, 9th) are connected. It indicates success, authority, wealth and high social status. There are over 30 types including Dharma Karmadhipati, Panch Mahapurusha, Gaja Kesari, and Neecha Bhanga." },
+            { q: "Does everyone have Raja Yoga?", a: "Most charts have 3-8 Raja Yogas of varying strength. However, quality matters far more than quantity. A chart with one strong, unafflicted Panch Mahapurusha Yoga outperforms a chart with five weak Kendra-Trikona yogas whose lords are debilitated or combust." },
+            { q: "How do I know if my Raja Yoga is strong?", a: "A Raja Yoga is strong when: the forming planets are in own sign or exalted, they are not combust (within 8° of Sun), they are not heavily afflicted by malefics, and they are confirmed in the D9 Navamsa chart. The yoga gives peak results during the Mahadasha of the forming planets." }
+        ],
+        content: (
+            <>
+                <p>
+                    Raja Yoga is the most searched and discussed topic in Indian astrology. From politicians to film stars to business leaders, many high-achievers are said to carry powerful Raja Yogas in their birth charts. But most articles about Raja Yoga either oversimplify it ("if you have this combination, you'll be a king") or make it needlessly complex. This is the definitive, accurate guide.
+                </p>
+                <p>
+                    The Sanskrit word <strong>Raja</strong> means king, and <strong>Yoga</strong> means union or planetary combination. Therefore, a Raja Yoga in Vedic astrology represents a royal combination—one that has the capacity to elevate a person from ordinary circumstances to a position of leadership, fame, wealth, and authority. In a modern context, you do not need to be born into a royal family; a Raja Yoga manifests as being a "king" in your own domain, whether that is corporate business, software engineering, politics, or the arts.
+                </p>
+
+                <h2>What is Raja Yoga? Effort Meets Grace</h2>
+                <p>
+                    The structural core of any classical Raja Yoga is the connection between two groups of houses in your birth chart: the <strong>Kendra houses</strong> and the <strong>Trikona houses</strong>.
+                </p>
+                <p>
+                    Kendra houses (1st, 4th, 7th, and 10th houses) are known as the Vishnu Sthanas. They represent the pillars of active life—your physical self, home, partner, and career. These houses require your effort, actions, and handling of worldly duties. On the other hand, Trikona houses (1st, 5th, and 9th houses) are known as the Lakshmi Sthanas. They represent divine grace, fortune, past-life merits (poorva punya), and wisdom.
+                </p>
+                <p>
+                    When the lord of a Kendra house connects with the lord of a Trikona house, it creates a union of action and grace. Your self-effort (Kendra) aligns perfectly with cosmic luck (Trikona). This is why Raja Yoga brings success; it is not just luck, but the perfect alignment of your hard work with the right opportunity.
+                </p>
+
+                <h2>How Raja Yoga Forms: The 3 Connection Methods</h2>
+                <p>
+                    For a Kendra lord and a Trikona lord to form a Raja Yoga, they must connect in one of three ways:
+                </p>
+                <ol>
+                    <li><strong>Conjunction (Yuti):</strong> The Kendra lord and Trikona lord sit together in the same house. For example, if Mars (5th lord) and Jupiter (9th lord) sit together in the 10th house.</li>
+                    <li><strong>Mutual Aspect (Sambandha):</strong> The two lords aspect each other, usually by sitting 7 houses apart. For example, if the 1st lord sits in the 4th house and the 9th lord sits in the 10th house, aspecting each other.</li>
+                    <li><strong>Sign Exchange (Parivartana):</strong> The Kendra lord sits in the Trikona lord's sign, and the Trikona lord sits in the Kendra lord's sign. For example, if the 9th lord sits in the 10th house, and the 10th lord sits in the 9th house. This is often the most durable form of connection.</li>
+                </ol>
+
+                <h2>The Most Powerful Raja Yogas in Vedic Astrology</h2>
+                <p>
+                    While there are many Kendra-Trikona combinations, certain specific configurations are considered exceptionally powerful:
+                </p>
+                
+                <h3>Dharma Karmadhipati Yoga</h3>
+                <p>
+                    This yoga forms when the lord of the 9th house (Dharma—highest trine, destiny) and the lord of the 10th house (Karma—highest quadrant, career) are connected. It is the ultimate combination for professional success, leadership, and public recognition. People with this yoga do not just get jobs; they find a true calling. They build a legacy, gain high respect, and are remembered for their contributions to society.
+                </p>
+
+                <h3>Panch Mahapurusha Yogas</h3>
+                <p>
+                    These are five special personality-based Raja Yogas formed by the tara grahas (non-luminary planets) when they are exalted or in their own signs AND placed in a Kendra house from the Ascendant:
+                </p>
+                <ul>
+                    <li><strong>Ruchaka Yoga (Mars):</strong> Grants physical strength, leadership, courage, and success in police, military, sports, or entrepreneurship.</li>
+                    <li><strong>Bhadra Yoga (Mercury):</strong> Grants sharp intelligence, business acumen, communication skills, and success in writing, media, or commerce.</li>
+                    <li><strong>Hamsa Yoga (Jupiter):</strong> Grants spiritual wisdom, high character, teaching abilities, and success in advisory or academic roles.</li>
+                    <li><strong>Malavya Yoga (Venus):</strong> Grants beauty, artistic talents, luxury, and success in hospitality, fashion, arts, or relationships.</li>
+                    <li><strong>Shasha Yoga (Saturn):</strong> Grants patience, persistence, organizational control, and success in politics, law, or mass movements.</li>
+                </ul>
+
+                <h3>Gaja Kesari Yoga</h3>
+                <p>
+                    Formed when Jupiter is in a Kendra (1st, 4th, 7th, or 10th) from the Moon. "Gaja" means elephant (wisdom) and "Kesari" means lion (courage). A strong Gaja Kesari Yoga ensures that the native is highly respected, mentally strong, wealthy, and overcomes all competitors.
+                </p>
+
+                <h3>Neecha Bhanga Raja Yoga</h3>
+                <p>
+                    This is the yoga of the "underdog." It occurs when a debilitated planet (a planet in its weakest sign) has its debilitation cancelled. This cancellation transforms the planet's energy from a weakness into a major strength. The native usually suffers severe struggles in early life but rises to immense power and wealth later, outperforming those who had easy starts.
+                </p>
+
+                <h3>Vipreet Raja Yoga</h3>
+                <p>
+                    Formed when Dusthana lords (rulers of the difficult 6th, 8th, or 12th houses) are placed in other Dusthana houses. This creates a double-negative effect where obstacles cancel out obstacles. Success comes through competition, crisis, or sudden changes.
+                </p>
+
+                <h3>Amala Yoga</h3>
+                <p>
+                    When a natural benefic (Jupiter, Venus, or Mercury) sits in the 10th house from the Lagna or Moon. It indicates a spotless public reputation, an ethical career, and recognition for doing good in the world.
+                </p>
+
+                <h2>Strength Calculation: Is Your Raja Yoga Strong or Weak?</h2>
+                <p>
+                    Many people get disappointed because their chart has a "Raja Yoga" but they live a very ordinary life. This is because we must check the strength of the planets forming the yoga:
+                </p>
+                <div className="overflow-x-auto rounded-xl border border-border my-4">
+                    <table className="w-full text-sm text-muted">
+                        <thead>
+                            <tr className="border-b border-border bg-surface">
+                                <th className="text-left py-3 px-4 text-gold font-mono">Dignity of Lords</th>
+                                <th className="text-left py-3 px-4 text-gold font-mono">Combustion Status</th>
+                                <th className="text-left py-3 px-4 text-gold font-mono">Yoga Strength</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="border-b border-border/30">
+                                <td className="py-3 px-4 text-white">Exalted or Own Sign</td>
+                                <td className="py-3 px-4">Not Combust</td>
+                                <td className="py-3 px-4 text-green-400 font-medium">Strong (Full Manifestation)</td>
+                            </tr>
+                            <tr className="border-b border-border/30">
+                                <td className="py-3 px-4 text-white">Neutral Sign</td>
+                                <td className="py-3 px-4">Not Combust</td>
+                                <td className="py-3 px-4 text-amber-400">Moderate (Decent Success)</td>
+                            </tr>
+                            <tr className="border-b border-border/30">
+                                <td className="py-3 px-4 text-white">Debilitated</td>
+                                <td className="py-3 px-4">Combust (within 8° of Sun)</td>
+                                <td className="py-3 px-4 text-red-400">Weak (Fails to manifest major results)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>When Does Raja Yoga Give Results? Dasha Activation</h2>
+                <p>
+                    Raja Yogas do not operate constantly throughout your life. They are timed through the <strong>Vimshottari Dasha system</strong>. A Raja Yoga will activate and give its peak results during the Mahadasha (major period) and Antardasha (sub-period) of the planets forming the yoga.
+                </p>
+                <p>
+                    For example, if you have a Gaja Kesari Yoga formed by Jupiter and the Moon, you will experience its best effects during your Jupiter Mahadasha (16 years) or Moon Mahadasha (10 years). If these Dashas run during your prime career-building years (ages 25 to 55), you will see significant career growth. If they run when you are 5 years old or 90 years old, the material results will be minimal.
+                </p>
+                <p>
+                    Additionally, major transits (Gochar)—especially Jupiter transiting over your yoga-forming planets—can act as triggers for sudden opportunities.
+                </p>
+
+                <h2>D9 Confirmation: The Ultimate Test</h2>
+                <p>
+                    To confirm the reality of a Raja Yoga, Vedic astrologers always inspect the <strong>D9 Navamsa chart</strong>. The Navamsa acts as the foundation. If a planet forms a Raja Yoga in the D1 chart but is debilitated or heavily afflicted in the D9 chart, the yoga will lack the strength to sustain itself, giving fleeting or superficial results.
+                </p>
+                <p>
+                    If the planet is strong in both D1 and D9 (especially if it is Vargottama—in the same sign in both charts), the Raja Yoga is highly authentic and will deliver lasting status and prosperity.
+                </p>
+                <p>
+                    To discover all the Raja Yogas in your birth chart, check their strength, and get a personalized AI reading of their Dasha timing, use AstroWord's free <Link href="/raja-yoga">Raja Yoga Calculator</Link>. You can also explore related details with our <Link href="/dasha-calculator">Dasha Calculator</Link> and <Link href="/d9-chart">D9 Navamsa Chart Calculator</Link>.
+                </p>
+            </>
+        ),
+    },
+    'gaja-kesari-yoga': {
+        title: "Gaja Kesari Yoga — Is Yours Strong or Weak? Complete Guide with Calculator",
+        description: "Gaja Kesari Yoga forms when Jupiter is in Kendra from Moon. But 25% of charts have it — why do results vary so much? Learn how to judge strength, timing, and whether your Gaja Kesari is truly powerful.",
+        category: "Vedic Astrology",
+        date: "May 28, 2026",
+        readTime: "8 min read",
+        keywords: ['gaja kesari yoga', 'gaja kesari yoga calculator', 'gaj kesari yoga meaning', 'is my gaja kesari strong', 'gaja kesari yoga effects', 'jupiter moon yoga', 'gaja kesari yoga dasha timing'],
+        relatedCalculator: { label: 'Check My Raja Yogas', href: '/raja-yoga', emoji: '🐘' },
+        faqs: [
+            { q: "What is Gaja Kesari Yoga?", a: "Gaja Kesari Yoga forms when Jupiter (Guru) is in a Kendra house (1st, 4th, 7th, or 10th) from the Moon. Gaja means elephant (wisdom and strength) and Kesari means lion (courage and leadership). It grants intelligence, wealth, fame, and social respect." },
+            { q: "How common is Gaja Kesari Yoga?", a: "About 25% of birth charts have Gaja Kesari Yoga in some form. However, the majority are moderate or weak due to Jupiter being debilitated, combust, or afflicted. A truly strong Gaja Kesari — with Jupiter exalted or in own sign, unafflicted — is found in roughly 3-5% of charts." },
+            { q: "Does Gaja Kesari Yoga guarantee wealth?", a: "No yoga guarantees any specific outcome. Gaja Kesari creates the potential and planetary support for wisdom, wealth, and recognition — but requires Dasha activation and personal effort to manifest. A strong Gaja Kesari with Jupiter Mahadasha running in productive years gives the clearest results." }
+        ],
+        content: (
+            <>
+                <p>
+                    Gaja Kesari Yoga is one of the most celebrated and misunderstood yogas in Vedic astrology. Ask any Indian astrologer about it and they'll cite impressive names. But here's the uncomfortable truth: roughly one in four people have Gaja Kesari Yoga in their chart — and most of them haven't experienced anything remotely "royal." Why? Because formation and effectiveness are completely different things. This guide explains what actually determines whether your Gaja Kesari will manifest.
+                </p>
+                <p>
+                    The Sanskrit name reveals the essence of this yoga: <strong>Gaja</strong> means elephant, representing deep wisdom, unstoppable strength, memory, and dignity. <strong>Kesari</strong> means lion, representing courage, leadership, command, and majesty. When these two energies combine, they create a personality that is simultaneously wise (like the elephant) and bold (like the lion).
+                </p>
+
+                <h2>How Gaja Kesari Yoga Forms</h2>
+                <p>
+                    The technical rule for Gaja Kesari is straightforward:
+                </p>
+                <p className="border-l-2 border-gold pl-4 font-serif text-white/90 italic my-4">
+                    Jupiter must be placed in a Kendra house (1st, 4th, 7th, or 10th house) from the Moon's position in the birth chart.
+                </p>
+                <p>
+                    Since the Moon moves through the zodiac quickly, this placement happens in roughly 25% of all charts. Because it is relatively common, the strength of the planets determines if the yoga is functional or merely nominal.
+                </p>
+
+                <h2>The Strength Spectrum: Why Results Vary So Much</h2>
+                <p>
+                    To understand why some Gaja Kesari Yoga natives achieve global fame while others work ordinary jobs, we must categorize the yoga into three strength levels:
+                </p>
+                
+                <h3>1. Strong Gaja Kesari (Top 5% of charts)</h3>
+                <p>
+                    This is a highly potent configuration where:
+                </p>
+                <ul>
+                    <li>Jupiter is exalted in Cancer or in its own signs (Sagittarius or Pisces).</li>
+                    <li>The Moon is strong (well-placed in Taurus or Cancer, and in its waxing phase).</li>
+                    <li>Both planets are free from conjunction or aspect of natural malefics (Rahu, Ketu, Saturn, or Mars).</li>
+                    <li>Jupiter is not combust (not within 8-11 degrees of the Sun).</li>
+                </ul>
+                <p>
+                    In this case, the yoga is fully active. It grants high academic success, leadership roles, wealth, and public respect.
+                </p>
+
+                <h3>2. Moderate Gaja Kesari (Most Common)</h3>
+                <p>
+                    Here, the planetary positions are neutral:
+                </p>
+                <ul>
+                    <li>Jupiter is in a friendly or neutral sign (such as Aries, Leo, Scorpio, or Virgo).</li>
+                    <li>There are minor afflictions, or the Moon is somewhat weak (waning or in a neutral house).</li>
+                </ul>
+                <p>
+                    This gives decent intelligence, comfortable material living, and respect within one's local community or profession, but not global fame.
+                </p>
+
+                <h3>3. Weak or Afflicted Gaja Kesari (Present but Ineffective)</h3>
+                <p>
+                    In these charts, the yoga is structurally present but energetically blocked:
+                </p>
+                <ul>
+                    <li>Jupiter is debilitated in Capricorn, losing its natural wisdom and beneficence.</li>
+                    <li>Jupiter is combust, meaning the Sun absorbs its power.</li>
+                    <li>The planets are heavily aspected or conjunct with Rahu/Ketu (forming Guru Chandal Yoga) or Saturn.</li>
+                </ul>
+                <p>
+                    In this case, the native may struggle with finances, reputation, or decision-making, despite technically having Gaja Kesari Yoga.
+                </p>
+
+                <h2>House-wise Effects from the Moon</h2>
+                <p>
+                    The specific Kendra house where Jupiter sits relative to the Moon shapes how the yoga manifests:
+                </p>
+                <ul>
+                    <li><strong>Jupiter in the 1st from Moon (Conjunction):</strong> Creates a highly philosophical, optimistic, and magnetic personality. The native is wise, respected, and possesses a strong character.</li>
+                    <li><strong>Jupiter in the 4th from Moon:</strong> Focuses the energy on domestic life, property, mother's blessings, and inner peace. It grants excellent education and comfortable assets.</li>
+                    <li><strong>Jupiter in the 7th from Moon:</strong> Blesses the native with a highly supportive, educated, and loyal spouse. It is excellent for business partnerships and public relations.</li>
+                    <li><strong>Jupiter in the 10th from Moon:</strong> The best placement for career. It grants rapid professional rise, authority, ethical leadership, and recognition from superiors.</li>
+                </ul>
+
+                <h2>Dasha Timing: When Does It Activate?</h2>
+                <p>
+                    Like all yogas, Gaja Kesari is dormant until its time comes. The primary activation occurs during the <strong>Jupiter Mahadasha</strong> (16 years) or the <strong>Moon Mahadasha</strong> (10 years). If these dashas run during your active working years, you will see a significant rise in your fortunes. If they run in childhood, they manifest as a happy, protected childhood with good education.
+                </p>
+
+                <h2>Remedies to Strengthen Your Jupiter and Moon</h2>
+                <p>
+                    If your Gaja Kesari is weak or afflicted, you can perform these simple remedies to strengthen Jupiter (Guru) and the Moon (Chandra):
+                </p>
+                <ul>
+                    <li>Chant the Jupiter Beej Mantra: <em>Om Gram Greem Graum Sah Gurave Namah</em> on Thursdays.</li>
+                    <li>Offer water to the Moon on full moon nights (Purnima).</li>
+                    <li>Respect teachers, mentors, and elderly figures, as they represent Jupiter's energy.</li>
+                    <li>Donate yellow items (chana dal, bananas, yellow cloth) on Thursdays.</li>
+                </ul>
+                <p>
+                    To check if your chart has a strong Gaja Kesari Yoga and find when your dashas activate it, calculate your chart free using AstroWord's <Link href="/raja-yoga">Raja Yoga Calculator</Link>. You can also confirm its strength in your divisional charts with the <Link href="/d9-chart">D9 Navamsa Chart Calculator</Link> and track your active periods using the <Link href="/dasha-calculator">Dasha Calculator</Link>.
+                </p>
+            </>
+        ),
+    },
+    'panch-mahapurusha-yoga': {
+        title: "Panch Mahapurusha Yoga — All 5 Types Explained: Ruchaka, Bhadra, Hamsa, Malavya, Shasha",
+        description: "The 5 Panch Mahapurusha Yogas form when Mars, Mercury, Jupiter, Venus or Saturn occupy a Kendra in own or exalted sign. Complete guide to all 5 types, how to check yours, strength factors, and famous examples.",
+        category: "Vedic Astrology",
+        date: "May 28, 2026",
+        readTime: "9 min read",
+        keywords: ['panch mahapurusha yoga', 'ruchaka yoga', 'bhadra yoga', 'hamsa yoga', 'malavya yoga', 'shasha yoga', 'panch mahapurusha yoga calculator', 'do i have panch mahapurusha yoga'],
+        relatedCalculator: { label: 'Check My Raja Yogas', href: '/raja-yoga', emoji: '🔱' },
+        faqs: [
+            { q: "What are Panch Mahapurusha Yogas?", a: "Panch Mahapurusha Yogas are five special Raja Yogas formed when Mars, Mercury, Jupiter, Venus, or Saturn occupies its own or exalted sign in a Kendra house (1st, 4th, 7th, or 10th). 'Panch' means five, 'Maha' means great, 'Purusha' means person — these are the five great-person yogas." },
+            { q: "How rare are Panch Mahapurusha Yogas?", a: "Each individual Panch Mahapurusha Yoga occurs in roughly 5-8% of charts. Having two or more simultaneously is rare — perhaps 1-2% of charts. Having three or more is exceptionally rare and almost always indicates a person of remarkable distinction." },
+            { q: "Can a combust planet form Panch Mahapurusha Yoga?", a: "Technically a combust planet can be in the right position to form the yoga, but combustion severely weakens it. Classical texts specify the planet should be 'strong' — combustion directly contradicts this. A combust Panch Mahapurusha Yoga gives 20-30% of expected results at best." }
+        ],
+        content: (
+            <>
+                <p>
+                    Of all the Raja Yogas in Vedic astrology, the Panch Mahapurusha Yogas are the most specific and arguably the most powerful personality yogas. While classical Kendra-Trikona yogas depend on house lord connections, Panch Mahapurusha Yogas depend on individual planetary strength and placement — making them easier to identify, more self-contained, and more reliably effective.
+                </p>
+                <p>
+                    The term translates to "Five Great Person Yogas." They are formed by the five physical planets (excluding the luminaries, Sun and Moon, and the shadow nodes, Rahu and Ketu). When one of these five planets is exceptionally strong and placed in a key house of action, it shapes the native's entire character, path, and destiny.
+                </p>
+
+                <h2>The General Formation Rule</h2>
+                <p>
+                    A Panch Mahapurusha Yoga forms when Mars, Mercury, Jupiter, Venus, or Saturn satisfies two conditions simultaneously:
+                </p>
+                <ol>
+                    <li>The planet must sit in a <strong>Kendra house</strong> (1st, 4th, 7th, or 10th house) from the Ascendant (Lagna).</li>
+                    <li>The planet must be in its <strong>own sign</strong> or its <strong>exaltation sign</strong>.</li>
+                </ol>
+                <p>
+                    This combination of placement and sign ensures that the planet has maximum natural strength (dignity) and maximum positional power (Kendra placement).
+                </p>
+
+                <h2>Deep Dive into the 5 Yogas</h2>
+
+                <h3>1. Ruchaka Yoga (Mars)</h3>
+                <p>
+                    Forms when Mars is in Aries, Scorpio, or Capricorn in a Kendra house.
+                </p>
+                <p>
+                    Mars is the planet of energy, drive, ambition, and physical courage. When Mars forms Ruchaka Yoga, it creates a powerful leader, soldier, athlete, or entrepreneur. The native possesses immense physical stamina, a commanding voice, and a fearless attitude. They excel under pressure and can lead teams in challenging situations.
+                </p>
+                <p>
+                    <em>Typical professions:</em> Defense services, sports, surgery, real estate development, engineering, or executive leadership.
+                </p>
+
+                <h3>2. Bhadra Yoga (Mercury)</h3>
+                <p>
+                    Forms when Mercury is in Gemini or Virgo in a Kendra house.
+                </p>
+                <p>
+                    Mercury is the planet of intellect, communication, business, and adaptability. Bhadra Yoga creates a person of exceptional mental clarity, mathematical ability, and verbal skill. They are excellent negotiators, writers, and financial minds. They remain youthful and possess a keen sense of humor.
+                </p>
+                <p>
+                    <em>Typical professions:</em> Journalism, publishing, accounting, software engineering, commerce, marketing, or public relations.
+                </p>
+
+                <h3>3. Hamsa Yoga (Jupiter)</h3>
+                <p>
+                    Forms when Jupiter is in Sagittarius, Pisces, or Cancer in a Kendra house.
+                </p>
+                <p>
+                    Jupiter is the planet of wisdom, spirituality, laws, and expansion. Hamsa Yoga creates a natural advisor, teacher, and spiritual seeker. The native is highly ethical, respected, and possesses a noble character. They have a pleasant appearance, a calm mind, and a natural ability to guide others through difficult times.
+                </p>
+                <p>
+                    <em>Typical professions:</em> Teaching, judiciary, financial advisory, religious or spiritual leadership, counseling, or academics.
+                </p>
+
+                <h3>4. Malavya Yoga (Venus)</h3>
+                <p>
+                    Forms when Venus is in Taurus, Libra, or Pisces in a Kendra house.
+                </p>
+                <p>
+                    Venus is the planet of love, beauty, art, and relationship harmony. Malavya Yoga blesses the native with an attractive physical appearance, artistic talent, a love for luxury, and strong diplomatic skills. They enjoy a happy marriage, material comfort, and are highly popular.
+                </p>
+                <p>
+                    <em>Typical professions:</em> Fine arts, fashion design, acting, hospitality, cosmetics, diplomacy, or luxury businesses.
+                </p>
+
+                <h3>5. Shasha Yoga (Saturn)</h3>
+                <p>
+                    Forms when Saturn is in Capricorn, Aquarius, or Libra in a Kendra house.
+                </p>
+                <p>
+                    Saturn is the planet of discipline, structure, hard work, and masses. Shasha Yoga creates a highly patient, persistent, and organized leader. Unlike Mars' fast leadership, Saturn's leadership is built slowly through service and organization. The native has massive appeal among the public or working class and can build long-lasting institutions.
+                </p>
+                <p>
+                    <em>Typical professions:</em> Politics, trade union leadership, law, administration, civil engineering, or heavy industries.
+                </p>
+
+                <h2>Factors that Weaken the Yogas</h2>
+                <p>
+                    Even if you have one of these yogas, its power can be reduced by:
+                </p>
+                <ul>
+                    <li><strong>Combustion:</strong> If the planet sits too close to the Sun, its ability to manifest its qualities is burned away.</li>
+                    <li><strong>Debilitated Navamsa:</strong> If the planet is exalted in the D1 chart but debilitated in the D9 Navamsa chart, the yoga will lack deep roots and fail to sustain itself.</li>
+                    <li><strong>Malefic Aspects:</strong> If Rahu, Ketu, or a malefic planet conjuncts or aspects the yoga-forming planet, it creates obstacles and delays in its manifestation.</li>
+                </ul>
+                <p>
+                    To check if you have a Panch Mahapurusha Yoga in your chart and analyze its strength, use AstroWord's free <Link href="/raja-yoga">Raja Yoga Calculator</Link>. You can also explore your soul's career indicators with the <Link href="/amatyakaraka">Amatyakaraka Calculator</Link> and verify your planet's strength using the <Link href="/d9-chart">D9 Navamsa Chart Calculator</Link>.
+                </p>
+            </>
+        ),
+    },
 };
 
 

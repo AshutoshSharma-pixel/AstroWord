@@ -172,6 +172,20 @@ export default function DashboardView() {
                     </p>
                 </button>
 
+                {/* Raja Yoga Card */}
+                <button
+                    onClick={() => navigateTo('raja-yoga')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">👑</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Raja Yoga Calculator
+                    </h3>
+                    <p className="text-muted text-sm">
+                        Discover all Raja Yogas in your birth chart — Gaja Kesari, Panch Mahapurusha, Dharma Karmadhipati, and more — with a detailed strength and Dasha activation reading.
+                    </p>
+                </button>
+
                 {/* Dasha Calculator Card */}
                 <button
                     onClick={() => navigateTo('dasha-calculator')}

@@ -35,6 +35,7 @@ const PUBLIC_ROUTES = [
     '/lagna-calculator',
     '/ishta-devata',
     '/pitra-dosha',
+    '/raja-yoga',
     '/upapada-lagna',
     '/arudha-lagna',
     '/marriage-report',
