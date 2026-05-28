@@ -13,6 +13,10 @@ class RajaYogaRequest(BaseModel):
 SIGNS = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
          'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
 
+def ordinal(n):
+    return {1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th',
+            9:'9th',10:'10th',11:'11th',12:'12th'}.get(n, f'{n}th')
+
 EXALTATION = {'Sun': 'Aries', 'Moon': 'Taurus', 'Mars': 'Capricorn',
                'Mercury': 'Virgo', 'Jupiter': 'Cancer', 'Venus': 'Pisces', 'Saturn': 'Libra'}
 OWN_SIGNS = {'Sun': ['Leo'], 'Moon': ['Cancer'], 'Mars': ['Aries', 'Scorpio'],
@@ -128,11 +132,11 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                         if not (combust1 and combust2):
                             effective_strength = "Strong" if "exalted" in [strength1, strength2] or "own sign" in [strength1, strength2] else "Moderate" if "debilitated" not in [strength1, strength2] else "Weak"
                             yogas_found.append({
-                                "name": f"Kendra-Trikona Raja Yoga ({kendra_h}th + {trikona_h}th)",
+                                "name": f"Kendra-Trikona Raja Yoga ({ordinal(kendra_h)} + {ordinal(trikona_h)})",
                                 "type": "Classical Raja Yoga",
                                 "planets": [kendra_lord, trikona_lord],
                                 "strength": effective_strength,
-                                "description": f"{kendra_lord} (lord of {kendra_h}th house) and {trikona_lord} (lord of {trikona_h}th house) are connected — a classical Raja Yoga indicating success, authority and recognition."
+                                "description": f"{kendra_lord} (lord of {ordinal(kendra_h)} house) and {trikona_lord} (lord of {ordinal(trikona_h)} house) are connected — a classical Raja Yoga indicating success, authority and recognition."
                             })
 
         # 2. Dharma Karmadhipati Yoga (9th + 10th lord)
@@ -196,7 +200,7 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                         "type": "Panch Mahapurusha Yoga",
                         "planets": [planet],
                         "strength": strength,
-                        "description": f"{planet} is in {p_sign} in the {p_house}th house — forming {yoga_name} Yoga, one of the five great person yogas. This grants {qualities}."
+                        "description": f"{planet} is in {p_sign} in the {ordinal(p_house)} house — forming {yoga_name} Yoga, one of the five great person yogas. This grants {qualities}."
                     })
 
         # 4. Gaja Kesari Yoga
@@ -216,7 +220,7 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                         "type": "Special Raja Yoga",
                         "planets": ["Jupiter", "Moon"],
                         "strength": strength,
-                        "description": f"Jupiter is in the {diff//3 + 1 if diff > 0 else 1}th Kendra from Moon — forming Gaja Kesari Yoga. This grants wisdom, wealth, fame, and a respected social position."
+                        "description": f"Jupiter is in the {ordinal(diff//3 + 1 if diff > 0 else 1)} Kendra from Moon — forming Gaja Kesari Yoga. This grants wisdom, wealth, fame, and a respected social position."
                     })
 
         # 5. Vipreet Raja Yoga
@@ -240,11 +244,11 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                     s2 = get_sign(lord2)
                     if s1 == dusthana_signs[h2] or s2 == dusthana_signs[h1]:
                         yogas_found.append({
-                            "name": f"Vipreet Raja Yoga ({h1}th-{h2}th)",
+                            "name": f"Vipreet Raja Yoga ({ordinal(h1)}-{ordinal(h2)})",
                             "type": "Special Raja Yoga",
                             "planets": [lord1, lord2],
                             "strength": "Moderate",
-                            "description": f"The lords of the {h1}th and {h2}th houses are exchanged — forming Vipreet Raja Yoga. Success emerges from adversity and difficult circumstances become stepping stones."
+                            "description": f"The lords of the {ordinal(h1)} and {ordinal(h2)} houses are exchanged — forming Vipreet Raja Yoga. Success emerges from adversity and difficult circumstances become stepping stones."
                         })
 
         # 6. Neecha Bhanga Raja Yoga — classical rules from BV Raman and Brihat Parashara
@@ -380,11 +384,11 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                     w_strength = planet_strength(w_lord)
                     effective = "Strong" if w_strength in ["exalted", "own sign"] else "Moderate"
                     yogas_found.append({
-                        "name": f"Dhan Yoga ({w_house}th + {t_house}th lord — same planet)",
+                        "name": f"Dhan Yoga ({ordinal(w_house)} + {ordinal(t_house)} lord — same planet)",
                         "type": "Dhan Yoga (Wealth)",
                         "planets": [w_lord],
                         "strength": effective,
-                        "description": f"{w_lord} rules both the {w_house}th house (wealth) and {t_house}th house (fortune/trikona) — a powerful Dhan Yoga by single planet lordship, placed in house {w_h}. Indicates strong wealth accumulation and financial prosperity."
+                        "description": f"{w_lord} rules both the {ordinal(w_house)} house (wealth) and {ordinal(t_house)} house (fortune/trikona) — a powerful Dhan Yoga by single planet lordship, placed in house {w_h}. Indicates strong wealth accumulation and financial prosperity."
                     })
                     continue
 
@@ -415,11 +419,11 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                 # Wealth lord placed in trikona house
                 elif w_h == t_house:
                     connected = True
-                    connect_type = f"placed in {t_house}th house (trikona)"
+                    connect_type = f"placed in {ordinal(t_house)} house (trikona)"
                 # Trikona lord placed in wealth house
                 elif t_h == w_house:
                     connected = True
-                    connect_type = f"placed in {w_house}th house (wealth house)"
+                    connect_type = f"placed in {ordinal(w_house)} house (wealth house)"
 
                 if connected:
                     checked_dhan.add(pair_key)
@@ -431,11 +435,11 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                         continue
                     effective = "Strong" if "exalted" in [w_strength, t_strength] or "own sign" in [w_strength, t_strength] else "Moderate"
                     yogas_found.append({
-                        "name": f"Dhan Yoga ({w_house}th + {t_house}th lord)",
+                        "name": f"Dhan Yoga ({ordinal(w_house)} + {ordinal(t_house)} lord)",
                         "type": "Dhan Yoga (Wealth)",
                         "planets": [w_lord, t_lord],
                         "strength": effective,
-                        "description": f"{w_lord} ({w_house}th lord) and {t_lord} ({t_house}th lord) are {connect_type} — a classical Dhan Yoga from BPHS indicating wealth accumulation, financial gains, and material prosperity."
+                        "description": f"{w_lord} ({ordinal(w_house)} lord) and {t_lord} ({ordinal(t_house)} lord) are {connect_type} — a classical Dhan Yoga from BPHS indicating wealth accumulation, financial gains, and material prosperity."
                     })
 
         # Sort by strength
