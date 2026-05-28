@@ -151,6 +151,31 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                     "description": f"The 9th lord ({lord9}) and 10th lord ({lord10}) are connected — the most powerful career and destiny yoga in Vedic astrology. Dharma (9th) and Karma (10th) align to create extraordinary professional success."
                 })
 
+        # Dharma Karmadhipati — 9th lord placed IN 10th house, or 10th lord placed IN 9th house
+        if lord9 and lord10:
+            lord9_current_house = get_house(get_sign(lord9))
+            lord10_current_house = get_house(get_sign(lord10))
+            # 9th lord placed in 10th house
+            if lord9_current_house == 10 and lord9 != lord10:
+                s9 = planet_strength(lord9)
+                yogas_found.append({
+                    "name": "Dharma Karmadhipati Yoga (9th lord in 10th)",
+                    "type": "Most Powerful Raja Yoga",
+                    "planets": [lord9],
+                    "strength": "Strong" if s9 in ["exalted", "own sign"] else "Moderate",
+                    "description": f"{lord9} (lord of 9th house — Dharma/fortune) is placed directly in the 10th house (Karma/career) — a classical Dharma Karmadhipati Yoga indicating extraordinary career success, public recognition, and a destiny-aligned profession."
+                })
+            # 10th lord placed in 9th house
+            if lord10_current_house == 9 and lord9 != lord10:
+                s10 = planet_strength(lord10)
+                yogas_found.append({
+                    "name": "Dharma Karmadhipati Yoga (10th lord in 9th)",
+                    "type": "Most Powerful Raja Yoga",
+                    "planets": [lord10],
+                    "strength": "Strong" if s10 in ["exalted", "own sign"] else "Moderate",
+                    "description": f"{lord10} (lord of 10th house — Karma/career) is placed in the 9th house (Dharma/fortune) — a classical Dharma Karmadhipati Yoga. Career success comes through dharmic action and higher purpose."
+                })
+
         # 3. Panch Mahapurusha Yogas
         PANCH = {
             'Mars': ('Ruchaka', 'Aries', 'Scorpio', 'Capricorn', 'courage, leadership, military success'),
@@ -289,6 +314,14 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                     "description": f"{planet} is debilitated in {debil_sign} (house {p_house}) but cancellation occurs because {cancel_reason}. Initial struggles in {planet}'s domain transform into extraordinary achievement — especially during {planet}'s Mahadasha."
                 })
 
+        # After neecha bhanga loop, add debug
+        import sys
+        print(f"DEBUG NEECHA CHART: ascendant={asc_sign}, planets={ {p: get_sign(p) for p in planets} }", file=sys.stderr)
+        for planet, debil_sign in DEBILITATION.items():
+            p_sign = get_sign(planet)
+            if p_sign == debil_sign:
+                print(f"DEBUG NEECHA: {planet} debilitated in {debil_sign}, dispositor check running", file=sys.stderr)
+
         # 7. Amala Yoga
         for planet in ["Jupiter", "Venus", "Mercury"]:
             p_sign = get_sign(planet)
@@ -387,10 +420,6 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                 elif t_h == w_house:
                     connected = True
                     connect_type = f"placed in {w_house}th house (wealth house)"
-                # Wealth lord placed in the other wealth house
-                elif w_h == (11 if w_house == 2 else 2):
-                    connected = True
-                    connect_type = f"placed in {11 if w_house == 2 else 2}th house"
 
                 if connected:
                     checked_dhan.add(pair_key)
