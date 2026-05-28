@@ -222,27 +222,72 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                             "description": f"The lords of the {h1}th and {h2}th houses are exchanged — forming Vipreet Raja Yoga. Success emerges from adversity and difficult circumstances become stepping stones."
                         })
 
-        # 6. Neecha Bhanga Raja Yoga
+        # 6. Neecha Bhanga Raja Yoga — classical rules from BV Raman and Brihat Parashara
         for planet, debil_sign in DEBILITATION.items():
             p_sign = get_sign(planet)
-            if p_sign == debil_sign:
-                # Check cancellation conditions
-                debil_lord_sign_ruler = {
-                    'Sun': 'Venus', 'Moon': 'Mars', 'Mars': 'Moon',
-                    'Mercury': 'Jupiter', 'Jupiter': 'Saturn', 'Venus': 'Mercury', 'Saturn': 'Sun'
-                }.get(planet)
-                if debil_lord_sign_ruler:
-                    ruler_sign = get_sign(debil_lord_sign_ruler)
-                    ruler_house = get_house(ruler_sign)
-                    p_house = get_house(p_sign)
-                    if ruler_house in KENDRA or (p_house and ruler_house == p_house):
-                        yogas_found.append({
-                            "name": f"Neecha Bhanga Raja Yoga ({planet})",
-                            "type": "Special Raja Yoga",
-                            "planets": [planet],
-                            "strength": "Strong",
-                            "description": f"{planet} is debilitated in {debil_sign} but its debilitation is cancelled — forming Neecha Bhanga Raja Yoga. Initial struggles transform into extraordinary achievement."
-                        })
+            if p_sign != debil_sign:
+                continue
+
+            p_house = get_house(p_sign)
+            cancelled = False
+            cancel_reason = ""
+
+            # Get dispositor — lord of debilitation sign
+            debil_sign_lords = {
+                'Aries': 'Mars', 'Taurus': 'Venus', 'Gemini': 'Mercury',
+                'Cancer': 'Moon', 'Leo': 'Sun', 'Virgo': 'Mercury',
+                'Libra': 'Venus', 'Scorpio': 'Mars', 'Sagittarius': 'Jupiter',
+                'Capricorn': 'Saturn', 'Aquarius': 'Saturn', 'Pisces': 'Jupiter'
+            }
+            dispositor = debil_sign_lords.get(debil_sign, "")
+
+            # Get planet exalted in the debilitation sign
+            exalted_in_debil = {v: k for k, v in EXALTATION.items()}.get(debil_sign, "")
+
+            # Get Moon house for checking Kendra from Moon
+            moon_sign_nb = get_sign("Moon")
+            moon_house_nb = get_house(moon_sign_nb)
+
+            def is_kendra_from_lagna(house):
+                return house in KENDRA
+
+            def is_kendra_from_moon(house):
+                if not moon_house_nb or not house:
+                    return False
+                diff = (house - moon_house_nb) % 12
+                return diff in [0, 3, 6, 9]
+
+            # Rule 1: Dispositor in Kendra from Lagna or Moon
+            if dispositor:
+                disp_sign = get_sign(dispositor)
+                disp_house = get_house(disp_sign)
+                if disp_house and (is_kendra_from_lagna(disp_house) or is_kendra_from_moon(disp_house)):
+                    cancelled = True
+                    cancel_reason = f"dispositor {dispositor} (lord of {debil_sign}) is in house {disp_house} — a Kendra"
+
+            # Rule 2: Planet exalted in that sign is in Kendra from Lagna or Moon
+            if not cancelled and exalted_in_debil:
+                ex_sign = get_sign(exalted_in_debil)
+                ex_house = get_house(ex_sign)
+                if ex_house and (is_kendra_from_lagna(ex_house) or is_kendra_from_moon(ex_house)):
+                    cancelled = True
+                    cancel_reason = f"{exalted_in_debil} (exalted in {debil_sign}) is in Kendra (house {ex_house})"
+
+            # Rule 3: Parivartana — debilitated planet and dispositor exchange signs
+            if not cancelled and dispositor:
+                disp_sign2 = get_sign(dispositor)
+                if disp_sign2 == p_sign and p_sign in OWN_SIGNS.get(planet, []):
+                    cancelled = True
+                    cancel_reason = f"{planet} and {dispositor} exchange signs (Parivartana)"
+
+            if cancelled:
+                yogas_found.append({
+                    "name": f"Neecha Bhanga Raja Yoga ({planet})",
+                    "type": "Special Raja Yoga",
+                    "planets": [planet],
+                    "strength": "Strong",
+                    "description": f"{planet} is debilitated in {debil_sign} (house {p_house}) but cancellation occurs because {cancel_reason}. Initial struggles in {planet}'s domain transform into extraordinary achievement — especially during {planet}'s Mahadasha."
+                })
 
         # 7. Amala Yoga
         for planet in ["Jupiter", "Venus", "Mercury"]:
@@ -273,6 +318,96 @@ async def calculate_raja_yoga(data: RajaYogaRequest):
                     "strength": "Strong" if yk_strength in ["exalted", "own sign"] else "Moderate",
                     "description": f"For {asc_sign} ascendant, {yogakaraka_planet} is the Yogakaraka — owning both a Kendra and Trikona house. Placed in {yk_sign} (house {yk_house}), it bestows independent raja yoga results."
                 })
+
+        # 9. Dhan Yoga — classical rules from BPHS Chapter 41
+        # Wealth houses: 2, 11. Trikona houses: 1, 5, 9. Connection = conjunction, mutual aspect, or sign exchange
+        wealth_lords = {}
+        trikona_lords = {}
+        for h in [2, 11]:
+            wealth_lords[h] = HOUSE_LORDS.get(h)
+        for h in [1, 5, 9]:
+            trikona_lords[h] = HOUSE_LORDS.get(h)
+
+        # Check all combinations of wealth lords with trikona lords
+        checked_dhan = set()
+        for w_house, w_lord in wealth_lords.items():
+            if not w_lord:
+                continue
+            for t_house, t_lord in trikona_lords.items():
+                if not t_lord:
+                    continue
+                if w_lord == t_lord:
+                    # Same planet rules both — automatic strong yoga
+                    pair_key = frozenset([w_lord, str(w_house), str(t_house)])
+                    if pair_key in checked_dhan:
+                        continue
+                    checked_dhan.add(pair_key)
+                    w_sign = get_sign(w_lord)
+                    w_h = get_house(w_sign)
+                    w_strength = planet_strength(w_lord)
+                    effective = "Strong" if w_strength in ["exalted", "own sign"] else "Moderate"
+                    yogas_found.append({
+                        "name": f"Dhan Yoga ({w_house}th + {t_house}th lord — same planet)",
+                        "type": "Dhan Yoga (Wealth)",
+                        "planets": [w_lord],
+                        "strength": effective,
+                        "description": f"{w_lord} rules both the {w_house}th house (wealth) and {t_house}th house (fortune/trikona) — a powerful Dhan Yoga by single planet lordship, placed in house {w_h}. Indicates strong wealth accumulation and financial prosperity."
+                    })
+                    continue
+
+                pair_key = frozenset([w_lord, t_lord])
+                if pair_key in checked_dhan:
+                    continue
+
+                w_sign = get_sign(w_lord)
+                t_sign = get_sign(t_lord)
+                w_h = get_house(w_sign)
+                t_h = get_house(t_sign)
+
+                connected = False
+                connect_type = ""
+
+                # Conjunction
+                if w_sign == t_sign:
+                    connected = True
+                    connect_type = "conjunct"
+                # Mutual aspect (7th from each other)
+                elif w_h and t_h and abs(w_h - t_h) == 6:
+                    connected = True
+                    connect_type = "mutually aspecting"
+                # Parivartana (sign exchange)
+                elif w_sign in OWN_SIGNS.get(t_lord, []) and t_sign in OWN_SIGNS.get(w_lord, []):
+                    connected = True
+                    connect_type = "in sign exchange (Parivartana)"
+                # Wealth lord placed in trikona house
+                elif w_h == t_house:
+                    connected = True
+                    connect_type = f"placed in {t_house}th house (trikona)"
+                # Trikona lord placed in wealth house
+                elif t_h == w_house:
+                    connected = True
+                    connect_type = f"placed in {w_house}th house (wealth house)"
+                # Wealth lord placed in the other wealth house
+                elif w_h == (11 if w_house == 2 else 2):
+                    connected = True
+                    connect_type = f"placed in {11 if w_house == 2 else 2}th house"
+
+                if connected:
+                    checked_dhan.add(pair_key)
+                    w_strength = planet_strength(w_lord)
+                    t_strength = planet_strength(t_lord)
+                    combust_w = is_combust(w_lord) if w_lord not in ['Sun', 'Moon'] else False
+                    combust_t = is_combust(t_lord) if t_lord not in ['Sun', 'Moon'] else False
+                    if combust_w and combust_t:
+                        continue
+                    effective = "Strong" if "exalted" in [w_strength, t_strength] or "own sign" in [w_strength, t_strength] else "Moderate"
+                    yogas_found.append({
+                        "name": f"Dhan Yoga ({w_house}th + {t_house}th lord)",
+                        "type": "Dhan Yoga (Wealth)",
+                        "planets": [w_lord, t_lord],
+                        "strength": effective,
+                        "description": f"{w_lord} ({w_house}th lord) and {t_lord} ({t_house}th lord) are {connect_type} — a classical Dhan Yoga from BPHS indicating wealth accumulation, financial gains, and material prosperity."
+                    })
 
         # Sort by strength
         strength_order = {"Strong": 0, "Good": 1, "Moderate": 2, "Weak": 3}
