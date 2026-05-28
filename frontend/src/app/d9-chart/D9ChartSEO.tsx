@@ -71,6 +71,58 @@ export default function D9ChartSEO() {
           ))}
         </div>
       </div>
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">How the Navamsa is Calculated — The 9 Sequences</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          The Navamsa chart is not arbitrary — it follows a precise mathematical sequence based on the element of each zodiac sign. Each sign&apos;s 9 Navamsa divisions begin from a specific starting sign determined by its elemental quality:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { element: 'Fire Signs — Aries, Leo, Sagittarius', rule: 'The 9 Navamsa divisions begin from Aries. So the first 3°20&apos; of Aries is Aries Navamsa, the next 3°20&apos; is Taurus Navamsa, and so on through all 9 signs.' },
+            { element: 'Earth Signs — Taurus, Virgo, Capricorn', rule: 'The 9 Navamsa divisions begin from Capricorn. So the first 3°20&apos; of Taurus corresponds to Capricorn in D9, the next to Aquarius, and so on.' },
+            { element: 'Air Signs — Gemini, Libra, Aquarius', rule: 'The 9 Navamsa divisions begin from Libra. So the first 3°20&apos; of Gemini corresponds to Libra in D9, the next to Scorpio, and so on.' },
+            { element: 'Water Signs — Cancer, Scorpio, Pisces', rule: 'The 9 Navamsa divisions begin from Cancer. So the first 3°20&apos; of Cancer corresponds to Cancer in D9, the next to Leo, and so on.' },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-3">
+              <p className="text-white text-sm font-medium mb-1">{item.element}</p>
+              <p className="text-muted text-xs leading-relaxed">{item.rule}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-muted text-sm leading-relaxed">
+          This is why accurate birth time is critical for D9 chart calculation. A planet at 3°19&apos; in Aries is in a completely different Navamsa than a planet at 3°21&apos; in Aries — a difference of just 2 minutes of arc that takes less than 5 minutes of birth time to cross. AstroWord uses Swiss Ephemeris with Lahiri ayanamsa to calculate all Navamsa positions with professional precision.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Reading D1 and D9 Together — The Professional Method</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          The most important rule in Vedic astrology is that no divisional chart should ever be read in isolation. The D9 Navamsa must always be read in conjunction with the D1 birth chart. Here is the exact method professional astrologers use:
+        </p>
+        <div className="space-y-3">
+          {[
+            { step: 'Step 1 — Identify the key planet in D1', desc: 'For marriage analysis, identify your 7th house lord, Venus, and Darakaraka in the D1 chart. Note their sign, house, and strength.' },
+            { step: 'Step 2 — Find the same planet in D9', desc: 'Locate that same planet in your D9 chart. Is it in its own sign, exalted, or debilitated? Is it Vargottama (same sign as D1)? This tells you whether the D1 promise will actually manifest.' },
+            { step: 'Step 3 — Check Vargottama', desc: 'If the planet occupies the same sign in both D1 and D9, it is Vargottama — exceptionally strong and reliable in delivering its results consistently throughout life.' },
+            { step: 'Step 4 — Examine the D9 7th house', desc: 'The 7th house from your Navamsa ascendant describes your spouse&apos;s inner character — more accurately than the D1 7th house for the lived reality of marriage.' },
+            { step: 'Step 5 — Find the Karakamsha', desc: 'Locate your Atmakaraka in D9. The sign it occupies is your Karakamsha — the most important spiritual and dharmic indicator in Jaimini astrology. The 12th from Karakamsha reveals your Ishta Devata.' },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-gold text-sm font-medium mb-1">✦ {item.step}</p>
+              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-muted text-sm leading-relaxed">
+          For the complete picture, use AstroWord&apos;s D9 calculator alongside your{' '}
+          <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka</Link>
+          {', '}
+          <Link href="/atmakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Atmakaraka</Link>
+          {', and '}
+          <Link href="/ishta-devata" className="text-gold/70 hover:text-gold underline underline-offset-2">Ishta Devata</Link>
+          {' calculators — all free on AstroWord, all based on authentic Jaimini methodology.'}
+        </p>
+      </div>
 
       <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">D9 Chart and Spouse Prediction</h2>

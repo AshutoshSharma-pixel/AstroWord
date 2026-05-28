@@ -36,6 +36,75 @@ export default function ArudhaSEOContent() {
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">All 12 Arudha Lagna Signs — What Each Means for Your Public Image</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          The sign of your Arudha Lagna shapes the flavour of your public persona — how strangers perceive you, what reputation you naturally attract, and what social identity feels most authentic to project outward.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { sign: 'Aries AL', meaning: 'Perceived as bold, energetic, and pioneering. Society sees you as someone who acts first and thinks later — a natural initiator and risk-taker. Your public image carries the energy of Mars: competitive, direct, and driven.' },
+            { sign: 'Taurus AL', meaning: 'Perceived as stable, wealthy, and refined. Others see you as someone who values quality, comfort, and material success. Your public image carries Venus energy — dependable, aesthetically aware, and worth trusting with resources.' },
+            { sign: 'Gemini AL', meaning: 'Perceived as intelligent, communicative, and versatile. Society sees you as a connector — someone who knows everyone and has information on everything. Your image is youthful, curious, and socially agile.' },
+            { sign: 'Cancer AL', meaning: 'Perceived as nurturing, approachable, and emotionally safe. Others see you as family-oriented and trustworthy. Your public image carries a warm, protective quality — people feel cared for in your presence.' },
+            { sign: 'Leo AL', meaning: 'Perceived as charismatic, authoritative, and naturally prominent. Society sees you as someone of status — a leader, performer, or public figure. Your image commands respect and attention without needing to demand it.' },
+            { sign: 'Virgo AL', meaning: 'Perceived as analytical, competent, and detail-oriented. Others see you as someone who gets things right — reliable, methodical, and excellent at their craft. Your public image is built on demonstrated skill rather than charisma.' },
+            { sign: 'Libra AL', meaning: 'Perceived as elegant, diplomatic, and socially graceful. Society sees you as a harmoniser — someone who makes every room more pleasant. Your image is aesthetically polished and socially adept, often associated with beauty or fairness.' },
+            { sign: 'Scorpio AL', meaning: 'Perceived as intense, magnetic, and somewhat mysterious. Others sense depth and power in you — a person who knows more than they reveal. Your public image carries an aura of transformation and strategic intelligence.' },
+            { sign: 'Sagittarius AL', meaning: 'Perceived as optimistic, philosophical, and worldly. Society sees you as someone with broad horizons — a teacher, traveller, or visionary. Your public image carries expansive, inspiring energy that others want to follow.' },
+            { sign: 'Capricorn AL', meaning: 'Perceived as professional, disciplined, and achievement-oriented. Others see you as someone who has earned their position through hard work. Your public image grows stronger with age and is associated with institutional authority and long-term success.' },
+            { sign: 'Aquarius AL', meaning: 'Perceived as innovative, unconventional, and socially conscious. Society sees you as someone ahead of their time — a reformer, technologist, or humanitarian. Your public image is associated with originality and collective thinking.' },
+            { sign: 'Pisces AL', meaning: 'Perceived as spiritual, compassionate, and otherworldly. Others sense something mystical or artistic in you — a healer, creative, or seeker. Your public image carries a gentle, idealistic quality that draws people seeking meaning.' },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-3">
+              <p className="text-white text-sm font-medium mb-1">{item.sign}</p>
+              <p className="text-muted text-xs leading-relaxed">{item.meaning}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">The 10th, 2nd and 11th Houses from Arudha Lagna</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          The Arudha Lagna is not read in isolation — the houses around it reveal different dimensions of your public life. Classical Jaimini texts specify three key derivative houses from the AL that every astrologer checks:
+        </p>
+        <div className="space-y-3">
+          {[
+            { house: '10th House from AL — Career and Public Authority', desc: 'The 10th from your Arudha Lagna shows your professional image, career recognition, and the public authority you are perceived to have. Planets placed here directly color how your career is seen by the world. Jupiter in the 10th from AL gives a reputation for wisdom and ethical leadership. Saturn gives a reputation for hard work and seriousness. Sun gives authority and a prominent professional image. This is often more important than the D1 10th house for understanding why certain careers make someone famous rather than just successful.' },
+            { house: '2nd House from AL — Wealth Perception', desc: 'The 2nd house from AL shows how your financial status is perceived by others. It is not your actual wealth (that is the D1 2nd house) but rather how wealthy people think you are. A strong 2nd from AL — with Jupiter or Venus — makes you appear prosperous and successful even before you have fully arrived. This is why AL is essential for understanding social mobility, brand perception, and financial reputation.' },
+            { house: '11th House from AL — Social Network and Gains', desc: 'The 11th from AL shows the quality and nature of your social network and the gains that flow through public recognition. Strong planets here indicate a large, influential social circle and the ability to monetise your public image. This house is particularly important for entrepreneurs, influencers, and anyone whose income depends on their reputation and network.' },
+          ].map((item, i) => (
+            <div key={i} className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-gold text-sm font-medium mb-2">✦ {item.house}</p>
+              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-gold font-serif text-2xl">Arudha Lagna in the Age of Social Media</h2>
+        <p className="text-muted text-sm leading-relaxed">
+          Arudha Lagna has never been more relevant than it is today. In an era of personal branding, LinkedIn profiles, Instagram personas, and public discourse, the gap between who you truly are (Lagna) and how you are perceived (Arudha Lagna) has become the central challenge of professional life.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          Your Arudha Lagna describes your social media presence, your professional reputation on platforms, how colleagues talk about you in rooms you are not in, and what first impression you make on strangers. A Leo Arudha Lagna person naturally attracts attention and tends to build a prominent public profile — even if their inner self (Lagna) is actually introverted or humble. A Virgo Arudha Lagna person is perceived as precise and competent — their professional reputation is built on demonstrated quality rather than personal charisma.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          Understanding your AL doesn&apos;t mean becoming the image — it means understanding the gap between your truth and your perception. Some people find their AL uncomfortable or unfamiliar — they don&apos;t recognise themselves in how others describe them. Others find their AL is exactly how they like to be seen. Both experiences are valid, and both are information. Use your AL to consciously shape how you present yourself in public life — rather than letting the projection happen unconsciously.
+        </p>
+        <p className="text-muted text-sm leading-relaxed">
+          For complete Jaimini analysis, use AstroWord&apos;s Arudha Lagna calculator alongside your{' '}
+          <Link href="/upapada-lagna" className="text-gold/70 hover:text-gold underline underline-offset-2">Upapada Lagna</Link>
+          {' (marriage reality), your '}
+          <Link href="/darakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Darakaraka</Link>
+          {' (spouse significator), and your '}
+          <Link href="/raja-yoga" className="text-gold/70 hover:text-gold underline underline-offset-2">Raja Yoga calculator</Link>
+          {' — all free on AstroWord.'}
+        </p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-gold font-serif text-2xl">Frequently Asked Questions</h2>
         <div className="space-y-6">
           {[
