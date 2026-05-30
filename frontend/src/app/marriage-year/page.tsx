@@ -99,7 +99,11 @@ export default function MarriageYearPage() {
                 return;
             }
 
-            let resultData: any = { reading: '## Marriage Timing Analysis\n\n' };
+            let resultData: any = { 
+                reading: '## Marriage Timing Analysis\n\n',
+                most_likely_year: '...',
+                windows: []
+            };
             streamBufferRef.current = resultData.reading;
 
             await handleStreamResponse(
@@ -107,7 +111,7 @@ export default function MarriageYearPage() {
                 (meta) => {
                     resultData = { ...resultData, ...meta };
                     setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
+                    setIsLoading(false);
                 },
                 (chunk) => {
                     streamBufferRef.current += chunk;
