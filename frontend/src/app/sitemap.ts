@@ -343,6 +343,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
         },
         {
+            url: `${base}/blog/neecha-bhanga-raja-yoga`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/dharma-karmadhipati-yoga`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
             url: `${base}/privacy-policy`,
             lastModified: now,
             changeFrequency: 'yearly',

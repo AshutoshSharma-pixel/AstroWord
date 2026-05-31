@@ -2538,6 +2538,232 @@ const articles: Record<string, {
             </>
         ),
     },
+    'neecha-bhanga-raja-yoga': {
+        title: "Neecha Bhanga Raja Yoga — When Weakness Becomes Extraordinary Strength",
+        description: "Complete guide to Neecha Bhanga Raja Yoga — all 4 classical cancellation rules, why it fails more than it succeeds, planet-by-planet breakdown, Dasha timing, and how to check yours free.",
+        category: "Vedic Astrology",
+        date: "May 31, 2026",
+        readTime: "10 min read",
+        keywords: ['neecha bhanga raja yoga', 'neech bhang raj yoga', 'debilitation cancellation astrology', 'neecha bhanga calculator', 'neecha bhanga effects', 'when does neecha bhanga activate', 'neecha bhanga dasha timing'],
+        faqs: [
+            { q: "What is Neecha Bhanga Raja Yoga?", a: "Neecha Bhanga Raja Yoga forms when a debilitated planet's weakness is cancelled by specific planetary conditions — making it exceptionally powerful. 'Neecha' means debilitated, 'Bhanga' means cancellation, 'Raja Yoga' means royal combination. The native faces severe struggles early in the debilitated planet's domain but eventually overcomes them dramatically." },
+            { q: "What are the 4 conditions for Neecha Bhanga?", a: "Classical Vedic texts specify 4 conditions: (1) The lord of the debilitation sign is in a Kendra house from Lagna or Moon. (2) The planet that gets exalted in that sign is in Kendra from Lagna or Moon. (3) The debilitated planet conjuncts its exaltation lord. (4) The debilitated planet is aspected by its dispositor. Even one condition is sufficient for cancellation." },
+            { q: "Why does Neecha Bhanga sometimes not work?", a: "Neecha Bhanga can fail when: the cancelling planet is itself weak or combust, the yoga is never activated by Dasha during productive life years, the debilitated planet rules difficult houses for the ascendant, or the cancellation is partial rather than complete. The yoga creates potential — Dasha timing determines manifestation." },
+        ],
+        relatedCalculator: { label: 'Check My Raja Yogas', href: '/raja-yoga', emoji: '👑' },
+        content: (
+            <>
+                <p>
+                    Of all the yogas in Vedic astrology, Neecha Bhanga Raja Yoga generates the most hope — and the most confusion. Literally meaning &quot;cancellation of debilitation leading to royal combination,&quot; this yoga promises that a planet placed in its weakest possible sign can, under the right conditions, transform into one of the most powerful forces in the entire chart. The life story it creates is one of adversity, struggle, and eventual triumph that often exceeds what even well-placed planets achieve.
+                </p>
+                <p>
+                    But here is the honest truth that most articles don&apos;t tell you: Neecha Bhanga Raja Yoga fails more often than it succeeds. Not because the classical rules are wrong — but because most people either misidentify it, or have it but never experience its full Raja Yoga manifestation. This guide covers everything — the correct rules, why it fails, how to judge its strength, and when it activates.
+                </p>
+
+                <h2>What Does Neecha Bhanga Mean?</h2>
+                <p>
+                    In Sanskrit, Neecha means debilitated or lowly — a planet placed in the sign where it is weakest. Every planet has one sign of debilitation: Sun in Libra, Moon in Scorpio, Mars in Cancer, Mercury in Pisces, Jupiter in Capricorn, Venus in Virgo, Saturn in Aries. When a planet occupies its debilitation sign, it cannot freely express its natural qualities. It is like a king stripped of his kingdom — the power is there, but the conditions don&apos;t allow it to function.
+                </p>
+                <p>
+                    Bhanga means breaking or cancellation. When specific planetary conditions neutralise the debilitation, the weakness breaks. Raja Yoga means the combination produces king-like results — elevated status, success, and recognition. Together, Neecha Bhanga Raja Yoga describes the complete arc: weakness → cancellation → extraordinary achievement.
+                </p>
+                <p>
+                    The classical understanding, from Brihat Parashara Hora Shastra and Phaladeepika, is that a planet whose debilitation is cancelled gains extra power from having overcome its weakness. Like a muscle that grows stronger through resistance, a Neecha Bhanga planet develops a resilient, hard-won strength that straightforwardly strong planets often lack.
+                </p>
+
+                <h2>The 4 Classical Cancellation Rules</h2>
+                <p>
+                    Classical Vedic texts give exactly four conditions that cancel debilitation. Any one of these is sufficient — all four together create the most powerful form of the yoga.
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { rule: "Rule 1 — Dispositor in Kendra from Lagna or Moon", desc: "The lord of the debilitation sign (the dispositor) must be placed in a Kendra house (1st, 4th, 7th, or 10th) counted from either the Lagna or the Moon. Example: Mars is debilitated in Cancer. Cancer's lord is Moon. If Moon is placed in the 1st, 4th, 7th, or 10th house from Lagna or from Moon itself — Mars's debilitation is cancelled. This is the most commonly occurring and most reliable cancellation rule." },
+                        { rule: "Rule 2 — Exaltation Lord in Kendra", desc: "The planet that gets exalted in the debilitation sign must be in Kendra from Lagna or Moon. Example: Mars is debilitated in Cancer. Jupiter is exalted in Cancer. If Jupiter is in a Kendra house — this cancels Mars's debilitation. The logic is that the exalted planet's strength in that sign compensates for the debilitated planet's weakness." },
+                        { rule: "Rule 3 — Conjunction with Exaltation Lord", desc: "If the debilitated planet itself conjuncts the planet that would be exalted in that sign, the debilitation is cancelled by direct association. Example: Mars debilitated in Cancer conjuncts Jupiter (exalted in Cancer) — direct Neecha Bhanga. This is a powerful form because the strength transfer happens at the closest possible distance." },
+                        { rule: "Rule 4 — Aspected by Dispositor", desc: "If the debilitated planet receives a direct aspect from its dispositor (the lord of the sign it occupies), the weakness is partially or fully cancelled. Example: Saturn debilitated in Aries receives an aspect from Mars (lord of Aries) — partial Neecha Bhanga. This is generally considered the weakest of the four cancellation conditions but is still significant." },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-2">✦ {item.rule}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Every Planet — Neecha Bhanga Conditions and Effects</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { planet: "Sun debilitated in Libra — Neecha Bhanga", condition: "Venus (lord of Libra) in Kendra, OR Saturn (exalted in Libra) in Kendra. Cancellation gives: authority that emerges through fairness and diplomacy rather than force. Initial struggles with confidence and recognition transform into balanced leadership. Often seen in politicians, judges, and mediators who rise to prominence.", effect: "Initial: identity confusion, seeking validation. After cancellation activates: commanding respect through ethical conduct." },
+                        { planet: "Moon debilitated in Scorpio — Neecha Bhanga", condition: "Mars (lord of Scorpio) in Kendra, OR Jupiter (exalted in Cancer — but this applies to Moon debilitation cancellation via the exaltation lord being strong). Cancellation gives: extraordinary emotional intelligence and psychological depth. Initial emotional turbulence becomes exceptional empathy and intuitive power.", effect: "Initial: anxiety, mood swings, emotional intensity. After: profound psychological insight, healing ability, deep wisdom." },
+                        { planet: "Mars debilitated in Cancer — Neecha Bhanga", condition: "Moon (lord of Cancer) in Kendra, OR Jupiter (exalted in Cancer) in Kendra. Cancellation gives: fierce protective energy channelled toward family and community. Initial passivity or misdirected aggression transforms into courageous, protective leadership.", effect: "Initial: passive aggression, unfocused drive. After: protective courage, strategic leadership, building for family and legacy." },
+                        { planet: "Mercury debilitated in Pisces — Neecha Bhanga", condition: "Jupiter (lord of Pisces) in Kendra, OR Venus (exalted in Pisces) in Kendra. Cancellation gives: creative intelligence that transcends ordinary logic. Initial communication difficulties become extraordinary creative writing, intuitive business sense, or artistic expression.", effect: "Initial: logical confusion, communication anxiety. After: creative genius, intuitive intelligence, inspired communication." },
+                        { planet: "Jupiter debilitated in Capricorn — Neecha Bhanga", condition: "Saturn (lord of Capricorn) in Kendra, OR Mars (exalted in Capricorn) in Kendra. Cancellation gives: practical wisdom that builds real-world results. Initial cynicism or faith challenges become a grounded, highly effective philosophical and professional outlook.", effect: "Initial: materialism, loss of faith, early career struggles. After: practical wisdom, structured success, dharmic leadership." },
+                        { planet: "Venus debilitated in Virgo — Neecha Bhanga", condition: "Mercury (lord of Virgo) in Kendra, OR Mercury (exalted in Virgo — same planet) in Kendra. Cancellation gives: refined artistic skill combined with analytical precision. Initial relationship difficulties become exceptional aesthetic intelligence and capacity for deep, selective love.", effect: "Initial: relationship criticism, perfectionism, difficulty receiving love. After: refined artistic mastery, selective but deep love, healing through beauty." },
+                        { planet: "Saturn debilitated in Aries — Neecha Bhanga", condition: "Mars (lord of Aries) in Kendra, OR Sun (exalted in Aries) in Kendra. Cancellation gives: disciplined courage and the ability to build lasting achievements through bold action. Initial delays and self-doubt transform into exceptional long-term success through persistent effort.", effect: "Initial: impulsive discipline, chronic delays, authority conflicts. After: disciplined ambition, late-blooming extraordinary success, lasting legacy." },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-4 space-y-2">
+                            <p className="text-white text-sm font-medium">✦ {item.planet}</p>
+                            <p className="text-muted text-xs"><span className="text-gold/70">Cancellation:</span> {item.condition}</p>
+                            <p className="text-muted text-xs"><span className="text-gold/70">Arc:</span> {item.effect}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Why Neecha Bhanga Fails — The Honest Truth</h2>
+                <p>
+                    This is the section most astrology blogs omit — because it&apos;s uncomfortable. Neecha Bhanga Raja Yoga fails to deliver its promised results in many charts. Here are the precise reasons:
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { reason: "The cancelling planet is itself weak", desc: "If the dispositor that cancels the debilitation is itself debilitated, combust, or heavily afflicted — the cancellation is incomplete. A weak doctor cannot heal a sick patient. Example: Mars debilitated in Cancer, Moon (lord of Cancer) in Kendra but Moon is in Scorpio (its debilitation sign) — the cancellation is significantly weakened." },
+                        { reason: "Dasha never runs at the right time", desc: "A perfectly formed Neecha Bhanga is meaningless if the Mahadasha of the debilitated planet never runs during the person's productive years (roughly age 20-60). A beautiful Jupiter Neecha Bhanga with Jupiter Mahadasha running from age 75-91 will not produce visible career or wealth results when it matters." },
+                        { reason: "The debilitated planet rules difficult houses", desc: "A planet whose debilitation is cancelled still carries its house rulership. If it rules the 6th, 8th, or 12th house for the ascendant, even with Neecha Bhanga, its Dasha brings mixed results. The cancellation removes the worst effects but does not automatically create Raja Yoga strength." },
+                        { reason: "Combustion of cancelling planet", desc: "If the planet providing the cancellation — the dispositor in Kendra — is combust (within 8° of Sun), it loses much of its cancelling power. The Sun absorbs its strength, leaving the debilitation partially intact." },
+                        { reason: "Partial cancellation only", desc: "Rule 4 (aspect by dispositor) is the weakest cancellation. It reduces debilitation effects but rarely creates full Raja Yoga. Partial Neecha Bhanga gives relief from the worst struggles but not the dramatic reversal that complete cancellation provides." },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-2">✦ {item.reason}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Dasha Timing — When Does Neecha Bhanga Activate?</h2>
+                <p>
+                    Neecha Bhanga Raja Yoga is not constantly active — it requires Dasha activation to manifest its full results. The yoga creates latent potential; the Dasha unlocks it.
+                </p>
+                <p>
+                    Primary activation: Mahadasha of the debilitated planet itself. This is when the yoga&apos;s full arc plays out — the initial difficulties of the planet&apos;s debilitation are experienced, followed by the dramatic reversal as the cancellation takes effect. For many natives, the Mahadasha of their Neecha Bhanga planet is their most transformative life period.
+                </p>
+                <p>
+                    Secondary activation: Antardasha of the debilitated planet within any Mahadasha, or Mahadasha/Antardasha of the cancelling planet. Jupiter transiting over the debilitated planet or the cancelling planet can also trigger temporary manifestation.
+                </p>
+                <p>
+                    The classical observation is that Neecha Bhanga Raja Yoga results often come after age 36 — particularly for Saturn Neecha Bhanga, which tends to manifest strongly in the second half of life. Use AstroWord&apos;s free <Link href="/raja-yoga" className="text-gold/70 hover:text-gold underline underline-offset-2">Raja Yoga calculator</Link> and <Link href="/dasha-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Dasha calculator</Link> together to identify if your Neecha Bhanga is currently active.
+                </p>
+
+                <h2>Neecha Bhanga vs Vargottama Debilitation</h2>
+                <p>
+                    A special case: when a planet is debilitated in both D1 and D9 (Vargottama debilitation), classical texts note a unique dynamic. The debilitation is consistent — the struggle is real and persistent through early life. However, the Vargottama quality means the planet is authentic in its weakness — and once the native consciously works through the planetary lesson, the strength that emerges is extraordinarily stable and enduring. Many self-made achievers who started from genuine poverty or disadvantage have Vargottama debilitated planets.
+                </p>
+
+                <p>
+                    Find all Raja Yogas in your chart including Neecha Bhanga — use AstroWord&apos;s free <Link href="/raja-yoga" className="text-gold/70 hover:text-gold underline underline-offset-2">Raja Yoga Calculator</Link>. It automatically detects all Neecha Bhanga formations and rates their strength based on the cancelling planet&apos;s condition.
+                </p>
+            </>
+        ),
+    },
+    'dharma-karmadhipati-yoga': {
+        title: "Dharma Karmadhipati Yoga — The Most Powerful Career Raja Yoga in Vedic Astrology",
+        description: "Complete guide to Dharma Karmadhipati Yoga — how the 9th and 10th lord connection creates extraordinary career success, all 12 ascendants analysis, 3 strength rankings, Dasha timing, and D9 confirmation.",
+        category: "Vedic Astrology",
+        date: "May 31, 2026",
+        readTime: "10 min read",
+        keywords: ['dharma karmadhipati yoga', 'dharma karma adhipati yoga', '9th lord 10th lord conjunction', 'most powerful raja yoga', 'dharma karmadhipati yoga calculator', 'dharma karmadhipati yoga effects', '9th and 10th lord astrology'],
+        faqs: [
+            { q: "What is Dharma Karmadhipati Yoga?", a: "Dharma Karmadhipati Yoga is the most powerful career Raja Yoga in Vedic astrology, formed when the 9th house lord (Dharma — fortune and purpose) and 10th house lord (Karma — career and action) are connected through conjunction, mutual aspect, or sign exchange. It aligns a person's calling with their career, creating extraordinary professional achievement." },
+            { q: "Which is the strongest form of Dharma Karmadhipati Yoga?", a: "The strongest form is when both lords conjunct in the 10th house itself — this combines Dharma Karmadhipati Yoga with a Kendra-Trikona Raja Yoga simultaneously. The second strongest is sign exchange (Parivartana) between 9th and 10th lords. Mutual aspect is the third form, generally slightly weaker than direct connection." },
+            { q: "For which ascendants is Dharma Karmadhipati Yoga most powerful?", a: "Classical texts (Phaladeepika) state it gives best results for Virgo and Pisces ascendant, very good results for Taurus, Cancer, Sagittarius and Capricorn ascendant. For these lagnas, the 9th and 10th lords are natural benefics or form powerful combinations that align dharma and karma most cleanly." },
+        ],
+        relatedCalculator: { label: 'Check My Raja Yogas', href: '/raja-yoga', emoji: '👑' },
+        content: (
+            <>
+                <p>
+                    Among all the Raja Yogas in Vedic astrology, one stands above the rest for career success and professional recognition. Not Gaja Kesari. Not Panch Mahapurusha. The most powerful career yoga is Dharma Karmadhipati Yoga — the union of the 9th house (your dharmic purpose) and the 10th house (your worldly karma). When these two forces align in a birth chart, the person&apos;s calling and their career become the same thing — and the result is extraordinary achievement that feels both effortless and inevitable.
+                </p>
+
+                <h2>What Does Dharma Karmadhipati Mean?</h2>
+                <p>
+                    The name is Sanskrit: Dharma (9th house — duty, purpose, higher knowledge, fortune, the father), Karma (10th house — action, career, public status, authority), Adhipati (lord). Dharma Karmadhipati literally means &quot;the lords of Dharma and Karma.&quot; When these two lords connect, they create a Raja Yoga described in Brihat Parashara Hora Shastra as the supreme Kendra-Trikona combination — because the 10th is the most powerful Kendra (angular house) and the 9th is the most powerful Trikona (trinal house).
+                </p>
+                <p>
+                    The 9th house represents your dharmic calling — what you were born to do, the higher purpose your soul chose for this lifetime. The 10th house represents your karma — the actual work you do in the world, your career, your public role, and your reputation. Most people have these two disconnected: they work in a career that has nothing to do with their deeper purpose. Dharma Karmadhipati Yoga connects them — the person works in their calling, and the calling becomes their career.
+                </p>
+
+                <h2>The 3 Ways Dharma Karmadhipati Yoga Forms — Ranked by Strength</h2>
+                <div className="space-y-3 my-4">
+                    {[
+                        { rank: "Strongest — Conjunction in Kendra or Trikona", desc: "Both the 9th lord and 10th lord occupy the same sign, ideally in a Kendra (1st, 4th, 7th, 10th) or Trikona (1st, 5th, 9th) house. The most powerful version: both conjunct in the 10th house itself — this creates simultaneous Dharma Karmadhipati Yoga AND a Kendra-Trikona Raja Yoga. Such charts show people who become the public face of their dharmic mission." },
+                        { rank: "Second — Parivartana (Sign Exchange)", desc: "The 9th lord occupies the 10th house&apos;s sign, and the 10th lord occupies the 9th house&apos;s sign — an exchange of houses. This creates Dharma Karmadhipati Yoga + Parivartana Yoga simultaneously. The person&apos;s career and calling exchange energies continuously, creating a dynamic, evolving alignment between purpose and profession that deepens over time." },
+                        { rank: "Third — Mutual Aspect", desc: "The 9th lord and 10th lord aspect each other from different houses without being in the same sign or exchanging signs. This is the most common form and slightly weaker than direct connection — but still highly significant. The career and dharma speak to each other across the chart, creating alignment that strengthens during their Dasha periods." },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-2">✦ {item.rank}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Dharma Karmadhipati Yoga for All 12 Ascendants</h2>
+                <p>
+                    The 9th and 10th lords are different planets for each ascendant. Classical texts specify that this yoga gives different quality of results depending on which planets form it.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+                    {[
+                        { lagna: 'Aries Ascendant', lords: '9th lord = Jupiter, 10th lord = Saturn', quality: 'Challenging but powerful. Jupiter and Saturn are natural enemies but their connection creates a rare balance of wisdom and discipline in career. Results: disciplined philosophical leadership, often in law, academia, or institutional authority.' },
+                        { lagna: 'Taurus Ascendant', lords: '9th lord = Saturn, 10th lord = Saturn (same planet)', quality: 'Automatic yoga — Saturn rules both. Very good results per classical texts. Single planet rulership concentrates the entire dharma-karma energy into Saturn: disciplined, patient, long-term career success in structured fields.' },
+                        { lagna: 'Gemini Ascendant', lords: '9th lord = Saturn, 10th lord = Jupiter', quality: 'Natural enemy planets, similar to Aries but reversed. Connection creates intellectually grounded wisdom. Career in education, philosophy, law, or writing that blends Saturn discipline with Jupiter expansion.' },
+                        { lagna: 'Cancer Ascendant', lords: '9th lord = Jupiter, 10th lord = Mars', quality: 'Very good results per classical texts. Jupiter and Mars are natural friends. Career alignment: purposeful action, leadership driven by wisdom. Often seen in doctors, military officers, and dharmic entrepreneurs.' },
+                        { lagna: 'Leo Ascendant', lords: '9th lord = Mars, 10th lord = Venus', quality: 'Interesting combination of drive (Mars) and aesthetics (Venus). Career in creative leadership, arts management, luxury brand building, or entertainment. The dharmic purpose involves beauty and courageous creativity.' },
+                        { lagna: 'Virgo Ascendant', lords: '9th lord = Venus, 10th lord = Mercury (same sign ruler overlap)', quality: 'Best results per classical texts (Phaladeepika). Venus and Mercury are natural friends and both benefics. Career in communication, writing, arts, healing, or analytical creative work that aligns deeply with the soul&apos;s purpose.' },
+                        { lagna: 'Libra Ascendant', lords: '9th lord = Mercury, 10th lord = Moon', quality: 'Benefic combination. Career in public communication, caregiving, emotional intelligence work, or media. The calling involves nurturing communication. Results are strong when Moon is well-placed.' },
+                        { lagna: 'Scorpio Ascendant', lords: '9th lord = Moon, 10th lord = Sun', quality: 'Luminaries forming the yoga — powerful and visible. Career achievement is highly public and recognition comes from authentic expression of inner purpose. Moon and Sun in connection: career as emotional authority or public leadership.' },
+                        { lagna: 'Sagittarius Ascendant', lords: '9th lord = Sun, 10th lord = Mercury', quality: 'Sun and Mercury: authoritative communication. Career as a teacher, writer, speaker, or thought leader whose work carries natural authority. The dharmic purpose is spreading knowledge with confidence.' },
+                        { lagna: 'Capricorn Ascendant', lords: '9th lord = Mercury, 10th lord = Venus', quality: 'Very good results per classical texts. Natural friends forming the yoga. Career in arts, communication, beauty, or analytical creative work. Grounded aesthetics and precise communication define the professional identity.' },
+                        { lagna: 'Aquarius Ascendant', lords: '9th lord = Venus, 10th lord = Mars', quality: 'Venus and Mars: creative drive and aesthetic ambition. Career in innovative design, artistic entrepreneurship, or humanitarian action. The dharmic calling involves making beauty serve a larger social purpose.' },
+                        { lagna: 'Pisces Ascendant', lords: '9th lord = Mars, 10th lord = Jupiter (same sign ruler overlap)', quality: 'Best results per classical texts. Mars and Jupiter: courage and wisdom. Career as a dharmic leader, spiritual teacher, healer, or pioneering guide. The calling is naturally aligned with righteous action and expansion.' },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-3">
+                            <p className="text-white text-sm font-medium mb-1">{item.lagna}</p>
+                            <p className="text-gold/60 text-xs font-mono mb-1">{item.lords}</p>
+                            <p className="text-muted text-xs leading-relaxed">{item.quality}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>How Strong Is Your Dharma Karmadhipati Yoga?</h2>
+                <p>
+                    Formation alone is not enough — strength determines results. Here are the key modifiers:
+                </p>
+                <div className="space-y-3 my-4">
+                    {[
+                        { factor: 'Planet dignity', desc: 'Lords in own sign or exalted = Strong yoga. Lords in neutral signs = Moderate. Lords in enemy signs = Weak. Lords debilitated = Significantly weakened (though Neecha Bhanga can restore strength).' },
+                        { factor: 'House placement', desc: 'Lords conjunct in 10th house = maximum strength. In 9th or 1st = very strong. In other Kendra = strong. In Trikona = good. In Upachaya (3rd, 6th, 11th) = moderate but growing. In Dusthana (6th, 8th, 12th) = weakened.' },
+                        { factor: 'Combustion check', desc: 'If either lord is combust (within 8° of Sun), the yoga is significantly weakened. Combust planets lose their independence and cannot fully deliver their significations.' },
+                        { factor: 'D9 Navamsa confirmation', desc: 'The same 9th and 10th lords should maintain their connection or dignity in the D9 Navamsa chart for full results. A yoga in D1 that is disrupted in D9 gives partial results. Confirmation in D9 = the yoga will definitely manifest.' },
+                        { factor: 'Jupiter\'s involvement', desc: 'Jupiter aspecting either lord or the conjunction point amplifies the yoga significantly. Jupiter\'s blessing on dharma-karma matters brings divine grace, ethical success, and mentors who support the career calling.' },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-surface border border-border rounded-xl p-4">
+                            <p className="text-gold text-sm font-medium mb-1">✦ {item.factor}</p>
+                            <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h2>Dasha Timing — When Will It Give Results?</h2>
+                <p>
+                    Dharma Karmadhipati Yoga activates most powerfully during the Mahadasha and Antardasha of the forming planets. The 10th lord Mahadasha typically brings the most visible career achievements — public recognition, authority, professional peak. The 9th lord Mahadasha brings philosophical alignment — career choices shift toward meaningful work, teachers and mentors appear, long-distance opportunities emerge.
+                </p>
+                <p>
+                    The most powerful activation: 10th lord Mahadasha with 9th lord Antardasha (or vice versa). This double activation — when both yoga-forming planets are simultaneously running — creates the peak period for career achievement and dharmic recognition. Mark these periods in your Dasha timeline using AstroWord&apos;s free <Link href="/dasha-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Dasha Calculator</Link>.
+                </p>
+                <p>
+                    Jupiter transiting over the conjunction point or over either lord also triggers temporary periods of career opportunity and dharmic alignment — these are the windows to act decisively.
+                </p>
+
+                <h2>The Jaimini Angle — Amatyakaraka and Career Dharma</h2>
+                <p>
+                    In Jaimini astrology, the Amatyakaraka (the planet with the second highest degree in the chart) is the primary indicator of career and professional destiny. When the Amatyakaraka is one of the planets forming Dharma Karmadhipati Yoga, the yoga&apos;s career effects are exceptionally personalised and powerful — the person&apos;s unique professional calling (Amatyakaraka) aligns with their dharmic purpose (9th house) and public karma (10th house) simultaneously.
+                </p>
+                <p>
+                    This three-way alignment — Dharma Karmadhipati Yoga + Amatyakaraka involvement — is one of the strongest indicators of someone who achieves exceptional recognition in a career that feels completely authentic to their nature. Find your Amatyakaraka using AstroWord&apos;s free <Link href="/amatyakaraka" className="text-gold/70 hover:text-gold underline underline-offset-2">Amatyakaraka Calculator</Link>.
+                </p>
+
+                <p>
+                    Check all Raja Yogas in your chart including Dharma Karmadhipati Yoga — use AstroWord&apos;s free <Link href="/raja-yoga" className="text-gold/70 hover:text-gold underline underline-offset-2">Raja Yoga Calculator</Link>. It automatically detects 9th-10th lord connections and rates their strength.
+                </p>
+            </>
+        ),
+    },
 };
 
 

@@ -303,6 +303,24 @@ const articles = [
         readTime: '9 min read',
         date: 'May 28, 2026',
         emoji: '🔱'
+    },
+    {
+        slug: 'neecha-bhanga-raja-yoga',
+        title: 'Neecha Bhanga Raja Yoga — When Weakness Becomes Extraordinary Strength',
+        description: 'Complete guide to Neecha Bhanga Raja Yoga — all 4 classical cancellation rules, why it fails, planet-by-planet breakdown, and Dasha timing.',
+        category: 'Vedic Astrology',
+        date: 'May 31, 2026',
+        readTime: '10 min read',
+        emoji: '⚡'
+    },
+    {
+        slug: 'dharma-karmadhipati-yoga',
+        title: 'Dharma Karmadhipati Yoga — The Most Powerful Career Raja Yoga',
+        description: 'Complete guide to Dharma Karmadhipati Yoga — the 9th and 10th lord connection that creates extraordinary career success. All 12 ascendants, Dasha timing, D9 confirmation.',
+        category: 'Vedic Astrology',
+        date: 'May 31, 2026',
+        readTime: '10 min read',
+        emoji: '👑'
     }
 ];
 
