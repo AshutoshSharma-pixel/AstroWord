@@ -207,6 +207,24 @@ export default function DarakarakaPage() {
                   planet={result.planet}
                 />
 
+                <div className="bg-surface2/60 border border-gold/20 rounded-2xl p-6 text-center space-y-3">
+                    <h3 className="text-gold font-serif text-lg font-medium">✦ Want to know WHEN you&apos;ll meet your spouse?</h3>
+                    <p className="text-muted text-sm max-w-md mx-auto">
+                        Your Marriage Report includes timing windows, 2026-2027 forecast, and remedies.
+                    </p>
+                    <button
+                        onClick={() => {
+                            const el = document.getElementById('marriage-report-section');
+                            if (el) {
+                                el.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="bg-gold text-bg px-6 py-2.5 rounded-xl font-medium hover:bg-gold/90 transition-all text-sm shadow-lg shadow-gold/5 inline-block"
+                    >
+                        Get Full Report — ₹199
+                    </button>
+                </div>
+
                 <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
                     <ReactMarkdown
@@ -267,10 +285,12 @@ export default function DarakarakaPage() {
                   <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
                 </div>
 
-                <MarriageReportPreview 
-                    chartData={chartData} 
-                    calculatorType="darakaraka"
-                />
+                <div id="marriage-report-section">
+                    <MarriageReportPreview 
+                        chartData={chartData} 
+                        calculatorType="darakaraka"
+                    />
+                </div>
 
                 <div className="space-y-3 pt-4">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono ml-2">
