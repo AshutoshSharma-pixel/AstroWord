@@ -177,6 +177,29 @@ export default function UpapadaPage() {
                             keywords={result.keywords?.slice(0, 4)}
                         />
 
+                        <div className="bg-gradient-to-br from-gold/15 to-amber/5 border border-gold/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
+                            <p className="text-gold font-serif text-xl">✦ Want the complete marriage destiny report?</p>
+                            <p className="text-white/70 text-sm leading-relaxed">
+                                Your Upapada Lagna reveals your marriage reality.<br/>
+                                The Marriage Report reveals <strong className="text-white">WHEN you&apos;ll marry, WHO your spouse will be, and personalised remedies</strong> — all in one 15-page PDF.
+                            </p>
+                            <div className="flex items-center justify-center gap-2 text-xs text-muted font-mono">
+                                <span>⭐ 15-page personalised PDF</span>
+                                <span>·</span>
+                                <span>Instant download</span>
+                                <span>·</span>
+                                <span>Based on your exact chart</span>
+                            </div>
+                            <button
+                                onClick={() => document.getElementById('marriage-report-section')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="bg-gradient-to-r from-gold to-amber text-bg font-semibold px-8 py-3 rounded-xl hover:opacity-90 transition-all text-sm w-full sm:w-auto animate-pulse"
+                            >
+                                Get Full Marriage Report — ₹199
+                            </button>
+                            <p className="text-muted/50 text-xs">One-time payment · No subscription · Instant PDF</p>
+                        </div>
+
                         {/* Reading */}
                         <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
@@ -210,7 +233,9 @@ export default function UpapadaPage() {
                             <p className="text-muted/50 text-xs">Free 5 questions daily · No signup required</p>
                         </div>
 
-                        <MarriageReportPreview chartData={chartData} calculatorType="upapada-lagna" />
+                        <div id="marriage-report-section">
+                            <MarriageReportPreview chartData={chartData} calculatorType="upapada-lagna" />
+                        </div>
 
                         {/* Suggested questions */}
                         <div className="space-y-3 pt-4">
