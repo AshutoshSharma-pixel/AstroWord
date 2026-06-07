@@ -24,8 +24,8 @@ async function run() {
 
     const payload = JSON.stringify({
       host: 'www.astroword.in',
-      key: 'c1b97ac38ee5fe52d4d07b5e8fd2fd2d',
-      keyLocation: 'https://www.astroword.in/c1b97ac38ee5fe52d4d07b5e8fd2fd2d.txt',
+      key: '301bd46ed835476da88621805484dea0',
+      keyLocation: 'https://www.astroword.in/301bd46ed835476da88621805484dea0.txt',
       urlList: urls
     });
 
