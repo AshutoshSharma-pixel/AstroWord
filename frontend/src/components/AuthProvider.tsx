@@ -42,6 +42,7 @@ const PUBLIC_ROUTES = [
     '/d9-chart',
     '/login',
     '/blog',
+    '/disclaimer',
     '/privacy-policy',
     '/terms',
     '/refund-policy',

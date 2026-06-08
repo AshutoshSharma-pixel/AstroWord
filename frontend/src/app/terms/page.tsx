@@ -234,6 +234,10 @@ export default function TermsPage() {
                         <p>Governed by the laws of India · IT Act 2000 · Consumer Protection Act 2019</p>
                     </div>
 
+                    <p className="text-muted/50 text-xs text-center mt-8">
+                        Also see: <a href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</a> · <a href="/terms" className="hover:text-gold transition-colors">Terms</a> · <a href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</a>
+                    </p>
+
                 </div>
             </div>
         </div>

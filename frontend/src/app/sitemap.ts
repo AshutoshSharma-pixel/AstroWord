@@ -355,6 +355,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: `${base}/disclaimer`,
+            lastModified: now,
+            changeFrequency: 'yearly' as const,
+            priority: 0.1,
+        },
+        {
             url: `${base}/privacy-policy`,
             lastModified: now,
             changeFrequency: 'yearly',
