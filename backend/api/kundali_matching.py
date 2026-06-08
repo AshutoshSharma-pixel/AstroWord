@@ -113,12 +113,12 @@ YONI_ANIMALS = [
 
 YONI_MATRIX = {
     "Horse":    [4, 2, 2, 3, 2, 2, 2, 1, 0, 1, 3, 3, 2, 1],
-    "Elephant": [2, 4, 3, 3, 2, 2, 2, 2, 3, 1, 2, 3, 2, 0],
+    "Elephant": [2, 4, 3, 3, 2, 2, 3, 2, 3, 1, 2, 3, 2, 0],
     "Sheep":    [2, 3, 4, 2, 1, 2, 1, 3, 3, 1, 2, 0, 3, 1],
     "Serpent":  [3, 3, 2, 4, 2, 1, 1, 1, 1, 2, 2, 2, 0, 2],
     "Dog":      [2, 2, 1, 2, 4, 2, 1, 2, 2, 1, 0, 2, 1, 1],
     "Cat":      [2, 2, 2, 1, 2, 4, 0, 2, 2, 1, 3, 3, 2, 1],
-    "Rat":      [2, 2, 1, 1, 1, 0, 4, 2, 2, 2, 2, 2, 1, 2],
+    "Rat":      [2, 3, 1, 1, 1, 0, 4, 2, 2, 2, 2, 2, 1, 2],
     "Cow":      [1, 2, 3, 1, 2, 2, 2, 4, 3, 0, 3, 2, 2, 1],
     "Buffalo":  [0, 3, 3, 1, 2, 2, 2, 3, 4, 1, 2, 2, 2, 1],
     "Tiger":    [1, 1, 1, 2, 1, 1, 2, 0, 1, 4, 1, 1, 2, 1],
@@ -411,9 +411,15 @@ async def kundali_matching(data: KundaliMatchingRequest):
 
         # 4. Compute Ashtakoota 36-Point Guna Milan
         
-        # Varna (max 1)
-        boy_varna = NAKSHATRA_VARNA.get(boy_nak, "Shudra")
-        girl_varna = NAKSHATRA_VARNA.get(girl_nak, "Shudra")
+        # Varna (max 1) - Based on Moon Rashi (Sign) Varna
+        RASHI_VARNA = {
+            "Cancer": "Brahmin", "Scorpio": "Brahmin", "Pisces": "Brahmin",
+            "Aries": "Kshatriya", "Leo": "Kshatriya", "Sagittarius": "Kshatriya",
+            "Taurus": "Vaishya", "Virgo": "Vaishya", "Capricorn": "Vaishya",
+            "Gemini": "Shudra", "Libra": "Shudra", "Aquarius": "Shudra"
+        }
+        boy_varna = RASHI_VARNA.get(boy_rashi, "Shudra")
+        girl_varna = RASHI_VARNA.get(girl_rashi, "Shudra")
         boy_varna_val = VARNA_HIERARCHY.get(boy_varna, 1)
         girl_varna_val = VARNA_HIERARCHY.get(girl_varna, 1)
         varna_obtained = 1.0 if boy_varna_val >= girl_varna_val else 0.0
