@@ -40,6 +40,7 @@ const PUBLIC_ROUTES = [
     '/arudha-lagna',
     '/marriage-report',
     '/d9-chart',
+    '/kundali-matching',
     '/login',
     '/blog',
     '/disclaimer',

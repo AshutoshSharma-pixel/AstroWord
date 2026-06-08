@@ -158,6 +158,24 @@ export default function DashboardView() {
                     </div>
                 </button>
 
+                {/* Kundali Matching Card */}
+                <button
+                    onClick={() => navigateTo('kundali-matching')}
+                    className="w-full bg-surface2 border border-border hover:border-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] rounded-2xl p-6 text-left transition-all group"
+                >
+                    <div className="text-3xl mb-4">💑</div>
+                    <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">
+                        Kundali Matching
+                    </h3>
+                    <p className="text-muted text-sm mb-4">
+                        Free 36-point Guna Milan, Jaimini Darakaraka spouse alignment, and Mangal Dosha verification.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Ashtakoota</span>
+                        <span className="text-xs bg-gold/10 text-gold border border-gold/20 px-2 py-1 rounded-full font-mono">Jaimini UL</span>
+                    </div>
+                </button>
+
                 {/* Manglik Card */}
                 <button
                     onClick={() => navigateTo('manglik')}

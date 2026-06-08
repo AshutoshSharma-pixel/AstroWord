@@ -21,6 +21,7 @@ const ALL_TOOLS = [
   { slug: 'gana',            emoji: '🔱', label: 'Gana' },
   { slug: 'marriage-year',   emoji: '💍', label: 'Marriage Year' },
   { slug: 'marriage-type',   emoji: '💝', label: 'Love or Arranged' },
+  { slug: 'kundali-matching', emoji: '💑', label: 'Kundali Matching' },
   { slug: 'upapada-lagna',   emoji: '💍', label: 'Upapada Lagna' },
   { slug: 'arudha-lagna',    emoji: '🪞', label: 'Arudha Lagna' },
   { slug: 'd9-chart',        emoji: '📊', label: 'D9 Chart' },
