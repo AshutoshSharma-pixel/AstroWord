@@ -53,7 +53,8 @@ async def get_user_plan(
             else:
                 expiry_dt = datetime.fromisoformat(str(expires_at))
             
-            if datetime.now(timezone.utc) > expiry_dt.replace(tzinfo=timezone.utc) if expiry_dt.tzinfo is None else expiry_dt:
+            expiry_dt_utc = expiry_dt.replace(tzinfo=timezone.utc) if expiry_dt.tzinfo is None else expiry_dt
+            if datetime.now(timezone.utc) > expiry_dt_utc:
                 # Plan expired — reset to free
                 try:
                     user_ref.update({
