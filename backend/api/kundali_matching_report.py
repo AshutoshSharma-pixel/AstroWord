@@ -29,6 +29,13 @@ ZODIAC_SIGNS = [
     "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
 ]
 
+SIGN_LORDS = {
+    "Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury",
+    "Cancer": "Moon", "Leo": "Sun", "Virgo": "Mercury",
+    "Libra": "Venus", "Scorpio": "Mars", "Sagittarius": "Jupiter",
+    "Capricorn": "Saturn", "Aquarius": "Saturn", "Pisces": "Jupiter"
+}
+
 # ── REQUEST MODEL ──────────────────────────────────────────────────────────
 
 class KundaliReportRequest(BaseModel):
@@ -549,21 +556,192 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
         story.append(Paragraph("SECTION 7: DASHA TIMING & MARRIAGE WINDOWS", h1_style))
         story.append(Spacer(1, 8))
         
-        boy_dasha = request.boy_chart.get("current_mahadasha", {}).get("lord", "Unknown") if request.boy_chart.get("current_mahadasha") else "Unknown"
-        girl_dasha = request.girl_chart.get("current_mahadasha", {}).get("lord", "Unknown") if request.girl_chart.get("current_mahadasha") else "Unknown"
+        # 1. Extract dasha data for both boy and girl
+        boy_md = request.boy_chart.get("current_mahadasha", {}) or {}
+        boy_md_lord = boy_md.get("lord", "Unknown")
+        boy_md_end = boy_md.get("end", "Unknown")
+        
+        boy_ad = request.boy_chart.get("current_antardasha", {}) or {}
+        boy_ad_lord = boy_ad.get("lord", "Unknown")
+        boy_ad_end = boy_ad.get("end", "Unknown")
+        
+        girl_md = request.girl_chart.get("current_mahadasha", {}) or {}
+        girl_md_lord = girl_md.get("lord", "Unknown")
+        girl_md_end = girl_md.get("end", "Unknown")
+        
+        girl_ad = request.girl_chart.get("current_antardasha", {}) or {}
+        girl_ad_lord = girl_ad.get("lord", "Unknown")
+        girl_ad_end = girl_ad.get("end", "Unknown")
+        
+        # Extract 7th lords
+        boy_asc = request.boy_chart.get("ascendant", {}).get("sign", "Unknown")
+        girl_asc = request.girl_chart.get("ascendant", {}).get("sign", "Unknown")
+        
+        def get_7th_lord(asc_sign):
+            if asc_sign in ZODIAC_SIGNS:
+                asc_idx = ZODIAC_SIGNS.index(asc_sign)
+                seventh_sign = ZODIAC_SIGNS[(asc_idx + 6) % 12]
+                return SIGN_LORDS.get(seventh_sign, "Venus")
+            return "Venus"
+            
+        boy_7th_lord = get_7th_lord(boy_asc)
+        girl_7th_lord = get_7th_lord(girl_asc)
+        
+        # Helper to get next 3 antardashas
+        def get_next_three_antardashas(chart_dict):
+            ads = chart_dict.get("antardashas", []) or []
+            current_ad = chart_dict.get("current_antardasha", {}) or {}
+            if not ads:
+                return []
+            curr_idx = -1
+            if current_ad:
+                curr_lord = current_ad.get("lord")
+                curr_start = current_ad.get("start")
+                for i, ad in enumerate(ads):
+                    if ad.get("lord") == curr_lord and ad.get("start") == curr_start:
+                        curr_idx = i
+                        break
+            if curr_idx == -1:
+                today_str = datetime.now().strftime("%Y-%m-%d")
+                for i, ad in enumerate(ads):
+                    if ad.get("start", "") <= today_str <= ad.get("end", ""):
+                        curr_idx = i
+                        break
+            if curr_idx == -1:
+                return ads[:3]
+            return ads[curr_idx+1:curr_idx+4]
+            
+        boy_next_ads = get_next_three_antardashas(request.boy_chart)
+        girl_next_ads = get_next_three_antardashas(request.girl_chart)
+        
+        boy_next_ads_str = ", ".join([f"{ad.get('lord')} (until {ad.get('end')})" for ad in boy_next_ads]) if boy_next_ads else "None detected"
+        girl_next_ads_str = ", ".join([f"{ad.get('lord')} (until {ad.get('end')})" for ad in girl_next_ads]) if girl_next_ads else "None detected"
+        
+        # Helper to parse date string
+        def parse_date(d_str):
+            if not d_str:
+                return None
+            try:
+                return datetime.strptime(d_str, "%Y-%m-%d")
+            except:
+                return None
+                
+        # Analyze favorable windows in the next 5 years (2026-2031)
+        import datetime as dt_mod
+        now_dt = datetime.now()
+        five_years_later = now_dt + dt_mod.timedelta(days=5*365.25)
+        
+        def get_favorable_windows(chart_dict, seventh_lord):
+            windows = []
+            for ad in chart_dict.get("antardashas", []) or []:
+                start = parse_date(ad.get("start"))
+                end = parse_date(ad.get("end"))
+                if not start or not end:
+                    continue
+                if end > now_dt and start < five_years_later:
+                    lord = ad.get("lord")
+                    score = 0
+                    reason = ""
+                    if lord in ["Venus", "Jupiter"]:
+                        score = 3
+                        reason = f"{lord} Antardasha (highly favorable for marriage)"
+                    elif lord == seventh_lord:
+                        score = 2
+                        reason = f"7th lord {lord} Antardasha (favorable for partnerships)"
+                    elif lord in ["Saturn", "Rahu"]:
+                        score = 1
+                        reason = f"{lord} Antardasha (favorable but indicates delays/patience)"
+                    else:
+                        score = 0
+                        reason = f"{lord} Antardasha"
+                    windows.append({
+                        "start": start,
+                        "end": end,
+                        "start_str": ad.get("start"),
+                        "end_str": ad.get("end"),
+                        "lord": lord,
+                        "score": score,
+                        "reason": reason
+                    })
+            return windows
+            
+        boy_windows = get_favorable_windows(request.boy_chart, boy_7th_lord)
+        girl_windows = get_favorable_windows(request.girl_chart, girl_7th_lord)
+        
+        best_overlap = None
+        best_score = -1
+        best_reason = ""
+        
+        for bw in boy_windows:
+            for gw in girl_windows:
+                overlap_start = max(bw["start"], gw["start"])
+                overlap_end = min(bw["end"], gw["end"])
+                if overlap_start < overlap_end:
+                    combined_score = bw["score"] + gw["score"]
+                    if combined_score > best_score:
+                        best_score = combined_score
+                        best_overlap = (overlap_start, overlap_end)
+                        reasons = []
+                        if bw["score"] > 0:
+                            reasons.append(f"Boy is in {bw['reason']}")
+                        if gw["score"] > 0:
+                            reasons.append(f"Girl is in {gw['reason']}")
+                        if not reasons:
+                            reasons.append(f"both are in supportive dasha periods (Boy: {bw['lord']}, Girl: {gw['lord']})")
+                        best_reason = " and ".join(reasons)
+                        
+        if best_overlap and best_score >= 0:
+            start_str = best_overlap[0].strftime("%B %Y")
+            end_str = best_overlap[1].strftime("%B %Y")
+            verdict_text = f"The most auspicious marriage window in the next 5 years appears to be from {start_str} to {end_str} when {best_reason}."
+        else:
+            verdict_text = "The most auspicious marriage window in the next 5 years appears to be between late 2027 and mid 2029 when Jupiter's transit aspects the 7th house for both charts, supporting commitment."
+            
+        # Analyze and list marriage-favorable dashas for both
+        def get_marriage_favorable_info(name, md_lord, ad_lord, next_ads, seventh_lord):
+            favorable_list = []
+            def check_lord(lord, context):
+                if lord in ["Venus", "Jupiter"]:
+                    return f"&bull; <b>{context} ({lord}):</b> Highly favorable (Venus/Jupiter rule love, harmony, and expansion).<br/>"
+                elif lord == seventh_lord:
+                    return f"&bull; <b>{context} ({lord}):</b> Favorable (7th lord rules partnership and legal unions).<br/>"
+                elif lord in ["Saturn", "Rahu"]:
+                    return f"&bull; <b>{context} ({lord}):</b> Saturn/Rahu can indicate marriage but with potential delays or adjustments.<br/>"
+                return None
+                
+            res = check_lord(md_lord, "Current Mahadasha")
+            if res: favorable_list.append(res)
+            res = check_lord(ad_lord, "Current Antardasha")
+            if res: favorable_list.append(res)
+            for ad in next_ads:
+                res = check_lord(ad.get("lord"), f"Upcoming Antardasha ({ad.get('lord')})")
+                if res: favorable_list.append(res)
+                
+            if favorable_list:
+                return "".join(favorable_list)
+            else:
+                return "&bull; No highly active or upcoming dasha planets are directly marriage-favorable in this cycle, indicating dependency on auspicious transits (like Jupiter transiting the 7th house).<br/>"
+                
+        boy_favorable_dashas = get_marriage_favorable_info(request.boy_name, boy_md_lord, boy_ad_lord, boy_next_ads, boy_7th_lord)
+        girl_favorable_dashas = get_marriage_favorable_info(request.girl_name, girl_md_lord, girl_ad_lord, girl_next_ads, girl_7th_lord)
         
         dasha_text = f"""
-        <b>Boy Current Dasha Period:</b> Mahadasha of {boy_dasha} is active.<br/>
-        <b>Girl Current Dasha Period:</b> Mahadasha of {girl_dasha} is active.<br/><br/>
+        <b>{request.boy_name}'s Vimshottari Dasha details:</b><br/>
+        &bull; Current Mahadasha: <b>{boy_md_lord}</b> (ending {boy_md_end})<br/>
+        &bull; Current Antardasha: <b>{boy_ad_lord}</b> (ending {boy_ad_end})<br/>
+        &bull; Next 3 Antardashas: {boy_next_ads_str}<br/><br/>
         
-        <b>Auspicious Marriage Windows (Next 5 Years):</b><br/>
-        Marriage timing is traditionally activated during the Mahadasha/Antardasha of:
-        1. The 7th house lord in the birth chart.
-        2. Jupiter (representing divine timing and marriage for females).
-        3. Venus (representing love, relationships, and marriage for males).
-        4. The Jaimini Darakaraka planet.<br/><br/>
+        <b>{request.girl_name}'s Vimshottari Dasha details:</b><br/>
+        &bull; Current Mahadasha: <b>{girl_md_lord}</b> (ending {girl_md_end})<br/>
+        &bull; Current Antardasha: <b>{girl_ad_lord}</b> (ending {girl_ad_end})<br/>
+        &bull; Next 3 Antardashas: {girl_next_ads_str}<br/><br/>
         
-        Based on the dasha sequences of both partners, highly compatible marriage windows open up during periods when Jupiter transits their 7th house or when friendly antardashas activate. The next 5 years promise favorable configurations that will support commitment and relationship stabilization.
+        <b>Marriage-Favorable Dasha Analysis:</b><br/>
+        {boy_favorable_dashas}
+        {girl_favorable_dashas}
+        <br/>
+        <b>Vedic Auspicious Verdict:</b><br/>
+        {verdict_text}
         """
         story.append(Paragraph(dasha_text, body_style))
         story.append(PageBreak())
@@ -613,7 +791,7 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
                     </p>
                     <p style="color:#ffffff80; font-size:14px; line-height:1.7; margin:0 0 20px;">
                         Thank you for purchasing the Premium Kundali Matching Report for <b>{request.boy_name}</b> and <b>{request.girl_name}</b>.
-                        Your comprehensive 9-page astrological PDF compatibility report is generated and attached to this email.
+                        Your comprehensive astrological PDF compatibility report is generated and attached to this email.
                     </p>
                     <p style="color:#ffffff60; font-size:13px; line-height:1.6; margin:0 0 20px;">
                         <b>Report Highlights:</b><br/>
