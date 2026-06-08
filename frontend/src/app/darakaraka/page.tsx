@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import WelcomeScreen from '@/components/WelcomeScreen';
@@ -295,6 +296,31 @@ export default function DarakarakaPage() {
                         chartData={chartData} 
                         calculatorType="darakaraka"
                     />
+                </div>
+
+                <div className="mt-8 bg-gradient-to-br from-[#1b1238] via-[#0d091a] to-bg border border-purple-500/20 rounded-2xl p-6 sm:p-8 text-center space-y-4 relative overflow-hidden shadow-lg shadow-purple-500/5">
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+                    <div className="max-w-xl mx-auto space-y-2">
+                        <span className="inline-block bg-purple-500/10 border border-purple-500/25 text-purple-300 text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full">
+                            Relationship Compatibility
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-serif text-white">Know If You&apos;re Compatible? Try Kundali Matching</h2>
+                        <p className="text-muted text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
+                            Enter both birth details for a full 36-point Ashtakoota + Jaimini compatibility analysis. Free results instantly.
+                        </p>
+                    </div>
+
+                    <div className="pt-2">
+                        <Link
+                            href="/kundali-matching"
+                            className="inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium px-8 py-3 rounded-xl shadow-lg shadow-purple-500/10 transition-all text-sm w-full sm:w-auto"
+                        >
+                            Try Free Kundali Matching &rarr;
+                        </Link>
+                    </div>
+                    <p className="text-muted/60 text-[10px] sm:text-xs">
+                        Premium 30-page AI report available at ₹399
+                    </p>
                 </div>
 
                 <div className="space-y-3 pt-4">
