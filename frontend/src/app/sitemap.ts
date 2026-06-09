@@ -402,5 +402,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'always',
             priority: 0.95,
         },
+        {
+            url: `${base}/blog/jaimini-kundali-matching`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/darakaraka-compatibility-marriage`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/navamsa-compatibility-marriage`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/nadi-dosha-cancellation`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/bhakoot-dosha-exceptions`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${base}/blog/upapada-lagna-compatibility`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        },
     ];
 }

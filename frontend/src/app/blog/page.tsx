@@ -17,6 +17,61 @@ export const metadata: Metadata = {
 
 const articles = [
     {
+        slug: 'jaimini-kundali-matching',
+        title: "Jaimini Kundali Matching: The Ancient Jyotish System for Deep Relationship Compatibility",
+        description: "Discover the secrets of relationship compatibility using the ancient Jaimini astrology system. Learn about Chara Karaka matching, Upapada Lagna compatibility, Karakamsa alignment, and why Jaimini matching provides deeper psychological insights than traditional Ashtakoot Milan.",
+        category: 'Compatibility',
+        readTime: '12 min read',
+        date: 'Jun 9, 2026',
+        emoji: '💑'
+    },
+    {
+        slug: 'darakaraka-compatibility-marriage',
+        title: "Darakaraka Compatibility for Marriage: How Your Spouse Planet Determines Conjugal Bliss",
+        description: "Master the Jaimini concept of Darakaraka compatibility. Learn how the planet representing your spouse interacts with your partner",
+        category: 'Jaimini Astrology',
+        readTime: '11 min read',
+        date: 'Jun 9, 2026',
+        emoji: '💗'
+    },
+    {
+        slug: 'navamsa-compatibility-marriage',
+        title: "Navamsa Compatibility for Marriage: The D9 Chart Secrets for Lifelong Relationship Success",
+        description: "Unlock the secrets of Navamsa compatibility. Learn how to compare the D9 charts of two individuals, analyze the 7th house of Navamsa, check Vargottama planets, and predict the real, long-term compatibility that manifests after marriage.",
+        category: 'Divisional Charts',
+        readTime: '12 min read',
+        date: 'Jun 9, 2026',
+        emoji: '🌙'
+    },
+    {
+        slug: 'nadi-dosha-cancellation',
+        title: "Nadi Dosha Cancellation Rules: The Definitive Astrological Guide",
+        description: "Discover the classical rules, exceptions, and remedies for Nadi Dosha in Kundli matching. Learn when this feared compatibility defect is completely cancelled.",
+        category: 'Compatibility',
+        readTime: '15 min read',
+        date: 'Jun 9, 2026',
+        emoji: '🧬'
+    },
+    {
+        slug: 'bhakoot-dosha-exceptions',
+        title: "Bhakoot Dosha Exceptions: When Emotional Mismatch is Cancelled",
+        description: "Learn about Bhakoot Dosha in Kundli matching, including the 2-12, 5-9, and 6-8 positions. Discover the classical exceptions, cancellations, and remedies.",
+        category: 'Compatibility',
+        readTime: '15 min read',
+        date: 'Jun 9, 2026',
+        emoji: '🔱'
+    },
+    {
+        slug: 'upapada-lagna-compatibility',
+        title: "Upapada Lagna Compatibility: The Jaimini Way to Marriage Destiny",
+        description: "Discover the secrets of Upapada Lagna (UL) in Jaimini astrology. Learn how to calculate UL, predict your spouse",
+        category: 'Jaimini Astrology',
+        readTime: '15 min read',
+        date: 'Jun 9, 2026',
+        emoji: '💍'
+    },
+
+    {
         slug: 'what-is-darakaraka',
         title: 'What is Darakaraka? The Planet That Reveals Your Spouse in Vedic Astrology',
         description: 'Learn how Jaimini astrology uses the Darakaraka planet to predict the nature, appearance and timing of your future spouse.',
