@@ -254,6 +254,13 @@ export default function MoonSignPage() {
           >
             {cleanReading(result.reading)}
           </ReactMarkdown>
+          <p className="text-xs text-text/40 mt-4 pt-4 border-t border-border/30 text-center">
+            This reading is for guidance and spiritual purposes only. Please consult 
+            qualified professionals for medical, legal, or financial decisions. 
+            <a href="/disclaimer" className="underline hover:text-text/60 transition-colors ml-1">
+              Disclaimer
+            </a>
+          </p>
         </div>
 
         <div className="mt-6 bg-surface2 border border-gold/20 rounded-2xl p-5 text-center space-y-3">
