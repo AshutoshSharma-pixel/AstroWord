@@ -182,23 +182,64 @@ export default function PrivacyPolicyPage() {
                     </section>
 
                     <div className="space-y-3">
-                        <h2 className="text-white font-medium text-base">Third Party Services</h2>
-                        <p className="text-muted text-sm leading-relaxed">AstroWord uses the following third-party services to operate: Firebase (Google) for data storage and authentication, Razorpay for payment processing, Google Gemini AI for generating astrological readings, and Vercel for website hosting. Each service has its own privacy policy governing their data practices.</p>
+                        <h2 className="text-white font-medium text-base">Data We Collect</h2>
+                        <ul className="list-disc list-inside space-y-2 text-muted text-sm leading-relaxed pl-2 text-white/75">
+                            <li>Name and email address (for account creation and report delivery)</li>
+                            <li>Date of birth, time of birth, place of birth (required for astrological calculations)</li>
+                            <li>Payment information (processed securely by Razorpay — we do not store card details or bank credentials)</li>
+                            <li>Usage data and analytics (Microsoft Clarity, Google Analytics)</li>
+                        </ul>
+                    </div>
+
+                    <div className="space-y-3">
+                        <h2 className="text-white font-medium text-base">How We Use Your Data</h2>
+                        <ul className="list-disc list-inside space-y-2 text-muted text-sm leading-relaxed pl-2 text-white/75">
+                            <li>To provide accurate astrological calculations and AI-generated readings</li>
+                            <li>To generate and deliver paid PDF reports to your email</li>
+                            <li>To send transactional emails (report delivery, payment receipts, account updates)</li>
+                            <li>We do not use your data for advertising, and we never sell your personal information to third parties</li>
+                        </ul>
                     </div>
 
                     <div className="space-y-3">
                         <h2 className="text-white font-medium text-base">Data Retention</h2>
-                        <p className="text-muted text-sm leading-relaxed">We retain your birth chart data and account information for as long as your account is active or as needed to provide services. You may request deletion of your data at any time by emailing info@astroword.in. We will delete your data within 30 days of receiving a verified deletion request.</p>
+                        <ul className="list-disc list-inside space-y-2 text-muted text-sm leading-relaxed pl-2 text-white/75">
+                            <li>Account data is retained for as long as your account is active</li>
+                            <li>Chart calculation data is stored to avoid recalculation on return visits</li>
+                            <li>Paid report data (order records) is retained for 3 years for accounting and audit purposes</li>
+                            <li>You may request deletion of your personal data at any time</li>
+                        </ul>
                     </div>
 
                     <div className="space-y-3">
-                        <h2 className="text-white font-medium text-base">Your Rights Under DPDP Act 2023</h2>
-                        <p className="text-muted text-sm leading-relaxed">Under India's Digital Personal Data Protection Act 2023, you have the right to: access your personal data, correct inaccurate data, request deletion of your data, and withdraw consent for data processing. To exercise these rights, email info@astroword.in with your registered email address.</p>
+                        <h2 className="text-white font-medium text-base">Your Rights (DPDP Act 2023)</h2>
+                        <ul className="list-disc list-inside space-y-2 text-muted text-sm leading-relaxed pl-2 text-white/75">
+                            <li>Right to access the personal data we hold about you</li>
+                            <li>Right to correction of inaccurate or incomplete data</li>
+                            <li>Right to erasure (deletion) of your data from our systems</li>
+                            <li>Right to withdraw your consent to data processing at any time</li>
+                            <li>To exercise any of these rights, please email us at <a href="mailto:info@astroword.in" className="text-[#c9a84c] underline hover:opacity-80">info@astroword.in</a></li>
+                        </ul>
+                    </div>
+
+                    <div className="space-y-3">
+                        <h2 className="text-white font-medium text-base">Third Party Services</h2>
+                        <p className="text-muted text-sm leading-relaxed mb-2 text-white/75">
+                            AstroWord uses the following third-party services which may process your data:
+                        </p>
+                        <ul className="list-disc list-inside space-y-2 text-muted text-sm leading-relaxed pl-2 text-white/75">
+                            <li>Firebase (Google) — database hosting and secure user authentication</li>
+                            <li>Razorpay — secure payment processing</li>
+                            <li>Resend — transactional email delivery</li>
+                            <li>Google Gemini — AI-generated astrological interpretations</li>
+                            <li>Microsoft Clarity — anonymised usage analytics</li>
+                            <li>Vercel — website hosting and deployment</li>
+                        </ul>
                     </div>
 
                     <div className="space-y-3">
                         <h2 className="text-white font-medium text-base">Cookies and Analytics</h2>
-                        <p className="text-muted text-sm leading-relaxed">AstroWord uses essential cookies for authentication and session management. We use Microsoft Clarity for anonymous usage analytics to improve our service. No personally identifiable information is shared with analytics providers. You can disable cookies in your browser settings, though this may affect site functionality.</p>
+                        <p className="text-muted text-sm leading-relaxed text-white/75">AstroWord uses essential cookies for authentication and session management. We use Microsoft Clarity for anonymous usage analytics to improve our service. No personally identifiable information is shared with analytics providers. You can disable cookies in your browser settings, though this may affect site functionality.</p>
                     </div>
 
                     <div className="border-t border-white/10 pt-8 text-sm text-white/40 font-mono">
@@ -208,7 +249,7 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     <p className="text-muted/50 text-xs text-center mt-8">
-                        Also see: <a href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</a> · <a href="/terms" className="hover:text-gold transition-colors">Terms</a> · <a href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</a>
+                        Also see: <Link href="/disclaimer" className="hover:text-gold transition-colors text-white/60">Disclaimer</Link> · <Link href="/terms" className="hover:text-gold transition-colors text-white/60">Terms</Link> · <Link href="/privacy-policy" className="hover:text-gold transition-colors text-white/60">Privacy Policy</Link>
                     </p>
 
                 </div>

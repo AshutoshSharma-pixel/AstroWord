@@ -432,6 +432,8 @@ export default function Sidebar({
                         <span className="opacity-30">·</span>
                         <a href="/terms" className="hover:text-gold transition-colors">Terms</a>
                         <span className="opacity-30">·</span>
+                        <a href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</a>
+                        <span className="opacity-30">·</span>
                         <a href="/support" className="hover:text-gold transition-colors">Support</a>
                         <span className="opacity-30">·</span>
                         <a href="/refund-policy" className="hover:text-gold transition-colors">Refund Policy</a>
