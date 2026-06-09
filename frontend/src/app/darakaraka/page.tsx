@@ -208,6 +208,30 @@ export default function DarakarakaPage() {
                   planet={result.planet}
                 />
 
+                <div className="bg-gradient-to-br from-indigo-500/15 to-purple-500/5 border border-indigo-400/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent" />
+                    <div className="relative z-10">
+                        <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-1">
+                            Relationship Compatibility
+                        </p>
+                        <h3 className="text-lg font-bold text-white mb-2">
+                            Know If You're Compatible? Try Kundali Matching
+                        </h3>
+                        <p className="text-sm text-text/70 mb-4">
+                            Enter both birth details for a full 36-point Ashtakoota + Jaimini compatibility analysis. Free results instantly.
+                        </p>
+                        <a
+                            href="/kundali-matching"
+                            className="inline-block bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
+                        >
+                            Try Free Kundali Matching →
+                        </a>
+                        <p className="text-xs text-text/50 mt-2">
+                            Premium 30-page AI report available at ₹399
+                        </p>
+                    </div>
+                </div>
+
                 <div className="bg-gradient-to-br from-gold/15 to-amber/5 border border-gold/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
                     <p className="text-gold font-serif text-xl">✦ Want to know WHEN you&apos;ll meet your spouse?</p>

@@ -365,6 +365,15 @@ export default function Sidebar({
                 {/* Bottom Section */}
                 <div className="p-3 border-t border-border mt-auto flex flex-col gap-3">
 
+                    {/* Kundali Matching Link */}
+                    <a
+                        href="/kundali-matching"
+                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-muted hover:text-white hover:bg-surface2 transition-all text-sm border border-transparent hover:border-border"
+                    >
+                        <span>💑</span>
+                        <span>Kundali Matching</span>
+                    </a>
+
                     {/* Blog Link */}
                     <a
                         href="/blog"
