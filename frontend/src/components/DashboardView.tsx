@@ -15,24 +15,23 @@ export default function DashboardView() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent" />
                 <div className="relative z-10">
                     <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-1">
-                        PREMIUM REPORT
+                        NEW FEATURE
                     </p>
                     <h3 className="text-lg font-bold text-white mb-2">
-                        Your Complete Marriage Report — ₹199
+                        Know If You're Compatible? Try Kundali Matching
                     </h3>
                     <p className="text-sm text-text/70 mb-4">
-                        Spouse profile, marriage timing, love or arranged prediction, 
-                        2026–2027 forecast and Vedic remedies — all from your exact birth chart. 
-                        Delivered as an instant PDF.
+                        Free 36-point Ashtakoota + Jaimini compatibility analysis for both partners. 
+                        Premium 30-page AI report with D9 Navamsa, Dasha timing and personalised verdict — ₹399.
                     </p>
                     <a
-                        href="/marriage-report"
+                        href="/kundali-matching"
                         className="inline-block bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
                     >
-                        Get Full Marriage Report — ₹199 →
+                        Try Free Kundali Matching →
                     </a>
                     <p className="text-xs text-text/50 mt-2">
-                        One-time payment · No subscription · Instant PDF delivery
+                        Free results instantly · Premium report ₹399 · Instant PDF
                     </p>
                 </div>
             </div>
