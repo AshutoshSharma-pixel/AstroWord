@@ -11,6 +11,32 @@ export default function DashboardView() {
 
     return (
         <div className="flex-1 overflow-y-auto px-4 py-8 space-y-6 max-w-4xl mx-auto w-full h-full">
+            <div className="bg-gradient-to-br from-indigo-500/15 to-purple-500/5 border border-indigo-400/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden mb-6">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent" />
+                <div className="relative z-10">
+                    <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-1">
+                        PREMIUM REPORT
+                    </p>
+                    <h3 className="text-lg font-bold text-white mb-2">
+                        Your Complete Marriage Report — ₹199
+                    </h3>
+                    <p className="text-sm text-text/70 mb-4">
+                        Spouse profile, marriage timing, love or arranged prediction, 
+                        2026–2027 forecast and Vedic remedies — all from your exact birth chart. 
+                        Delivered as an instant PDF.
+                    </p>
+                    <a
+                        href="/marriage-report"
+                        className="inline-block bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
+                    >
+                        Get Full Marriage Report — ₹199 →
+                    </a>
+                    <p className="text-xs text-text/50 mt-2">
+                        One-time payment · No subscription · Instant PDF delivery
+                    </p>
+                </div>
+            </div>
+
             <h1 className="text-3xl font-serif text-gold mb-2">Explore Tools</h1>
             <p className="text-muted text-sm mb-8">
                 Discover deep astrological insights using our specialized calculation tools. These tools are completely free to use and do not consume your daily question limit.
