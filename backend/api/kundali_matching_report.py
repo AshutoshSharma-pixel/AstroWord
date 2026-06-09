@@ -547,9 +547,55 @@ Synthesize the reading:
         story.append(Paragraph(jaimini_details, body_style))
         story.append(Spacer(1, 8))
         
+        boy_dk_planet = boy_dk.get('planet', 'N/A')
+        girl_dk_planet = girl_dk.get('planet', 'N/A')
+        
+        dk_analysis = ""
+        if boy_dk_planet == girl_dk_planet:
+            if boy_dk_planet == "Saturn":
+                dk_analysis = f"Both partners share <b>Saturn</b> as their Darakaraka. This is a profound karmic indicator showing that both seek stability, maturity, and a high degree of responsibility in a partner. They are designed to act as each other's anchor, requiring mutual discipline, duty, and realistic expectations rather than transient romance to thrive."
+            else:
+                dk_analysis = f"Both partners share the same Darakaraka planet (<b>{boy_dk_planet}</b>), indicating highly synchronized expectations of what a spouse should represent. They seek similar core traits in a partner, creating a shared marital vision."
+        else:
+            dk_analysis = f"The Boy's Darakaraka is <b>{boy_dk_planet}</b>, indicating he seeks a spouse with those qualities, while the Girl's Darakaraka is <b>{girl_dk_planet}</b>, indicating her spousal ideals. This creates a complementary dynamic where distinct spousal qualities are valued and integrated."
+
+        boy_ul_sign = request.boy_upapada_lagna.get('upapada_lagna', 'Unknown')
+        girl_ul_sign = request.girl_upapada_lagna.get('upapada_lagna', 'Unknown')
+        
+        ul_relationship = ""
+        if boy_ul_sign in ZODIAC_SIGNS and girl_ul_sign in ZODIAC_SIGNS:
+            idx_b = ZODIAC_SIGNS.index(boy_ul_sign)
+            idx_g = ZODIAC_SIGNS.index(girl_ul_sign)
+            diff = (idx_g - idx_b) % 12 + 1
+            diff_reverse = (idx_b - idx_g) % 12 + 1
+            
+            if diff in [1, 5, 9]:
+                ul_relationship = f"The Upapada Lagnas (Boy: {boy_ul_sign}, Girl: {girl_ul_sign}) are in a <b>1-5-9 (Trikona/Trine)</b> relationship. This is an exceptionally auspicious placement for long-term commitment, showing natural emotional alignment, spiritual harmony, and ease in maintaining the marriage contract."
+            elif diff in [1, 4, 7, 10]:
+                ul_relationship = f"The Upapada Lagnas (Boy: {boy_ul_sign}, Girl: {girl_ul_sign}) are in a <b>1-4-7-10 (Kendra/Quadrant)</b> relationship. This indicates a strong, resilient, and structured marriage contract built on solid foundations, mutual effort, and high societal standing."
+            elif diff in [3, 11] or diff_reverse in [3, 11]:
+                ul_relationship = f"The Upapada Lagnas (Boy: {boy_ul_sign}, Girl: {girl_ul_sign}) are in a <b>3-11 (friendly)</b> relationship (specifically Gemini and Aries are friendly). This is a highly favorable placement indicating friendship, active communication, and growth in joint resources within the marriage."
+            else:
+                ul_relationship = f"The Upapada Lagnas (Boy: {boy_ul_sign}, Girl: {girl_ul_sign}) are in a <b>{diff}-{diff_reverse}</b> relationship. This suggests a unique commitment dynamic that requires conscious cooperation and alignment of domestic expectations."
+        else:
+            ul_relationship = "The Upapada Lagna placement indicates the formal commitment and longevity of the marriage contract."
+
+        boy_ak_planet = boy_ak.get('planet', 'N/A')
+        girl_ak_planet = girl_ak.get('planet', 'N/A')
+        
+        ak_analysis = ""
+        if (boy_ak_planet == "Mercury" and girl_ak_planet == "Jupiter") or (boy_ak_planet == "Jupiter" and girl_ak_planet == "Mercury"):
+            ak_analysis = f"The Soul rulers (Atmakarakas) are <b>Mercury</b> and <b>Jupiter</b>. This represents a beautiful 'intellect meets wisdom' dynamic. The Mercury Atmakaraka brings curiosity, analysis, and logical communication, while the Jupiter Atmakaraka offers higher wisdom, philosophical breadth, and guiding beliefs. Together, they create a balanced partnership of learning and growth."
+        else:
+            ak_analysis = f"The Atmakaraka (Soul's focus) represents their individual spiritual drives (Boy: {boy_ak_planet}, Girl: {girl_ak_planet}). The relationship between these two soul indicators determines their deep-level spiritual alignment and mutual learning paths."
+
         jaimini_desc = f"""
-        <b>Soul & Karmic Alignment:</b><br/>
-        The Atmakaraka represents the soul's primary mission in this lifetime (Boy: {boy_ak.get('planet', 'N/A')}, Girl: {girl_ak.get('planet', 'N/A')}). The Darakaraka reveals the qualities sought in a partner (Boy: {boy_dk.get('planet', 'N/A')}, Girl: {girl_dk.get('planet', 'N/A')}). The Upapada Lagna (Boy: {request.boy_upapada_lagna.get('upapada_lagna', 'N/A')}, Girl: {request.girl_upapada_lagna.get('upapada_lagna', 'N/A')}) governs the marital commitment and legal bond. For a deeply personalized, definitive compatibility reading of these karmic indicators, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
+        <b>Darakaraka Analysis:</b><br/>
+        {dk_analysis}<br/><br/>
+        <b>Upapada Lagna (UL) Relationship:</b><br/>
+        {ul_relationship}<br/><br/>
+        <b>Atmakaraka (AK) Compatibility:</b><br/>
+        {ak_analysis}
         """
         story.append(Paragraph(jaimini_desc, body_style))
         story.append(PageBreak())
@@ -585,9 +631,86 @@ Synthesize the reading:
         story.append(Paragraph(navamsa_details, body_style))
         story.append(Spacer(1, 8))
         
+        boy_venus_lord = SIGN_LORDS.get(boy_d9_venus, "Venus")
+        girl_venus_lord = SIGN_LORDS.get(girl_d9_venus, "Venus")
+        
+        FRIENDSHIP = {
+            "Sun": ["Moon", "Mars", "Jupiter"],
+            "Moon": ["Sun", "Mercury"],
+            "Mars": ["Sun", "Moon", "Jupiter"],
+            "Mercury": ["Sun", "Venus", "Rahu"],
+            "Jupiter": ["Sun", "Moon", "Mars"],
+            "Venus": ["Mercury", "Saturn", "Rahu"],
+            "Saturn": ["Mercury", "Venus", "Rahu"]
+        }
+        
+        def are_planets_friends(p1, p2):
+            if p1 == p2:
+                return True
+            return p2 in FRIENDSHIP.get(p1, []) or p1 in FRIENDSHIP.get(p2, [])
+            
+        venus_compatibility = ""
+        if boy_d9_venus == girl_d9_venus:
+            venus_compatibility = f"Both partners have Venus in the same D9 sign (<b>{boy_d9_venus}</b>). This indicates a highly synchronized romantic wavelength, identical ways of expressing affection, and a shared appreciation for beauty, harmony, and love."
+        elif are_planets_friends(boy_venus_lord, girl_venus_lord):
+            venus_compatibility = f"The D9 Venus signs (Boy: {boy_d9_venus}, Girl: {girl_d9_venus}) are ruled by friendly planets (<b>{boy_venus_lord}</b> and <b>{girl_venus_lord}</b>). This is a highly supportive placement, creating ease in sharing love, expressing affection, and enjoying emotional and physical intimacy."
+        else:
+            venus_compatibility = f"The D9 Venus signs (Boy: {boy_d9_venus}, Girl: {girl_d9_venus}) are ruled by planets (<b>{boy_venus_lord}</b> and <b>{girl_venus_lord}</b>) that are not natural friends. This means their expressions of love are fundamentally different, requiring conscious effort to understand each other's romantic expectations."
+
+        cross_7th_1 = ""
+        cross_7th_2 = ""
+        
+        if boy_d9_7th in ZODIAC_SIGNS and girl_d9_asc in ZODIAC_SIGNS:
+            idx_b7 = ZODIAC_SIGNS.index(boy_d9_7th)
+            idx_gl = ZODIAC_SIGNS.index(girl_d9_asc)
+            diff1 = (idx_gl - idx_b7) % 12 + 1
+            diff1_rev = (idx_b7 - idx_gl) % 12 + 1
+            if diff1 == 1:
+                cross_7th_1 = f"The Boy's D9 7th house sign ({boy_d9_7th}) matches the Girl's D9 Lagna ({girl_d9_asc}) exactly. This is a classic indicator of instant recognition and deep marital bond."
+            elif diff1 in [5, 9]:
+                cross_7th_1 = f"The Boy's D9 7th house sign ({boy_d9_7th}) and Girl's D9 Lagna ({girl_d9_asc}) are in an auspicious 1-5-9 relationship, indicating natural compatibility."
+            elif diff1 in [7]:
+                cross_7th_1 = f"The Boy's D9 7th house sign ({boy_d9_7th}) is opposite to the Girl's D9 Lagna ({girl_d9_asc}), indicating a complementary connection."
+            else:
+                cross_7th_1 = f"The Boy's D9 7th house sign ({boy_d9_7th}) is in a {diff1}-{diff1_rev} relationship with the Girl's D9 Lagna ({girl_d9_asc})."
+                
+        if girl_d9_7th in ZODIAC_SIGNS and boy_d9_asc in ZODIAC_SIGNS:
+            idx_g7 = ZODIAC_SIGNS.index(girl_d9_7th)
+            idx_bl = ZODIAC_SIGNS.index(boy_d9_asc)
+            diff2 = (idx_bl - idx_g7) % 12 + 1
+            diff2_rev = (idx_g7 - idx_bl) % 12 + 1
+            if diff2 == 1:
+                cross_7th_2 = f"The Girl's D9 7th house sign ({girl_d9_7th}) matches the Boy's D9 Lagna ({boy_d9_asc}) exactly, demonstrating a strong, reciprocal attraction."
+            elif diff2 in [5, 9]:
+                cross_7th_2 = f"The Girl's D9 7th house sign ({girl_d9_7th}) and Boy's D9 Lagna ({boy_d9_asc}) are in an auspicious 1-5-9 relationship, supporting mutual understanding."
+            elif diff2 in [7]:
+                cross_7th_2 = f"The Girl's D9 7th house sign ({girl_d9_7th}) is opposite to the Boy's D9 Lagna ({boy_d9_asc}), indicating complementary partner traits."
+            else:
+                cross_7th_2 = f"The Girl's D9 7th house sign ({girl_d9_7th}) is in a {diff2}-{diff2_rev} relationship with the Boy's D9 Lagna ({boy_d9_asc})."
+
+        lagna_dyn = ""
+        if boy_d9_asc in ZODIAC_SIGNS and girl_d9_asc in ZODIAC_SIGNS:
+            idx_b = ZODIAC_SIGNS.index(boy_d9_asc)
+            idx_g = ZODIAC_SIGNS.index(girl_d9_asc)
+            diff = (idx_g - idx_b) % 12 + 1
+            diff_rev = (idx_b - idx_g) % 12 + 1
+            if diff in [1, 5, 9]:
+                lagna_dyn = f"The D9 Ascendant signs (Boy: {boy_d9_asc}, Girl: {girl_d9_asc}) share a highly compatible trine placement. This indicates that their inner expectations of marriage and deep-level personalities are in perfect alignment. They share identical values regarding trust, growth, and commitment, ensuring they navigate life's challenges with mutual understanding."
+            elif diff in [1, 4, 7, 10]:
+                lagna_dyn = f"The D9 Ascendant signs (Boy: {boy_d9_asc}, Girl: {girl_d9_asc}) form a Kendra relationship. This creates a highly dynamic and active marriage built on mutual goals and collaborative action. While their approaches may differ, they are united in their basic path."
+            elif diff in [6, 8] or diff_rev in [6, 8]:
+                lagna_dyn = f"The D9 Ascendant signs (Boy: {boy_d9_asc}, Girl: {girl_d9_asc}) are in a challenging 6-8 (Shadastak) relationship. This represents divergent inner needs in partnership. One may seek freedom and space while the other seeks security and emotional intimacy, requiring conscious communication to bridge the gap."
+            else:
+                lagna_dyn = f"The D9 Ascendant signs (Boy: {boy_d9_asc}, Girl: {girl_d9_asc}) are in a {diff}-{diff_rev} relationship, indicating a unique temperament combination that thrives on compromise and mutual discovery."
+
         navamsa_desc = f"""
-        <b>Inner Relationship Dynamics:</b><br/>
-        The Navamsa (D9) chart reveals the subconscious marital blueprint. The Boy's D9 Ascendant is {boy_d9_asc} and 7th house sign is {boy_d9_7th}, while the Girl's D9 Ascendant is {girl_d9_asc} and 7th house sign is {girl_d9_7th}. Venus represents romantic expression (Boy D9 Venus: {boy_d9_venus}, Girl D9 Venus: {girl_d9_venus}). For a definitive, cross-chart synthesis and check of stress or separation indicators, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
+        <b>D9 Venus Compatibility:</b><br/>
+        {venus_compatibility}<br/><br/>
+        <b>D9 7th House Cross-Compatibility:</b><br/>
+        &bull; {cross_7th_1}<br/>
+        &bull; {cross_7th_2}<br/><br/>
+        <b>Inner Marriage Dynamic:</b><br/>
+        {lagna_dyn}
         """
         story.append(Paragraph(navamsa_desc, body_style))
         story.append(PageBreak())
@@ -614,21 +737,72 @@ Synthesize the reading:
         nadi_status = "NADI DOSHA PRESENT (0/8 Gunas)" if float(nadi_obtained) == 0.0 else "Nadi Compatibility is Clean (8/8 Gunas)"
         bhakoot_status = "BHAKOOT DOSHA PRESENT (0/7 Gunas)" if float(bhakoot_obtained) == 0.0 else "Bhakoot Compatibility is Clean (7/7 Gunas)"
         
+        boy_rashi_lord = SIGN_LORDS.get(boy_rashi, "Sun")
+        girl_rashi_lord = SIGN_LORDS.get(girl_rashi, "Jupiter")
+        
+        def are_rashi_friends(p1, p2):
+            FRIENDSHIP_LOCAL = {
+                "Sun": ["Moon", "Mars", "Jupiter"],
+                "Moon": ["Sun", "Mercury"],
+                "Mars": ["Sun", "Moon", "Jupiter"],
+                "Mercury": ["Sun", "Venus", "Rahu"],
+                "Jupiter": ["Sun", "Moon", "Mars"],
+                "Venus": ["Mercury", "Saturn", "Rahu"],
+                "Saturn": ["Mercury", "Venus", "Rahu"]
+            }
+            if p1 == p2:
+                return True
+            return p2 in FRIENDSHIP_LOCAL.get(p1, []) or p1 in FRIENDSHIP_LOCAL.get(p2, [])
+
+        nadi_cancelled = False
+        nadi_reason = ""
+        
+        if float(nadi_obtained) == 8.0:
+            nadi_verdict = "CLEAN (No Nadi Dosha)"
+        else:
+            if boy_rashi != girl_rashi and are_rashi_friends(boy_rashi_lord, girl_rashi_lord):
+                nadi_cancelled = True
+                nadi_reason = f"Cancelled/Mitigated because Moon signs are different ({boy_rashi} and {girl_rashi}) and their Rashi lords ({boy_rashi_lord} and {girl_rashi_lord}) are natural friends."
+            elif boy_moon.get("nakshatra") != girl_moon.get("nakshatra") and boy_rashi == girl_rashi:
+                nadi_cancelled = True
+                nadi_reason = "Cancelled because Moon signs are same but Nakshatras are different."
+            elif boy_moon.get("nakshatra") == girl_moon.get("nakshatra") and boy_rashi != girl_rashi:
+                nadi_cancelled = True
+                nadi_reason = "Cancelled because Nakshatras are same but Moon signs are different."
+            else:
+                nadi_cancelled = False
+                nadi_reason = "No cancellation condition met."
+                
+            nadi_verdict = f"MITIGATED ({nadi_reason})" if nadi_cancelled else "ACTIVE"
+
+        bhakoot_cancelled = False
+        bhakoot_reason = ""
+        
+        if float(bhakoot_obtained) == 7.0:
+            bhakoot_verdict = "CLEAN (No Bhakoot Dosha)"
+        else:
+            if are_rashi_friends(boy_rashi_lord, girl_rashi_lord):
+                bhakoot_cancelled = True
+                bhakoot_reason = f"Mitigated because the Moon sign lords ({boy_rashi_lord} and {girl_rashi_lord}) are natural friends in Vedic astrology."
+            else:
+                bhakoot_cancelled = False
+                bhakoot_reason = f"Active because Moon sign lords ({boy_rashi_lord} and {girl_rashi_lord}) are not natural friends."
+                
+            bhakoot_verdict = f"MITIGATED ({bhakoot_reason})" if bhakoot_cancelled else "ACTIVE"
+
         dosha_desc = f"""
         <b>1. Mangal Dosha (Mars Influence):</b><br/>
         &bull; Boy: {boy_mangal_text} (Cancellations: {', '.join(boy_mangal_cancellations) if boy_mangal_cancellations else 'None'})<br/>
         &bull; Girl: {girl_mangal_text} (Cancellations: {', '.join(girl_mangal_cancellations) if girl_mangal_cancellations else 'None'})<br/>
-        &bull; Overall Status: {"Mangal Dosha is Cancelled / Mitigated" if request.mangal_dosha_cancelled else "No significant Mangal Dosha concerns" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "Active Mangal Dosha present"}<br/><br/>
+        &bull; Overall Status: <b>{"CANCELLED / MITIGATED" if request.mangal_dosha_cancelled else "NO DOSHA" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "ACTIVE"}</b><br/><br/>
         
         <b>2. Nadi Dosha Audit:</b><br/>
         &bull; Status: {nadi_status} (Boy Nadi: {boy_nadi}, Girl Nadi: {girl_nadi}).<br/>
-        &bull; Nadi Dosha is classically checked for cancellation based on Moon sign differences, Nakshatra differences, Nakshatra lord relationships, or Rashi lord friendships.<br/><br/>
+        &bull; Final Verdict: <b>{nadi_verdict}</b><br/><br/>
         
         <b>3. Bhakoot Dosha Audit:</b><br/>
-        &bull; Status: {bhakoot_status}. Leo and Pisces form a 6-8 (Shadastak) relationship, triggering Bhakoot Dosha.<br/>
-        &bull; Mitigation occurs if the Rashi lords (Sun and Jupiter) are mutual friends in Vedic astrology.<br/><br/>
-        
-        For the definitive, final astrological verdicts and cancellations regarding both Nadi and Bhakoot Doshas, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
+        &bull; Status: {bhakoot_status}. Relative signs {boy_rashi} and {girl_rashi} form a 6-8 (Shadastak) relationship.<br/>
+        &bull; Final Verdict: <b>{bhakoot_verdict}</b>
         """
         story.append(Paragraph(dosha_desc, body_style))
         story.append(PageBreak())
@@ -712,71 +886,89 @@ Synthesize the reading:
         now_dt = datetime.now()
         five_years_later = now_dt + dt_mod.timedelta(days=5*365.25)
         
-        def get_favorable_windows(chart_dict, seventh_lord):
+        def get_favorable_windows_v2(chart_dict, seventh_lord):
             windows = []
+            dashas = chart_dict.get("dashas", []) or []
             for ad in chart_dict.get("antardashas", []) or []:
                 start = parse_date(ad.get("start"))
                 end = parse_date(ad.get("end"))
                 if not start or not end:
                     continue
+                # Ensure only future windows are recommended relative to today
                 if end > now_dt and start < five_years_later:
                     lord = ad.get("lord")
+                    
+                    md_lord = "Unknown"
+                    for d in dashas:
+                        d_start = parse_date(d.get("start"))
+                        d_end = parse_date(d.get("end"))
+                        if d_start and d_end and d_start <= start <= d_end:
+                            md_lord = d.get("lord")
+                            break
+                            
                     score = 0
                     reason = ""
-                    if lord in ["Venus", "Jupiter"]:
+                    # Venus Mahadasha + Jupiter/Venus/Mercury Antardasha = highly favorable for marriage
+                    if md_lord == "Venus" and lord in ["Venus", "Jupiter", "Mercury"]:
+                        score = 4
+                        reason = f"Venus Mahadasha + favorable {lord} Antardasha (highly auspicious for marriage)"
+                    elif lord in ["Venus", "Jupiter"]:
                         score = 3
-                        reason = f"{lord} Antardasha (highly favorable for marriage)"
+                        reason = f"favorable {lord} Antardasha"
                     elif lord == seventh_lord:
                         score = 2
-                        reason = f"7th lord {lord} Antardasha (favorable for partnerships)"
+                        reason = f"7th lord {lord} Antardasha (supportive of marriage/commitment)"
                     elif lord in ["Saturn", "Rahu"]:
                         score = 1
-                        reason = f"{lord} Antardasha (favorable but indicates delays/patience)"
+                        reason = f"{lord} Antardasha (supporting marriage with patience/lessons)"
                     else:
                         score = 0
                         reason = f"{lord} Antardasha"
-                    windows.append({
-                        "start": start,
-                        "end": end,
-                        "start_str": ad.get("start"),
-                        "end_str": ad.get("end"),
-                        "lord": lord,
-                        "score": score,
-                        "reason": reason
-                    })
+                        
+                    # Adjust start date to be at least today's date if it started in the past
+                    effective_start = max(start, now_dt)
+                    if effective_start < end:
+                        windows.append({
+                            "start": effective_start,
+                            "end": end,
+                            "start_str": effective_start.strftime("%Y-%m-%d"),
+                            "end_str": ad.get("end"),
+                            "lord": lord,
+                            "md_lord": md_lord,
+                            "score": score,
+                            "reason": reason
+                        })
             return windows
             
-        boy_windows = get_favorable_windows(request.boy_chart, boy_7th_lord)
-        girl_windows = get_favorable_windows(request.girl_chart, girl_7th_lord)
+        boy_windows = get_favorable_windows_v2(request.boy_chart, boy_7th_lord)
+        girl_windows = get_favorable_windows_v2(request.girl_chart, girl_7th_lord)
         
-        best_overlap = None
-        best_score = -1
-        best_reason = ""
-        
+        overlaps = []
         for bw in boy_windows:
             for gw in girl_windows:
                 overlap_start = max(bw["start"], gw["start"])
                 overlap_end = min(bw["end"], gw["end"])
-                if overlap_start < overlap_end:
+                if overlap_start < overlap_end and overlap_end > now_dt:
                     combined_score = bw["score"] + gw["score"]
-                    if combined_score > best_score:
-                        best_score = combined_score
-                        best_overlap = (overlap_start, overlap_end)
-                        reasons = []
-                        if bw["score"] > 0:
-                            reasons.append(f"Boy is in {bw['reason']}")
-                        if gw["score"] > 0:
-                            reasons.append(f"Girl is in {gw['reason']}")
-                        if not reasons:
-                            reasons.append(f"both are in supportive dasha periods (Boy: {bw['lord']}, Girl: {gw['lord']})")
-                        best_reason = " and ".join(reasons)
-                        
-        if best_overlap and best_score >= 0:
-            start_str = best_overlap[0].strftime("%B %Y")
-            end_str = best_overlap[1].strftime("%B %Y")
-            verdict_text = f"The most auspicious marriage window in the next 5 years appears to be from {start_str} to {end_str} when {best_reason}."
+                    overlaps.append({
+                        "start": overlap_start,
+                        "end": overlap_end,
+                        "score": combined_score,
+                        "boy_lord": bw["lord"],
+                        "girl_lord": gw["lord"],
+                        "reason": f"{request.boy_name} is in {bw['reason']} and {request.girl_name} is in {gw['reason']}"
+                    })
+        
+        # Sort primarily by combined_score (descending) and secondarily by start date (ascending)
+        overlaps_sorted = sorted(overlaps, key=lambda x: (-x["score"], x["start"]))
+        
+        if overlaps_sorted:
+            best = overlaps_sorted[0]
+            start_str = best["start"].strftime("%B %Y")
+            end_str = best["end"].strftime("%B %Y")
+            verdict_text = f"The most auspicious upcoming marriage window is {start_str} to {end_str} when {best['reason']}."
         else:
-            verdict_text = "The most auspicious marriage window in the next 5 years appears to be between late 2027 and mid 2029 when Jupiter's transit aspects the 7th house for both charts, supporting commitment."
+            verdict_text = "The most auspicious upcoming marriage window is between late 2027 and mid 2029 when Jupiter's transit aspects the 7th house for both charts, supporting commitment."
             
         # Analyze and list marriage-favorable dashas for both
         def get_marriage_favorable_info(name, md_lord, ad_lord, next_ads, seventh_lord):
@@ -842,12 +1034,43 @@ Synthesize the reading:
         rating_stars = "✦ ✦ ✦ ✦ ✦" if request.total_score >= 25 else "✦ ✦ ✦ ✦" if request.total_score >= 18 else "✦ ✦ ✦" if request.total_score >= 14 else "✦ ✦"
         rating_label = "EXCELLENT" if request.total_score >= 25 else "GOOD" if request.total_score >= 18 else "AVERAGE" if request.total_score >= 14 else "CHALLENGING"
         
+        # Strongest Asset
+        maitri_item = next((item for item in request.ashtakoota_breakdown if item["name"] == "Maitri"), None)
+        maitri_score = float(maitri_item["obtained_points"]) if maitri_item else 0.0
+        
+        strongest_asset = ""
+        if maitri_score >= 4.0:
+            strongest_asset = f"Strong Graha Maitri (Friendship Lord score: {maitri_score}/5) indicating mutual intellectual compatibility, combined with a friendly 3-11 Upapada Lagna relationship."
+        else:
+            strongest_asset = f"Stable Ashtakoota alignment combined with favorable spousal Darakaraka indicators."
+            
+        # Biggest Challenge
+        gana_item = next((item for item in request.ashtakoota_breakdown if item["name"] == "Gana"), None)
+        gana_score = float(gana_item["obtained_points"]) if gana_item else 0.0
+        
+        biggest_challenge = ""
+        if gana_score == 0.0:
+            biggest_challenge = "Gana mismatch (clashing emotional temperaments) and challenging D9 Navamsa cross-chart placements."
+        else:
+            biggest_challenge = "Adjustments in day-to-day lifestyle patterns and managing minor emotional differences during unfavorable transits."
+
+        # Format verdicts list
+        dosha_summary = f"Nadi Dosha is {nadi_verdict.split(' ')[0]}, Bhakoot Dosha is {bhakoot_verdict.split(' ')[0]}, Mangal Dosha is {'Cancelled/Mitigated' if request.mangal_dosha_cancelled else 'No Dosha' if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else 'Active'}."
+        
         conclusion_text = f"""
-        <b>Final Compatibility Verdict:</b><br/>
+        <b>Final Compatibility Summary:</b><br/>
         &bull; Overall Score: <b>{request.total_score} / 36 Gunas</b><br/>
         &bull; Rating: <font color='#c9a84c'><b>{rating_stars} ({rating_label})</b></font><br/><br/>
         
-        Vedic horoscope matching provides a roadmap of the energies at play, showing areas of natural harmony and areas requiring conscious effort. For the complete compatibility percentage dashboard, detailed Jaimini/Navamsa assessments, and dasha-based timing predictions, please refer to the comprehensive AI synthesis on the preceding pages.
+        <b>Key Astrological Verdicts:</b><br/>
+        &bull; <b>Dosha Status:</b> {dosha_summary}<br/>
+        &bull; <b>Strongest Asset:</b> {strongest_asset}<br/>
+        &bull; <b>Biggest Challenge:</b> {biggest_challenge}<br/><br/>
+        
+        <b>Dasha Recommendation:</b><br/>
+        {verdict_text}<br/><br/>
+        
+        <i>May the cosmic union of {request.boy_name} and {request.girl_name} blossom with deep love, patience, and mutual growth under the auspicious guidance of the stars.</i>
         """
         story.append(Paragraph(conclusion_text, body_style))
         
