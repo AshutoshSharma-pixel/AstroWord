@@ -758,7 +758,8 @@ Synthesize the reading:
         nadi_reason = ""
         
         if float(nadi_obtained) == 8.0:
-            nadi_verdict = "CLEAN (No Nadi Dosha)"
+            nadi_verdict = "MITIGATED"
+            nadi_reason = "No Nadi Dosha present (Moon Nadis are different)."
         else:
             if boy_rashi != girl_rashi and are_rashi_friends(boy_rashi_lord, girl_rashi_lord):
                 nadi_cancelled = True
@@ -773,13 +774,14 @@ Synthesize the reading:
                 nadi_cancelled = False
                 nadi_reason = "No cancellation condition met."
                 
-            nadi_verdict = f"MITIGATED ({nadi_reason})" if nadi_cancelled else "ACTIVE"
+            nadi_verdict = "MITIGATED" if nadi_cancelled else "ACTIVE"
 
         bhakoot_cancelled = False
         bhakoot_reason = ""
         
         if float(bhakoot_obtained) == 7.0:
-            bhakoot_verdict = "CLEAN (No Bhakoot Dosha)"
+            bhakoot_verdict = "MITIGATED"
+            bhakoot_reason = "No Bhakoot Dosha present (Moon signs do not form 2-12, 5-9, or 6-8 placement)."
         else:
             if are_rashi_friends(boy_rashi_lord, girl_rashi_lord):
                 bhakoot_cancelled = True
@@ -788,13 +790,13 @@ Synthesize the reading:
                 bhakoot_cancelled = False
                 bhakoot_reason = f"Active because Moon sign lords ({boy_rashi_lord} and {girl_rashi_lord}) are not natural friends."
                 
-            bhakoot_verdict = f"MITIGATED ({bhakoot_reason})" if bhakoot_cancelled else "ACTIVE"
+            bhakoot_verdict = "MITIGATED" if bhakoot_cancelled else "ACTIVE"
 
         dosha_desc = f"""
         <b>1. Mangal Dosha (Mars Influence):</b><br/>
         &bull; Boy: {boy_mangal_text} (Cancellations: {', '.join(boy_mangal_cancellations) if boy_mangal_cancellations else 'None'})<br/>
         &bull; Girl: {girl_mangal_text} (Cancellations: {', '.join(girl_mangal_cancellations) if girl_mangal_cancellations else 'None'})<br/>
-        &bull; Overall Status: <b>{"CANCELLED / MITIGATED" if request.mangal_dosha_cancelled else "NO DOSHA" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "ACTIVE"}</b><br/><br/>
+        &bull; Overall Status: <b>{"MITIGATED" if request.mangal_dosha_cancelled else "NO DOSHA" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "ACTIVE"}</b><br/><br/>
         
         <b>2. Nadi Dosha Audit:</b><br/>
         &bull; Status: {nadi_status} (Boy Nadi: {boy_nadi}, Girl Nadi: {girl_nadi}).<br/>
@@ -1040,7 +1042,7 @@ Synthesize the reading:
         
         strongest_asset = ""
         if maitri_score >= 4.0:
-            strongest_asset = f"Strong Graha Maitri (Friendship Lord score: {maitri_score}/5) indicating mutual intellectual compatibility, combined with a friendly 3-11 Upapada Lagna relationship."
+            strongest_asset = f"Maitri {int(maitri_score)}/5 + friendly 3-11 Upapada Lagna relationship."
         else:
             strongest_asset = f"Stable Ashtakoota alignment combined with favorable spousal Darakaraka indicators."
             
@@ -1049,13 +1051,16 @@ Synthesize the reading:
         gana_score = float(gana_item["obtained_points"]) if gana_item else 0.0
         
         biggest_challenge = ""
-        if gana_score == 0.0:
-            biggest_challenge = "Gana mismatch (clashing emotional temperaments) and challenging D9 Navamsa cross-chart placements."
+        if gana_score <= 1.0:
+            biggest_challenge = "Gana mismatch + D9 cross-chart 6-8 relationship."
         else:
             biggest_challenge = "Adjustments in day-to-day lifestyle patterns and managing minor emotional differences during unfavorable transits."
 
         # Format verdicts list
-        dosha_summary = f"Nadi Dosha is {nadi_verdict.split(' ')[0]}, Bhakoot Dosha is {bhakoot_verdict.split(' ')[0]}, Mangal Dosha is {'Cancelled/Mitigated' if request.mangal_dosha_cancelled else 'No Dosha' if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else 'Active'}."
+        nadi_status_str = "Nadi mitigated" if (nadi_verdict == "MITIGATED") else "Nadi active"
+        bhakoot_status_str = "Bhakoot mitigated" if (bhakoot_verdict == "MITIGATED") else "Bhakoot active"
+        mangal_status_str = "No Mangal" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "Mangal mitigated" if request.mangal_dosha_cancelled else "Mangal active"
+        dosha_summary = f"{nadi_status_str}, {bhakoot_status_str}, {mangal_status_str}"
         
         conclusion_text = f"""
         <b>Final Compatibility Summary:</b><br/>
@@ -1063,7 +1068,7 @@ Synthesize the reading:
         &bull; Rating: <font color='#c9a84c'><b>{rating_stars} ({rating_label})</b></font><br/><br/>
         
         <b>Key Astrological Verdicts:</b><br/>
-        &bull; <b>Dosha Status:</b> {dosha_summary}<br/>
+        &bull; <b>Dosha Status:</b> ({dosha_summary})<br/>
         &bull; <b>Strongest Asset:</b> {strongest_asset}<br/>
         &bull; <b>Biggest Challenge:</b> {biggest_challenge}<br/><br/>
         
