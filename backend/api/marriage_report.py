@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import time
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
@@ -226,14 +227,43 @@ REMEDIES & GUIDANCE
 Be specific, personal, and detailed. Minimum 1200 words total.
 """
 
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=8192
-            )
-        )
-        response_text = response.text.strip()
+        # 3. Call Gemini with retry logic
+        response_text = ""
+        max_retries = 3
+        backoff = 2
+        for attempt in range(max_retries + 1):
+            try:
+                response = call_gemini_new(
+                    prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.4,
+                        max_output_tokens=8192
+                    )
+                )
+                response_text = response.text.strip()
+                if response_text:
+                    break
+            except Exception as e:
+                print(f"[ERROR] Gemini API attempt {attempt + 1} failed: {str(e)}")
+                if attempt < max_retries:
+                    print(f"Retrying in {backoff} seconds...")
+                    time.sleep(backoff)
+                    backoff *= 2
+                else:
+                    print("[ERROR] All Gemini retries failed. Saving pending order to Firestore.")
+                    report_order_ref = db.collection("report_orders").document(request.payment_id)
+                    report_order_ref.set({
+                        "payment_id": request.payment_id,
+                        "user_id": request.user_id,
+                        "amount": 199,
+                        "razorpay_order_id": request.razorpay_order_id,
+                        "razorpay_signature": request.razorpay_signature,
+                        "pdf_generated": False,
+                        "pending_retry": True,
+                        "status": "pending_retry",
+                        "timestamp": firestore.SERVER_TIMESTAMP
+                    })
+                    return {"success": True, "message": "Your report is being generated and will be emailed within 10 minutes"}
 
         # 4. Parse Response and Generate HTML
         section_titles = [

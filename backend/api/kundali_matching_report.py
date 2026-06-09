@@ -4,6 +4,7 @@ import re
 import base64
 import hmac
 import hashlib
+import time
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
@@ -231,15 +232,45 @@ Synthesize the reading:
 - Dasha Timings: Look at the dasha timeline for both. Identify specific years/periods in the next 5-10 years when the relationship will be tested (e.g., during Rahu or Saturn sub-periods or when 7th lord is afflicted) and when it will flourish (e.g., during Jupiter/Venus sub-periods). State these timeframes by name and date.
 """
 
-        response = call_gemini_new(
-            prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.4,
-                max_output_tokens=4096,
-                thinking_config=types.ThinkingConfig(thinking_budget=0)
-            )
-        )
-        gemini_verdict = response.text or ""
+        # 2. Call Gemini for AI Verdict & Remedies with retry logic
+        gemini_verdict = ""
+        max_retries = 3
+        backoff = 2
+        for attempt in range(max_retries + 1):
+            try:
+                response = call_gemini_new(
+                    prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.4,
+                        max_output_tokens=4096,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0)
+                    )
+                )
+                gemini_verdict = response.text or ""
+                if gemini_verdict:
+                    break
+            except Exception as e:
+                print(f"[ERROR] Gemini API attempt {attempt + 1} failed: {str(e)}")
+                if attempt < max_retries:
+                    print(f"Retrying in {backoff} seconds...")
+                    time.sleep(backoff)
+                    backoff *= 2
+                else:
+                    print("[ERROR] All Gemini retries failed. Saving pending order to Firestore.")
+                    order_ref = db.collection("kundali_match_orders").document(request.razorpay_order_id)
+                    order_ref.set({
+                        "buyer_email": request.buyer_email,
+                        "boy_name": request.boy_name,
+                        "girl_name": request.girl_name,
+                        "amount": 399,
+                        "razorpay_order_id": request.razorpay_order_id,
+                        "razorpay_payment_id": request.razorpay_payment_id,
+                        "razorpay_signature": request.razorpay_signature,
+                        "pdf_generated": False,
+                        "pending_retry": True,
+                        "timestamp": firestore.SERVER_TIMESTAMP
+                    })
+                    return {"success": True, "message": "Your report is being generated and will be emailed within 10 minutes"}
 
         # 3. Generate PDF using ReportLab
         file_path = f"/tmp/kundali_match_{request.razorpay_order_id}.pdf"
