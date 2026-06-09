@@ -156,31 +156,79 @@ async def generate_kundali_report(request: KundaliReportRequest, db=Depends(get_
     try:
         # 2. Call Gemini for AI Verdict & Remedies
         prompt = f"""You are a master Vedic astrologer specializing in relationship compatibility (Kundali Matching / Milan).
-Analyze the compatibility between {request.boy_name} (Boy) and {request.girl_name} (Girl) based on the comprehensive data below.
+Provide a deeply personalized, highly specific, and engaging compatibility reading for {request.boy_name} (Boy) and {request.girl_name} (Girl).
 
-ASTROLOGICAL DATA:
+CRITICAL DIRECTIVES:
+1. MAKE DEFINITIVE STATEMENTS — Do NOT use conditional language like "if", "may", "might", or "could" when planetary details, signs, and scores are already provided in the data. You must analyze the exact placements and state their direct influence.
+   - Example (Wrong): "If Leo and Virgo Venus are friendly, they will share affection well."
+   - Example (Right): "Leo Venus (Sun-ruled) and Virgo Venus (Mercury-ruled) — Sun and Mercury are neutral planets. This means their expressions of love are fundamentally different: he shows love through grand gestures and pride, she through quiet acts of service and attention to detail. Neither is wrong, but neither comes naturally to the other. This requires conscious effort."
+2. PERSONALIZED DETAIL — Use the couple's actual names ({request.boy_name} and {request.girl_name}) throughout. Reference specific signs, houses, nakshatras, and lords. No sentence should be generic or applicable to any couple; if a sentence could be true for another couple, rewrite it to be specific.
+3. TONE — Warm, wise, like a senior astrologer who genuinely cares about this couple's growth.
+4. LENGTH — Write between 1,200 and 1,500 words.
+
+INPUT ASTROLOGICAL DATA:
 - Total Guna Milan Score: {request.total_score} / 36
 - Ashtakoota Breakdown: {json.dumps(request.ashtakoota_breakdown)}
-- Mangal Dosha Boy: {request.mangal_dosha_boy}
-- Mangal Dosha Girl: {request.mangal_dosha_girl}
+- Mangal Dosha status: Boy Manglik = {request.mangal_dosha_boy}, Girl Manglik = {request.mangal_dosha_girl}, Couple Cancelled/Mitigated = {request.mangal_dosha_cancelled}
 - Boy Jaimini Karakas: {json.dumps(request.boy_jaimini_karakas)}
 - Girl Jaimini Karakas: {json.dumps(request.girl_jaimini_karakas)}
-- Boy Upapada Lagna: {json.dumps(request.boy_upapada_lagna)}
-- Girl Upapada Lagna: {json.dumps(request.girl_upapada_lagna)}
-- Boy D9 Navamsa: Ascendant={request.boy_chart.get('d9_ascendant', 'Unknown')}, Moon Sign={request.boy_chart.get('planets', {}).get('Moon', {}).get('d9', {}).get('sign', 'Unknown')}, Venus Sign={request.boy_chart.get('planets', {}).get('Venus', {}).get('d9', {}).get('sign', 'Unknown')}
-- Girl D9 Navamsa: Ascendant={request.girl_chart.get('d9_ascendant', 'Unknown')}, Moon Sign={request.girl_chart.get('planets', {}).get('Moon', {}).get('d9', {}).get('sign', 'Unknown')}, Venus Sign={request.girl_chart.get('planets', {}).get('Venus', {}).get('d9', {}).get('sign', 'Unknown')}
-- Boy Current Mahadasha: {request.boy_chart.get('current_mahadasha', {}).get('lord', 'Unknown') if request.boy_chart.get('current_mahadasha') else 'Unknown'}
-- Girl Current Mahadasha: {request.girl_chart.get('current_mahadasha', {}).get('lord', 'Unknown') if request.girl_chart.get('current_mahadasha') else 'Unknown'}
+- Boy Upapada Lagna (UL): {json.dumps(request.boy_upapada_lagna)}
+- Girl Upapada Lagna (UL): {json.dumps(request.girl_upapada_lagna)}
+- Boy Full Birth Chart Details (D1 & D9 Placements, Dashas):
+{request.boy_chart.get('description_text', '')}
+- Girl Full Birth Chart Details (D1 & D9 Placements, Dashas):
+{request.girl_chart.get('description_text', '')}
 
-Generate a deeply personalized compatibility verdict + remedies.
-The output should cover:
-1. Overall Compatibility Verdict: A synthesis of the Guna Milan score, Jaimini, and Navamsa factors. Explain how their temperaments and life purposes align.
-2. Areas of Strength: What holds them together?
-3. Potential Areas of Friction: What challenges might arise (e.g., Gana mismatch, Nadi dosha, Bhakoot dosha, or Mangal dosha)?
-4. Practical Remedies: 4-5 tailored Vedic remedies (mantras, charity, behaviors, rituals) to mitigate any doshas and enhance relationship harmony.
+YOUR REPORT MUST CONTAIN THE FOLLOWING SECTIONS IN ORDER (Use '## Heading' format for each):
 
-Write a minimum of 700 words. Keep the tone warm, professional, reassuring, and precise.
-Provide the response in plain text or Markdown. Do not include JSON formatting.
+## 1. Compatibility Percentage Dashboard
+Display these 7 scores as percentages, calculated based on the actual chart data and scores:
+- Overall Compatibility: [Compute as (total score / 36) * 100%]
+- Emotional Match: [Derived from Tara + Nadi + Moon sign analysis. Look at the Moon signs, nakshatra nadis, and Tara score to calculate a specific percentage.]
+- Marriage Stability: [Derived from Bhakoot + Nadi + D9 7th house. Look at whether Bhakoot and Nadi are present/clean, and the D9 7th house placements/lords.]
+- Communication: [Derived from Maitri + Mercury placements in D9. Look at Graha Maitri score and the Mercury signs in D9.]
+- Family Harmony: [Derived from Gana + Varna + 4th house. Look at Gana/Varna scores and D1/D9 4th houses.]
+- Physical Chemistry: [Derived from Yoni + Venus placements in D9. Look at Yoni score and Venus signs/relationships in D9.]
+- Long-Term Growth: [Derived from Tara + Dasha alignment. Look at upcoming dashas and Tara score.]
+Provide a 2-3 sentence explanation for each score, explaining how the specific placements led to that exact percentage.
+
+## 2. Jaimini Soul & Spousal Compatibility
+Analyze the following Jaimini parameters in depth:
+- Both have Saturn as Darakaraka: Explain exactly what this means. Since Saturn represents structure, duty, delays, and discipline, both seek a mature, responsible, and stable partner. Analyze specifically if they are that for each other, or if they bring coldness/rigidity.
+- Boy UL in Gemini, Girl UL in Aries: Gemini and Aries are in a 3-11 relationship (friendly). Explain what this means for their marriage contract, commitment resilience, and financial prosperity.
+- Atmakarakas: Analyze the Boy's Atmakaraka (soul ruler) planet vs the Girl's Atmakaraka planet. Explain the specific spiritual dynamic (e.g., if one is Mercury and the other is Jupiter, explain the intellect vs wisdom dynamic).
+
+## 3. D9 Navamsa Depth Analysis
+Evaluate the inner marriage reality using this framework for EACH person:
+- D9 Lagna: Detail what the D9 Lagna sign says about their inner expectation of marriage and true relationship behavior.
+- D9 7th House Sign: Identify the sign of the 7th house in D9 and describe the kind of partner they attract in reality.
+- D9 7th Lord: Identify the D9 7th lord, its placement (house/sign), and whether it is strong (exalted, friendly, own sign) or weak/challenged (debilitated, combust, enemy sign).
+- Venus in D9: Analyze the dignity and sign of Venus in D9, and how it impacts their romantic expression.
+- Cross-Chart Synastry: Compare the Boy's D9 7th house with the Girl's D9 Lagna, and the Girl's D9 7th house with the Boy's D9 Lagna. Explain if they match each other's marital blueprint.
+- Separation/Stress Indicators: Check for classical rules: Malefics (Mars, Saturn, Rahu, Ketu, Sun) in D9 7th house without benefic (Jupiter, Venus) support, or the D9 7th lord placed in a dusthana (6th, 8th, or 12th house). State exactly what is present in THEIR charts, and do not write generic warnings if none exist.
+
+## 4. Conclusive Dosha & Mitigation Audit
+Provide a definitive analysis and final verdict for:
+- Nadi Dosha: Perform a systematic audit of all cancellation conditions:
+  * Are their Moon signs different? (Yes/No - check Leo vs Pisces)
+  * Are their Nakshatras different? (Yes/No - check Magha vs Revati)
+  * Are their Nakshatra lords different or Rashi lords friendly? (Yes/No - check Sun and Jupiter)
+  Provide a final definitive verdict: Is Nadi Dosha active or is it cancelled? (Note: different Moon signs with friendly Rashi lords Sun and Jupiter cancels/mitigates Nadi Dosha. Explain this clearly).
+- Bhakoot Dosha: The Moon signs Leo and Pisces form a 6-8 (Shadastak) placement, which triggers Bhakoot Dosha. Rashi lords are Sun (Leo) and Jupiter (Pisces). Because Sun and Jupiter are natural friends, this Bhakoot Dosha is mitigated. State this definitively.
+- Mangal Dosha: State the Manglik status of each and whether it is cancelled or balanced.
+
+## 5. Why This Match Has Potential Despite The Challenges
+Provide a positive counterweight:
+- List 4-5 genuine strengths from their actual charts (e.g., friendly sign alignments, strong D9 ascendants, supportive dashas).
+- Explain the specific attraction dynamic that draws them together.
+- Frame challenges as mutual growth opportunities.
+- End this section with hope and encouragement, not doom.
+
+## 6. Actionable Conclusion & Dasha Timings
+Synthesize the reading:
+- Summarize the dashboard.
+- Give highly specific, actionable advice for their specific doshas and planetary mismatches (e.g., behaviors, charity, or spiritual remedies).
+- Dasha Timings: Look at the dasha timeline for both. Identify specific years/periods in the next 5-10 years when the relationship will be tested (e.g., during Rahu or Saturn sub-periods or when 7th lord is afflicted) and when it will flourish (e.g., during Jupiter/Venus sub-periods). State these timeframes by name and date.
 """
 
         response = call_gemini_new(
@@ -470,7 +518,7 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
         
         jaimini_desc = f"""
         <b>Soul & Karmic Alignment:</b><br/>
-        The Atmakaraka represents the soul's primary mission in this lifetime. The Boy's soul is anchored by {boy_ak.get('planet', 'N/A')}, whereas the Girl's soul is guided by {girl_ak.get('planet', 'N/A')}. This creates a dynamic where the partners will teach each other significant life lessons. The Darakaraka planets reveal the qualities they seek in a spouse. The Boy's chart points to {boy_dk.get('planet', 'N/A')} qualities (representing his ideal spouse), and the Girl's chart points to {girl_dk.get('planet', 'N/A')} qualities. The Upapada Lagnas (Boy: {request.boy_upapada_lagna.get('upapada_lagna')}, Girl: {request.girl_upapada_lagna.get('upapada_lagna')}) represent the commitment and long-term compatibility. If these signs are friendly or in trines/quadrants, it indicates a strong, resilient marriage contract.
+        The Atmakaraka represents the soul's primary mission in this lifetime (Boy: {boy_ak.get('planet', 'N/A')}, Girl: {girl_ak.get('planet', 'N/A')}). The Darakaraka reveals the qualities sought in a partner (Boy: {boy_dk.get('planet', 'N/A')}, Girl: {girl_dk.get('planet', 'N/A')}). The Upapada Lagna (Boy: {request.boy_upapada_lagna.get('upapada_lagna', 'N/A')}, Girl: {request.girl_upapada_lagna.get('upapada_lagna', 'N/A')}) governs the marital commitment and legal bond. For a deeply personalized, definitive compatibility reading of these karmic indicators, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
         """
         story.append(Paragraph(jaimini_desc, body_style))
         story.append(PageBreak())
@@ -508,7 +556,7 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
         
         navamsa_desc = f"""
         <b>Inner Relationship Dynamics:</b><br/>
-        Venus represents the physical and emotional attraction in Navamsa. The Boy's Venus resides in {boy_d9_venus} while the Girl's Venus is in {girl_d9_venus}. If these signs are mutually friendly, it ensures natural compatibility in how they share love and affection. The 7th house of Navamsa indicates the quality of relationship stability and commitment. The Boy's 7th house sign of {boy_d9_7th} and the Girl's 7th house sign of {girl_d9_7th} indicate their individual marriage karma. When the D9 Ascendants are in mutual trines or friendly signs (e.g. Leo and Sagittarius, or Pisces and Cancer), it indicates a strong spiritual harmony that supports them through all worldly challenges.
+        The Navamsa (D9) chart reveals the subconscious marital blueprint. The Boy's D9 Ascendant is {boy_d9_asc} and 7th house sign is {boy_d9_7th}, while the Girl's D9 Ascendant is {girl_d9_asc} and 7th house sign is {girl_d9_7th}. Venus represents romantic expression (Boy D9 Venus: {boy_d9_venus}, Girl D9 Venus: {girl_d9_venus}). For a definitive, cross-chart synthesis and check of stress or separation indicators, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
         """
         story.append(Paragraph(navamsa_desc, body_style))
         story.append(PageBreak())
@@ -537,17 +585,19 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
         
         dosha_desc = f"""
         <b>1. Mangal Dosha (Mars Influence):</b><br/>
-        Boy: {boy_mangal_text} (Cancellations: {', '.join(boy_mangal_cancellations) if boy_mangal_cancellations else 'None'})<br/>
-        Girl: {girl_mangal_text} (Cancellations: {', '.join(girl_mangal_cancellations) if girl_mangal_cancellations else 'None'})<br/>
-        Overall Status: {"Mangal Dosha is Cancelled / Mitigated" if request.mangal_dosha_cancelled else "No significant Mangal Dosha concerns" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "Active Mangal Dosha present"}<br/><br/>
+        &bull; Boy: {boy_mangal_text} (Cancellations: {', '.join(boy_mangal_cancellations) if boy_mangal_cancellations else 'None'})<br/>
+        &bull; Girl: {girl_mangal_text} (Cancellations: {', '.join(girl_mangal_cancellations) if girl_mangal_cancellations else 'None'})<br/>
+        &bull; Overall Status: {"Mangal Dosha is Cancelled / Mitigated" if request.mangal_dosha_cancelled else "No significant Mangal Dosha concerns" if (not request.mangal_dosha_boy and not request.mangal_dosha_girl) else "Active Mangal Dosha present"}<br/><br/>
         
-        <b>2. Nadi Dosha:</b><br/>
-        Status: {nadi_status}<br/>
-        Nadi represents physiological compatibility and biological compatibility. A Nadi Dosha occurs when both partners share the same Nadi (Boy: {boy_nadi}, Girl: {girl_nadi}). This is traditionally believed to affect progeny health. However, Nadi Dosha is cancelled if the partners' Moon signs are different or if they share the same sign but have different Nakshatras.<br/><br/>
+        <b>2. Nadi Dosha Audit:</b><br/>
+        &bull; Status: {nadi_status} (Boy Nadi: {boy_nadi}, Girl Nadi: {girl_nadi}).<br/>
+        &bull; Nadi Dosha is classically checked for cancellation based on Moon sign differences, Nakshatra differences, Nakshatra lord relationships, or Rashi lord friendships.<br/><br/>
         
-        <b>3. Bhakoot Dosha:</b><br/>
-        Status: {bhakoot_status}<br/>
-        Bhakoot Dosha occurs when the relative distance of the Moon signs forms a 6-8 (Shadastak), 9-5 (Navapancham), or 12-2 (Dwirdwadash) position. This can trigger emotional distance or sudden arguments. Bhakoot Dosha is cancelled if the sign lords are mutual friends.
+        <b>3. Bhakoot Dosha Audit:</b><br/>
+        &bull; Status: {bhakoot_status}. Leo and Pisces form a 6-8 (Shadastak) relationship, triggering Bhakoot Dosha.<br/>
+        &bull; Mitigation occurs if the Rashi lords (Sun and Jupiter) are mutual friends in Vedic astrology.<br/><br/>
+        
+        For the definitive, final astrological verdicts and cancellations regarding both Nadi and Bhakoot Doshas, please refer to <b>Section 8: AI Verdict & Compatibility Synthesis</b>.
         """
         story.append(Paragraph(dosha_desc, body_style))
         story.append(PageBreak())
@@ -763,10 +813,10 @@ Provide the response in plain text or Markdown. Do not include JSON formatting.
         
         conclusion_text = f"""
         <b>Final Compatibility Verdict:</b><br/>
-        Overall Score: <b>{request.total_score} / 36 Gunas</b><br/>
-        Rating: <font color='#c9a84c'><b>{rating_stars} ({rating_label})</b></font><br/><br/>
+        &bull; Overall Score: <b>{request.total_score} / 36 Gunas</b><br/>
+        &bull; Rating: <font color='#c9a84c'><b>{rating_stars} ({rating_label})</b></font><br/><br/>
         
-        horoscope matching provides a map of the energies at play, showing areas of natural harmony and areas requiring conscious effort. A score of 18 or above represents an auspicious baseline for marriage. For matches with Nadi/Bhakoot/Mangal Doshas, performing regular remedies (like reciting mantras, performing charity, and cultivating mutual respect) helps build a strong, successful, and harmonious life partnership.
+        Vedic horoscope matching provides a roadmap of the energies at play, showing areas of natural harmony and areas requiring conscious effort. For the complete compatibility percentage dashboard, detailed Jaimini/Navamsa assessments, and dasha-based timing predictions, please refer to the comprehensive AI synthesis on the preceding pages.
         """
         story.append(Paragraph(conclusion_text, body_style))
         
