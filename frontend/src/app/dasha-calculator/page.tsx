@@ -367,6 +367,28 @@ export default function DashaCalculatorPage() {
 
 
 
+                <div className="bg-gradient-to-br from-indigo-500/15 to-purple-500/5 border border-indigo-400/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent" />
+                  <div className="relative z-10">
+                    <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-1">
+                      Relationship Compatibility
+                    </p>
+                    <h3 className="text-lg font-bold text-white mb-2">
+                      Know If You&apos;re Compatible? Try Kundali Matching
+                    </h3>
+                    <p className="text-sm text-text/70 mb-4">
+                      Free 36-point Ashtakoota + Jaimini compatibility analysis. 
+                      Premium 30-page AI report at ₹399.
+                    </p>
+                    <a
+                      href="/kundali-matching"
+                      className="inline-block bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
+                    >
+                      Try Free Kundali Matching →
+                    </a>
+                  </div>
+                </div>
+
                 {/* Marriage Report Upsell */}
                 <MarriageReportPreview chartData={chartData} calculatorType="dasha" />
 
