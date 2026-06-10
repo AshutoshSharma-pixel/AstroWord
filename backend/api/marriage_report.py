@@ -2,15 +2,70 @@ import os
 import json
 import re
 import time
+import base64
 from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
-from firebase_admin import firestore, storage
+from firebase_admin import firestore, storage, auth
+import resend
 from api.gemini_utils import call_gemini_new
 from google.genai import types
 from weasyprint import HTML
 
 router = APIRouter()
+resend.api_key = os.environ.get("RESEND_API_KEY", "")
+
+def send_marriage_report_email_bg(email: str, name: str, payment_id: str, pdf_bytes: bytes):
+    try:
+        file_content = base64.b64encode(pdf_bytes).decode('utf-8')
+        
+        # Clean first name
+        first_name = name.split()[0].capitalize() if name else "there"
+        
+        resend.Emails.send({
+            "from": "AstroWord <info@astroword.in>",
+            "to": email,
+            "subject": "Your AstroWord Marriage Report ✦ Attached",
+            "html": f"""
+            <div style="background:#0D0F1A; font-family:Georgia,serif; padding:40px 20px; color:#e8e4dc;">
+                <div style="max-width:560px; margin:0 auto; background:#13151F; border:1px solid #ffffff10; border-radius:20px; padding:40px 36px;">
+                    <h2 style="color:#C9A84C; font-weight:normal; margin:0 0 16px;">✦ Your Premium Marriage Report ✦</h2>
+                    <p style="color:#ffffff90; font-size:15px; line-height:1.8; margin:0 0 20px;">
+                        Hello {first_name},
+                    </p>
+                    <p style="color:#ffffff80; font-size:14px; line-height:1.7; margin:0 0 20px;">
+                        Thank you for purchasing the Premium Marriage Report on AstroWord.
+                        Your comprehensive AI-generated PDF astrological report is ready and attached to this email.
+                    </p>
+                    <p style="color:#ffffff60; font-size:13px; line-height:1.6; margin:0 0 20px;">
+                        <b>Report Highlights:</b><br/>
+                        - Your Cosmic Marriage Profile<br/>
+                        - Future Spouse Description (Appearance, Personality, Profession)<br/>
+                        - Auspicious Marriage Year Windows & Dasha Analysis<br/>
+                        - Love vs. Arranged Marriage Indicators<br/>
+                        - Spouse Name Initial Syllables<br/>
+                        - Compatibility Nature & 2026-2027 Transit Forecast<br/>
+                        - Custom Vedic Astrological Remedies
+                    </p>
+                    <div style="border-top:1px solid #ffffff08; margin:20px 0;"></div>
+                    <p style="color:#666666; font-size:12px; margin:0;">
+                        Warm regards,<br/>
+                        AstroWord Team · <a href="https://astroword.in" style="color:#C9A84C; text-decoration:none;">astroword.in</a>
+                    </p>
+                </div>
+            </div>
+            """,
+            "attachments": [
+                {
+                    "filename": f"marriage_report_{payment_id}.pdf",
+                    "content": file_content
+                }
+            ]
+        })
+        print(f"[SUCCESS] Marriage report email sent to {email} for payment {payment_id}")
+    except Exception as mail_err:
+        print(f"[ERROR] Failed to send marriage report email: {mail_err}")
+
 
 # ── Shared astrology constants (Duplicated from marriage.py) ──────────────────
 SIGN_LORDS = {
@@ -90,9 +145,20 @@ def get_db():
         return None
 
 @router.post("/marriage-report/generate")
-async def generate_marriage_report(request: GenerateReportRequest, db=Depends(get_db)):
+async def generate_marriage_report(request: GenerateReportRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
     if not db:
         raise HTTPException(status_code=500, detail="Database not initialized")
+        
+    # Fetch user's email from Auth using request.user_id
+    recipient_email = None
+    recipient_name = "there"
+    try:
+        user_record = auth.get_user(request.user_id)
+        recipient_email = user_record.email
+        recipient_name = user_record.display_name or "there"
+    except Exception as auth_err:
+        print(f"[ERROR] Failed to fetch user from Firebase Auth: {auth_err}")
+
         
     import hmac
     import hashlib
@@ -384,6 +450,15 @@ Be specific, personal, and detailed. Minimum 1200 words total.
             "report_generated_at": firestore.SERVER_TIMESTAMP,
             "status": "completed"
         })
+
+        if recipient_email:
+            background_tasks.add_task(
+                send_marriage_report_email_bg,
+                email=recipient_email,
+                name=recipient_name,
+                payment_id=request.payment_id,
+                pdf_bytes=pdf_bytes
+            )
 
         return {
             "success": True,
