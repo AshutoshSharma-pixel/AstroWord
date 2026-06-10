@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AmatyakarakaSEOContent from "./AmatyakarakaSEO";
 
 export const metadata: Metadata = {
   title: "Amatyakaraka Calculator — Free AI Career Reading",
@@ -74,6 +75,7 @@ export default function AmatyakarakaLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {children}
+      <AmatyakarakaSEOContent />
     </>
   );
 }
