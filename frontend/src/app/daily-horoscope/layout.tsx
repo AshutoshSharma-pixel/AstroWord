@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import DailyHoroscopeSEOContent from './DailyHoroscopeSEO';
 
 export const metadata: Metadata = {
   title: "Daily Planetary Transits — Today's Astrology Reading",
@@ -56,12 +57,13 @@ const faqSchema = {
 
 export default function TransitLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
-    </>
+      <DailyHoroscopeSEOContent />
+    </div>
   );
 }
