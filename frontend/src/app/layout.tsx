@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/astroword-logo.png',
   },
+  other: {
+    google: "notranslate",
+  },
   title: {
     default: "Free AI Vedic Astrologer — Ask Your Birth Chart Anything",
     template: "%s | AstroWord",
