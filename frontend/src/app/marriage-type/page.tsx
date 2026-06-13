@@ -60,13 +60,13 @@ export default function MarriageTypePage() {
 
     // Tagline cycler
     useEffect(() => {
-        if (isLoading && chartData && !result) {
+        if (isLoading && chartData) {
             const interval = setInterval(() => {
                 setTaglineIndex(prev => (prev < TAGLINES.length - 1 ? prev + 1 : prev));
             }, 2000);
             return () => clearInterval(interval);
         }
-    }, [isLoading, chartData, result]);
+    }, [isLoading, chartData]);
 
     const fetchMarriageType = async (chart: any) => {
         setIsLoading(true);
@@ -104,7 +104,6 @@ export default function MarriageTypePage() {
                         key_indicators: ["Analyzing..."]
                     };
                     setResult({ ...resultData });
-                    setIsLoading(false); // Stop loading animation, show the result card
                 },
                 (chunk) => {
                     resultData.reading += chunk;
@@ -120,6 +119,7 @@ export default function MarriageTypePage() {
                         }
                     };
                     setResult({ ...resultData });
+                    setIsLoading(false);
                     localStorage.setItem('astroword_chart', JSON.stringify(chart));
                 }
             );

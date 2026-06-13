@@ -62,13 +62,13 @@ export default function MarriageYearPage() {
 
     // Tagline cycler
     useEffect(() => {
-        if (isLoading && chartData && !result) {
+        if (isLoading && chartData) {
             const interval = setInterval(() => {
                 setTaglineIndex(prev => (prev < TAGLINES.length - 1 ? prev + 1 : prev));
             }, 2000);
             return () => clearInterval(interval);
         }
-    }, [isLoading, chartData, result]);
+    }, [isLoading, chartData]);
 
     useEffect(() => {
         return () => {
@@ -111,7 +111,6 @@ export default function MarriageYearPage() {
                 (meta) => {
                     resultData = { ...resultData, ...meta };
                     setResult({ ...resultData });
-                    setIsLoading(false);
                 },
                 (chunk) => {
                     streamBufferRef.current += chunk;
