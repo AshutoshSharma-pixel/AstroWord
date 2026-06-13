@@ -273,21 +273,21 @@ export default function SpouseInitialPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left mt-4">
                         <div className="bg-surface border border-border rounded-xl p-3 sm:p-4">
                             <p className="text-[10px] sm:text-xs text-muted font-mono mb-1">7th Lord Method</p>
-                            <p className="text-gold font-medium text-sm sm:text-base">{result.methods?.seventh_lord?.planet}</p>
-                            <p className="text-xs text-muted truncate">{result.methods?.seventh_lord?.nakshatra}</p>
-                            <p className="text-white font-mono text-lg mt-1">{result.methods?.seventh_lord?.primary_syllable}</p>
+                            <p className="text-gold font-medium text-sm sm:text-base">{result.method_seventh_lord?.planet}</p>
+                            <p className="text-xs text-muted truncate">{result.method_seventh_lord?.nakshatra}</p>
+                            <p className="text-white font-mono text-lg mt-1">{result.method_seventh_lord?.primary_syllable}</p>
                         </div>
                         <div className="bg-surface border border-border rounded-xl p-3 sm:p-4">
                             <p className="text-[10px] sm:text-xs text-muted font-mono mb-1">Darakaraka</p>
-                            <p className="text-gold font-medium text-sm sm:text-base">{result.methods?.darakaraka?.planet}</p>
-                            <p className="text-xs text-muted truncate">{result.methods?.darakaraka?.nakshatra}</p>
-                            <p className="text-white font-mono text-lg mt-1">{result.methods?.darakaraka?.primary_syllable}</p>
+                            <p className="text-gold font-medium text-sm sm:text-base">{result.method_darakaraka?.planet}</p>
+                            <p className="text-xs text-muted truncate">{result.method_darakaraka?.nakshatra}</p>
+                            <p className="text-white font-mono text-lg mt-1">{result.method_darakaraka?.primary_syllable}</p>
                         </div>
                         <div className="bg-surface border border-border rounded-xl p-3 sm:p-4">
                             <p className="text-[10px] sm:text-xs text-muted font-mono mb-1">Venus Karaka</p>
                             <p className="text-gold font-medium text-sm sm:text-base">Venus</p>
-                            <p className="text-xs text-muted truncate">{result.methods?.venus?.nakshatra}</p>
-                            <p className="text-white font-mono text-lg mt-1">{result.methods?.venus?.primary_syllable}</p>
+                            <p className="text-xs text-muted truncate">{result.method_venus?.nakshatra}</p>
+                            <p className="text-white font-mono text-lg mt-1">{result.method_venus?.primary_syllable}</p>
                         </div>
                     </div>
 
