@@ -208,6 +208,34 @@ export default function DarakarakaPage() {
                   planet={result.planet}
                 />
 
+                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
+                    <ReactMarkdown
+                        components={{
+                            h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,
+                            h3: ({ children }) => <h3 className="text-gold/80 text-lg font-medium mt-4 mb-2">{children}</h3>,
+                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
+                            p: ({ children }) => <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>,
+                            ul: ({ children }) => <ul className="space-y-2 mb-4 mt-2">{children}</ul>,
+                            li: ({ children }) => (
+                                <li className="flex items-start gap-3 text-text/90 text-[15px]">
+                                    <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
+                                    <span>{children}</span>
+                                </li>
+                            ),
+                        }}
+                    >
+                        {cleanReading(result.reading)}
+                    </ReactMarkdown>
+                    <p className="text-xs text-text/40 mt-4 pt-4 border-t border-border/30 text-center">
+                      This reading is for guidance and spiritual purposes only. Please consult 
+                      qualified professionals for medical, legal, or financial decisions. 
+                      <a href="/disclaimer" className="underline hover:text-text/60 transition-colors ml-1">
+                        Disclaimer
+                      </a>
+                    </p>
+                </div>
+
                 <div className="bg-gradient-to-br from-indigo-500/15 to-purple-500/5 border border-indigo-400/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent" />
                     <div className="relative z-10">
@@ -253,34 +281,6 @@ export default function DarakarakaPage() {
                         Get Full Marriage Report — ₹199
                     </button>
                     <p className="text-muted/50 text-xs">One-time payment · No subscription · Instant PDF</p>
-                </div>
-
-                <div className="bg-surface2/80 border border-border rounded-2xl p-6 sm:p-8 relative min-h-[400px]">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full" />
-                    <ReactMarkdown
-                        components={{
-                            h2: ({ children }) => <h2 className="text-gold font-serif text-xl font-medium mt-6 mb-3">{children}</h2>,
-                            h3: ({ children }) => <h3 className="text-gold/80 text-lg font-medium mt-4 mb-2">{children}</h3>,
-                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
-                            p: ({ children }) => <p className="text-text/90 leading-relaxed mb-4 text-[15px]">{children}</p>,
-                            ul: ({ children }) => <ul className="space-y-2 mb-4 mt-2">{children}</ul>,
-                            li: ({ children }) => (
-                                <li className="flex items-start gap-3 text-text/90 text-[15px]">
-                                    <span className="text-gold mt-1 text-[10px] flex-shrink-0">✦</span>
-                                    <span>{children}</span>
-                                </li>
-                            ),
-                        }}
-                    >
-                        {cleanReading(result.reading)}
-                    </ReactMarkdown>
-                    <p className="text-xs text-text/40 mt-4 pt-4 border-t border-border/30 text-center">
-                      This reading is for guidance and spiritual purposes only. Please consult 
-                      qualified professionals for medical, legal, or financial decisions. 
-                      <a href="/disclaimer" className="underline hover:text-text/60 transition-colors ml-1">
-                        Disclaimer
-                      </a>
-                    </p>
                 </div>
 
                 <div className="text-center py-4">
