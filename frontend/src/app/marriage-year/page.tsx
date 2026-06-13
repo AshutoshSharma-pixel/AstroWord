@@ -285,12 +285,21 @@ export default function MarriageYearPage() {
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">
                         Your Marriage Windows
                     </p>
-                    <h1 className="text-gold font-serif text-3xl">
-                        {result.most_likely_year}
-                    </h1>
-                    <p className="text-white/60 text-sm">
-                        Most auspicious year for marriage or any romantic relationship
-                    </p>
+                    {result.most_likely_year === "..." ? (
+                        <div className="space-y-3 animate-pulse py-2">
+                            <div className="h-9 w-32 bg-surface border border-border/20 rounded mx-auto" />
+                            <div className="h-3.5 w-2/3 bg-surface border border-border/20 rounded mx-auto" />
+                        </div>
+                    ) : (
+                        <>
+                            <h1 className="text-gold font-serif text-3xl">
+                                {result.most_likely_year}
+                            </h1>
+                            <p className="text-white/60 text-sm">
+                                Most auspicious year for marriage or any romantic relationship
+                            </p>
+                        </>
+                    )}
                 </div>
 
                 <ShareCard
@@ -302,39 +311,53 @@ export default function MarriageYearPage() {
 
                 <div className="space-y-3">
                     <p className="text-xs text-muted uppercase tracking-widest font-mono">All Marriage Windows</p>
-                    {result.windows?.map((window: any, i: number) => (
-                        <div key={i} className={`bg-surface2 border rounded-xl p-4 flex items-center justify-between ${i === 0 ? 'border-gold/30' : 'border-border'
-                            }`}>
-                            <div>
-                                <p className={`font-serif text-lg ${i === 0 ? 'text-gold' : 'text-white'}`}>
-                                    {window.year}
-                                </p>
-                                <p className="text-muted text-xs font-mono mt-0.5">
-                                    {window.dasha_period}
-                                </p>
-                            </div>
-                            <div className="text-right">
-                                <div className={`inline-block text-xs px-2 py-1 rounded-full border font-mono ${window.strength === 'Strong'
-                                    ? 'bg-gold/10 text-gold border-gold/20'
-                                    : window.strength === 'Moderate'
-                                        ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                                        : 'bg-white/5 text-white/40 border-white/10'
-                                    }`}>
-                                    {window.strength}
+                    {result.most_likely_year === "..." ? (
+                        <div className="space-y-3 animate-pulse">
+                            {[1, 2, 3].map((idx) => (
+                                <div key={idx} className="bg-surface2 border border-border rounded-xl p-4 flex justify-between items-center">
+                                    <div className="space-y-2">
+                                        <div className="h-5 w-16 bg-surface border border-border/20 rounded" />
+                                        <div className="h-3 w-24 bg-surface border border-border/20 rounded" />
+                                    </div>
+                                    <div className="h-6 w-20 bg-surface border border-border/20 rounded-full" />
                                 </div>
-                                <div className="text-muted text-xs mt-1">
-                                    <ReactMarkdown
-                                        components={{
-                                            strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
-                                            p: ({ children }) => <span className="inline">{children}</span>
-                                        }}
-                                    >
-                                        {window.reason}
-                                    </ReactMarkdown>
-                                </div>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        result.windows?.map((window: any, i: number) => (
+                            <div key={i} className={`bg-surface2 border rounded-xl p-4 flex items-center justify-between ${i === 0 ? 'border-gold/30' : 'border-border'
+                                }`}>
+                                <div>
+                                    <p className={`font-serif text-lg ${i === 0 ? 'text-gold' : 'text-white'}`}>
+                                        {window.year}
+                                    </p>
+                                    <p className="text-muted text-xs font-mono mt-0.5">
+                                        {window.dasha_period}
+                                    </p>
+                                </div>
+                                <div className="text-right">
+                                    <div className={`inline-block text-xs px-2 py-1 rounded-full border font-mono ${window.strength === 'Strong'
+                                        ? 'bg-gold/10 text-gold border-gold/20'
+                                        : window.strength === 'Moderate'
+                                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                                            : 'bg-white/5 text-white/40 border-white/10'
+                                        }`}>
+                                        {window.strength}
+                                    </div>
+                                    <div className="text-muted text-xs mt-1">
+                                        <ReactMarkdown
+                                            components={{
+                                                strong: ({ children }) => <strong className="text-white font-medium">{children}</strong>,
+                                                p: ({ children }) => <span className="inline">{children}</span>
+                                            }}
+                                        >
+                                            {window.reason}
+                                        </ReactMarkdown>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
 
                 <div className="bg-gradient-to-br from-gold/15 to-amber/5 border border-gold/40 rounded-2xl p-6 text-center space-y-3 relative overflow-hidden">
