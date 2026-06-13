@@ -133,7 +133,7 @@ ARRANGED MARRIAGE INDICATORS (check each):
 - No malefic planets in 5th house
 - Strong benefic influence on 7th house
 
-Provide a highly detailed, expansive reading.
+Provide a concise, summarized reading focusing only on the most important points. Keep all the sections (Love Marriage Indicators, Arranged Marriage Indicators, Deeper Analysis, and Conclusion) but write them as short, direct bullet points or brief paragraphs to ensure fast delivery. Keep the total reading under 350-400 words.
 Do not give generic answers. Be specific — cite actual planets and houses from THIS chart.
 
 Provide the response in pure Markdown. Do not use JSON.
@@ -168,7 +168,7 @@ KEYWORDS: word 1, word 2, word 3
                 prompt,
                 config=types.GenerateContentConfig(
                     temperature=0.4,
-                    max_output_tokens=8192,
+                    max_output_tokens=1500,
                     thinking_config=types.ThinkingConfig(thinking_budget=0)
                 )
             ):
