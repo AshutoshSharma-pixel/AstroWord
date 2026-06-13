@@ -276,28 +276,48 @@ export default function MarriageTypePage() {
             <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                 <div className="bg-surface2 border border-gold/30 rounded-2xl p-6 sm:p-8 text-center space-y-3 sm:space-y-4">
                     <p className="text-muted text-xs uppercase tracking-widest font-mono">Your Marriage Type</p>
-                    <h1 className="text-gold font-serif text-4xl sm:text-5xl">{result.result}</h1>
-
-                    <div className="space-y-2 mt-4 max-w-sm mx-auto">
-                        <div className="flex justify-between text-xs text-muted font-mono px-2">
-                            <span>❤️ Love {result.percentage?.love || 50}%</span>
-                            <span>🏛️ Arranged {result.percentage?.arranged || 50}%</span>
+                    {result.result === "Analyzing..." ? (
+                        <div className="space-y-6 animate-pulse max-w-sm mx-auto py-4">
+                            <div className="h-10 w-3/4 bg-surface border border-border/20 rounded mx-auto" />
+                            <div className="space-y-2">
+                                <div className="flex justify-between px-2">
+                                    <div className="h-3 w-20 bg-surface border border-border/20 rounded" />
+                                    <div className="h-3 w-24 bg-surface border border-border/20 rounded" />
+                                </div>
+                                <div className="h-4 w-full bg-surface border border-border/20 rounded-full" />
+                            </div>
+                            <div className="flex gap-2 justify-center flex-wrap">
+                                <div className="h-7 w-20 bg-surface border border-border/20 rounded-full" />
+                                <div className="h-7 w-24 bg-surface border border-border/20 rounded-full" />
+                                <div className="h-7 w-16 bg-surface border border-border/20 rounded-full" />
+                            </div>
                         </div>
-                        <div className="h-4 bg-surface rounded-full overflow-hidden border border-border">
-                            <div
-                                className="h-full bg-gradient-to-r from-pink-500 to-gold rounded-full transition-all duration-1000"
-                                style={{ width: `${result.percentage?.love || 50}%` }}
-                            />
-                        </div>
-                    </div>
+                    ) : (
+                        <>
+                            <h1 className="text-gold font-serif text-4xl sm:text-5xl">{result.result}</h1>
 
-                    <div className="flex flex-wrap gap-2 justify-center pt-4">
-                        {result.key_indicators?.map((indicator: string, i: number) => (
-                            <span key={i} className="text-[11px] sm:text-xs bg-gold/10 text-gold border border-gold/20 px-3 py-1.5 rounded-full font-mono">
-                                {indicator}
-                            </span>
-                        ))}
-                    </div>
+                            <div className="space-y-2 mt-4 max-w-sm mx-auto">
+                                <div className="flex justify-between text-xs text-muted font-mono px-2">
+                                    <span>❤️ Love {result.percentage?.love || 50}%</span>
+                                    <span>🏛️ Arranged {result.percentage?.arranged || 50}%</span>
+                                </div>
+                                <div className="h-4 bg-surface rounded-full overflow-hidden border border-border">
+                                    <div
+                                        className="h-full bg-gradient-to-r from-pink-500 to-gold rounded-full transition-all duration-1000"
+                                        style={{ width: `${result.percentage?.love || 50}%` }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 justify-center pt-4">
+                                {result.key_indicators?.map((indicator: string, i: number) => (
+                                    <span key={i} className="text-[11px] sm:text-xs bg-gold/10 text-gold border border-gold/20 px-3 py-1.5 rounded-full font-mono">
+                                        {indicator}
+                                    </span>
+                                ))}
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {result.result !== "Analyzing..." && (
