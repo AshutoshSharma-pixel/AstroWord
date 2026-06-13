@@ -116,13 +116,25 @@ export default function ChatInterface({
 
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     useEffect(() => {
-        scrollToBottom();
+        const container = chatContainerRef.current;
+        if (!container) return;
+
+        const lastMessage = initialMessages[initialMessages.length - 1];
+        const isUserMessage = lastMessage?.role === 'user';
+
+        // Check if user is within 150px of the bottom of the container
+        const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
+
+        if (isUserMessage || isNearBottom) {
+            scrollToBottom();
+        }
     }, [initialMessages, isTyping]);
 
     // Auto-send pending question from calculator pages (suggested questions)
@@ -342,7 +354,7 @@ export default function ChatInterface({
         <div className="flex flex-col h-full bg-bg relative overflow-hidden">
             <UpgradeModal isOpen={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
-            <div className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-6 py-6 space-y-6 max-w-4xl mx-auto w-full scroll-smooth">
                 {initialMessages.map((msg: any, idx: number) => (
                     <div
                         key={msg.id || idx}
