@@ -1616,144 +1616,250 @@ const articles: Record<string, {
     ),
     },
     'nakshatra-secrets': {
-        title: "Secrets of the 27 Nakshatras: How Lunar Mansions Reveal Your Destiny",
-        description: "Go beyond zodiac signs. Learn how the 27 Nakshatras add highly specific layers to your personality, emotional landscape, and future timing.",
+        title: "27 Nakshatras in Vedic Astrology: Complete Guide to Lunar Mansions, Darakaraka & Destiny",
+        description: "Complete guide to all 27 Nakshatras in Vedic astrology: meanings, ruling planets, Ganas, Padas, and the unique Jaimini connection between Nakshatras and your Darakaraka spouse planet.",
         category: "Vedic Astrology",
         date: "May 23, 2026",
         readTime: "6 min read",
         keywords: ['nakshatra', '27 nakshatras', 'lunar mansions', 'birth star calculator', 'find my nakshatra', 'nakshatra meaning', 'janma nakshatra'],
         faqs: [
-            { q: "What is a Nakshatra?", a: "A Nakshatra is a lunar mansion or star constellation. The 360-degree zodiac is divided into 27 Nakshatras of 13 degrees 20 minutes each, which represent the daily transit of the Moon." },
-            { q: "What is a Nakshatra Pada?", a: "Each Nakshatra is divided into 4 quarters or Padas of 3 degrees 20 minutes each. This results in 108 Padas across the entire zodiac, representing different sub-influences of the birth star." },
-            { q: "How does my Nakshatra affect my life?", a: "Your birth Nakshatra determines your emotional nature, thinking patterns, physical traits, and determines the planetary Dasha timeline that you start your life with." }
-        ],
+      { q: "What is a Nakshatra in Vedic astrology?", a: "A Nakshatra is one of 27 lunar mansions that divide the zodiac into 13-degree 20-minute segments. Your Janma Nakshatra (birth Nakshatra) is where the Moon was positioned at birth, determining your Vimshottari Dasha sequence and adding precise personality detail beyond what the Moon sign alone reveals." },
+      { q: "How are Nakshatras different from Zodiac signs?", a: "The 12 zodiac signs are 30-degree divisions of the sky used for broad personality and life themes. The 27 Nakshatras are smaller 13-degree 20-minute divisions that provide greater precision in personality description, timing (Dasha system), and compatibility matching. Every zodiac sign contains 2.25 Nakshatras." },
+      { q: "What is the connection between Nakshatras and spouse prediction?", a: "In Jaimini astrology, the Nakshatra occupied by your Darakaraka (spouse planet — the planet with the lowest degree in your chart) reveals specific qualities of your future spouse beyond what the planet or sign alone indicates. The Nakshatra lord, deity, and Pada all add specific spouse characteristics." },
+      { q: "What are the three Nakshatra Ganas?", a: "The three Ganas are Deva (divine — gentle, idealistic), Manushya (human — balanced, practical), and Rakshasa (fierce — intense, independent). Gana compatibility is assessed in marriage matching as part of the Ashtakoota system, carrying 6 points out of 36 total." },
+      { q: "How does Nakshatra determine Dasha periods?", a: "Your birth Nakshatra and the Moon&apos;s exact position within it determine your starting Dasha at birth. From there, the 120-year Vimshottari sequence unfolds in a fixed order. Because this requires exact Nakshatra position, accurate birth time is essential for correct Dasha timing." }
+    ],
         relatedCalculator: { label: 'Calculate My Nakshatra', href: '/nakshatra-calculator', emoji: '✨' },
         content: (
-            <>
-                <p>
-                    If you only look at your 12 zodiac signs, you are only scratching the surface of Vedic astrology. The true heart of Jyotish precision lies in the <strong>27 Nakshatras</strong>, also known as the &quot;Lunar Mansions.&quot;
-                </p>
-                <p>
-                    While the Sun takes a full month to cross one zodiac sign (30 degrees), the Moon transits the entire zodiac circle in 27.3 days, spending roughly one day in each of the 27 Nakshatras (each spanning 13°20&apos;). This makes Nakshatra analysis the most precise tool for understanding a person&apos;s birth details, choosing auspicious timings (Muhurthas), and calculating relationship compatibility (Kundli Milan).
-                </p>
+      <>
+        <p className="text-lg text-white/80 mb-6">
+          The 27 Nakshatras (lunar mansions) are the foundation of Vedic astrology — more ancient and precise than the 12 zodiac signs. While the 12 Rashis divide the sky into broad 30-degree segments, the 27 Nakshatras divide it into precise 13-degree 20-minute segments, each carrying a specific deity, ruling planet, symbol, and set of qualities that reveal extraordinary detail about personality, timing, and destiny.
+        </p>
 
-                <h2>What is a Nakshatra?</h2>
-                <p>
-                    In Sanskrit, <em>Nakshatra</em> means &quot;that which does not decay&quot; or &quot;map of stars.&quot; Historically, ancient seers looked at the night sky and divided the ecliptic into 27 equal segments, each identified by a prominent star constellation. 
-                </p>
-                <p>
-                    Each Nakshatra is further divided into 4 parts called <strong>Padas</strong> (quarters), each spanning 3°20&apos;. This means the 360-degree zodiac consists of 108 Padas. The 108 beads on a Hindu mala directly represent these 108 cosmic steps, symbolizing the journey of the soul through the cosmos.
-                </p>
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">What is a Nakshatra?</h2>
+        <p className="text-white/80 mb-4">
+          A Nakshatra is a lunar mansion — a specific segment of the zodiac through which the Moon travels during its monthly cycle. The Moon spends approximately one day in each Nakshatra, completing all 27 in roughly 27.3 days. Your Janma Nakshatra (birth Nakshatra) is the constellation the Moon occupied at the exact moment of your birth, and it serves as the starting point for your Vimshottari Dasha — the primary timing system of Vedic astrology.
+        </p>
+        <p className="text-white/80 mb-4">
+          While your Moon sign (Rashi) tells you the broad emotional theme of your mind, your Nakshatra reveals the specific texture, motivation, and karmic tone within that theme. Two people with the same Moon sign in Scorpio may have completely different Nakshatras (Vishakha, Anuradha, or Jyeshtha), giving them distinct personalities, Dasha sequences, and life timing despite sharing the same Rashi.
+        </p>
 
-                <h2>The Three Nakshatra Ganas (Temperaments)</h2>
-                <p>
-                    Each Nakshatra belongs to one of three psychological classifications or <em>Ganas</em>, which determine your fundamental behavioral temperament:
-                </p>
-                <ul>
-                    <li><strong>Deva Gana (Divine):</strong> Representing purity, kindness, empathy, and charity. People born under Deva Nakshatras (like Ashwini, Pushya, or Hasta) seek harmony and naturally avoid conflict.</li>
-                    <li><strong>Manushya Gana (Human):</strong> Representing ambition, practical action, family focus, and dynamic effort. People born under Manushya Nakshatras (like Bharani, Rohini, or Purva Phalguni) are focused on worldly achievements, relationships, and societal duties.</li>
-                    <li><strong>Rakshasa Gana (Demonic/Assertive):</strong> Representing strong willpower, sharp intuition, independence, and the capacity to fight obstacles. People born under Rakshasa Nakshatras (like Jyeshtha, Ashlesha, or Magha) have powerful survival instincts, are highly protective, and can face heavy challenges head-on.</li>
-                </ul>
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">The 27 Nakshatras and Their Ruling Planets</h2>
+        <p className="text-white/80 mb-4">
+          Each Nakshatra is governed by one of the nine planets (Navagrahas) in the sequence: Ketu, Venus, Sun, Moon, Mars, Rahu, Jupiter, Saturn, Mercury. This sequence repeats three times to cover all 27 Nakshatras and determines the order of your Vimshottari Dasha periods.
+        </p>
+        <ul className="space-y-2 mb-6 text-white/80 text-sm">
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Ashwini (Aries 0-13.20)</span><span>Ketu — beginnings, healing, speed</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Bharani (Aries 13.20-26.40)</span><span>Venus — transformation, death-rebirth, creativity</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Krittika (Aries/Taurus)</span><span>Sun — sharpness, purification, ambition</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Rohini (Taurus)</span><span>Moon — beauty, growth, sensuality, exaltation</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Mrigashira (Taurus/Gemini)</span><span>Mars — seeking, curiosity, gentle restlessness</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Ardra (Gemini)</span><span>Rahu — storm, destruction, transformation through pain</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Punarvasu (Gemini/Cancer)</span><span>Jupiter — renewal, goodness, return of light</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Pushya (Cancer)</span><span>Saturn — nourishment, auspiciousness, discipline in giving</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Ashlesha (Cancer)</span><span>Mercury — serpent wisdom, strategy, hidden power</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Magha (Leo)</span><span>Ketu — ancestral power, royalty, past-life karma</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Purva Phalguni (Leo)</span><span>Venus — pleasure, creativity, marriage</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Uttara Phalguni (Leo/Virgo)</span><span>Sun — contracts, service, patronage</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Hasta (Virgo)</span><span>Moon — skill, craftsmanship, wit</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Chitra (Virgo/Libra)</span><span>Mars — brilliance, artistry, discernment</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Swati (Libra)</span><span>Rahu — independence, wind, adaptability</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Vishakha (Libra/Scorpio)</span><span>Jupiter — purpose, ambition, triumph through persistence</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Anuradha (Scorpio)</span><span>Saturn — devotion, friendship, organizational power</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Jyeshtha (Scorpio)</span><span>Mercury — seniority, authority, protection</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Mula (Sagittarius)</span><span>Ketu — uprooting, truth-seeking, foundation destruction</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Purva Ashadha (Sagittarius)</span><span>Venus — invincibility, water, purification</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Uttara Ashadha (Sagittarius/Capricorn)</span><span>Sun — final victory, universal principles, righteousness</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Shravana (Capricorn)</span><span>Moon — listening, learning, connectivity</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Dhanishtha (Capricorn/Aquarius)</span><span>Mars — wealth, music, abundance</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Shatabhisha (Aquarius)</span><span>Rahu — healing, mysticism, a hundred physicians</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Purva Bhadrapada (Aquarius/Pisces)</span><span>Jupiter — fierce transformation, two-faced nature</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Uttara Bhadrapada (Pisces)</span><span>Saturn — depth, serpent of the deep, karmic completion</span></li>
+          <li className="flex gap-3"><span className="text-gold min-w-[160px]">Revati (Pisces)</span><span>Mercury — completion, nourishment, the final journey</span></li>
+        </ul>
 
-                <h2>The 27 Nakshatras at a Glance</h2>
-                <p>
-                    Every Nakshatra has a ruling planet, a presiding deity, and a primary symbol that defines its energy. The Nakshatras are divided across the 12 signs of the zodiac:
-                </p>
-                <div className="overflow-x-auto rounded-xl border border-border my-4">
-                    <table className="w-full text-sm text-muted">
-                        <thead>
-                            <tr className="border-b border-border bg-surface">
-                                <th className="text-left py-3 px-4 text-gold font-mono">Sign Span</th>
-                                <th className="text-left py-3 px-4 text-gold font-mono">Nakshatras</th>
-                                <th className="text-left py-3 px-4 text-gold font-mono">Core Theme</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {[
-                                ['Aries', 'Ashwini, Bharani, Krittika (1/4)', 'Beginnings, speed, purification, initiation'],
-                                ['Taurus', 'Krittika (3/4), Rohini, Mrigashira (1/2)', 'Growth, beauty, artistic talent, preservation'],
-                                ['Gemini', 'Mrigashira (1/2), Ardra, Punarvasu (3/4)', 'Curiosity, chaos, intellect, rejuvenation'],
-                                ['Cancer', 'Punarvasu (1/4), Pushya, Ashlesha', 'Nurturing, wisdom, spirituality, deep intuition'],
-                                ['Leo', 'Magha, Purva Phalguni, Uttara Phalguni (1/4)', 'Power, heritage, creativity, leadership'],
-                                ['Virgo', 'Uttara Phalguni (3/4), Hasta, Chitra (1/2)', 'Precision, analysis, craft, communication'],
-                                ['Libra', 'Chitra (1/2), Swati, Vishakha (3/4)', 'Harmony, trade, balance, ambition'],
-                                ['Scorpio', 'Vishakha (1/4), Anuradha, Jyeshtha', 'Depth, secrecy, friendship, transformation'],
-                                ['Sagittarius', 'Mula, Purva Ashadha, Uttara Ashadha (1/4)', 'Truth-seeking, destruction of illusion, philosophy'],
-                                ['Capricorn', 'Uttara Ashadha (3/4), Shravana, Dhanishtha (1/2)', 'Discipline, structure, listening, achievements'],
-                                ['Aquarius', 'Dhanishtha (1/2), Shatabhisha, Purva Bhadrapada (3/4)', 'Unconventional ideas, healing, networks'],
-                                ['Pisces', 'Purva Bhadrapada (1/4), Uttara Bhadrapada, Revati', 'Liberation, final journey, empathy, spirituality'],
-                            ].map(([sign, nakshatras, theme]) => (
-                                <tr key={sign} className="border-b border-border/30">
-                                    <td className="py-3 px-4 text-white">{sign}</td>
-                                    <td className="py-3 px-4">{nakshatras}</td>
-                                    <td className="py-3 px-4 text-xs">{theme}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">The 108 Padas: Nakshatra Subdivisions</h2>
+        <p className="text-white/80 mb-4">
+          Each of the 27 Nakshatras is subdivided into 4 Padas (quarters) of 3 degrees 20 minutes each, producing 108 Padas total — a sacred number in Vedic tradition. Each Pada corresponds to one of the 12 zodiac signs, cycling through Aries, Taurus, Gemini, Virgo, and so on in sequence.
+        </p>
+        <p className="text-white/80 mb-4">
+          The Pada your Moon (or any planet) occupies adds a layered zodiac quality to the Nakshatra meaning. For example, Moon in Punarvasu Nakshatra Pada 4 (Cancer Pada) is in a Pushkara Navamsha — an auspicious subdivision associated with abundance and fulfillment. This level of precision is unique to Vedic astrology and unavailable in Western systems.
+        </p>
+        <p className="text-white/80 mb-4">
+          In Jaimini astrology, the Pada of your Darakaraka planet carries specific information about your future spouse — their Nakshatra energy, their zodiac qualities, and even the syllables of their name through the traditional Akshara system associated with each Pada.
+        </p>
 
-                <h2>Nakshatras and Your Life Path</h2>
-                <p>
-                    Your birth Nakshatra governs your mental patterns, physical attributes, and the sequence of major dashas you will experience in life. For example, if you are born with the Moon in Ashwini Nakshatra, your life starts under the Ketu Mahadasha. If you are born under Rohini, your life starts under the Moon Mahadasha.
-                </p>
-                <p>
-                    Use our free <Link href="/nakshatra-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Nakshatra Calculator</Link> to discover your birth Nakshatra, Pada, animal symbol, and receive a personalized AI analysis of your destiny.
-                </p>
-            </>
-        ),
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Nakshatras and Your Darakaraka: The Jaimini Spouse Connection</h2>
+        <p className="text-white/80 mb-4">
+          This is a dimension of Nakshatra analysis that most guides overlook. In Jaimini astrology, your Darakaraka — the planet with the lowest degree in your chart — represents your destined life partner. The Nakshatra your Darakaraka occupies reveals specific qualities of your future spouse that go beyond the broad planet-sign interpretation.
+        </p>
+        <p className="text-white/80 mb-4">
+          For example: a Darakaraka Venus in Rohini Nakshatra (ruled by Moon) suggests a spouse who is deeply nurturing, aesthetically refined, and possibly connected to beauty, food, or the arts — the Moon-ruled Nakshatra softening Venus into a more domestic, fertile expression. The same Venus in Bharani Nakshatra (ruled by Venus itself) would suggest a spouse with strong creative drives, intensity, and a connection to transformation.
+        </p>
+        <p className="text-white/80 mb-4">
+          The Pada of the Darakaraka further refines this: Pada 1 (Aries quality) adds assertiveness; Pada 4 (Cancer quality) adds emotional depth and family orientation. This three-layer system (planet + Nakshatra + Pada) provides extraordinary specificity in spouse prediction — a uniquely Jaimini contribution to astrology.
+        </p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">The Three Ganas: Cosmic Temperament</h2>
+        <p className="text-white/80 mb-4">
+          Every Nakshatra belongs to one of three Ganas (temperament groups), which are central to marriage compatibility assessment:
+        </p>
+        <ul className="space-y-3 mb-6">
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Deva Gana (Divine)</strong> — Ashwini, Mrigashira, Punarvasu, Pushya, Hasta, Swati, Anuradha, Shravana, Revati. Gentle, idealistic, spiritually inclined, adaptable in relationships. Best compatibility with other Deva Gana natives.</span>
+          </li>
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Manushya Gana (Human)</strong> — Bharani, Rohini, Ardra, Purva Phalguni, Uttara Phalguni, Purva Ashadha, Uttara Ashadha, Purva Bhadrapada, Uttara Bhadrapada. Balanced between worldly and spiritual, practical, relationship-focused.</span>
+          </li>
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Rakshasa Gana (Fierce)</strong> — Krittika, Ashlesha, Magha, Chitra, Vishakha, Jyeshtha, Mula, Dhanishtha, Shatabhisha. Intense, independent, self-determined. Often misunderstood as negative — these Nakshatras carry transformative power.</span>
+          </li>
+        </ul>
+        <p className="text-white/80 mb-4">
+          In Jaimini Kundali Matching, Gana compatibility is scored as part of the Ashtakoota system (36 points total). Gana match alone carries 6 points — the second highest weight after Graha Maitri (5 points) and Yoni (4 points). Deva-Deva and Manushya-Manushya combinations score full points; Rakshasa-Rakshasa scores 6; mixed combinations score lower.
+        </p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Nakshatras in Vimshottari Dasha Timing</h2>
+        <p className="text-white/80 mb-4">
+          Your Janma Nakshatra determines your starting Dasha (planetary period) at birth. The Moon&apos;s position within the Nakshatra at birth determines how much of that first Dasha period has already elapsed. From this starting point, the full 120-year Vimshottari sequence unfolds: Sun (6 years), Moon (10), Mars (7), Rahu (18), Jupiter (16), Saturn (19), Mercury (17), Ketu (7), Venus (20).
+        </p>
+        <p className="text-white/80 mb-4">
+          Because Nakshatra-based Dasha timing is so precise, your birth Nakshatra has direct practical impact on when major life events (marriage, career peaks, foreign travel, health events) occur. This is why Nakshatra calculation requires exact birth time — even 10 minutes of error can shift the Dasha sequence and make timing predictions inaccurate.
+        </p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Nakshatras in Jaimini Chara Dasha</h2>
+        <p className="text-white/80 mb-4">
+          Beyond Vimshottari, Jaimini astrology uses Chara Dasha — a sign-based timing system unique to this school. In Chara Dasha, each zodiac sign rules a variable period determined by its lord&apos;s placement. Nakshatras play a secondary but important role in Chara Dasha through the Atmakaraka and the Karakamsha — the Navamsha sign of the Atmakaraka, which reveals the soul&apos;s deepest purpose and the qualities of the spouse through the 7th house from Karakamsha.
+        </p>
+        <p className="text-white/80 mb-6">
+          To discover your Darakaraka planet and the Nakshatra it occupies — and receive a complete AI-powered reading about your future spouse — use the Darakaraka Calculator below.
+        </p>
+      </>
+    ),
     },
     'rising-sign-astrology': {
-        title: "Vedic Rising Sign: How Your Lagna Shapes Your Appearance & Purpose",
-        description: "Your Lagna (Ascendant) is the starting point of your chart. Learn how it determines your physical look, self-identity, and the houses of your life path.",
+        title: "Vedic Rising Sign & Arudha Lagna: How Your Lagna Defines Appearance, Purpose & Public Image",
+        description: "Complete guide to the Vedic Rising Sign (Lagna): how it differs from Moon sign and Sun sign, the Jaimini concept of Arudha Lagna (your public image), all 12 Lagnas explained, and how Lagna determines your life path.",
         category: "Vedic Astrology",
         date: "May 23, 2026",
         readTime: "6 min read",
         keywords: ['rising sign', 'lagna calculator', 'ascendant astrology', 'vedic rising sign', 'lagna lord', 'first house astrology'],
         faqs: [
-            { q: "What is the Lagna or Rising Sign?", a: "Lagna (Ascendant) is the zodiac sign rising on the eastern horizon at the exact time and place of your birth. It determines the structure of your 12 houses and represents your physical body and identity." },
-            { q: "Who is the Lagna Lord?", a: "The Lagna Lord is the planet that rules your rising sign. Its position and strength in your birth chart show where your primary energy is focused and directs your life path." },
-            { q: "Why is the Vedic rising sign different from the Western rising sign?", a: "Vedic astrology uses the Sidereal zodiac (aligned with stars) while Western uses the Tropical zodiac (aligned with seasons). Due to precession, they differ by about 24 degrees, often shifting your rising sign back by one sign." }
-        ],
+      { q: "What is Lagna (Rising Sign) in Vedic astrology?", a: "The Lagna is the zodiac sign rising on the eastern horizon at the exact moment and place of your birth. It changes every ~2 hours, making it the most personalized point in your chart. The Lagna determines your physical appearance, outer personality, house structure, and the Lagna Lord who directs your entire chart." },
+      { q: "How is Rising Sign different from Moon sign?", a: "The Rising Sign (Lagna) represents your physical body, outer personality, and chart structure. The Moon sign represents your mind, emotions, and inner world. Vedic astrology uses both simultaneously — Lagna for body and life structure, Moon sign for psychology, timing (Dasha), and transits." },
+      { q: "What is Arudha Lagna in Jaimini astrology?", a: "Arudha Lagna (AL) is the mirror image of how your Lagna is reflected into the material world. Calculated by counting houses from Lagna to its ruling planet and then the same distance forward, it reveals your public image and how others perceive you — which often differs from your actual Lagna nature." },
+      { q: "Why might my Vedic Rising Sign differ from my Western Rising Sign?", a: "Vedic astrology uses the sidereal zodiac based on actual star positions, while Western astrology uses the tropical zodiac based on equinoxes. The Ayanamsha difference (~23-24 degrees currently) means your Vedic Rising Sign may be 1-2 signs earlier than your Western Rising Sign." },
+      { q: "Which is the strongest Lagna in Vedic astrology?", a: "There is no single strongest Lagna — strength depends on the Lagna Lord&apos;s placement and dignity. However, Leo Lagna with a strong Sun, Sagittarius Lagna with a strong Jupiter, and Aries Lagna with a strong Mars are classically considered powerful configurations. Libra Lagna benefits from Saturn&apos;s exaltation in its sign." }
+    ],
         relatedCalculator: { label: 'Calculate My Lagna', href: '/lagna-calculator', emoji: '🌅' },
         content: (
-            <>
-                <p>
-                    When you look at your horoscope, the 1st house is the starting point of everything. In Vedic astrology, this house is called the <strong>Lagna</strong>, or the <strong>Rising Sign</strong> / <strong>Ascendant</strong>. It is the zodiac sign that was rising on the eastern horizon at the exact minute and place of your birth.
-                </p>
-                <p>
-                    Because the Earth rotates once every 24 hours, all 12 signs of the zodiac pass through the horizon in a day, meaning the Lagna changes sign approximately every two hours. This fast movement makes your Lagna the most unique and time-sensitive point in your entire birth chart. It represents the physical body, the self-identity, health, first impressions, and your overall approach to life.
-                </p>
+      <>
+        <p className="text-lg text-white/80 mb-6">
+          Your Rising Sign — called Lagna or Ascendant in Vedic astrology — is the zodiac sign that was rising on the eastern horizon at the exact moment and place of your birth. It is the anchor of your entire birth chart: every house, every planetary placement, and every predictive calculation is structured around it. In Jaimini astrology, the Lagna takes on additional dimensions through the concept of Arudha Lagna — revealing not just who you are, but how the world perceives you.
+        </p>
 
-                <h2>Why the Lagna Defines Your Horoscope</h2>
-                <p>
-                    The Lagna is the anchor of your chart. When an astrologer draws your birth chart, the Lagna sign is placed in the first house. All other houses are then arranged sequentially. If you have an Aries Lagna, Taurus becomes your 2nd house (wealth), Gemini your 3rd house (communication), and so on.
-                </p>
-                <p>
-                    This layout defines where your planets will sit. A person born on the exact same day as you will have the same planetary positions, but if they are born 4 hours later, their Lagna will be different. Consequently, a planet that represents career in your chart might represent expenditures or health issues in theirs. This is why the Lagna is the absolute key to personalizing any astrological reading.
-                </p>
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">What is the Rising Sign (Lagna)?</h2>
+        <p className="text-white/80 mb-4">
+          The Lagna changes approximately every two hours as the Earth rotates, completing all 12 zodiac signs in one 24-hour day. This rapid movement makes the Rising Sign the most personalized point in the birth chart — two people born on the same day with the same Moon sign but at different times of day will have entirely different Lagnas, and therefore entirely different chart structures, house arrangements, and life themes.
+        </p>
+        <p className="text-white/80 mb-4">
+          The Lagna represents your physical body, outer personality, self-image, and the lens through which you approach life. It is the first impression you make on the world, your natural temperament in new situations, and your bodily constitution (Prakriti). Classical texts describe the Lagna as the boat: however you arrived in this life — what you look like, how you move, how you present yourself — is described by the Lagna and its ruling planet.
+        </p>
 
-                <h2>Lagna Lord — The Life Director</h2>
-                <p>
-                    Every zodiac sign is ruled by a planet. The planet that rules your Lagna sign is designated as your <strong>Lagna Lord</strong> (or <em>Lagnesha</em>). In Jyotish, the Lagna Lord is your personal guardian angel. Its placement in your chart represents where your primary energy, attention, and destiny will unfold.
-                </p>
-                <ul>
-                    <li><strong>Lagna Lord in the 1st House:</strong> Strong self-focus, high vitality, independent nature, and focus on self-improvement.</li>
-                    <li><strong>Lagna Lord in the 2nd House:</strong> Focus on family accumulation, finance, values, and speech-oriented work.</li>
-                    <li><strong>Lagna Lord in the 5th House:</strong> Creative pursuits, love of learning, connection with children, and speculative ventures.</li>
-                    <li><strong>Lagna Lord in the 9th House:</strong> Spiritual inclination, love for higher learning, travel, and a fortunate life path.</li>
-                    <li><strong>Lagna Lord in the 10th House:</strong> Career-oriented, public recognition, leadership roles, and strong sense of duty.</li>
-                </ul>
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Lagna vs Moon Sign vs Sun Sign</h2>
+        <p className="text-white/80 mb-4">
+          Vedic astrology uses three primary reference points simultaneously, each revealing a different dimension of the person:
+        </p>
+        <ul className="space-y-3 mb-6">
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Lagna (Rising Sign)</strong> — The physical body, outer personality, life approach, and the structural foundation of the chart. Determines house placements and planetary rulerships. Changes every ~2 hours.</span>
+          </li>
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Moon Sign (Chandra Rashi)</strong> — The mind, emotions, instincts, and inner world. Used for Dasha timing, transit predictions, and compatibility. Changes every ~2.25 days.</span>
+          </li>
+          <li className="flex items-start gap-3 text-white/80">
+            <span className="text-gold mt-1">✦</span>
+            <span><strong className="text-white">Sun Sign (Surya Rashi)</strong> — The soul, vitality, ego, and father. Less emphasized in Vedic astrology for daily predictions but important for understanding life purpose and authority. Changes every ~30 days.</span>
+          </li>
+        </ul>
+        <p className="text-white/80 mb-4">
+          Western astrology focuses primarily on the Sun sign. Vedic astrology considers all three, with the Lagna and Moon sign carrying the most weight in chart analysis and predictions.
+        </p>
 
-                <h2>Vedic vs. Western Rising Signs</h2>
-                <p>
-                    It is common to find that your Vedic rising sign is different from your Western rising sign. This is because Western astrology uses the <strong>Tropical Zodiac</strong> (aligned with seasons), while Vedic astrology uses the <strong>Sidereal Zodiac</strong> (aligned with actual stars). Due to the precession of the equinoxes, the difference between the two systems is currently about 24 degrees. In most cases, this shifts your rising sign back by one full sign in Vedic astrology.
-                </p>
-                <p>
-                    Use our free <Link href="/lagna-calculator" className="text-gold/70 hover:text-gold underline underline-offset-2">Lagna Calculator</Link> to find your Vedic Ascendant sign, degree, Lagna lord, and get a personalized AI-powered reading about your appearance and life direction.
-                </p>
-            </>
-        ),
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">The Lagna Lord: Captain of Your Chart</h2>
+        <p className="text-white/80 mb-4">
+          The planet that rules your Lagna sign is called the Lagna Lord or Ascendant Lord. This planet is considered the most important planet in your chart — the captain that directs all other planetary energies. Its strength, placement, and aspects determine the overall quality of your life, health, and direction.
+        </p>
+        <p className="text-white/80 mb-4">
+          A strong Lagna Lord (in its own sign, exaltation, or in a Kendra/Trikona house) gives the native strong vitality, clear self-direction, and the ability to overcome obstacles. A weak or afflicted Lagna Lord (debilitated, in the 6th/8th/12th house, or hemmed by malefics) creates challenges in health, self-expression, and life clarity.
+        </p>
+        <p className="text-white/80 mb-4">
+          In Jaimini astrology, the Lagna Lord&apos;s relationship with the Atmakaraka (soul planet) is particularly significant — when the Lagna Lord and Atmakaraka are conjunct or mutually aspecting, the native&apos;s worldly self and soul purpose are deeply aligned, creating a cohesive and purposeful life.
+        </p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Arudha Lagna: The Jaimini Concept of Public Image</h2>
+        <p className="text-white/80 mb-4">
+          This is the most distinctive and least understood Jaimini contribution to Lagna analysis. The Arudha Lagna (AL) is not your actual Lagna — it is the mirror image of how your Lagna is reflected into the material world. It represents your public image, social standing, how others perceive you, and the illusion (Maya) you project into the world.
+        </p>
+        <p className="text-white/80 mb-4">
+          To calculate the Arudha Lagna: count the number of houses from the Lagna to its ruling planet. Then count the same number of houses from the ruling planet forward. The sign you land on is your Arudha Lagna.
+        </p>
+        <p className="text-white/80 mb-4">
+          For example: if you have Aries Lagna, your Lagna Lord is Mars. If Mars is in the 4th house (Cancer), count 4 houses forward from Mars — you land on the 7th house (Libra). Your Arudha Lagna is Libra. This means despite having an Aries Ascendant (naturally assertive, direct personality), you are perceived by the world as Libra-like — diplomatic, relationship-oriented, and refined.
+        </p>
+        <p className="text-white/80 mb-4">
+          The gap between your Lagna (who you truly are) and your Arudha Lagna (how you are perceived) reveals the Maya — the illusion — surrounding your personality. When they are the same sign or in the same element, self-perception and public perception align naturally. When they clash, a disconnect between inner reality and outer image creates life complexity.
+        </p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">All 12 Lagnas: Vedic and Jaimini Insights</h2>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Aries Lagna (Mesha)</h3>
+        <p className="text-white/80 mb-4">Mars rules. Dynamic, pioneering, physically energetic. Natural leaders who act before thinking. The Lagna Lord Mars also rules the 8th house of transformation — creating natives with both great initiative and deep karmic intensity. Jaimini: when Mars is strong as Lagna Lord, the native often becomes an Atmakaraka candidate.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Taurus Lagna (Vrishabha)</h3>
+        <p className="text-white/80 mb-4">Venus rules. Steady, sensual, materially grounded. Natural beauty sense and financial instinct. Venus ruling the 1st and 6th houses creates a connection between personal identity and service/work — Taurus Lagna natives often build wealth through their skills. Moon exalted in Taurus gives this Lagna emotional stability.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Gemini Lagna (Mithuna)</h3>
+        <p className="text-white/80 mb-4">Mercury rules. Intellectually versatile, communicative, youthful in appearance. Mercury ruling both the 1st and 4th houses connects the self with home, education, and inner peace. Natural writers, teachers, and business people. The chart often shows strong 3rd house themes (siblings, communication, media).</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Cancer Lagna (Karka)</h3>
+        <p className="text-white/80 mb-4">Moon rules. Nurturing, intuitive, emotionally perceptive. The most fluid of the Lagnas — Cancer Lagna natives absorb environmental energies strongly. Because the Moon changes signs every 2.25 days, the Lagna Lord is constantly moving, making Cancer Lagna charts particularly sensitive to transits.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Leo Lagna (Simha)</h3>
+        <p className="text-white/80 mb-4">Sun rules. Dignified, confident, naturally commanding. The Sun as Lagna Lord in its own sign is exceptionally powerful — Leo Lagna natives carry natural authority and often find themselves in leadership roles. Jaimini&apos;s Chara Dasha often activates Leo-sign periods for recognition and fame.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Virgo Lagna (Kanya)</h3>
+        <p className="text-white/80 mb-4">Mercury rules. Analytical, meticulous, service-oriented. Mercury rules both the 1st and 10th houses for Virgo Lagna — creating an extremely strong connection between personal identity and career. Natural healers, researchers, and technical experts. Health matters often arise through the 6th house from Lagna.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Libra Lagna (Tula)</h3>
+        <p className="text-white/80 mb-4">Venus rules. Diplomatic, aesthetically refined, relationship-focused. Venus ruling the 1st and 8th houses gives Libra Lagna a hidden depth beneath the graceful exterior. Saturn is exalted in Libra, making Saturn a particularly auspicious planet for this Lagna — a rare classical Yoga.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Scorpio Lagna (Vrishchika)</h3>
+        <p className="text-white/80 mb-4">Mars rules (with Ketu as co-ruler in Jaimini tradition). Intense, perceptive, magnetically powerful. Scorpio Lagna natives see through surfaces — they perceive hidden motivations and occult dimensions naturally. Mars ruling the 1st and 6th houses creates both intensity and health resilience.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Sagittarius Lagna (Dhanu)</h3>
+        <p className="text-white/80 mb-4">Jupiter rules. Philosophical, optimistic, spiritually inclined. Jupiter ruling the 1st and 4th houses creates strong connection between the self and home, education, and dharmic foundations. Natural teachers and spiritual guides. Jupiter as Lagna Lord is considered the most benefic Lagna rulership.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Capricorn Lagna (Makara)</h3>
+        <p className="text-white/80 mb-4">Saturn rules. Ambitious, disciplined, late-blooming. Saturn ruling the 1st and 2nd houses connects identity with family wealth and accumulated resources. Capricorn Lagna natives often build their best work after age 35, as Saturn rewards persistent long-term effort over short-term gain.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Aquarius Lagna (Kumbha)</h3>
+        <p className="text-white/80 mb-4">Saturn rules (with Rahu as co-ruler in Jaimini). Unconventional, humanitarian, intellectually independent. Saturn ruling both the 1st and 12th houses creates a paradox: Aquarius Lagna is both worldly-ambitious and spiritually detached. Foreign connections, technology, and collective causes are often life themes.</p>
+
+        <h3 className="text-gold/80 text-xl mt-6 mb-3">Pisces Lagna (Meena)</h3>
+        <p className="text-white/80 mb-4">Jupiter rules. Compassionate, intuitive, spiritually open. Jupiter ruling the 1st and 10th houses creates a direct connection between identity and dharmic career — Pisces Lagna natives often feel their work must be spiritually meaningful. The most permeable of the Lagnas, absorbing spiritual dimensions effortlessly.</p>
+
+        <h2 className="text-gold font-serif text-2xl mt-8 mb-4">Sidereal vs Tropical Rising Signs</h2>
+        <p className="text-white/80 mb-6">
+          Vedic astrology uses the sidereal zodiac — based on actual star positions — while Western astrology uses the tropical zodiac based on equinoxes. The difference (called Ayanamsha) is currently approximately 23-24 degrees, meaning your Vedic Rising Sign may be one or even two signs different from your Western Rising Sign. The Lahiri Ayanamsha, used by the Government of India and most classical Vedic astrologers, is the standard reference for all Vedic calculations on AstroWord.
+        </p>
+      </>
+    ),
     },
     'find-ishta-devata': {
         title: "How to Find Your Ishta Devata: The Soul's Guiding Divine Force",
